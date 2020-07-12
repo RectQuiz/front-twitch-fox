@@ -4,6 +4,7 @@ export const Container = styled.div`
   background-color: #1c1c1c;
   width: 100%;
   height: auto;
+  max-height:100px;
   color: #fff;
   display: flex;
   /* padding: 0px 10px; */
@@ -194,18 +195,47 @@ export const ContainerNickname = styled.button`
     align-items:center;
     justify-content:center;
 `;
-export const ContentNickname = styled.div`
+export const ContentNickname = styled.button`
     /* background-color:black; */
     width:100%;
     height:100%;
-    /* padding:10px; */
+    padding:5px;
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
     align-items:center;
-    justify-content:center;
+    justify-content:space-between;
     color:#fff;
     font-size:18px;
     text-transform:uppercase;
     height:100%;
     font-weight:bold;
+    position:relative;
+`;
+
+export const DropdownUser = styled.div`
+    display:${({visible})=>visible?'flex':'none'};
+    position:absolute;
+    top:140px;
+    background-color:#141414;
+    width:150px;
+    height:auto;
+    border-radius:7px;
+    border:2px solid rgba(55,56,71);
+    overflow:hidden;
+    flex-direction:column;
+    z-index:999;
+`;
+
+export const ItemDropDown = styled.div`
+    border-bottom: 2px solid rgba(55,56,71);
+    text-align:center;
+    padding:7px;
+    /* border-radius:7px; */
+`;
+
+export const ButtonSair = styled.button`
+    /* border-bottom: 2px solid rgba(55,56,71); */
+    text-align:center;
+    padding:7px;
+    /* border-radius:7px; */
 `;

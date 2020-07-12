@@ -38,7 +38,7 @@ const Simple = (props) => {
     <Container className="bg-white">
         <RedesSociais/>
         <Header logar={logar} open={open} setOpen={setOpen}/>
-        {children}
+          {children}
     </Container>
   )
 }

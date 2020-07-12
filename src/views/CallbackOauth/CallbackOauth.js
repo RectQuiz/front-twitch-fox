@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../../services/api';
 import { Redirect } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 export default function CallbackOauth({location, history}){
     
@@ -16,6 +17,8 @@ export default function CallbackOauth({location, history}){
                     let resp = await api.get(`http://localhost:3333/auth-from-code-twitch?code=${code}`,{withCredentials: true});
                     console.log('resp token on code: ',resp);
                     console.log('resp.data.data.url: ',resp.data);
+                    const cookies = new Cookies();
+                    cookies.set('nickname', resp.data.decodedResponse.resp.preferred_username, { path: '/' });
                     history.push('/home');
                 } catch (error) {
                     if (error.response) {

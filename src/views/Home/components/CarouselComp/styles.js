@@ -14,7 +14,8 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   /* padding-top: 50px; */
-  width: 100vw;
+  width: 100%;
+  max-width: 100vw;
   /* margin-top:1px; */
   /* max-width: 1200px; */
   /* max-height:50vh; */
@@ -57,6 +58,6 @@ export const SubTitleSlide = styled.p`
 
 export const DetailHome = styled.div`
   width:100%;
-  height:1px;
+  height:3px;
   background-color:#DC143C;
 `;

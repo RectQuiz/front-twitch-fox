@@ -13,14 +13,10 @@ import {
   import { Carousel } from 'react-responsive-carousel';
 
 export default function CarouselComp({}){
-    var settings = {
-        showArrows:true,
-        width:"700vw"
-      };
     return (
         <Container>
             <Content>
-                <Carousel dynamicHeight={true} showThumbs={false} showStatus={false} width="80vw" infiniteLoop={true} autoPlay={true}>
+                <Carousel interval={7000} dynamicHeight={true} showThumbs={false} showStatus={false} width="80vw" infiniteLoop={true} autoPlay={true}>
                     <ContentSlide key="slide1">
                             <TitleSlide>SEJA BEM VINDO!</TitleSlide>
                             <SubTitleSlide>

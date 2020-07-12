@@ -5,19 +5,8 @@ export const api = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    'Accept': 'application/json',
+    // 'Access-Control-Allow-Origin':'*'
   }
 });
-export const apiWithToken =(token) => (
-  axios.create(
-    {
-      baseURL: API_URL,
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
-    }
-  )
-);
 

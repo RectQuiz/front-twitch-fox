@@ -4,8 +4,12 @@ import { api } from '../../services/api';
 import { Redirect } from 'react-router-dom';
 import CarouselComp from './components/CarouselComp';
 import Cards from './components/Cards';
+import Promo from './components/Promo';
+import Divider from './components/Divider';
+import Parceiros from './components/Parceiros';
 import fundo from '../../assets/images/fundo.jpg';
-import { ImageFundo, Content } from './styles';
+import Footer from '../../components/Footer';
+import { BackgroundColor, Content } from './styles';
 
 export default function Home({history}){
 
@@ -86,9 +90,15 @@ export default function Home({history}){
 
     return (
         <Content fundo={fundo}>
-        {/* <ImageFundo className='image-fundo' fundo={fundo}/> */}
             <CarouselComp/>
-            <Cards/>
+            <BackgroundColor>
+                <Cards/>
+                <Divider title='Promoções'/>
+                <Promo/>
+                {/* <Divider title='Lives parceiras'/> */}
+                <Parceiros/>
+                <Footer/>
+            </BackgroundColor>
         </Content>
     )
 }

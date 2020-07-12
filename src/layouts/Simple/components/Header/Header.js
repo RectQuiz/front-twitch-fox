@@ -12,14 +12,38 @@ import {
     ContainerListMenu,
     Ul,
     ContentBig,
-    ContentSmall
+    ContentSmall,
+    ContainerNickname,
+    ContentNickname,
 } from './styles';
 import logo from '../../../../assets/images/logo.png';
 import menu from '../../../../assets/images/menu.png';
 import { TiThMenu } from 'react-icons/ti';
+import { FaArrowCircleDown } from 'react-icons/fa';
+import Cookies from 'universal-cookie';
 
-export default function Header({open, setOpen, logar}){
+export default function Header({open, setOpen, logar }){
+    const [ nickname, setNickname] = useState(null);
+    const [ visibleInfoUser, setVisibleInfoUser] = useState(true);
     
+    useEffect(()=>{
+        const cookies = new Cookies();
+        // Cookies.set('teste', 'value');
+        let cookieNick = cookies.get('nickname');
+        let cookieSession = cookies.get('session');
+        console.log('cookieNick: ', cookieNick);
+        console.log('cookieSession: ', cookieSession);
+        if (cookieNick && cookieSession) {
+            setNickname(cookieNick);
+        }else{
+            setNickname(null);
+        }
+    });
+    const setVisibleDropDown = ()=>{
+        console.log('visibleInfoUser: ',visibleInfoUser);
+        setVisibleInfoUser(!visibleInfoUser);
+    }
+
     return (
         <Container>
             <Content>
@@ -34,11 +58,22 @@ export default function Header({open, setOpen, logar}){
                         </TitleLogo>
                     </ContainerLogo>
                     <ContainerButtonsNav>
-                        <a href="#home">ÍNICIO</a>
+                        <a href="/">HOME</a>
                         <a href="#news">LOJA</a>
                         <a href="#contact">PARCEIROS</a>
                         <a href="#about">CONTATO</a>
-                        <ButtonAuth onClick={logar}>ENTRAR COM A TWITCH</ButtonAuth>
+                        {
+                            !nickname?(
+                                <ButtonAuth onClick={logar}>ENTRAR COM A TWITCH</ButtonAuth>
+                            ):
+                            (
+                                <ContainerNickname>
+                                    <ContentNickname  onClick={setVisibleDropDown}>
+                                            {nickname}
+                                    </ContentNickname>
+                                </ContainerNickname>
+                            )
+                        }
                     </ContainerButtonsNav>
                     <ContainerButtonMenu onClick={()=>setOpen(!open)}>
                         <ImageMenu
@@ -48,11 +83,22 @@ export default function Header({open, setOpen, logar}){
                 </ContentBig>
                 <ContentSmall open={open}>
                         <Ul open={open}>
-                            <li><a class="active" href="#home">Home</a></li>
-                            <li><a href="#news">News</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                            <li><a href="#about">About</a></li>
-                        <ButtonAuth onClick={logar}>ENTRAR COM A TWITCH</ButtonAuth>
+                            <li><a href="/">HOME</a></li>
+                            <li><a href="#news">LOJA</a></li>
+                            <li><a href="#contact">PARCEIROS</a></li>
+                            <li><a href="#about">CONTATO</a></li>
+                            {
+                                !nickname?(
+                                    <ButtonAuth onClick={logar}>ENTRAR COM A TWITCH</ButtonAuth>
+                                ):
+                                (
+                                    <ContainerNickname>
+                                        <ContentNickname>
+                                                {nickname}
+                                        </ContentNickname>
+                                    </ContainerNickname>
+                                )
+                            }
                         </Ul>
                 </ContentSmall>
             </Content>
