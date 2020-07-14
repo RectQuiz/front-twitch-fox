@@ -1,43 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RedesSociais, Header } from './components';
-import { Container } from './styles';
-import { api } from '../../services/api';
+import { Container, ContainerHeader } from './styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { 
+  getUrlAuthTwitch,
+  setStatus,
+  setResponse,
+  setUrlAuthTwitch
+} from '../../store/modules/login/actions';
 
 const Simple = (props) => {
   const { children } = props;
   const [ open, setOpen ] = useState(false);
+  const dispatch = useDispatch();
+  const { response, url_twitch, status, errors } = useSelector(({ LoginReducer }) => LoginReducer);
+  const { status:statusModal } = useSelector(({ ModalReducer }) => ModalReducer);
+  console.log('statusModal: ',statusModal);
+  useEffect(()=>{
+    // console.log('response home: ',response);
+    // console.log('url_twitch home: ',url_twitch);
+    // console.log('status home: ',status);
+    // console.log('staerrorstus home: ',errors);
+    if (status && status == 200 && (url_twitch && url_twitch.length > 0) && errors.length == 0) {
+          window.location.assign(url_twitch);
+          dispatch(setStatus(0));
+          dispatch(setResponse({}));
+          dispatch(setUrlAuthTwitch(''));
+    }
+  },[status]);
 
   const logar = async ()=>{
-    try {
-        let resp = await api.get(`http://localhost:3333/auth-url-twitch`);
-        console.log('resp: ',resp);
-        console.log('resp.data.data.url: ',resp.data.data.url);
-        if(resp.data.data.url){
-            window.location.assign(resp.data.data.url);
-        }
-    } catch (error) {
-        if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-          } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
-            console.log(error.request);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', error.message);
-          }
-          console.log(error.config);
-    }
+      dispatch(getUrlAuthTwitch());
   }
+  
   return (
-    <Container className="bg-white">
-        <RedesSociais/>
-        <Header logar={logar} open={open} setOpen={setOpen}/>
+    <Container modal={statusModal} className="bg-white">
+        <ContainerHeader>
+          <RedesSociais/>
+          <Header logar={logar} open={open} setOpen={setOpen}/>
+        </ContainerHeader>
           {children}
     </Container>
   )

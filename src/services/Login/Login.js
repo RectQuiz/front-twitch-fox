@@ -1,0 +1,33 @@
+import { api } from '../api';
+
+const resouceUrl = '/auth';
+
+export const getAuthUrlTwitch = async (params) => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  let page = urlParams.has('page') ? { page: urlParams.get('page') } : {};
+  params = params ? params : {};
+  let search = urlParams.has('search')
+    ? { search: urlParams.get('search') }
+    : {};
+  return await api.get(`${resouceUrl}/url-twitch`, {
+    params: {
+      ...params,
+      ...page,
+      ...search,
+    },
+  });
+};
+
+export const authCodeTwitch = async (params) => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let page = urlParams.has('page') ? { page: urlParams.get('page') } : {};
+    params = params ? params : {};
+    let search = urlParams.has('search')
+      ? { search: urlParams.get('search') }
+      : {};
+    return await api.get(`${resouceUrl}/from-code-twitch?code=${params.code}`, {
+      withCredentials: true
+    });
+  };

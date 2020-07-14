@@ -1,0 +1,1 @@
+export const SET_STATUS_MODAL = 'SET_STATUS_MODAL';

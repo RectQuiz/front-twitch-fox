@@ -6,8 +6,13 @@ export const Container = styled.div`
   height: auto;
   color: #fff;
   display: flex;
+  /* max-height:95px; */
+  min-height:95px;
   /* padding: 0px 10px; */
   border-bottom: 4px solid #141414;
+  /* position:absolute;
+  top:70px; */
+  /* opacity:0.5; */
 `;
 
 export const Content = styled.header`
@@ -184,11 +189,11 @@ export const Ul = styled.ul`
     }
 `;
 
-export const ContainerNickname = styled.button`
+export const ContainerNickname = styled.div`
     /* background-color:red; */
     width:100%;
-    height:100%;
-    padding:10px;
+    height:auto;
+    /* padding:10px; */
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -197,15 +202,24 @@ export const ContainerNickname = styled.button`
 export const ContentNickname = styled.div`
     /* background-color:black; */
     width:100%;
+    /* max-width:150px; */
     height:100%;
     /* padding:10px; */
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
     align-items:center;
     justify-content:center;
-    color:#fff;
-    font-size:18px;
-    text-transform:uppercase;
     height:100%;
+`;
+
+export const Nickname = styled.h4`
+    /* background-color:white; */
+    text-transform:uppercase;
+    text-overflow: ellipsis;
     font-weight:bold;
+    white-space:nowrap;
+    overflow: hidden;
+    text-align:left;
+    color:#DC143C;
+    font-size:16px;
 `;

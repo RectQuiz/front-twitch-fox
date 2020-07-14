@@ -12,6 +12,9 @@ export const Container = styled.div`
   flex-direction:column;
   align-items: center;
   justify-content: flex-end;
+  position:relative;
+  bottom:0;
+  opacity:0.5;
 `;
 
 export const Content = styled.div`

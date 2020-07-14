@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction:row;
   align-items: center;
   justify-content:center;
-  z-index:9999;
+  z-index:5;
 `;
 
 export const TitleDivider = styled.div`

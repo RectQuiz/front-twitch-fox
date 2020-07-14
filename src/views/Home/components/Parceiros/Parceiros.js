@@ -30,7 +30,7 @@ function Parceiros() {
                 <ContainerLogoParceiros>
                     {parceiros.map(parceiro=>{
                         return (
-                            <ContainerLogoParceiro>
+                            <ContainerLogoParceiro key={parceiro}>
                                 <ContentLogoParceiro>
                                     <LogoParceiro
                                         src={logo}

@@ -15,6 +15,7 @@ import {
     ContentSmall,
     ContainerNickname,
     ContentNickname,
+    Nickname
 } from './styles';
 import logo from '../../../../assets/images/logo.png';
 import menu from '../../../../assets/images/menu.png';
@@ -31,14 +32,15 @@ export default function Header({open, setOpen, logar }){
         // Cookies.set('teste', 'value');
         let cookieNick = cookies.get('nickname');
         let cookieSession = cookies.get('session');
-        console.log('cookieNick: ', cookieNick);
-        console.log('cookieSession: ', cookieSession);
+        // console.log('cookieNick: ', cookieNick);
+        // console.log('cookieSession: ', cookieSession);
         if (cookieNick && cookieSession) {
             setNickname(cookieNick);
         }else{
             setNickname(null);
         }
     });
+    
     const setVisibleDropDown = ()=>{
         console.log('visibleInfoUser: ',visibleInfoUser);
         setVisibleInfoUser(!visibleInfoUser);
@@ -59,7 +61,7 @@ export default function Header({open, setOpen, logar }){
                     </ContainerLogo>
                     <ContainerButtonsNav>
                         <a href="/">HOME</a>
-                        <a href="#news">LOJA</a>
+                        <a href="/loja">LOJA</a>
                         <a href="#contact">PARCEIROS</a>
                         <a href="#about">CONTATO</a>
                         {
@@ -68,8 +70,10 @@ export default function Header({open, setOpen, logar }){
                             ):
                             (
                                 <ContainerNickname>
-                                    <ContentNickname  onClick={setVisibleDropDown}>
+                                    <ContentNickname>
+                                        <Nickname>
                                             {nickname}
+                                        </Nickname>
                                     </ContentNickname>
                                 </ContainerNickname>
                             )
@@ -84,7 +88,7 @@ export default function Header({open, setOpen, logar }){
                 <ContentSmall open={open}>
                         <Ul open={open}>
                             <li><a href="/">HOME</a></li>
-                            <li><a href="#news">LOJA</a></li>
+                            <li><a href="/loja">LOJA</a></li>
                             <li><a href="#contact">PARCEIROS</a></li>
                             <li><a href="#about">CONTATO</a></li>
                             {
@@ -94,7 +98,9 @@ export default function Header({open, setOpen, logar }){
                                 (
                                     <ContainerNickname>
                                         <ContentNickname>
+                                            <Nickname>
                                                 {nickname}
+                                            </Nickname>
                                         </ContentNickname>
                                     </ContainerNickname>
                                 )

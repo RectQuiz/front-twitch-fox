@@ -2,56 +2,49 @@ import React, { useState, useEffect } from 'react';
 import { api } from '../../services/api';
 import { Redirect } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import { useSelector, useDispatch } from 'react-redux';
+import { 
+  authCodeTwitch,
+  setStatus,
+  setResponse,
+  setUrlAuthTwitch
+} from '../../store/modules/login/actions';
 
 export default function CallbackOauth({location, history}){
     
+    const dispatch = useDispatch();
+    const { response, url_twitch, status, errors } = useSelector(({ LoginReducer }) => LoginReducer);
+
     useEffect(()=>{
         console.log('location.hash id_token: ',(document.location.hash.match(/id_token=([^&]+)/) || [])[1]);
         console.log('location.hash access_token: ',(document.location.hash.match(/access_token=([^&]+)/) || [])[1]);
-        const get_token = async ()=>{
-            const code = (location.search.match(/code=([^&]+)/) || [])[1];
-            // const state = (location.search.match(/state=([^&]+)/) || [])[1];
-            if (code) {
-                console.log('code: ',code);
-                try {
-                    let resp = await api.get(`http://localhost:3333/auth-from-code-twitch?code=${code}`,{withCredentials: true});
-                    console.log('resp token on code: ',resp);
-                    console.log('resp.data.data.url: ',resp.data);
-                    const cookies = new Cookies();
-                    cookies.set('nickname', resp.data.decodedResponse.resp.preferred_username, { path: '/' });
-                    history.push('/home');
-                } catch (error) {
-                    if (error.response) {
-                        // The request was made and the server responded with a status code
-                        // that falls out of the range of 2xx
-                        console.log(error.response.data);
-                        console.log(error.response.status);
-                        console.log(error.response.headers);
-                      } else if (error.request) {
-                        // The request was made but no response was received
-                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                        // http.ClientRequest in node.js
-                        console.log(error.request);
-                      } else {
-                        // Something happened in setting up the request that triggered an Error
-                        console.log('Error', error.message);
-                      }
-                      console.log(error.config);
-                }
-
-                // fetch(`http://localhost:3333/auth-from-code-twitch?code=${code}`, {
-                //     credentials: "include"
-                //   })
-                //     .then(res => res.json())
-                //     .then(res => console.log(res))
-                //     .catch(console.error);
-            }else{
-                console.log('code não encontrado: ',code);
-            }
+        const code = (location.search.match(/code=([^&]+)/) || [])[1];
+        if (code) {
+            dispatch(authCodeTwitch(code));
+        } else {
+            setTimeout(() => {
+                history.push('/home');
+            }, 5000);
         }
-        get_token();
     },[]);
 
+    useEffect(()=>{
+        // console.log('response CallbackOauth: ',response);
+        // console.log('url_twitch CallbackOauth: ',url_twitch);
+        // console.log('status CallbackOauth: ',status);
+        // console.log('staerrorstus CallbackOauth: ',errors);
+        if (status && status == 200 && response && errors.length == 0) {
+            const cookies = new Cookies();
+            cookies.set('nickname', response.data.decodedResponse.resp.preferred_username, { path: '/' });
+            dispatch(setStatus(0));
+            dispatch(setResponse({}));
+            history.push('/home');
+        }
+    },[status]);
+
+    useEffect(()=>{
+        console.log('staerrorstus CallbackOauth: ',errors);
+    },[errors]);
     
     return (
         <div>

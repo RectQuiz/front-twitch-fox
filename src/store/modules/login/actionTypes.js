@@ -1,0 +1,6 @@
+export const GET_URL_AUTH_TWITCH = 'GET_URL_AUTH_TWITCH';
+export const SET_URL_AUTH_TWITCH = 'SET_URL_AUTH_TWITCH';
+export const AUTH_CODE_TWITCH = 'AUTH_CODE_TWITCH';
+export const SET_RESPONSE = 'SET_RESPONSE';
+export const SET_STATUS = 'SET_STATUS';
+export const SET_ERROR = 'SET_ERROR';

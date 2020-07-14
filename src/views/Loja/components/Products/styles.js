@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.footer`
   /* background-color: red; */
   width: 100%;
   display: flex;
@@ -25,10 +25,12 @@ export const Content = styled.div`
   /* @media (max-width: 500px) { */
     flex-direction:row;
     flex-wrap:wrap;
+  padding-bottom:40px;
+  flex:1;
   /* } */
 `;
 
-export const Products = styled.div`
+export const ContainerProducts = styled.div`
   /* background-color: green; */
   width: 100%;
   max-width: 1150px;
@@ -59,6 +61,6 @@ export const ButtonStore = styled.button`
   :hover{
     /* background-color:rgba(232,0,115); */
     opacity:0.6;
-    /* transform: translateY(-15px); */
+    transform: translateY(-15px);
   }
 `;

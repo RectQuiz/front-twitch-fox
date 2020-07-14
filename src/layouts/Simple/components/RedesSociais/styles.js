@@ -4,10 +4,14 @@ export const Container = styled.div`
   background-color: #000;
   width: 100%;
   height: auto;
+  max-height:70px;
+  min-height:70px;
   color: #fff;
   display: flex;
   padding: 15px;
-
+  /* position:absolute;
+  top:0; */
+  
 `;
 
 export const Content = styled.div`

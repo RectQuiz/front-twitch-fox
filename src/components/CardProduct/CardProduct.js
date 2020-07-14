@@ -18,11 +18,12 @@ import {
 } from './styles';
 import { GiPopcorn } from 'react-icons/gi';
 const image_test = 'https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposem2LFZfwOP3ZTxS6eOlnI-Zg8j-JrXWmm5u4MBwnPCPpd703QPk_EdpYDr3cY6TJANtYguGqVm6xufp08PutcufyCMwu3Z2sGGdwULWjjgloA/330x192';
-const CardProduct = ({image,title,desc,type,amount,price,inspectGameLink,promo,pricePromo}) => {
+const CardProduct = (props) => {
+    let {image,title,desc,type,amount,price,inspectGameLink,promo,pricePromo,handleSelect} = props;
     image = `https://steamcommunity-a.akamaihd.net/economy/image/${image}`;
     return (
         <ContainerCard>
-            <Card promo={promo}>
+            <Card promo={promo} onClick={()=>handleSelect(props)}>
                 <ContentImage>
                     <ImageProduct
                         className='imageProduct'
@@ -33,10 +34,10 @@ const CardProduct = ({image,title,desc,type,amount,price,inspectGameLink,promo,p
                     {/* <Type>
                         {type}
                     </Type> */}
-                    <TitleCard alt={title}>
+                    <TitleCard title={title}>
                         {title}
                     </TitleCard>
-                    <DescCard>
+                    <DescCard title={desc}>
                         {desc}
                     </DescCard>
                     <Amount>

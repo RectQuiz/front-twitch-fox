@@ -15,7 +15,7 @@ export const ContainerCard = styled.div`
     }
 `;
 
-export const Card = styled.div`
+export const Card = styled.button`
     width:100%;
     height:100%;
     border-width:1px;
@@ -39,12 +39,29 @@ export const Card = styled.div`
 
 export const ImageProduct = styled.img`
     max-width: 100%;
-  max-height: 100%;
+    max-height: 100%;
     /* background-color:#fff; */
     transition: 0.2s all ease-out;
     /* @media (max-width: 500px) {
         max-width:60vw;
     } */
+`;
+
+export const ContentImage = styled.div`
+    background-color:rgba(0,0,0,0.4);
+    border-radius:12px;
+    border-bottom: 2px solid #fff;
+    border-bottom-left-radius:0px;
+    border-bottom-right-radius:0px;
+    padding:15px;
+    width:100%;
+    height:100%;
+    min-height:${(sizeCardH/2)-10}px;
+    max-height:${(sizeCardH/2)-10}px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 `;
 
 export const Type = styled.p`
@@ -119,7 +136,7 @@ export const Desconto = styled.h5`
 
 export const Price = styled.h5`
     font-size:19px;
-    color:#fff;
+    color:orange;
     font-family:Raleway,sans-serif;
     text-align:left;
     overflow: hidden;
@@ -144,23 +161,6 @@ export const ContentInfo = styled.div`
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-`;
-
-export const ContentImage = styled.div`
-    background-color:rgba(0,0,0,0.4);
-    border-radius:12px;
-    border-bottom: 2px solid #fff;
-    border-bottom-left-radius:0px;
-    border-bottom-right-radius:0px;
-    padding:15px;
-    width:100%;
-    height:100%;
-    min-height:${(sizeCardH/2)-10}px;
-    max-height:${(sizeCardH/2)-10}px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
 `;
 
 export const ContentPrice = styled.div`

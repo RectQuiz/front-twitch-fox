@@ -223,7 +223,7 @@ export const DropdownUser = styled.div`
     border:2px solid rgba(55,56,71);
     overflow:hidden;
     flex-direction:column;
-    z-index:999;
+    z-index:6;
 `;
 
 export const ItemDropDown = styled.div`

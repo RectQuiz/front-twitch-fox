@@ -59,6 +59,9 @@ export const ContainerLogoParceiros = styled.div`
     /* background-color:#fff; */
     padding:50px;
     flex-wrap:wrap;
+    @media (max-width: 500px) {
+        flex-direction:column;
+    }
 `;
 
 export const ContainerLogoParceiro = styled.div`
@@ -74,12 +77,12 @@ export const ContentLogoParceiro = styled.div`
     width: 150px;
     height: 150px;
     overflow: hidden;
-    position: relative;
+    /* position: relative; */
     border:3px solid  rgba(218,0,57);
 `;
 
 export const LogoParceiro = styled.img`
-    position: absolute;
-    bottom: 0;
+    /* position: absolute;
+    bottom: 0; */
     width: 100%;
 `;
