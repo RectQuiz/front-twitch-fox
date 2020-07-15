@@ -39,7 +39,7 @@ export default function Products({
         setModal(false);
     }
 
-    console.log('products: ',products);
+    console.log('products 1: ',products);
     const [ cards, setCards ] = useState([1,2,3,4]);
     return (
         
@@ -49,11 +49,11 @@ export default function Products({
                         <Content>
                             <ContainerProducts>
                                 {
-                                products.map((product)=>{
+                                products.map((product,index)=>{
                                         return (
                                             <CardProduct
                                                 handleSelect={handleSelect}
-                                                key={product.id_item}
+                                                key={index}
                                                 image={product.imageurl}
                                                 title={product.name}
                                                 type={product.type}

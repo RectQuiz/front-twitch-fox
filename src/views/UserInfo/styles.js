@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-export const ImageFundo = styled.div`
-`;
-
 export const Content = styled.div`
     max-width: 100vw;
     max-height:100vh;
@@ -19,11 +16,8 @@ export const BackgroundColor = styled.div`
     display: flex;
     flex-direction:column;
     align-items: center;
-    justify-content:center;
+    justify-content:flex-start;
     position:relative;
     padding-bottom:200px;
     /* opacity:0.3; */
 `;
-
-
-

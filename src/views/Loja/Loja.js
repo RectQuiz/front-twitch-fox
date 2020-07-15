@@ -6,18 +6,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { 
     setStatusModal
 } from '../../store/modules/modal/actions';
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 import { Content, BackgroundColor } from './styles';
 
 function Loja() {
   const { status } = useSelector(({ ModalReducer }) => ModalReducer);
   const dispatch = useDispatch();
-  const [ products, setProducts ] = useState([]);
+  const [ products, setProducts ] = useState(null);
   const [ pagination, setPagination ] = useState({
       totalPages:0,
       currentPage:0
   });
   // const [ modalInfoProduct, setModalInfoProduct ] = useState(false);
+
+  console.log('products: ',products);
 
   const setModalInfoProduct = (status_set)=>{
     if (status_set != status) {
@@ -34,12 +37,13 @@ function Loja() {
           // let resp = await api.get(`https://steamcommunity.com/id/argerioaf/inventory/json/730/2`);
           let resp = await api.get(`http://localhost:3333/products?page=${page}`);
           console.log('resp itens cs: ',resp.data.data);
-          setProducts(resp.data.data);
           setPagination({
               currentPage:resp.data.currentPage,
               totalPages:resp.data.totalPages
           });
+          setProducts(resp.data.data);
       } catch (error) {
+            setProducts([]);
           console.log('error itens cs: ',error);
           if (error.response) {
               // The request was made and the server responded with a status code
@@ -63,13 +67,28 @@ function Loja() {
   return(
     <Content modal={status}>
         <BackgroundColor>
-            <Products
-               products={products} 
-               pagination={pagination}
-               load_products={load_products}
-               modal={status}
-               setModal={setModalInfoProduct}
-            />
+            {
+                products?
+                (
+                    <Products
+                       products={products} 
+                       pagination={pagination}
+                       load_products={load_products}
+                       modal={status}
+                       setModal={setModalInfoProduct}
+                    />
+                ):
+                (
+                    <ScaleLoader
+                        // css={override}
+                        color="#DC143C"
+                        height={60}
+                        width={7}
+                        margin={7}
+                        loading={true}
+                    />
+                )
+            }
             <Footer/>
         </BackgroundColor>
     </Content>

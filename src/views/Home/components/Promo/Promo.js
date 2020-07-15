@@ -12,7 +12,7 @@ import logo from '../../../../assets/images/logo.png';
 import { CardProduct } from '../../../../components';
 
 export default function Cards({products}){
-    console.log('products: ',products);
+    // console.log('products: ',products);
     const [ cards, setCards ] = useState([1,2,3,4]);
     return (
             products.length > 0?(

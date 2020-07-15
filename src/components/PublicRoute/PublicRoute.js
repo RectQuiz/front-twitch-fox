@@ -7,11 +7,17 @@ const PublicRoute = props => {
   return (
     <Route
       {...rest}
-      render={matchProps => (
-        <Layout>
-          <Component {...matchProps} />
-        </Layout>
-      )}
+      render={matchProps => 
+        Layout?
+        (
+          <Layout>
+            <Component {...matchProps} />
+          </Layout>
+        ):
+        (
+            <Component {...matchProps} />
+        )
+      }
     />
   )
 }

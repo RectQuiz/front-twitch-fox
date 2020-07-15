@@ -1,0 +1,6 @@
+export const LOAD_INFO_USER = 'LOAD_INFO_USER';
+export const SET_INFO_USER = 'SET_INFO_USER';
+export const SET_LOADING_USER = 'SET_LOADING_USER';
+export const SET_RESPONSE_USER = 'SET_RESPONSE_USER';
+export const SET_STATUS_USER = 'SET_STATUS_USER';
+export const SET_ERROR_USER = 'SET_ERROR_USER';

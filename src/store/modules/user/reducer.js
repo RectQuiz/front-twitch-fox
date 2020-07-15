@@ -2,36 +2,35 @@ import * as actions from './actionTypes';
 
 const initial_state = {
     response: {},
-    loading:false,
-    url_twitch: '',
+    user: null,
     loading: false,
     errors: '',
     status:0
 }
 
-export const LoginReducer = (state = initial_state, action) => {
+export const UserReducer = (state = initial_state, action) => {
   switch (action.type) {
-    case actions.SET_URL_AUTH_TWITCH:
+    case actions.SET_INFO_USER:
       return {
         ...state,
-        url_twitch: action.url,
+        user: action.info_user,
       };
-    case actions.SET_LOADING_LOGIN:
+    case actions.SET_LOADING_USER:
       return {
         ...state,
         loading: action.loading
       };
-    case actions.SET_RESPONSE_LOGIN:
+    case actions.SET_RESPONSE_USER:
       return {
         ...state,
         response: action.response
       };
-    case actions.SET_STATUS_LOGIN:
+    case actions.SET_STATUS_USER:
       return {
         ...state,
         status: action.status
       };
-    case actions.SET_ERROR_LOGIN:
+    case actions.SET_ERROR_USER:
       return {
         ...state,
         errors: action.errors,

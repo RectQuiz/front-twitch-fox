@@ -13,6 +13,7 @@ const Routes = () => {
       <PublicRoute component={View.Home} exact layout={Simple} path="/home" />
       <PublicRoute component={View.CallbackOauth} exact layout={Simple} path="/callback_oauth" />
       <PublicRoute component={View.Loja} exact layout={Simple} path="/loja" />
+      <PrivateRoute component={View.UserInfo} exact layout={Simple} path="/user/:nick_user" />
       {/* <PublicRoute
         component={View.CadPessoaFisica}
         exact

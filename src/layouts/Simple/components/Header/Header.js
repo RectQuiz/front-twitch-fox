@@ -9,30 +9,32 @@ import {
     ContainerButtonMenu,
     TitleLogo,
     ImageMenu,
-    ContainerListMenu,
     Ul,
     ContentBig,
     ContentSmall,
     ContainerNickname,
     ContentNickname,
-    Nickname
+    Nickname,
+    ContainerDropDown,
+    ItemDropDown,
+    ContainerDropDownMobile,
+    ItemDropDownMobile
 } from './styles';
+import { useHistory } from 'react-router-dom';
 import logo from '../../../../assets/images/logo.png';
 import menu from '../../../../assets/images/menu.png';
-import { TiThMenu } from 'react-icons/ti';
-import { FaArrowCircleDown } from 'react-icons/fa';
 import Cookies from 'universal-cookie';
-
-export default function Header({open, setOpen, logar }){
+import { Link } from 'react-router-dom';
+export default function Header({open, setOpen, logar, loadingAuth }){
+    let history = useHistory();
     const [ nickname, setNickname] = useState(null);
-    const [ visibleInfoUser, setVisibleInfoUser] = useState(true);
-    
+    const [ dropDawnMobile, setDropDawnMobile] = useState(false);
+
     useEffect(()=>{
         const cookies = new Cookies();
         // Cookies.set('teste', 'value');
         let cookieNick = cookies.get('nickname');
         let cookieSession = cookies.get('session');
-        // console.log('cookieNick: ', cookieNick);
         // console.log('cookieSession: ', cookieSession);
         if (cookieNick && cookieSession) {
             setNickname(cookieNick);
@@ -41,9 +43,21 @@ export default function Header({open, setOpen, logar }){
         }
     });
     
-    const setVisibleDropDown = ()=>{
-        console.log('visibleInfoUser: ',visibleInfoUser);
-        setVisibleInfoUser(!visibleInfoUser);
+    const setVisibleDropDownMobile = ()=>{
+        console.log('visibleInfoUser: ',dropDawnMobile);
+        setDropDawnMobile(!dropDawnMobile);
+    }
+
+    const styleTaga = {
+        cursor:loadingAuth?'not-allowed':'',
+        pointerEvents:loadingAuth?'none':'auto'
+    }
+
+    const logOut = ()=>{
+        const cookies = new Cookies();
+        cookies.remove('nickname', { path: '/' });
+        cookies.remove('session');
+        window.location.reload(false);
     }
 
     return (
@@ -60,22 +74,33 @@ export default function Header({open, setOpen, logar }){
                         </TitleLogo>
                     </ContainerLogo>
                     <ContainerButtonsNav>
-                        <a href="/">HOME</a>
-                        <a href="/loja">LOJA</a>
-                        <a href="#contact">PARCEIROS</a>
-                        <a href="#about">CONTATO</a>
+                        <Link style={styleTaga} to="/">HOME</Link>
+                        <Link style={styleTaga} to="/loja">LOJA</Link>
+                        <Link style={styleTaga} to="#contact">PARCEIROS</Link>
+                        <Link style={styleTaga} to="#about">CONTATO</Link>
                         {
-                            !nickname?(
-                                <ButtonAuth onClick={logar}>ENTRAR COM A TWITCH</ButtonAuth>
-                            ):
+                            !loadingAuth && 
                             (
-                                <ContainerNickname>
-                                    <ContentNickname>
-                                        <Nickname>
-                                            {nickname}
-                                        </Nickname>
-                                    </ContentNickname>
-                                </ContainerNickname>
+                                !nickname?(
+                                    <ButtonAuth onClick={logar}>ENTRAR COM A TWITCH</ButtonAuth>
+                                ):
+                                (
+                                    <ContainerNickname>
+                                        <ContentNickname>
+                                            <Nickname>
+                                                {nickname}
+                                            </Nickname>
+                                        </ContentNickname>
+                                        <ContainerDropDown className='dropDownNicname'>
+                                            <ItemDropDown>
+                                                <Link style={styleTaga} to={`/user/${nickname}`}>Perfil</Link>
+                                            </ItemDropDown>
+                                            <ItemDropDown style={{padding:10}} onClick={logOut}>
+                                                Sair
+                                            </ItemDropDown>
+                                        </ContainerDropDown>
+                                    </ContainerNickname>
+                                )
                             )
                         }
                     </ContainerButtonsNav>
@@ -87,22 +112,33 @@ export default function Header({open, setOpen, logar }){
                 </ContentBig>
                 <ContentSmall open={open}>
                         <Ul open={open}>
-                            <li><a href="/">HOME</a></li>
-                            <li><a href="/loja">LOJA</a></li>
-                            <li><a href="#contact">PARCEIROS</a></li>
-                            <li><a href="#about">CONTATO</a></li>
+                            <li><Link style={styleTaga} to="/">HOME</Link></li>
+                            <li><Link style={styleTaga} to="/loja">LOJA</Link></li>
+                            <li><Link style={styleTaga} to="#contact">PARCEIROS</Link></li>
+                            <li><Link style={styleTaga} to="#about">CONTATO</Link></li>
                             {
-                                !nickname?(
-                                    <ButtonAuth onClick={logar}>ENTRAR COM A TWITCH</ButtonAuth>
-                                ):
+                                !loadingAuth && 
                                 (
-                                    <ContainerNickname>
-                                        <ContentNickname>
-                                            <Nickname>
-                                                {nickname}
-                                            </Nickname>
-                                        </ContentNickname>
-                                    </ContainerNickname>
+                                    !nickname?(
+                                        <ButtonAuth onClick={logar}>ENTRAR COM A TWITCH</ButtonAuth>
+                                    ):
+                                    (
+                                        <ContainerNickname>
+                                            <ContentNickname onClick={setVisibleDropDownMobile}>
+                                                <Nickname>
+                                                    {nickname}
+                                                </Nickname>
+                                            </ContentNickname>
+                                            <ContainerDropDownMobile status={dropDawnMobile}  className='dropDownMobile'>
+                                                <ItemDropDownMobile>
+                                                    Perfil
+                                                </ItemDropDownMobile>
+                                                <ItemDropDownMobile onClick={logOut}>
+                                                    Sair
+                                                </ItemDropDownMobile>
+                                            </ContainerDropDownMobile>
+                                        </ContainerNickname>
+                                    )
                                 )
                             }
                         </Ul>

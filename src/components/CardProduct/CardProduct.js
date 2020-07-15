@@ -8,7 +8,6 @@ import {
     DescCard,
     ContentImage,
 
-    Type,
     Amount,
     Price,
     ContentInfo,
@@ -17,7 +16,7 @@ import {
     PriceOld
 } from './styles';
 import { GiPopcorn } from 'react-icons/gi';
-const image_test = 'https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposem2LFZfwOP3ZTxS6eOlnI-Zg8j-JrXWmm5u4MBwnPCPpd703QPk_EdpYDr3cY6TJANtYguGqVm6xufp08PutcufyCMwu3Z2sGGdwULWjjgloA/330x192';
+// const image_test = 'https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposem2LFZfwOP3ZTxS6eOlnI-Zg8j-JrXWmm5u4MBwnPCPpd703QPk_EdpYDr3cY6TJANtYguGqVm6xufp08PutcufyCMwu3Z2sGGdwULWjjgloA/330x192';
 const CardProduct = (props) => {
     let {image,title,desc,type,amount,price,inspectGameLink,promo,pricePromo,handleSelect} = props;
     image = `https://steamcommunity-a.akamaihd.net/economy/image/${image}`;

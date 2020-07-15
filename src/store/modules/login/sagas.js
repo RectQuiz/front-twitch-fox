@@ -5,14 +5,18 @@ import * as actions from './actions';
 // import { getErros } from '~/store/modules/errors/action';
 
 function* getUrlAuthTwitchWorker({ params }) {
+  yield put(actions.setLoading(true));
   try {
     const response = yield call(Login.getAuthUrlTwitch, params);
+    // yield put(actions.setLoading(false));
     // console.log('response getUrlAuthTwitchWorker: ',response);
-    yield put(actions.setUrlAuthTwitch(response.data.data.url));
+    window.location.assign(response.data.data.url);
+    // yield put(actions.setUrlAuthTwitch(response.data.data.url));
     yield put(actions.setError(''));
-    yield put(actions.setResponse(response));
-    yield put(actions.setStatus(response.status));
+    // yield put(actions.setResponse(response));
+    // yield put(actions.setStatus(response.status));
   } catch (error) {
+    yield put(actions.setLoading(false));
     if (error.response) {
         console.log('error response: ',error.response);
         yield put(actions.setStatus(error.response.status));
@@ -28,18 +32,20 @@ function* getUrlAuthTwitchWorker({ params }) {
   }
 }
 
-
 function* authCodeTwitchWorker({params}) {
+  yield put(actions.setLoading(true));
   try {
     const response = yield call(Login.authCodeTwitch,params);
+    yield put(actions.setLoading(false));
     yield put(actions.setError(''));
     yield put(actions.setResponse(response));
     yield put(actions.setStatus(response.status));
 
   } catch (error) {
+    yield put(actions.setLoading(false));
     yield put(actions.setStatus(error.status));
     if (error.response) {
-      yield put(actions.setError(error.response));
+      yield put(actions.setError(error.response.data.message));
     } else if (error.request) {
       yield put(actions.setError({ data: error.message }));
     } else {

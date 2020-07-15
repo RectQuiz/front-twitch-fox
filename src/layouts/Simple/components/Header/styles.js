@@ -102,7 +102,8 @@ export const ButtonAuth = styled.button`
         background-color:#9147ff!important;
         @media (max-width: 990px) {
             width:100%;
-            border-radius:0px;
+            /* border-radius:0px; */
+            padding:7px;
             justify-content: center;
         }
         font-size:12px;
@@ -190,36 +191,121 @@ export const Ul = styled.ul`
 `;
 
 export const ContainerNickname = styled.div`
-    /* background-color:red; */
+    /* background-color:#fff; */
     width:100%;
-    height:auto;
+    /* height:auto; */
+    padding:5px;
+    /* display:flex; */
+    display: inline-block;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    :hover .dropDownNicname {
+        display: flex;
+    }
+`;
+
+export const ContentNickname = styled.div`
+    /* background-color:black; */
+    width:100%;
+    /* max-width:150px; */
+    /* height:100%; */
     /* padding:10px; */
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-`;
-export const ContentNickname = styled.div`
-    /* background-color:black; */
-    width:100%;
-    /* max-width:150px; */
-    height:100%;
-    /* padding:10px; */
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:center;
     height:100%;
 `;
 
-export const Nickname = styled.h4`
+export const Nickname = styled.div`
     /* background-color:white; */
+    cursor:pointer;
     text-transform:uppercase;
     text-overflow: ellipsis;
     font-weight:bold;
     white-space:nowrap;
     overflow: hidden;
-    text-align:left;
+    text-align:center;
     color:#DC143C;
     font-size:16px;
+    ::after{
+        display: inline-block;
+        margin-left: .255em;
+        vertical-align: .255em;
+        content: "";
+        border-top: .3em solid;
+        border-right: .3em solid transparent;
+        border-bottom: 0;
+        border-left: .3em solid transparent;
+    }
+`;
+
+export const ContainerDropDown = styled.div`
+    display: none;
+    position: absolute;
+    background-color: #1c1c1c;
+    border-radius:7px;
+    border: 4px solid #141414;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    color: black;
+    cursor:pointer;
+    text-align:center;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    
+`;
+
+export const ItemDropDown = styled.div`
+    color: white !important;
+    /* padding: 12px 16px; */
+    text-decoration: none;
+    display: flex;
+    text-align:center;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-transform:uppercase;
+    border-bottom:1px solid #141414;
+    width:90%;
+    :hover{
+        color: #DC143C !important;
+        font-weight:bold;
+    }
+`;
+
+export const ContainerDropDownMobile = styled.div`
+    display: ${({status})=>status?'flex':'none'};
+    margin-top:10px;
+    /* position: absolute; */
+    background-color: #1c1c1c;
+    border-radius:7px;
+    border: 4px solid #141414;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    /* z-index: 1; */
+    color: black;
+    cursor:pointer;
+    text-align:center;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+`;
+
+export const ItemDropDownMobile = styled.div`
+    width:90%;
+    color: white !important;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-transform:uppercase;
+    border-bottom:1px solid #141414;
+    :hover{
+        color: #DC143C !important;
+        font-weight:bold;
+    }
 `;

@@ -25,14 +25,18 @@ export const ContentCardInfo = styled.div`
     max-height:100%;
     min-height:70vh;
     height:auto;
-    max-width:25vw;
-    min-width:25vw;
+    /* max-width:25vw; */
+    /* min-width:25vw; */
     background-color:#24252f;
     border-radius:7px;
     border: 3px solid #141414;
     align-self:center;
     padding:10px;
     overflow: hidden;
+    
+    @media (max-width: 1000px) {
+        /* min-width:50vw; */
+    }
     
     @media (max-width: 500px) {
         max-width:300px;
@@ -232,7 +236,7 @@ export const ContentButtonAdd = styled.div`
 `;
 
 export const ButtonAdd = styled.button`
-    background-color:#DC143C;
+    background-color:#00a000;
     border-radius:7px;
     text-transform:uppercase;
     padding:10px;

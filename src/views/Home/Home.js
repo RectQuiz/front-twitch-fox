@@ -18,7 +18,7 @@ export default function Home({history}){
             try {
                 // let resp = await api.get(`https://steamcommunity.com/id/argerioaf/inventory/json/730/2`);
                 let resp = await api.get(`http://localhost:3333/products/promo`);
-                console.log('resp itens cs: ',resp.data.data);
+                // console.log('resp itens cs: ',resp.data.data);
                 setProducts(resp.data.data);
             } catch (error) {
                 console.log('error itens cs: ',error);

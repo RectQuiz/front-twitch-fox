@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  /* background-color: #745; */
+  /* background-color: green; */
   width: 100%;
-  /* position:relative;
-  top:0;
+  position:relative;
+  /*top:0;
   opacity:0.5; */
   /* overflow:${({modal})=>modal?'hidden':'visible'}; */
 `;
