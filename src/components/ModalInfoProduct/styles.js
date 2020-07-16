@@ -236,7 +236,7 @@ export const ContentButtonAdd = styled.div`
 `;
 
 export const ButtonAdd = styled.button`
-    background-color:#00a000;
+    background-color:${({active})=>active?'#00a000':'#A4A4A4'};
     border-radius:7px;
     text-transform:uppercase;
     padding:10px;

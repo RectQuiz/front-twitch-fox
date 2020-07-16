@@ -6,12 +6,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { 
     setStatusModal
 } from '../../store/modules/modal/actions';
+import { loadInfoUser } from '../../store/modules/user/actions';
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 import { Content, BackgroundColor } from './styles';
+import Cookies from 'universal-cookie';
 
 function Loja() {
   const { status } = useSelector(({ ModalReducer }) => ModalReducer);
+  const { user } = useSelector(({ UserReducer }) => UserReducer);
   const dispatch = useDispatch();
   const [ products, setProducts ] = useState(null);
   const [ pagination, setPagination ] = useState({
@@ -20,7 +23,8 @@ function Loja() {
   });
   // const [ modalInfoProduct, setModalInfoProduct ] = useState(false);
 
-  console.log('products: ',products);
+  const cookies = new Cookies();
+  // Cookies.set('teste', 'value');
 
   const setModalInfoProduct = (status_set)=>{
     if (status_set != status) {
@@ -29,6 +33,7 @@ function Loja() {
   }
 
   useEffect(()=>{
+      dispatch(loadInfoUser());
       load_products();
   },[]);
 
@@ -71,6 +76,7 @@ function Loja() {
                 products?
                 (
                     <Products
+                       user={user}
                        products={products} 
                        pagination={pagination}
                        load_products={load_products}

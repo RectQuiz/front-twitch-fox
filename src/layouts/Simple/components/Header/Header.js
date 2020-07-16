@@ -82,7 +82,7 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                             !loadingAuth && 
                             (
                                 !nickname?(
-                                    <ButtonAuth onClick={logar}>ENTRAR COM A TWITCH</ButtonAuth>
+                                    <ButtonAuth onClick={logar}>LOGIN COM A TWITCH</ButtonAuth>
                                 ):
                                 (
                                     <ContainerNickname>
@@ -120,7 +120,7 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                                 !loadingAuth && 
                                 (
                                     !nickname?(
-                                        <ButtonAuth onClick={logar}>ENTRAR COM A TWITCH</ButtonAuth>
+                                        <ButtonAuth onClick={logar}>LOGIN COM A TWITCH</ButtonAuth>
                                     ):
                                     (
                                         <ContainerNickname>

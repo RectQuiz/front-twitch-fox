@@ -10,7 +10,7 @@ export const loadInfoUser = async (params) => {
   let search = urlParams.has('search')
     ? { search: urlParams.get('search') }
     : {};
-  return await api.get(`${resouceUrl}`, {
+  return await api.get(`${resouceUrl}/session`, {
     params: {
       ...params,
       ...page,

@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import {
     Container,
     Content,
-    ContainerProducts
+    ContainerProducts,
+    ContentInfoPoints,
+    PointsLabel,
+    PointsValue
   } from './styles';
 import ReactPaginate from 'react-paginate';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,6 +14,7 @@ import {
 } from '../../../../store/modules/modal/actions';
 
 import './pagination.css';
+import { GiPopcorn } from 'react-icons/gi';
 import { ModalInfoProduct, CardProduct } from '../../../../components';
 
 export default function Products({
@@ -18,7 +22,8 @@ export default function Products({
     pagination,
     load_products,
     modal,
-    setModal
+    setModal,
+    user
 }){
     const [ productSelect, setProductSelect ] = useState(null);
     const pageClick = (e)=>{
@@ -39,7 +44,8 @@ export default function Products({
         setModal(false);
     }
 
-    console.log('products 1: ',products);
+    // console.log('user: ',user);
+    // console.log('products 1: ',products);
     const [ cards, setCards ] = useState([1,2,3,4]);
     return (
         
@@ -47,6 +53,20 @@ export default function Products({
                 (
                     <Container>
                         <Content>
+                            {
+                                user?
+                                (
+                                    <ContentInfoPoints>
+                                        <PointsLabel>
+                                            Seus Pontos: 
+                                        </PointsLabel>
+                                        <PointsValue>
+                                                {user.points} <GiPopcorn/> 
+                                        </PointsValue>
+                                    </ContentInfoPoints>
+                                ):
+                                (null)
+                            }
                             <ContainerProducts>
                                 {
                                 products.map((product,index)=>{

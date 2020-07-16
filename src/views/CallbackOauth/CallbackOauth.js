@@ -10,6 +10,9 @@ import {
   setUrlAuthTwitch,
   setLoading
 } from '../../store/modules/login/actions';
+import { 
+  loadInfoUser
+} from '../../store/modules/user/actions';
 import {
     Container,
     BackgroundColor
@@ -49,7 +52,10 @@ export default function CallbackOauth({location, history}){
             cookies.set('nickname', responseLogin.data.decodedResponse.resp.preferred_username, { path: '/' });
             dispatch(setStatus(0));
             dispatch(setResponse({}));
-            history.goBack();
+            dispatch(loadInfoUser());
+            setTimeout(() => {
+                history.goBack();
+            }, 2000);
         }
     },[status]);
 

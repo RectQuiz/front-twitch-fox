@@ -38,6 +38,7 @@ function ModalInfoProduct({
     let image = `https://steamcommunity-a.akamaihd.net/economy/image/${infoProduct.image}`;
 
     const dispatch = useDispatch();
+    const { user } = useSelector(({ UserReducer }) => UserReducer);
 
     const dimisissModal = (e)=>{
         console.log(e.target);
@@ -107,9 +108,27 @@ function ModalInfoProduct({
                         </ContentInfoCard>
                     
                         <ContentButtonAdd>
-                            <ButtonAdd>
-                                Resgatar item
-                            </ButtonAdd>
+                            {
+                                user?
+                                (
+                                    (user.points&&user.points>=infoProduct.price)?
+                                    (
+                                        <ButtonAdd active={true}>
+                                            Resgatar item
+                                        </ButtonAdd>
+                                    ):
+                                    (
+                                        <ButtonAdd disabled active={false}>
+                                            Pontos insuficientes
+                                        </ButtonAdd>
+                                    )
+                                ):
+                                (
+                                    <ButtonAdd disabled active={false} >
+                                        Faça login antes
+                                    </ButtonAdd>
+                                )
+                            }
                         </ContentButtonAdd>
 
                     </ContentCardInfo>
