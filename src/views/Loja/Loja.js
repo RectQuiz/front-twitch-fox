@@ -10,7 +10,6 @@ import { loadInfoUser } from '../../store/modules/user/actions';
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 import { Content, BackgroundColor } from './styles';
-import Cookies from 'universal-cookie';
 
 function Loja() {
   const { status } = useSelector(({ ModalReducer }) => ModalReducer);
@@ -22,9 +21,8 @@ function Loja() {
       currentPage:0
   });
   // const [ modalInfoProduct, setModalInfoProduct ] = useState(false);
-
-  const cookies = new Cookies();
-  // Cookies.set('teste', 'value');
+  const token = localStorage.getItem('@siteJokerz/token');
+//   console.log('token: ',token);
 
   const setModalInfoProduct = (status_set)=>{
     if (status_set != status) {
@@ -33,7 +31,10 @@ function Loja() {
   }
 
   useEffect(()=>{
-      dispatch(loadInfoUser());
+      const token = localStorage.getItem('@siteJokerz/token');
+      if (token) {
+        dispatch(loadInfoUser());
+      }
       load_products();
   },[]);
 
@@ -41,7 +42,7 @@ function Loja() {
       try {
           // let resp = await api.get(`https://steamcommunity.com/id/argerioaf/inventory/json/730/2`);
           let resp = await api.get(`http://localhost:3333/products?page=${page}`);
-          console.log('resp itens cs: ',resp.data.data);
+        //   console.log('resp itens cs: ',resp.data.data);
           setPagination({
               currentPage:resp.data.currentPage,
               totalPages:resp.data.totalPages

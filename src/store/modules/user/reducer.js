@@ -5,7 +5,8 @@ const initial_state = {
     user: null,
     loading: false,
     errors: '',
-    status:0
+    status:0,
+    users:null
 }
 
 export const UserReducer = (state = initial_state, action) => {
@@ -34,6 +35,11 @@ export const UserReducer = (state = initial_state, action) => {
       return {
         ...state,
         errors: action.errors,
+      };
+    case actions.SET_USERS:
+      return {
+        ...state,
+        users: action.users,
       };
     default:
       return state;

@@ -5,6 +5,11 @@ export const loadInfoUser = (id_user) => ({
   id:id_user
 });
 
+export const loadAccountsForType = (params) => ({
+    type: actions.LOAD_ACCOUNTS_FOR_TYPE,
+    params:params
+});
+
 export const setInfoUser = (info_user) => ({
     type: actions.SET_INFO_USER,
     info_user:info_user
@@ -28,4 +33,14 @@ export const setStatus = (status) => ({
 export const setError = (errors) => ({
     type: actions.SET_ERROR_USER,
     errors:errors
+});
+
+export const setStatusTypePerson = (params) => ({
+    type: actions.SET_STATUS_TYPE_PERSON,
+    params:params
+});
+
+export const setUsers = (users) => ({
+    type: actions.SET_USERS,
+    users:users
 });

@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
 
 const PrivateRoute = ({ layout: Layout, component: Component, ...rest })=>{
-    const cookies = new Cookies();
     let isAuth = false;
-    let cookieNick = cookies.get('nickname');
-    let cookieSession = cookies.get('session');
-    // console.log('cookieNick: ', cookieNick);
-    // console.log('cookieSession: ', cookieSession);
-    if (cookieNick && cookieSession) {
+    const nickname = localStorage.getItem('@siteJokerz/nickname');
+    const token = localStorage.getItem('@siteJokerz/token');
+    // console.log('nickname PrivateRoute: ', nickname);
+    // console.log('token PrivateRoute: ', token);
+    if (nickname && token) {
         isAuth = true;
     }
     return (

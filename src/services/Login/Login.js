@@ -27,7 +27,5 @@ export const authCodeTwitch = async (params) => {
     let search = urlParams.has('search')
       ? { search: urlParams.get('search') }
       : {};
-    return await api.get(`${resouceUrl}/from-code-twitch?code=${params.code}`, {
-      withCredentials: true
-    });
+    return await api.get(`${resouceUrl}/twitch_person?code=${params.code}`);
   };

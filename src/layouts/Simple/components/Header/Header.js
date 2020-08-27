@@ -23,7 +23,6 @@ import {
 import { useHistory } from 'react-router-dom';
 import logo from '../../../../assets/images/logo.png';
 import menu from '../../../../assets/images/menu.png';
-import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
 export default function Header({open, setOpen, logar, loadingAuth }){
     let history = useHistory();
@@ -31,13 +30,10 @@ export default function Header({open, setOpen, logar, loadingAuth }){
     const [ dropDawnMobile, setDropDawnMobile] = useState(false);
 
     useEffect(()=>{
-        const cookies = new Cookies();
-        // Cookies.set('teste', 'value');
-        let cookieNick = cookies.get('nickname');
-        let cookieSession = cookies.get('session');
-        // console.log('cookieSession: ', cookieSession);
-        if (cookieNick && cookieSession) {
-            setNickname(cookieNick);
+        const nickname = localStorage.getItem('@siteJokerz/nickname');
+        const token = localStorage.getItem('@siteJokerz/token');
+        if (nickname && token) {
+            setNickname(nickname);
         }else{
             setNickname(null);
         }
@@ -54,9 +50,8 @@ export default function Header({open, setOpen, logar, loadingAuth }){
     }
 
     const logOut = ()=>{
-        const cookies = new Cookies();
-        cookies.remove('nickname', { path: '/' });
-        cookies.remove('session');
+        localStorage.removeItem('@siteJokerz/token');
+        localStorage.removeItem('@siteJokerz/nickname');
         window.location.reload(false);
     }
 
@@ -74,10 +69,10 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                         </TitleLogo>
                     </ContainerLogo>
                     <ContainerButtonsNav>
-                        <Link style={styleTaga} to="/">HOME</Link>
-                        <Link style={styleTaga} to="/loja">LOJA</Link>
-                        <Link style={styleTaga} to="#contact">PARCEIROS</Link>
-                        <Link style={styleTaga} to="#about">CONTATO</Link>
+                        <a style={styleTaga} href="/">HOME</a>
+                        <a style={styleTaga} href="/loja">LOJA</a>
+                        <a style={styleTaga} href="#contact">PARCEIROS</a>
+                        <a style={styleTaga} href="#about">CONTATO</a>
                         {
                             !loadingAuth && 
                             (
@@ -93,7 +88,7 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                                         </ContentNickname>
                                         <ContainerDropDown className='dropDownNicname'>
                                             <ItemDropDown>
-                                                <Link style={styleTaga} to={`/user/${nickname}`}>Perfil</Link>
+                                                <a style={styleTaga} href={`/user/${nickname}`}>Perfil</a>
                                             </ItemDropDown>
                                             <ItemDropDown style={{padding:10}} onClick={logOut}>
                                                 Sair
@@ -112,10 +107,10 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                 </ContentBig>
                 <ContentSmall open={open}>
                         <Ul open={open}>
-                            <li><Link style={styleTaga} to="/">HOME</Link></li>
-                            <li><Link style={styleTaga} to="/loja">LOJA</Link></li>
-                            <li><Link style={styleTaga} to="#contact">PARCEIROS</Link></li>
-                            <li><Link style={styleTaga} to="#about">CONTATO</Link></li>
+                            <li><a style={styleTaga} href="/">HOME</a></li>
+                            <li><a style={styleTaga} href="/loja">LOJA</a></li>
+                            <li><a style={styleTaga} href="#contact">PARCEIROS</a></li>
+                            <li><a style={styleTaga} href="#about">CONTATO</a></li>
                             {
                                 !loadingAuth && 
                                 (
@@ -131,7 +126,7 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                                             </ContentNickname>
                                             <ContainerDropDownMobile status={dropDawnMobile}  className='dropDownMobile'>
                                                 <ItemDropDownMobile>
-                                                    Perfil
+                                                    <a style={styleTaga} href={`/user/${nickname}`}>Perfil</a>
                                                 </ItemDropDownMobile>
                                                 <ItemDropDownMobile onClick={logOut}>
                                                     Sair

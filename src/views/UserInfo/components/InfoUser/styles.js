@@ -66,7 +66,6 @@ export const ItemValueInfo = styled.div`
     font-size:16px;
 `;
 
-
 //channels
 export const ContentItemInfoChannels = styled.div`
     width:100%;
@@ -146,4 +145,15 @@ export const ContainerValueInfoChannels = styled.div`
     /* padding-left:10px;
     padding-right:10px; */
     margin:10px;
+`;
+
+//selecinar tipo
+export const ContainerSelectTypeAccount = styled.div`
+
+`;
+
+export const TitleSelectAccount = styled.div`
+    color:#fff;
+    font-size:15px;
+    padding:10px;
 `;

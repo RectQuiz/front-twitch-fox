@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../../services/api';
 import { Redirect } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import { useSelector, useDispatch } from 'react-redux';
 import { 
   authCodeTwitch,
   setStatus,
   setResponse,
+  setError,
   setUrlAuthTwitch,
   setLoading
 } from '../../store/modules/login/actions';
@@ -37,7 +37,7 @@ export default function CallbackOauth({location, history}){
             // }, 5000);
         } else {
             // setTimeout(() => {
-                history.goBack();
+            history.push('home');
             // }, 5000);
         }
     },[]);
@@ -48,21 +48,17 @@ export default function CallbackOauth({location, history}){
         // console.log('status CallbackOauth: ',status);
         // console.log('staerrorstus CallbackOauth: ',errors);
         if (status && status == 200 && responseLogin && errors.length == 0) {
-            const cookies = new Cookies();
-            cookies.set('nickname', responseLogin.data.decodedResponse.resp.preferred_username, { path: '/' });
             dispatch(setStatus(0));
             dispatch(setResponse({}));
-            dispatch(loadInfoUser());
-            setTimeout(() => {
-                history.goBack();
-            }, 2000);
+            history.push('home');
         }
     },[status]);
 
     useEffect(()=>{
-        console.log('staerrorstus CallbackOauth: ',errors);
-        if(errors.length > 0 ){
-            history.goBack();
+        console.log('staerrorstus CallbackOauth: ',String(errors));
+        if(String(errors).length > 0 ){
+            dispatch(setError(''));
+            history.push('home');
         }
     },[errors]);
     

@@ -111,16 +111,33 @@ function ModalInfoProduct({
                             {
                                 user?
                                 (
-                                    (user.points&&user.points>=infoProduct.price)?
+                                    
+                                    user.type_account == 'pendente'?
                                     (
-                                        <ButtonAdd active={true}>
-                                            Resgatar item
+                                        <ButtonAdd disabled active={false} >
+                                            Atualize seu perfil
                                         </ButtonAdd>
                                     ):
                                     (
-                                        <ButtonAdd disabled active={false}>
-                                            Pontos insuficientes
-                                        </ButtonAdd>
+                                        user.type_account == 'secondary'?
+                                        (
+                                            <ButtonAdd disabled active={false} >
+                                                Apenas para contas primárias
+                                            </ButtonAdd>
+                                        ):
+                                        (
+                                            (user.points&&user.points>=infoProduct.price)?
+                                            (
+                                                <ButtonAdd active={true}>
+                                                    Resgatar item
+                                                </ButtonAdd>
+                                            ):
+                                            (
+                                                <ButtonAdd disabled active={false}>
+                                                    Pontos insuficientes
+                                                </ButtonAdd>
+                                            )
+                                        )
                                     )
                                 ):
                                 (
