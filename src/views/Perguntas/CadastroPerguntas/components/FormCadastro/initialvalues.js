@@ -1,0 +1,24 @@
+export const initialvalues = {
+  titulo:'',
+  nivel:'',
+  categoria:'',
+  resposta:'',
+  alternativas:[
+    {
+      name:'',
+      number:1
+    },
+    {
+      name:'',
+      number:2
+    },
+    {
+      name:'',
+      number:3
+    },
+    {
+      name:'',
+      number:4
+    }
+  ]
+}

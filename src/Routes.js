@@ -14,6 +14,10 @@ const Routes = () => {
       <PublicRoute component={View.CallbackOauth} exact layout={Simple} path="/callback_oauth" />
       <PublicRoute component={View.Loja} exact layout={Simple} path="/loja" />
       <PrivateRoute component={View.UserInfo} exact layout={Simple} path="/user/:nick_user" />
+      <PrivateRoute component={View.CadastroPerguntas} exact layout={Simple} path="/perguntas/cadastro" />
+      <PrivateRoute component={View.CadastrarNiveis} exact layout={Simple} path="/nivel/cadastro" />
+      <PrivateRoute component={View.CadastroPremiacao} exact layout={Simple} path="/premiacao/cadastro" />
+      <PrivateRoute component={View.Partida} exact layout={Simple} path="/partida" />
       {/* <PublicRoute
         component={View.CadPessoaFisica}
         exact
@@ -22,6 +26,7 @@ const Routes = () => {
       /> */}
 
       {/* ------- INICIO ROTAS PROCESSOS ------ */}
+      
       {/* <PrivateRoute
         component={View.Dashboard}
         exact

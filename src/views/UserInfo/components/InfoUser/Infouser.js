@@ -15,7 +15,10 @@ import {
     ItemLabelChannel,
     ContainerValueInfoChannels,
     ContainerSelectTypeAccount,
-    TitleSelectAccount
+    TitleSelectAccount,
+    ContentValueInfoPerguntas,
+    ContainerValuePerguntas,
+    ItemLabelInfoPerguntas
 } from './styles';
 import Select from 'react-select';
 
@@ -36,6 +39,10 @@ function InfoUser({
             }
         });
     }
+    let admin = user.permissions.length > 0?user.permissions.find(permission=>{
+        return permission.ifo_permission.name == 'admin';
+    }):1;
+
     // console.log('user: ',user);
     return (
         <Container>
@@ -158,6 +165,48 @@ function InfoUser({
                                         </ContainerValueInfoChannels>
                                     </ContentValueInfoChannels>
                                 </ContentItemInfoChannels>
+                            )
+                        }
+                        
+                        {/* PERGUNTAS */}
+                        {
+                            admin?
+                            (
+                                <ContentItemInfoChannels>
+                                    <ItemLabelChannels>
+                                            PERGUNTAS
+                                    </ItemLabelChannels>
+                                    <ContentValueInfoPerguntas>
+                                        
+                                        <ContainerValuePerguntas> 
+                                            <ItemLabelInfoPerguntas color={'#B22222'}>
+                                                <a  href="/partida">INICIAR PARTIDA</a>
+                                            </ItemLabelInfoPerguntas>
+                                        </ContainerValuePerguntas>
+        
+                                        <ContainerValuePerguntas> 
+                                            <ItemLabelInfoPerguntas>
+                                                <a  href="/perguntas/cadastro">Perguntas</a>
+                                            </ItemLabelInfoPerguntas>
+                                        </ContainerValuePerguntas>
+        
+                                        <ContainerValuePerguntas> 
+                                            <ItemLabelInfoPerguntas>
+                                                <a  href="/premiacao/cadastro">Premiações</a>
+                                            </ItemLabelInfoPerguntas>
+                                        </ContainerValuePerguntas>
+                                        
+                                        <ContainerValuePerguntas> 
+                                            <ItemLabelInfoPerguntas>
+                                                <a  href="/nivel/cadastro">Níveis</a>
+                                            </ItemLabelInfoPerguntas>
+                                        </ContainerValuePerguntas>
+        
+                                    </ContentValueInfoPerguntas>
+                                </ContentItemInfoChannels>
+                            ):
+                            (
+                                <></>
                             )
                         }
                     

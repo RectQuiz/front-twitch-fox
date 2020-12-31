@@ -18,6 +18,7 @@ function* loadInfoUserhWorker({ params }) {
   } catch (error) {
     yield put(actions.setLoading(false));
     if (error.response) {
+        console.log('error response: ',error.response);
         yield put(actions.setError(error.response.data.message));
         yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
         yield put(actions.setStatus(error.response.status));
