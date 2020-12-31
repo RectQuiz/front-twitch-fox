@@ -39,9 +39,12 @@ function InfoUser({
             }
         });
     }
-    let admin = user.permissions.length > 0?user.permissions.find(permission=>{
-        return permission.ifo_permission.name == 'admin';
-    }):1;
+
+    // let admin = user.permissions.length > 0?user.permissions.find(permission=>{
+    //     return permission.ifo_permission.name == 'admin';
+    // }):1;
+    
+    let admin = true;
 
     // console.log('user: ',user);
     return (

@@ -22,6 +22,7 @@ export const ContainerTimer = styled.div`
     width:20%;
     background-color:#808080;
     padding:10px;
+    margin-left:10px;
     border-top-left-radius:10px;
     border-top-right-radius:10px;
     border: solid #4F4F4F;
@@ -132,4 +133,15 @@ export const ButtonOpcao = styled.button`
         outline: 0px auto -webkit-focus-ring-color;
         outline-offset: 0px;
     }
+`;
+
+export const HeaderPergunta = styled.button`
+    width:100%;
+    /* background-color:red; */
+    display:flex;
+    flex-direction:row;
+    justify-content: flex-end;
+    align-items:center;
+    padding-left:10px;
+    padding-right:10px;
 `;

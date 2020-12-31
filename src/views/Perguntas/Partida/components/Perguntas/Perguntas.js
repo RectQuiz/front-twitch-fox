@@ -13,6 +13,7 @@ import {
     ContentAlternativa,
     TextoAlternativa,
     Timer,
+    HeaderPergunta,
 
     ContainerOpcoes,
     ContentOpcao,
@@ -50,17 +51,25 @@ function Perguntas({partida,perguntas}) {
   return (
       <Container>
           <ContainerPergunta>
-            <ContainerTimer>
-              <Timer>
-                {timer}
-              </Timer>
-            </ContainerTimer>
+            <HeaderPergunta>
+              <ContainerTimer>
+                <Timer>
+                  Questão {partida?(partida.quant_acertos == 0?1:partida.quant_acertos + 1):0}
+                </Timer>
+              </ContainerTimer>
+              <ContainerTimer>
+                <Timer>
+                  {timer}
+                </Timer>
+              </ContainerTimer>
+            </HeaderPergunta>
             <ContentPergunta>
               <ContainerTitulo>
                 <TituloPergunta>
                     Qual o ano?
                 </TituloPergunta>
               </ContainerTitulo>
+
               <ContainerAlternativas>
                 <ContentAlternativa>
                   <TextoAlternativa>
@@ -83,6 +92,7 @@ function Perguntas({partida,perguntas}) {
                   </TextoAlternativa>
                 </ContentAlternativa>
               </ContainerAlternativas>
+
             </ContentPergunta>
             <ContainerOpcoes>
               <ContentOpcao>
