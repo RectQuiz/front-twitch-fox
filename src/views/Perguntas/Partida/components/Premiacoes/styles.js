@@ -64,6 +64,7 @@ export const ContainerArrow = styled.button`
 export const ContainerPremio = styled.div`
   width:100%;
   background-color:${(props)=>props.cor};
+  color:${(props)=>props.cor2};
   min-height:32px;
   max-height:32px;
   border-radius:3px;
@@ -90,7 +91,6 @@ export const LabelIndicePremio = styled.span`
   /* background-color:green; */
   padding:5px;
   font-weight:bold;
-  color:#fff;
 `;
 
 export const ContentImagePremio = styled.div`
@@ -131,7 +131,6 @@ export const ContentNomePremio = styled.div`
 
 export const NomePremio = styled.span`
   font-weight:bold;
-  color:#fff;
   font-size:13px;
   white-space: nowrap;
   overflow:hidden;display: inline-block;

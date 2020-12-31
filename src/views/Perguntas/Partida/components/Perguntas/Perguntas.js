@@ -29,43 +29,81 @@ import {
 } from './styles';
 import Vazio from '../../../../../assets/images/vazio.png';
 import MusicaInicio from '../../../../../assets/sounds/Aparecer_pergunta.wav';
+import MusicaC4 from '../../../../../assets/sounds/c4.mp3';
+import { useDispatch } from 'react-redux';
+import { atualizarPartida } from '../../../../../store/modules/partida/actions';
 
-function Perguntas({partida,perguntas,premiacoes}) {
+function Perguntas({partida,perguntas,premiacoes,history,statusRodada,setStatuRodada}) {
+  const dispatch = useDispatch();
   const timerRef = useRef();
   const [ timer, setTimer ] = useState('00:00');
-  const [ alternativaSelecionada, setAlternativaSelecionada ] = useState('');
-  const [ statusRodada, setStatuRodada ] = useState(false);
+  const [ alternativaSelecionada, setAlternativaSelecionada ] = useState({});
   const [ statusTimer, setStatusTimer ] = useState(false);
-  const [ pergunta, setPergunta ] = useState({});
+  const [ pergunta, setPergunta ] = useState(null);
   const [ imagesOptionsErrar, setImagesOptionsErrar ] = useState(Vazio);
   const [ imagesOptionsParar, setImagesOptionsParar ] = useState(Vazio);
+  const [ ref, setRef ] = useState();
+  const [ alternativasTiradas, setAlternativasTiradas ] = useState([]);
   const [ imagesOptionsAcertar, setImagesOptionsAcertar ] = useState(Vazio);
   const [ musica, setMusica ] = useState(new Audio(MusicaInicio));
+  const [ musicaC4, setMusicaC4 ] = useState(new Audio(MusicaC4));
 
 
   useEffect(()=>{
     if (partida && premiacoes) {
-      
-    if(partida.quant_acertos > 0){
-      EscolherOpcoesPremiosErrar();
-      EscolherOpcoesPremiosParar();
-      EscolherOpcoesPremiosAcertar();
-    }else{
-      setImagesOptionsErrar(Vazio);
-      setImagesOptionsParar(Vazio);
-      EscolherOpcoesPremiosAcertar();
-    }
+      if(partida.quant_acertos > 0){
+        EscolherOpcoesPremiosErrar();
+        EscolherOpcoesPremiosParar();
+        EscolherOpcoesPremiosAcertar();
+      }else{
+        setImagesOptionsErrar(Vazio);
+        setImagesOptionsParar(Vazio);
+        EscolherOpcoesPremiosAcertar();
+      }
     }
   },[partida,premiacoes]);
 
+  // console.log('alternativasTiradas: ',alternativasTiradas);
+  useEffect(()=>{
+    if (statusRodada && (pergunta&&partida) && partida.ajuda_1 == false) {
+      console.log('Ajuda 1 usada: ',partida);
+      musicaC4.play();
+      let alternativa1 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
+      let alternativa2 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
+      while(alternativa2 == alternativa1 || (pergunta.alternativas[alternativa1].number == pergunta.resposta || pergunta.alternativas[alternativa2].number == pergunta.resposta)){ 
+        alternativa2 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
+        alternativa1 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
+        console.log('entrou: ');
+      }
+      console.log('pergunta.alternativas[alternativa1].number: ',pergunta.alternativas[alternativa1].number);
+      console.log('pergunta.alternativas[alternativa2].number: ',pergunta.alternativas[alternativa2].number);
+      console.log('alternativa1: ',alternativa1);
+      console.log('alternativa2: ',alternativa2);
+      console.log('pergunta.resposta: ',pergunta.resposta);
+      setAlternativasTiradas({
+        alternativa1:alternativa1,
+        alternativa2:alternativa2
+      });
+    }else{
+      console.log('n foi 1');
+    }
+
+    if (statusRodada && (pergunta&&partida) && partida.ajuda_2 == true) {
+      console.log('Ajuda 1 usada: ',partida);
+    }else{
+      console.log('n foi 1');
+    }
+
+  },[partida]);
+  
   function startTimer(duration) {
-    EscolherPergunta();
-    musica.play();
-    setStatuRodada(true);
     var timer = duration, minutes, seconds;
     if (statusTimer == false) {
+      EscolherPergunta();
+      musica.play();
+      setStatuRodada(true);
       setStatusTimer(true);
-      let ref = setInterval(function () {
+      let ref_ = setInterval(function () {
           minutes = parseInt(timer / 60, 10);
           seconds = parseInt(timer % 60, 10);
   
@@ -78,28 +116,41 @@ function Perguntas({partida,perguntas,premiacoes}) {
   
           if (--timer < 0) {
               // timer = duration;
-              clearInterval(ref);
+              clearInterval(ref_);
               setStatusTimer(false);
           }
       }, 1000);
+      setRef(ref_);
     }
   }
 
   function selecionarAlternativa(alternativa) {
     setAlternativaSelecionada(alternativa);
   }
-
+  
   function verificarResposta() {
     if (statusRodada) {
       if (alternativaSelecionada.number == pergunta.resposta) {
-        console.log('aacertou');
+        console.log('acertou');
+        let partidaChange = {
+          quant_acertos: partida.quant_acertos+1,
+          id:partida._id,
+          ajuda_1:false,
+          ajuda_2:false
+        }
+        setAlternativasTiradas({});
+        dispatch(atualizarPartida(partidaChange));
+        setStatuRodada(false);
+        clearInterval(ref);
+        setStatusTimer(false);
+        setAlternativaSelecionada({});
+        setTimer('00:00');
       }else{
         console.log('errou');
       }
     }
   }
 
-  // console.log('perguntas: ',perguntas);
   function EscolherPergunta() {
     let perguntasDoNivel = perguntas.filter((pergunta)=>{
       return pergunta.nivel.number == partida.nivel.number;
@@ -108,9 +159,9 @@ function Perguntas({partida,perguntas,premiacoes}) {
       let IndexperguntaAtual = Math.random() * (perguntasDoNivel.length - 0) + 0;
       let perguntaAtual = perguntasDoNivel[parseInt(IndexperguntaAtual)];
       setPergunta(perguntaAtual);
-      console.log('perguntaAtual: ',perguntaAtual);
+      // console.log('perguntaAtual: ',perguntaAtual);
     }
-    console.log('perguntasDoNivel: ',perguntasDoNivel);
+    // console.log('perguntasDoNivel: ',perguntasDoNivel);
   }
   
   function EscolherOpcoesPremiosErrar() {
@@ -118,7 +169,7 @@ function Perguntas({partida,perguntas,premiacoes}) {
       let if_errar = premiacoes.filter((premiacao)=>{
         return premiacao.indice == partida.quant_acertos-1;
       });
-      console.log('if_errar: ',if_errar);
+      // console.log('if_errar: ',if_errar);
       if (if_errar.length > 0) {
         setImagesOptionsErrar('http://localhost:3333/'+if_errar[0].image);
       }else{
@@ -132,7 +183,7 @@ function Perguntas({partida,perguntas,premiacoes}) {
       let if_parar = premiacoes.filter((premiacao)=>{
         return premiacao.indice == partida.quant_acertos;
       });
-      console.log('if_parar: ',if_parar);
+      // console.log('if_parar: ',if_parar);
       if (if_parar.length > 0) {
         setImagesOptionsParar('http://localhost:3333/'+if_parar[0].image);
       }else{
@@ -146,12 +197,23 @@ function Perguntas({partida,perguntas,premiacoes}) {
       return premiacao.indice == partida.quant_acertos+1;
     });
     if (if_acertar.length > 0) {
-      console.log('if_acertar: ',if_acertar);
+      // console.log('if_acertar: ',if_acertar);
       setImagesOptionsAcertar('http://localhost:3333/'+if_acertar[0].image);
     }else{
       setImagesOptionsAcertar(Vazio);
     }
 
+  }
+  
+  function encerraPartida() {
+    console.log('encerrando');
+    let partidaChange = {
+      status:'encerrada',
+      id:partida._id
+    }
+    const nickname = localStorage.getItem('@siteJokerz/nickname');
+    dispatch(atualizarPartida(partidaChange));
+    history.push('user/'+nickname);
   }
 
   return (
@@ -183,16 +245,16 @@ function Perguntas({partida,perguntas,premiacoes}) {
                 {
                   statusRodada && (pergunta && pergunta.alternativas.length) > 0?
                     pergunta.alternativas.map((alternativa,index)=>{
-                      return (
-                        <ContentAlternativa onClick={()=>selecionarAlternativa(alternativa)} statusSelect={alternativaSelecionada._id == alternativa._id} key={alternativa._id}>
-                          <TextoAlternativa status={statusRodada}>
-                            <LetraAlternativa>
-                              {index +1})
-                            </LetraAlternativa>
-                              {alternativa.name}
-                          </TextoAlternativa>
-                        </ContentAlternativa>
-                      )
+                        return (
+                          <ContentAlternativa onClick={()=>selecionarAlternativa(alternativa)} statusSelect={alternativaSelecionada._id == alternativa._id} key={alternativa._id}>
+                            <TextoAlternativa status={statusRodada && !(alternativasTiradas.alternativa1 == index || alternativasTiradas.alternativa2 == index)}>
+                              <LetraAlternativa>
+                                {index +1})
+                              </LetraAlternativa>
+                                {alternativa.name}
+                            </TextoAlternativa>
+                          </ContentAlternativa>
+                        )
                     })
                   :(
                     <>
@@ -239,12 +301,12 @@ function Perguntas({partida,perguntas,premiacoes}) {
             <ContainerOpcoes>
               <ContainerOpcoesJogo>
                 <ContentOpcao>
-                  <ButtonOpcao color={'#C5142F'}>
+                  <ButtonOpcao onClick={encerraPartida} color={'#C5142F'}>
                       ENCERRAR
                   </ButtonOpcao>
                 </ContentOpcao>
                 <ContentOpcao>
-                  <ButtonOpcao color={'#A59D0E'} onClick={()=>startTimer(10)}>
+                  <ButtonOpcao color={'#A59D0E'} onClick={()=>startTimer(partida.tempo)}>
                       TEMPO
                   </ButtonOpcao>
                 </ContentOpcao>

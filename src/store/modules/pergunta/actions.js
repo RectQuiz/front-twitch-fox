@@ -9,6 +9,11 @@ export const cadastrarPergunta = (pergunta) => ({
     pergunta:pergunta
 });
 
+export const atualizarPergunta = (pergunta) => ({
+    type: actions.ATUALIZAR_PERGUNTA,
+    pergunta:pergunta
+});
+
 export const deletePergunta = (id) => ({
     type: actions.DELETE_PERGUNTA,
     id:id

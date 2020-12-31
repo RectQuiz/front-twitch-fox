@@ -10,6 +10,13 @@ export const registerPergunta = async (params) => {
   });
 };
 
+export const atualizarPergunta = async (params) => {
+  params = params ? params : {};
+  return await api.put(`${resouceUrl}/${params.id}`, {
+      ...params
+  });
+};
+
 export const loadPerguntas = async (params) => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);

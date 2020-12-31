@@ -38,6 +38,40 @@ function* registerPerguntaWorker({ pergunta }) {
   }
 }
 
+function* atualizarPerguntaWorker({ pergunta }) {
+  yield put(actions.setLoadingPergunta(true));
+  yield put(actions.setStatusPergunta(0));
+  yield put(actions.setResponsePergunta({}));
+  yield put(actions.setErrorPergunta(''));
+  try {
+    const response = yield call(Pergunta.atualizarPergunta, pergunta);
+    // console.log('response loadInfoUserhWorker: ',response);
+    yield put(actions.setErrorPergunta(''));
+    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setResponsePergunta(response));
+    yield put(actions.setLoadingPergunta(false));
+    // yield put(actions.setResponse(response));
+    yield put(actions.setStatusPergunta(response.status));
+    yield put(actions.loadPerguntas());
+  } catch (error) {
+    yield put(actions.setLoadingPergunta(false));
+    if (error.response) {
+        console.log('error response register pergunta: ',error.response);
+        yield put(actions.setErrorPergunta(error.response.data.message));
+        yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
+        yield put(actions.setStatusPergunta(error.response.status));
+    } else if (error.request) {
+        console.log('error request register pergunta: ',error.request);
+        yield put(setErrorGeneral(error.message,true,error.request.status));
+        yield put(actions.setErrorPergunta({ data: error.message }));
+        yield put(actions.setStatusPergunta(error.request.status));
+    } else {
+        console.log('error desc  register pergunta: ',error.message);
+        yield put(actions.setErrorPergunta({ data: error.message }));
+    }
+  }
+}
+
 function* loadPerguntasWorker() {
   yield put(actions.setLoadingPergunta(true));
   yield put(actions.setStatusPergunta(0));
@@ -100,6 +134,7 @@ function* deletarPerguntaWorker({id}) {
 
 function* watcherAnalise() {
   yield takeLatest(actionType.CADASTRAR_PERGUNTA, registerPerguntaWorker);
+  yield takeLatest(actionType.ATUALIZAR_PERGUNTA, atualizarPerguntaWorker);
   yield takeLatest(actionType.LOAD_PERGUNTAS, loadPerguntasWorker);
   yield takeLatest(actionType.DELETE_PERGUNTA, deletarPerguntaWorker);
 }

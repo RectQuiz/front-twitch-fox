@@ -10,6 +10,13 @@ export const registerPartida = async (params) => {
   });
 };
 
+export const atualizarPartida = async (params) => {
+  params = params ? params : {};
+  return await api.put(`${resouceUrl}/${params.id}`, {
+      ...params
+  });
+};
+
 export const loadPartidas = async (params) => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);

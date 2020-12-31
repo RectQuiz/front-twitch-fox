@@ -18,6 +18,7 @@ import {
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import image_c4 from '../../../../../assets/images/c4.png';
 import image_defuse from '../../../../../assets/images/defuse.png';
+import Partida from '../../Partida';
 
 function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
   const [ stateArrow, setStateArrow ] = useState(true);
@@ -48,6 +49,13 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
     }
   }
 
+  function logicaCor2(indice) {
+    return (
+        partida.quant_acertos+1 == indice?'#0B0530':
+        '#fff'
+    );
+  }
+
   function logicaCor(indice) {
     return (
       partida.nivel.number >= 2  && indice == 5 && partida.quant_acertos >= 5?
@@ -62,6 +70,7 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
       )
     );
   }
+  
 
   return (
       <Container>
@@ -94,7 +103,7 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
                     (
                       premiacoes.map((premiacao)=>{
                         return(
-                          <ContainerPremio cor={()=>logicaCor(premiacao.indice)}>
+                          <ContainerPremio cor2={()=>logicaCor2(premiacao.indice)} cor={()=>logicaCor(premiacao.indice)}>
                             <ContentIndicePremio>
                               <LabelIndicePremio>
                                 {premiacao.indice}

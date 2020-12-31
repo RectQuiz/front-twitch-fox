@@ -10,15 +10,16 @@ import {
 } from './styles';
 import { loadPremiacoes } from '../../../store/modules/premiacao/actions';
 import { loadPerguntas } from '../../../store/modules/pergunta/actions';
-import { loadPartidaAtual, cadastrarPartida } from '../../../store/modules/partida/actions';
+import { loadPartidaAtual, cadastrarPartida, atualizarPartida } from '../../../store/modules/partida/actions';
 
-function Partida() {
+function Partida({history}) {
 
   const dispatch = useDispatch();
   const [ ajudas, setAjudas ] = useState({
     ajuda1:false,
     ajuda2:false
   });
+  const [ statusRodada, setStatuRodada ] = useState(false);
   const { premiacoes, loading:loadingPremiacao, errors:errorsPremiacao, status:statusPremiacao } = useSelector(({ PremiacaoReducer }) => PremiacaoReducer);
   const { perguntas, loading:loadingPergunta, errors:errorsPergunta, status:statusPergunta} = useSelector(({ PerguntaReducer }) => PerguntaReducer);
   const { partida, loading, errors, status, response } = useSelector(({ PartidaReducer }) => PartidaReducer);
@@ -41,16 +42,19 @@ function Partida() {
   },[partida,status,loading]);
 
   function setAjuda(id) {
-    if (id == 1) {
-      setAjudas({
-        ...ajudas,
-        ajuda1:!ajudas.ajuda1
-      });
-    }else{
-      setAjudas({
-        ...ajudas,
-        ajuda2:!ajudas.ajuda2
-      });
+    if(statusRodada){
+      if (id == 1 && partida.ajuda_1 == false) {
+        dispatch(atualizarPartida({
+          id:partida._id,
+          ajuda_1:true
+        }));
+      }
+      if (id == 2 && partida.ajuda_2 == false) {
+        dispatch(atualizarPartida({
+          id:partida._id,
+          ajuda_2:true
+        }));
+      }
     }
   }
 
@@ -59,12 +63,16 @@ function Partida() {
         <BackgroundColor>
           <ContainerPartida>
             <Premiacoes
+              statusRodada={statusRodada}
               partida={partida}
               ajudas={ajudas}
               setAjuda={setAjuda}
               premiacoes={premiacoes}
             />
             <Perguntas
+              statusRodada={statusRodada}
+              setStatuRodada={setStatuRodada}
+              history={history}
               premiacoes={premiacoes}
               partida={partida}
               perguntas={perguntas}
@@ -72,7 +80,7 @@ function Partida() {
           </ContainerPartida>
           {/* <Footer/> */}
           <Loading
-            show={ loading && loadingPergunta && loadingPremiacao}
+            show={ loading || loadingPergunta || loadingPremiacao }
             title={'CARREGANDO NIVEIS'}
           />
         </BackgroundColor>

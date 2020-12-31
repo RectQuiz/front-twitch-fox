@@ -17,6 +17,11 @@ export const cadastrarPartida = (partida) => ({
     partida:partida
 });
 
+export const atualizarPartida = (partida) => ({
+    type: actions.ATUALIZAR_PARTIDA,
+    partida:partida
+});
+
 export const deletePartida = (id) => ({
     type: actions.DELETE_PARTIDA,
     id:id
