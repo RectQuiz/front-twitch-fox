@@ -66,7 +66,7 @@ function CadastroPremiacao() {
               show={(loading && loadingNivel) || (!loading && loadingNivel) || (loading && !loadingNivel) }
               title={'CARREGANDO NIVEIS'}
             />
-          <Footer/>
+            <Footer/>
         </BackgroundColor>
       </Content>
     );

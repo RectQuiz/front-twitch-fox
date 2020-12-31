@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Footer } from '../../../components';
+import { Footer, Loading } from '../../../components';
 import { Perguntas, Premiacoes } from './components';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -65,11 +65,16 @@ function Partida() {
               premiacoes={premiacoes}
             />
             <Perguntas
+              premiacoes={premiacoes}
               partida={partida}
               perguntas={perguntas}
             />
           </ContainerPartida>
           {/* <Footer/> */}
+          <Loading
+            show={ loading && loadingPergunta && loadingPremiacao}
+            title={'CARREGANDO NIVEIS'}
+          />
         </BackgroundColor>
     </Content>
   );

@@ -9,7 +9,7 @@ export const Container = styled.div`
   align-items:center;
   /* background-color:red; */
   height:100%;
-  width:400px;
+  width:600px;
   top:0;
   bottom:100px;
   /* padding:10px; */
@@ -64,8 +64,8 @@ export const ContainerArrow = styled.button`
 export const ContainerPremio = styled.div`
   width:100%;
   background-color:${(props)=>props.cor};
-  min-height: 30px;
-  max-height:30px;
+  min-height:32px;
+  max-height:32px;
   border-radius:3px;
   border: 1px solid #fff;
   display:flex;
@@ -145,9 +145,10 @@ export const ContainerAjudas = styled.div`
   flex-direction:row;
   justify-content:space-between;
   align-items:center;
-  padding-bottom:20px;
-  padding-left:15px;
-  padding-right:15px;
+  padding-bottom:10px;
+  /* padding-top:10px; */
+  /* padding-left:15px;
+  padding-right:15px; */
 `;
 
 export const ContentAjuda = styled.button`
@@ -155,9 +156,9 @@ export const ContentAjuda = styled.button`
   width: 5vw;
   min-width:50px;
   min-height:50px;
-  border-radius: 50%;
+  border-radius: 5px;
   overflow: hidden;
-  margin-right:7%;
+  /* margin-right:30px; */
   background-color:#1c1c1c;
   box-shadow: 1px 1px 15px -5px black;
   transition: all .3s ease;
@@ -176,7 +177,7 @@ export const ImageAjuda = styled.img`
   object-fit: contain;
   height: 100%;
   width: 100%;
-  border-radius: 50%;
+  border-radius: 5px;
   background-color:#fff;
   border: 2px solid #141414;
   transition: all .3s ease;

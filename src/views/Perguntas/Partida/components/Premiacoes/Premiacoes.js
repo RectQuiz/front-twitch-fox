@@ -25,6 +25,9 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
   const [ styleArrow, setStyleArrow ] = useState({});
   const [ stylePremiosContent, setStylePremiosContent ] = useState({});
 
+  // console.log('premiacoes: ',premiacoes);
+  // console.log('partida: ',partida);
+
   function mudarStatusArraow() {
     setStateArrow(!stateArrow);
     if (stateArrow) {
@@ -54,8 +57,8 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
       partida.nivel.number >= 4 && indice == 15 && partida.quant_acertos >= 15?
       '	#FF8C00':
       (
-        partida.quant_acertos == indice?'#FFD700':
-        partida.quant_acertos >= indice?'#2E8B57':'#191970'
+        partida.quant_acertos+1 == indice?'#FFD700':
+        partida.quant_acertos >= indice?'#2E8B57':'#0B0530'
       )
     );
   }
