@@ -127,6 +127,23 @@ function FormCadastro({registrarPergunta,niveis}) {
 
                 <ContainerInput>
                   <LabelForm>
+                      Tempo para responder:
+                  </LabelForm>
+                  <InputForm
+                        type="number"
+                        name="tempo"
+                        id="tempo"
+                        className="tempo"
+                        value={values.tempo} // We also bind our email value
+                        {...getFieldProps("tempo")}
+                  />
+                  <ErroForm className="errorMessage">
+                    {touched["tempo"] && errors["tempo"]}
+                  </ErroForm>
+                </ContainerInput>
+
+                <ContainerInput>
+                  <LabelForm>
                       Alternativa 1:
                   </LabelForm>
                   <InputForm

@@ -3,6 +3,7 @@ export const initialvalues = {
   nivel:'',
   categoria:'',
   resposta:'',
+  tempo:'',
   alternativas:[
     {
       name:'',

@@ -257,6 +257,7 @@ function Perguntas({
           setShowPergunta(1);
           let IndexperguntaAtual = Math.random() * (perguntasDoNivel.length - 0) + 0;
           let perguntaAtual = perguntasDoNivel[parseInt(IndexperguntaAtual)];
+          setTimer(organizarTempo(perguntaAtual.tempo));
           setPergunta(perguntaAtual);
           setStatuRodada(true);
           //********************************************************** */
@@ -319,6 +320,18 @@ function Perguntas({
     }
 
   }
+
+  function organizarTempo(duration) {
+    var timer = duration, minutes, seconds;
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10); 
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    let time = minutes + ":" + seconds;
+    return time;
+  }
   
   function encerraPartida() {
     console.log('encerrando');
@@ -330,6 +343,7 @@ function Perguntas({
     dispatch(atualizarPartida(partidaChange));
     history.push('user/'+nickname);
   }
+
   function verificarAlternativa(alternativa) {
     return alternativa.number == pergunta.resposta;
   }
@@ -525,7 +539,7 @@ function Perguntas({
                       </ButtonOpcao>
                     </ContentOpcao>
                     <ContentOpcao>
-                      <ButtonOpcao color={'#A59D0E'} onClick={()=>startTimer(partida.tempo)}>
+                      <ButtonOpcao color={'#A59D0E'} onClick={()=>startTimer(pergunta?pergunta.tempo:0)}>
                           TEMPO
                       </ButtonOpcao>
                     </ContentOpcao>

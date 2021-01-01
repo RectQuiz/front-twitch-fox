@@ -11,6 +11,9 @@ const nivelSchema = yup.object().shape({
     categoria: yup
         .string()
         .required('Precisa informar a categoria da pergunta'),
+    tempo: yup
+        .number()
+        .required('Precisa informar tempo da pergunta'),
     resposta: yup
         .number()
         .max(4,'Escolha um numero até 4')
