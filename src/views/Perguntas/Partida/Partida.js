@@ -12,6 +12,8 @@ import { loadPremiacoes } from '../../../store/modules/premiacao/actions';
 import { loadPerguntas } from '../../../store/modules/pergunta/actions';
 import { loadPartidaAtual, cadastrarPartida, atualizarPartida } from '../../../store/modules/partida/actions';
 
+import MusicaC4 from '../../../assets/sounds/c4.mp3';
+import MusicaDefuse from '../../../assets/sounds/defuse.mp3';
 function Partida({history}) {
 
   const dispatch = useDispatch();
@@ -19,7 +21,10 @@ function Partida({history}) {
     ajuda1:false,
     ajuda2:false
   });
+  const [ musicaC4, setMusicaC4 ] = useState(new Audio(MusicaC4));
+  const [ musicaDefuse, setMusicaDefuse ] = useState(new Audio(MusicaDefuse));
   const [ statusRodada, setStatuRodada ] = useState(false);
+  const [ statusTimer, setStatusTimer ] = useState(false);
   const { premiacoes, loading:loadingPremiacao, errors:errorsPremiacao, status:statusPremiacao } = useSelector(({ PremiacaoReducer }) => PremiacaoReducer);
   const { perguntas, loading:loadingPergunta, errors:errorsPergunta, status:statusPergunta} = useSelector(({ PerguntaReducer }) => PerguntaReducer);
   const { partida, loading, errors, status, response } = useSelector(({ PartidaReducer }) => PartidaReducer);
@@ -44,12 +49,14 @@ function Partida({history}) {
   function setAjuda(id) {
     if(statusRodada){
       if (id == 1 && partida.ajuda_1 == false) {
+        musicaC4.play();
         dispatch(atualizarPartida({
           id:partida._id,
           ajuda_1:true
         }));
       }
-      if (id == 2 && partida.ajuda_2 == false) {
+      if (id == 2 && partida.ajuda_2 == false && statusTimer) {
+        musicaDefuse.play();
         dispatch(atualizarPartida({
           id:partida._id,
           ajuda_2:true
@@ -76,6 +83,8 @@ function Partida({history}) {
               premiacoes={premiacoes}
               partida={partida}
               perguntas={perguntas}
+              statusTimer={statusTimer}
+              setStatusTimer={setStatusTimer}
             />
           </ContainerPartida>
           {/* <Footer/> */}

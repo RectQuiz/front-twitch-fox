@@ -21,24 +21,38 @@ import {
     ButtonOpcao,
     ContainerOpcoesJogo,
     ContainerOpcoesPremios,
+    ContainerOpcoesPremios2,
     ContentOpcoesPremio,
     OpcoesPremio,
     ContentLabelOpcoesPremio,
     LabelOpcoesPremio,
-    ContentImage
+    ContentImage,
+
+    ContainerResultado,
+    ContentResultado,
+    TituloResultado
 } from './styles';
 import Vazio from '../../../../../assets/images/vazio.png';
 import MusicaInicio from '../../../../../assets/sounds/Aparecer_pergunta.wav';
-import MusicaC4 from '../../../../../assets/sounds/c4.mp3';
+// import MusicaC4 from '../../../../../assets/sounds/c4.mp3';
 import { useDispatch } from 'react-redux';
 import { atualizarPartida } from '../../../../../store/modules/partida/actions';
+import { atualizarPergunta } from '../../../../../store/modules/pergunta/actions';
 
-function Perguntas({partida,perguntas,premiacoes,history,statusRodada,setStatuRodada}) {
+function Perguntas({
+  partida,
+  perguntas,
+  premiacoes,
+  history,
+  statusRodada,
+  setStatuRodada,
+  statusTimer,
+  setStatusTimer
+}) {
   const dispatch = useDispatch();
   const timerRef = useRef();
   const [ timer, setTimer ] = useState('00:00');
   const [ alternativaSelecionada, setAlternativaSelecionada ] = useState({});
-  const [ statusTimer, setStatusTimer ] = useState(false);
   const [ pergunta, setPergunta ] = useState(null);
   const [ imagesOptionsErrar, setImagesOptionsErrar ] = useState(Vazio);
   const [ imagesOptionsParar, setImagesOptionsParar ] = useState(Vazio);
@@ -46,7 +60,10 @@ function Perguntas({partida,perguntas,premiacoes,history,statusRodada,setStatuRo
   const [ alternativasTiradas, setAlternativasTiradas ] = useState([]);
   const [ imagesOptionsAcertar, setImagesOptionsAcertar ] = useState(Vazio);
   const [ musica, setMusica ] = useState(new Audio(MusicaInicio));
-  const [ musicaC4, setMusicaC4 ] = useState(new Audio(MusicaC4));
+  const [ statusResultado, setStatusResultado ] = useState(false);
+  const [ statusResposta, setStatusResposta ] = useState(false);
+
+  // const [ musicaC4, setMusicaC4 ] = useState(new Audio(MusicaC4));
 
 
   useEffect(()=>{
@@ -65,9 +82,9 @@ function Perguntas({partida,perguntas,premiacoes,history,statusRodada,setStatuRo
 
   // console.log('alternativasTiradas: ',alternativasTiradas);
   useEffect(()=>{
-    if (statusRodada && (pergunta&&partida) && partida.ajuda_1 == false) {
+    if (statusRodada && (pergunta&&partida) && partida.ajuda_1 == true) {
       console.log('Ajuda 1 usada: ',partida);
-      musicaC4.play();
+      // musicaC4.play();
       let alternativa1 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
       let alternativa2 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
       while(alternativa2 == alternativa1 || (pergunta.alternativas[alternativa1].number == pergunta.resposta || pergunta.alternativas[alternativa2].number == pergunta.resposta)){ 
@@ -86,26 +103,34 @@ function Perguntas({partida,perguntas,premiacoes,history,statusRodada,setStatuRo
       });
     }else{
       console.log('n foi 1');
+      console.log('statusRodada: ',statusRodada);
+      console.log('pergunta: ',pergunta);
+      console.log('partida: ',partida);
     }
 
-    if (statusRodada && (pergunta&&partida) && partida.ajuda_2 == true) {
-      console.log('Ajuda 1 usada: ',partida);
-    }else{
-      console.log('n foi 1');
-    }
-
-  },[partida]);
+  },[partida&&partida.ajuda_1]);
   
-  function startTimer(duration) {
+  useEffect(()=>{
+
+    if (statusRodada && (pergunta&&partida) && partida.ajuda_2 == true && statusTimer == true) {
+      console.log('Ajuda 2 usada: ',partida);
+      addTime(8);
+    }else{
+      console.log('n foi 2');
+    }
+
+  },[partida&&partida.ajuda_2]);
+  
+  function startTimer(duration,status=null) {
+    console.log('status: ',status);
+    console.log('statusTimer: ',statusTimer);
+    console.log('statusRodada: ',statusRodada);
     var timer = duration, minutes, seconds;
-    if (statusTimer == false) {
-      EscolherPergunta();
-      musica.play();
-      setStatuRodada(true);
+    if ((statusTimer == false || status == true) && statusRodada == true) {
       setStatusTimer(true);
       let ref_ = setInterval(function () {
           minutes = parseInt(timer / 60, 10);
-          seconds = parseInt(timer % 60, 10);
+          seconds = parseInt(timer % 60, 10); 
   
           minutes = minutes < 10 ? "0" + minutes : minutes;
           seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -135,31 +160,60 @@ function Perguntas({partida,perguntas,premiacoes,history,statusRodada,setStatuRo
         let partidaChange = {
           quant_acertos: partida.quant_acertos+1,
           id:partida._id,
-          ajuda_1:false,
-          ajuda_2:false
+          // ajuda_1:false,
+          // ajuda_2:false
         }
+        setStatusResultado(true);
+        setStatusResposta(true);
         setAlternativasTiradas({});
         dispatch(atualizarPartida(partidaChange));
+        setAlternativaSelecionada({});
+
+        setStatuRodada(false);
+        clearInterval(ref);
+        setStatusTimer(false);
+        setTimer('00:00');
+      }else{
+        console.log('errou');
+        setStatusResultado(true);
+        setStatusResposta(false);
+        setAlternativasTiradas({});
         setStatuRodada(false);
         clearInterval(ref);
         setStatusTimer(false);
         setAlternativaSelecionada({});
         setTimer('00:00');
-      }else{
-        console.log('errou');
       }
     }
   }
 
+  async function addTime(time) {
+    clearInterval(ref);
+    let result = async ()=>{
+      setStatusTimer(false);
+    };
+    await result();
+    let timerArray = timer.split(':');
+    let timerMinutos = parseInt(timerArray[0]);
+    let timerSegundos = parseInt(timerArray[1]);
+    let timeTotal = (timerMinutos * 60) + timerSegundos;
+    startTimer(timeTotal+time,true);
+  }
+
   function EscolherPergunta() {
     let perguntasDoNivel = perguntas.filter((pergunta)=>{
-      return pergunta.nivel.number == partida.nivel.number;
+      return pergunta.nivel.number == partida.nivel.number && pergunta.ativa == true;
     });
-    if (perguntasDoNivel.length > 0) {
+    console.log('perguntasDoNivel: ',perguntasDoNivel);
+    if (perguntasDoNivel.length > 0 && partida.quant_acertos < 15) {
       let IndexperguntaAtual = Math.random() * (perguntasDoNivel.length - 0) + 0;
       let perguntaAtual = perguntasDoNivel[parseInt(IndexperguntaAtual)];
+      setStatuRodada(true);
       setPergunta(perguntaAtual);
-      // console.log('perguntaAtual: ',perguntaAtual);
+      musica.play();
+      // dispatch(atualizarPergunta({id:perguntaAtual._id,ativa:false}));
+      console.log('perguntaAtual: ',perguntaAtual);
+    }else{
     }
     // console.log('perguntasDoNivel: ',perguntasDoNivel);
   }
@@ -167,7 +221,12 @@ function Perguntas({partida,perguntas,premiacoes,history,statusRodada,setStatuRo
   function EscolherOpcoesPremiosErrar() {
       //Errar
       let if_errar = premiacoes.filter((premiacao)=>{
-        return premiacao.indice == partida.quant_acertos-1;
+        if (partida.quant_acertos >= 5 && partida.quant_acertos < 10) {
+          return premiacao.indice == 5;
+        }
+        if (partida.quant_acertos >= 10 && partida.quant_acertos < 14) {
+          return premiacao.indice == 10;
+        }
       });
       // console.log('if_errar: ',if_errar);
       if (if_errar.length > 0) {
@@ -220,102 +279,191 @@ function Perguntas({partida,perguntas,premiacoes,history,statusRodada,setStatuRo
       <Container>
           <ContainerPergunta>
 
-            <HeaderPergunta>
-              <ContainerTimer>
-                <Timer>
-                  PERGUNTA {partida?(partida.quant_acertos == 0?1:partida.quant_acertos + 1):0}
-                </Timer>
-              </ContainerTimer>
-              <ContainerTimer>
-                <Timer>
-                  {timer}
-                </Timer>
-              </ContainerTimer>
-            </HeaderPergunta>
+            {
+              !statusResultado&&
+              (
+                <HeaderPergunta>
+                  <ContainerTimer onClick={()=>EscolherPergunta()}>
+                    <Timer>
+                      PERGUNTA {partida?(partida.quant_acertos == 0?1:partida.quant_acertos < 15?partida.quant_acertos + 1:'PARTIDA FINALIZADA'):0}
+                    </Timer>
+                  </ContainerTimer>
+                  <ContainerTimer>
+                    <Timer>
+                      {timer}
+                    </Timer>
+                  </ContainerTimer>
+                </HeaderPergunta>
+              )
+            }
             
             <ContentPergunta>
+              {
+                !statusResultado&&
+                (
+                  <ContainerTitulo>
+                    <TituloPergunta status={statusRodada}>
+                        {statusRodada?pergunta.titulo:'Partida Ainda não iniciada'}
+                    </TituloPergunta>
+                  </ContainerTitulo>
+                )
+              }
 
-              <ContainerTitulo>
-                <TituloPergunta status={statusRodada}>
-                    {statusRodada?pergunta.titulo:'Partida Ainda não iniciada'}
-                </TituloPergunta>
-              </ContainerTitulo>
-
-              <ContainerAlternativas>
-                {
-                  statusRodada && (pergunta && pergunta.alternativas.length) > 0?
-                    pergunta.alternativas.map((alternativa,index)=>{
-                        return (
-                          <ContentAlternativa onClick={()=>selecionarAlternativa(alternativa)} statusSelect={alternativaSelecionada._id == alternativa._id} key={alternativa._id}>
-                            <TextoAlternativa status={statusRodada && !(alternativasTiradas.alternativa1 == index || alternativasTiradas.alternativa2 == index)}>
-                              <LetraAlternativa>
-                                {index +1})
-                              </LetraAlternativa>
-                                {alternativa.name}
-                            </TextoAlternativa>
-                          </ContentAlternativa>
-                        )
-                    })
-                  :(
-                    <>
-                      <ContentAlternativa>
-                      <TextoAlternativa status={statusRodada}>
-                        <LetraAlternativa>
-                          A)
-                        </LetraAlternativa>
-                          Alternativa 1
-                      </TextoAlternativa>
-                    </ContentAlternativa>
-                    <ContentAlternativa>
-                      <TextoAlternativa status={statusRodada}>
-                        <LetraAlternativa>
-                          B)
-                        </LetraAlternativa>
-                          Alternativa 2
-                      </TextoAlternativa>
-                    </ContentAlternativa>
-                    <ContentAlternativa>
-                      <TextoAlternativa status={statusRodada}>
-                        <LetraAlternativa>
-                          C)
-                        </LetraAlternativa>
-                          Alternativa 3
-                      </TextoAlternativa>
-                    </ContentAlternativa>
-                    <ContentAlternativa>
-                      <TextoAlternativa status={statusRodada}>
-                        <LetraAlternativa>
-                          D)
-                        </LetraAlternativa>
-                          Alternativa 4
-                      </TextoAlternativa>
-                    </ContentAlternativa>
-                  </>
-                  )
-                }
-                
-              </ContainerAlternativas>
+              {
+                statusResultado?
+                (
+                  <ContainerResultado>
+                    <ContentResultado>
+                      <TituloResultado>
+                        {statusResposta?'PARABENS VOCÊ ACERTOU!':'VOCÊ ERROU!'}
+                      </TituloResultado>
+                      <ContainerOpcoesPremios2>
+                            {
+                              statusResposta?
+                              (
+                                <ContentOpcoesPremio>
+                                  <ContentImage>
+                                    <OpcoesPremio src={imagesOptionsParar}/>
+                                  </ContentImage>
+                                  <ContentLabelOpcoesPremio>
+                                    <LabelOpcoesPremio color={'#0D7F35'} fundo={'#0D7F35'}>
+                                      GANHOU
+                                    </LabelOpcoesPremio>
+                                  </ContentLabelOpcoesPremio>
+                                </ContentOpcoesPremio>
+                              ):
+                              (
+                                <ContentOpcoesPremio>
+                                  <ContentImage>
+                                    <OpcoesPremio src={imagesOptionsErrar}/>
+                                  </ContentImage>
+                                  {
+                                    imagesOptionsErrar != Vazio?
+                                    (
+                                      <ContentLabelOpcoesPremio>
+                                        <LabelOpcoesPremio color={'#0D7F35'} fundo={'#0D7F35'}>
+                                          GANHOU
+                                        </LabelOpcoesPremio>
+                                      </ContentLabelOpcoesPremio>
+                                    ):
+                                    (
+                                      <ContentLabelOpcoesPremio>
+                                        <LabelOpcoesPremio color={'#C5142F'} fundo={'#C5142F'}>
+                                          PERDEU
+                                        </LabelOpcoesPremio>
+                                      </ContentLabelOpcoesPremio>
+                                    )
+                                  }
+                                </ContentOpcoesPremio>
+                              )
+                            }
+                      </ContainerOpcoesPremios2>
+                    </ContentResultado>
+                  </ContainerResultado>
+                ):
+                (
+                  <ContainerAlternativas>
+                    {
+                      statusRodada && (pergunta && pergunta.alternativas.length) > 0?
+                        pergunta.alternativas.map((alternativa,index)=>{
+                            return (
+                              <ContentAlternativa onClick={()=>selecionarAlternativa(alternativa)} statusSelect={alternativaSelecionada._id == alternativa._id} key={alternativa._id}>
+                                <TextoAlternativa status={statusRodada && !(alternativasTiradas.alternativa1 == index || alternativasTiradas.alternativa2 == index)}>
+                                  <LetraAlternativa>
+                                    {index +1})
+                                  </LetraAlternativa>
+                                    {alternativa.name}
+                                </TextoAlternativa>
+                              </ContentAlternativa>
+                            )
+                        })
+                      :(
+                        <>
+                          <ContentAlternativa>
+                          <TextoAlternativa status={statusRodada}>
+                            <LetraAlternativa>
+                              A)
+                            </LetraAlternativa>
+                              Alternativa 1
+                          </TextoAlternativa>
+                        </ContentAlternativa>
+                        <ContentAlternativa>
+                          <TextoAlternativa status={statusRodada}>
+                            <LetraAlternativa>
+                              B)
+                            </LetraAlternativa>
+                              Alternativa 2
+                          </TextoAlternativa>
+                        </ContentAlternativa>
+                        <ContentAlternativa>
+                          <TextoAlternativa status={statusRodada}>
+                            <LetraAlternativa>
+                              C)
+                            </LetraAlternativa>
+                              Alternativa 3
+                          </TextoAlternativa>
+                        </ContentAlternativa>
+                        <ContentAlternativa>
+                          <TextoAlternativa status={statusRodada}>
+                            <LetraAlternativa>
+                              D)
+                            </LetraAlternativa>
+                              Alternativa 4
+                          </TextoAlternativa>
+                        </ContentAlternativa>
+                      </>
+                      )
+                    }
+                  </ContainerAlternativas>
+                )
+              }
 
             </ContentPergunta>
 
             <ContainerOpcoes>
-              <ContainerOpcoesJogo>
-                <ContentOpcao>
-                  <ButtonOpcao onClick={encerraPartida} color={'#C5142F'}>
-                      ENCERRAR
-                  </ButtonOpcao>
-                </ContentOpcao>
-                <ContentOpcao>
-                  <ButtonOpcao color={'#A59D0E'} onClick={()=>startTimer(partida.tempo)}>
-                      TEMPO
-                  </ButtonOpcao>
-                </ContentOpcao>
-                <ContentOpcao>
-                  <ButtonOpcao onClick={verificarResposta} color={'#0D7F35'}>
-                      VERIFICAR
-                  </ButtonOpcao>
-                </ContentOpcao>
-              </ContainerOpcoesJogo>
+              {
+                statusResultado?
+                (
+                  statusResposta?
+                  (
+                    <ContainerOpcoesJogo>
+                      <ContentOpcao>
+                        <ButtonOpcao onClick={()=>setStatusResultado(false)} color={'#0D7F35'}>
+                            CONTINUAR
+                        </ButtonOpcao>
+                      </ContentOpcao>
+                    </ContainerOpcoesJogo>
+                  ):
+                  (
+                    <ContainerOpcoesJogo>
+                      <ContentOpcao>
+                        <ButtonOpcao onClick={()=>encerraPartida()} color={'#C5142F'}>
+                            ENCERRAR
+                        </ButtonOpcao>
+                      </ContentOpcao>
+                    </ContainerOpcoesJogo>
+                  )
+                ):
+                (
+                  <ContainerOpcoesJogo>
+                    <ContentOpcao>
+                      <ButtonOpcao onClick={encerraPartida} color={'#C5142F'}>
+                          ENCERRAR
+                      </ButtonOpcao>
+                    </ContentOpcao>
+                    <ContentOpcao>
+                      <ButtonOpcao color={'#A59D0E'} onClick={()=>startTimer(partida.tempo)}>
+                          TEMPO
+                      </ButtonOpcao>
+                    </ContentOpcao>
+                    <ContentOpcao>
+                      <ButtonOpcao onClick={verificarResposta} color={'#0D7F35'}>
+                          VERIFICAR
+                      </ButtonOpcao>
+                    </ContentOpcao>
+                  </ContainerOpcoesJogo>
+                )
+              }
 
               <ContainerOpcoesPremios>
                 <ContentOpcoesPremio>

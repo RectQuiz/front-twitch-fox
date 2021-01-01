@@ -28,7 +28,7 @@ export const HeaderPergunta = styled.div`
     align-items:center;
 `;
 
-export const ContainerTimer = styled.div`
+export const ContainerTimer = styled.button`
     /* width:20%; */
     background-color:#0B0530;
     /* padding:7px; */
@@ -44,6 +44,11 @@ export const ContainerTimer = styled.div`
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    :focus{
+        outline: thin dotted;
+        outline: 0px auto -webkit-focus-ring-color;
+        outline-offset: 0px;
+    }
     /* transform:translateY(3px); */
 `;
 
@@ -198,6 +203,17 @@ export const ContainerOpcoesPremios = styled.div`
     padding-left:15px;
 `;
 
+export const ContainerOpcoesPremios2 = styled.div`
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    /* background-color:red; */
+    flex:5;
+    padding-top:20px;
+    padding-bottom:20px;
+`;
+
 export const ContentOpcoesPremio = styled.button`
     height: 5vw;
     width: 5vw;
@@ -250,4 +266,25 @@ export const ContentImage = styled.div`
     /* background-color:yellow; */
     height:70%;
     padding:3px;
+`;
+
+export const ContainerResultado = styled.div`
+    width:100%;
+    background-color:#0B0530;
+    border: 2px solid #fff;
+    border-radius:3px;
+    padding:5px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+`;
+
+export const ContentResultado = styled.div`
+
+`;
+
+export const TituloResultado = styled.span`
+    color:#fff;
+    font-weight:bold;
 `;

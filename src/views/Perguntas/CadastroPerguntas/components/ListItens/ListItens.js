@@ -34,7 +34,7 @@ function ListItens({perguntas,deletarPergunta}) {
                         (
                             perguntas.map(pergunta=>{
                                 return(
-                                    <ContainerItem key={pergunta._id}>
+                                    <ContainerItem ativa={pergunta.ativa} key={pergunta._id}>
                                         <ContentItem>
                                             <TitleItem>
                                                 {`${pergunta.titulo} - ${pergunta.nivel?pergunta.nivel.name:'Nivel não informado'}`}

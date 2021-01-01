@@ -75,7 +75,7 @@ export const ContainerItem = styled.div`
     margin-bottom:10px;
     padding:10px;
     border-radius:12px;
-    border: 4px solid #363636;
+    border:${(props)=>props.ativa?'4px solid #363636':'4px solid red'};
 `;
 
 export const ContentItem = styled.div`
