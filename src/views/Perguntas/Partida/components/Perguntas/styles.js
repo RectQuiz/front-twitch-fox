@@ -78,7 +78,7 @@ export const ContainerTitulo = styled.div`
     background-color:#0B0530;
     border: 2px solid #fff;
     padding:5px;
-    margin-bottom:5px;
+    margin-bottom:10px;
     display:flex;
     flex-direction:row;
     justify-content: center;
@@ -109,7 +109,12 @@ export const TituloPergunta = styled.span`
 
 export const ContentAlternativa = styled.button`
     width:49%;
-    background-color:${(props)=>props.statusSelect?'#0D7F35':'#0B0530'};
+    background-color:${(props)=>{
+        return props.statusSelect && props.showResposta && props.statusResposta?'#0D7F35':
+         props.statusSelect && props.showResposta && !props.statusResposta?'#C5142F':
+         props.showResposta && props.statusResposta?'#0D7F35'
+        :props.statusSelect?'#DDE117':'#0B0530';
+    }};
     padding:5px;
     display:flex;
     border-radius:3px;
@@ -133,7 +138,12 @@ export const ContentAlternativa = styled.button`
 
 export const TextoAlternativa = styled.span`
     min-width:40px;
-    color:#fff;
+    color:${(props)=>{
+        return props.statusSelect && props.showResposta && props.statusResposta?'#fff':
+         props.statusSelect && props.showResposta && !props.statusResposta?'#fff':
+         props.showResposta && props.statusResposta?'#fff'
+         :props.statusSelect?'#0B0530':'#fff';
+    }};
     font-weight:bold;
     font-size:18px;
     display:flex;
@@ -152,7 +162,12 @@ export const Timer = styled.span`
 export const LetraAlternativa = styled.span`
     font-weight:bold;
     font-size:20px;
-    color:#DDE117;
+    color:${(props)=>{
+        return props.statusSelect && props.showResposta && props.statusResposta?'#fff':
+         props.statusSelect && props.showResposta && !props.statusResposta?'#fff':
+         props.showResposta && props.statusResposta?'#fff'
+        :props.statusSelect?'#0B0530':'#DDE117';
+    }};
     margin-right:7px;
 `;
 
@@ -298,8 +313,8 @@ export const TituloResultado = styled.span`
 
 export const ContainerTimerNovo = styled.div`
     flex:1;
-    /* background-color:#0B0530; */
-    padding:7px;
+    /* background-color:red; */
+    /* padding:7px; */
     display:flex;
     flex-direction:row;
     justify-content:center;
@@ -309,13 +324,39 @@ export const ContainerTimerNovo = styled.div`
 `;
 
 export const ContentTimerNovo = styled.div`
-    width:70%;
-    background-color:#0B0530;
-    border:2px solid #fff;
+    width:100%;
+    /* background-color:#0B0530;
+    border:2px solid #fff; */
     border-radius:3px;
     display:flex;
     flex-direction:row;
     justify-content:center;
     align-items:center;
+    position:relative;
 
+`;
+export const TimerC4 = styled.span`
+    font-weight:bold;
+    font-size:15px;
+    color:#DDE117;
+    position:absolute;
+    top:39px;
+    left:67px;
+`;
+
+export const ContentImageC4 = styled.div`
+    /* background-color:yellow; */
+    width:160px;
+    height:170px;
+
+    /* padding:3px; */
+`;
+
+export const OpcoesPremioC4 = styled.img`
+    /* object-fit: contain; */
+    width: 100%;
+    height:100%;
+    /* border-radius: 50%; */
+    /* background-color:#fff; */
+    /* border: 2px solid #141414; */
 `;

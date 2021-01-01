@@ -13,7 +13,8 @@ import {
     NomePremio,
     ContainerAjudas,
     ContentAjuda,
-    ImageAjuda
+    ImageAjuda,
+    ContatoCreator
 } from './styles';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import image_granada from '../../../../../assets/images/granada_2.png';
@@ -123,6 +124,10 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
                     ):
                     (<></>)
                 }
+                <ContatoCreator>
+                  Feito por: Argério Queiroz<br/>
+                  WhatsApp: (96) 98410-9393
+                </ContatoCreator>
               </>
               )
             }

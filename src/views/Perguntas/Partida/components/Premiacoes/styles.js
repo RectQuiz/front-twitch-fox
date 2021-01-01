@@ -181,3 +181,15 @@ export const ImageAjuda = styled.img`
   border: 2px solid #141414;
   transition: all .3s ease;
 `;
+export const ContatoCreator = styled.div`
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    align-items:flex-end;
+    /* background-color:red; */
+    color:#fff;
+    font-size:10px;
+    height:100%;
+
+`;

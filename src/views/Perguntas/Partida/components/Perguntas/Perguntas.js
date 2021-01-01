@@ -33,9 +33,13 @@ import {
     TituloResultado,
 
     ContainerTimerNovo,
-    ContentTimerNovo
+    ContentTimerNovo,
+    TimerC4,
+    ContentImageC4,
+    OpcoesPremioC4
 } from './styles';
 import Vazio from '../../../../../assets/images/vazio.png';
+import c42 from '../../../../../assets/images/C42.png';
 import MusicaInicio from '../../../../../assets/sounds/aparecer_pergunta.mp3';
 import MusicaErrar from '../../../../../assets/sounds/errou.mp3';
 import MusicaAcertar from '../../../../../assets/sounds/acertou.mp3';
@@ -72,6 +76,7 @@ function Perguntas({
   const [ showPergunta, setShowPergunta ] = useState(0); 
   const [ statusResultado, setStatusResultado ] = useState(false);
   const [ statusResposta, setStatusResposta ] = useState(false);
+  const [ showResposta, setShowResposta ] = useState(false);
 
   // const [ musicaC4, setMusicaC4 ] = useState(new Audio(MusicaC4));
 
@@ -172,31 +177,41 @@ function Perguntas({
   }
   
   function verificarResposta() {
+    console.log('showResposta: ',showResposta);
     if (statusRodada) {
-      if (alternativaSelecionada.number == pergunta.resposta) {
-        musicaAcertar.play();
-        setTimeout(() => {
-          console.log('acertou');
-          let partidaChange = {
-            quant_acertos: partida.quant_acertos+1,
-            id:partida._id,
-            // ajuda_1:false,
-            // ajuda_2:false
-          }
-          setShowPergunta(0);
-          setStatusResultado(true);
-          setStatusResposta(true);
-          setAlternativasTiradas({});
-          dispatch(atualizarPartida(partidaChange));
-          setAlternativaSelecionada({});
-  
-          setStatuRodada(false);
-          clearInterval(ref);
-          setStatusTimer(false);
-          setTimer('00:00');
-        }, 1000);
+      if (!showResposta) {
+        if (alternativaSelecionada.number == pergunta.resposta) {
+          musicaAcertar.play();
+        }else{
+          musicaErrar.play();
+        }
+        setShowResposta(true);
       }else{
-        musicaErrar.play();
+        if (alternativaSelecionada.number == pergunta.resposta) {
+            // musicaAcertar.play();
+            setTimeout(() => {
+              console.log('acertou');
+              let partidaChange = {
+                quant_acertos: partida.quant_acertos+1,
+                id:partida._id,
+                // ajuda_1:false,
+                // ajuda_2:false
+              }
+              setShowPergunta(0);
+              setStatusResultado(true);
+              setStatusResposta(true);
+              setAlternativasTiradas({});
+              dispatch(atualizarPartida(partidaChange));
+              setAlternativaSelecionada({});
+              setShowResposta(false);
+      
+              setStatuRodada(false);
+              clearInterval(ref);
+              setStatusTimer(false);
+              setTimer('00:00');
+            }, 1000);
+      }else{
+        // musicaErrar.play();
         setTimeout(() => {
           console.log('errou');
           setShowPergunta(0);
@@ -208,8 +223,10 @@ function Perguntas({
           setStatusTimer(false);
           setAlternativaSelecionada({});
           setTimer('00:00');
+          setShowResposta(false);
         }, 1000);
       }
+    }
     }
   }
 
@@ -313,6 +330,9 @@ function Perguntas({
     dispatch(atualizarPartida(partidaChange));
     history.push('user/'+nickname);
   }
+  function verificarAlternativa(alternativa) {
+    return alternativa.number == pergunta.resposta;
+  }
 
   return (
       <Container>
@@ -401,16 +421,31 @@ function Perguntas({
                       statusRodada && (pergunta && pergunta.alternativas.length) > 0?
                         pergunta.alternativas.map((alternativa,index)=>{
                             return (
-                              <ContentAlternativa onClick={()=>selecionarAlternativa(alternativa)} statusSelect={alternativaSelecionada._id == alternativa._id} key={alternativa._id}>
-                                <TextoAlternativa status={
-                                  statusRodada && 
-                                  !(alternativasTiradas.alternativa1 == index || alternativasTiradas.alternativa2 == index) &&
-                                  showPergunta >= index+2
+                              <ContentAlternativa
+                                onClick={()=>selecionarAlternativa(alternativa)}
+                                statusSelect={alternativaSelecionada._id == alternativa._id}
+                                key={alternativa._id}
+                                statusResposta={verificarAlternativa(alternativa)}
+                                showResposta={showResposta}
+                              >
+                                <TextoAlternativa 
+                                  statusSelect={alternativaSelecionada._id == alternativa._id} key={alternativa._id}
+                                  statusResposta={verificarAlternativa(alternativa)}
+                                  showResposta={showResposta}
+                                  status={
+                                    statusRodada && 
+                                    !(alternativasTiradas.alternativa1 == index || alternativasTiradas.alternativa2 == index) &&
+                                    showPergunta >= index+2
                                   }>
-                                  <LetraAlternativa>
-                                    {index == 0?'A':index == 1?'B':index == 2?'C':index == 3?'D':''})
-                                  </LetraAlternativa>
-                                    {alternativa.name}
+                                    <LetraAlternativa 
+                                      statusSelect={alternativaSelecionada._id == alternativa._id}
+                                      key={alternativa._id}
+                                      statusResposta={verificarAlternativa(alternativa)}
+                                      showResposta={showResposta}
+                                    >
+                                      {index == 0?'A':index == 1?'B':index == 2?'C':index == 3?'D':''})
+                                    </LetraAlternativa>
+                                      {alternativa.name}
                                 </TextoAlternativa>
                               </ContentAlternativa>
                             )
@@ -539,9 +574,12 @@ function Perguntas({
           </ContainerPergunta>
           <ContainerTimerNovo>
             <ContentTimerNovo>
-              <Timer>
+              <ContentImageC4>
+                <OpcoesPremioC4 src={c42}/>
+              </ContentImageC4>
+              <TimerC4>
                 {timer}
-              </Timer>
+              </TimerC4>
             </ContentTimerNovo>
           </ContainerTimerNovo>
       </Container>
