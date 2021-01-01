@@ -33,7 +33,10 @@ import {
     TituloResultado
 } from './styles';
 import Vazio from '../../../../../assets/images/vazio.png';
-import MusicaInicio from '../../../../../assets/sounds/Aparecer_pergunta.wav';
+import MusicaInicio from '../../../../../assets/sounds/aparecer_pergunta.mp3';
+import MusicaErrar from '../../../../../assets/sounds/errou.mp3';
+import MusicaAcertar from '../../../../../assets/sounds/acertou.mp3';
+import MusicaTimer from '../../../../../assets/sounds/timer.mp3';
 // import MusicaC4 from '../../../../../assets/sounds/c4.mp3';
 import { useDispatch } from 'react-redux';
 import { atualizarPartida } from '../../../../../store/modules/partida/actions';
@@ -60,6 +63,10 @@ function Perguntas({
   const [ alternativasTiradas, setAlternativasTiradas ] = useState([]);
   const [ imagesOptionsAcertar, setImagesOptionsAcertar ] = useState(Vazio);
   const [ musica, setMusica ] = useState(new Audio(MusicaInicio));
+  const [ musicaErrar, setMusicaErrar ] = useState(new Audio(MusicaErrar));
+  const [ musicaAcertar, setMusicaAcertar ] = useState(new Audio(MusicaAcertar));
+  const [ musicaTimer, setMusicaTimer ] = useState(new Audio(MusicaTimer));
+  const [ showPergunta, setShowPergunta ] = useState(0); 
   const [ statusResultado, setStatusResultado ] = useState(false);
   const [ statusResposta, setStatusResposta ] = useState(false);
 
@@ -67,6 +74,10 @@ function Perguntas({
 
 
   useEffect(()=>{
+    musica.preload = 'auto';
+    musicaErrar.preload = 'auto';
+    musicaAcertar.preload = 'auto';
+    musicaTimer.preload = 'auto';
     if (partida && premiacoes) {
       if(partida.quant_acertos > 0){
         EscolherOpcoesPremiosErrar();
@@ -82,7 +93,7 @@ function Perguntas({
 
   // console.log('alternativasTiradas: ',alternativasTiradas);
   useEffect(()=>{
-    if (statusRodada && (pergunta&&partida) && partida.ajuda_1 == true) {
+    if (statusRodada && (pergunta&&partida) && partida.ajuda_1 == true && statusTimer == true) {
       console.log('Ajuda 1 usada: ',partida);
       // musicaC4.play();
       let alternativa1 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
@@ -97,6 +108,7 @@ function Perguntas({
       console.log('alternativa1: ',alternativa1);
       console.log('alternativa2: ',alternativa2);
       console.log('pergunta.resposta: ',pergunta.resposta);
+      addTime(4);
       setAlternativasTiradas({
         alternativa1:alternativa1,
         alternativa2:alternativa2
@@ -127,6 +139,9 @@ function Perguntas({
     console.log('statusRodada: ',statusRodada);
     var timer = duration, minutes, seconds;
     if ((statusTimer == false || status == true) && statusRodada == true) {
+      if (!statusTimer) {
+        musicaTimer.play();
+      }
       setStatusTimer(true);
       let ref_ = setInterval(function () {
           minutes = parseInt(timer / 60, 10);
@@ -156,33 +171,41 @@ function Perguntas({
   function verificarResposta() {
     if (statusRodada) {
       if (alternativaSelecionada.number == pergunta.resposta) {
-        console.log('acertou');
-        let partidaChange = {
-          quant_acertos: partida.quant_acertos+1,
-          id:partida._id,
-          // ajuda_1:false,
-          // ajuda_2:false
-        }
-        setStatusResultado(true);
-        setStatusResposta(true);
-        setAlternativasTiradas({});
-        dispatch(atualizarPartida(partidaChange));
-        setAlternativaSelecionada({});
-
-        setStatuRodada(false);
-        clearInterval(ref);
-        setStatusTimer(false);
-        setTimer('00:00');
+        musicaAcertar.play();
+        setTimeout(() => {
+          console.log('acertou');
+          let partidaChange = {
+            quant_acertos: partida.quant_acertos+1,
+            id:partida._id,
+            // ajuda_1:false,
+            // ajuda_2:false
+          }
+          setShowPergunta(0);
+          setStatusResultado(true);
+          setStatusResposta(true);
+          setAlternativasTiradas({});
+          dispatch(atualizarPartida(partidaChange));
+          setAlternativaSelecionada({});
+  
+          setStatuRodada(false);
+          clearInterval(ref);
+          setStatusTimer(false);
+          setTimer('00:00');
+        }, 1000);
       }else{
-        console.log('errou');
-        setStatusResultado(true);
-        setStatusResposta(false);
-        setAlternativasTiradas({});
-        setStatuRodada(false);
-        clearInterval(ref);
-        setStatusTimer(false);
-        setAlternativaSelecionada({});
-        setTimer('00:00');
+        musicaErrar.play();
+        setTimeout(() => {
+          console.log('errou');
+          setShowPergunta(0);
+          setStatusResultado(true);
+          setStatusResposta(false);
+          setAlternativasTiradas({});
+          setStatuRodada(false);
+          clearInterval(ref);
+          setStatusTimer(false);
+          setAlternativaSelecionada({});
+          setTimer('00:00');
+        }, 1000);
       }
     }
   }
@@ -205,15 +228,28 @@ function Perguntas({
       return pergunta.nivel.number == partida.nivel.number && pergunta.ativa == true;
     });
     console.log('perguntasDoNivel: ',perguntasDoNivel);
-    if (perguntasDoNivel.length > 0 && partida.quant_acertos < 15) {
-      let IndexperguntaAtual = Math.random() * (perguntasDoNivel.length - 0) + 0;
-      let perguntaAtual = perguntasDoNivel[parseInt(IndexperguntaAtual)];
-      setStatuRodada(true);
-      setPergunta(perguntaAtual);
-      musica.play();
-      // dispatch(atualizarPergunta({id:perguntaAtual._id,ativa:false}));
-      console.log('perguntaAtual: ',perguntaAtual);
+    if (statusRodada == true && showPergunta < 5) {
+      setShowPergunta(showPergunta+1);
     }else{
+      if (perguntasDoNivel.length > 0 && partida.quant_acertos < 15 && showPergunta == 0) {
+        musica.play();
+        setTimeout(() => {
+          setShowPergunta(1);
+          let IndexperguntaAtual = Math.random() * (perguntasDoNivel.length - 0) + 0;
+          let perguntaAtual = perguntasDoNivel[parseInt(IndexperguntaAtual)];
+          setPergunta(perguntaAtual);
+          setStatuRodada(true);
+          //********************************************************** */
+          //**********************************************************
+          //***  COMENTAR A LINHA A BAIXO QUANDO FOR FAZER TESTES  ***
+          //**********************************************************
+          //********************************************************** */
+          // dispatch(atualizarPergunta({id:perguntaAtual._id,ativa:false}));
+    
+          console.log('perguntaAtual: ',perguntaAtual);
+        }, 1000);
+      }else{
+      }
     }
     // console.log('perguntasDoNivel: ',perguntasDoNivel);
   }
@@ -284,7 +320,7 @@ function Perguntas({
               (
                 <HeaderPergunta>
                   <ContainerTimer onClick={()=>EscolherPergunta()}>
-                    <Timer>
+                    <Timer status={showPergunta >= 1}>
                       PERGUNTA {partida?(partida.quant_acertos == 0?1:partida.quant_acertos < 15?partida.quant_acertos + 1:'PARTIDA FINALIZADA'):0}
                     </Timer>
                   </ContainerTimer>
@@ -368,9 +404,13 @@ function Perguntas({
                         pergunta.alternativas.map((alternativa,index)=>{
                             return (
                               <ContentAlternativa onClick={()=>selecionarAlternativa(alternativa)} statusSelect={alternativaSelecionada._id == alternativa._id} key={alternativa._id}>
-                                <TextoAlternativa status={statusRodada && !(alternativasTiradas.alternativa1 == index || alternativasTiradas.alternativa2 == index)}>
+                                <TextoAlternativa status={
+                                  statusRodada && 
+                                  !(alternativasTiradas.alternativa1 == index || alternativasTiradas.alternativa2 == index) &&
+                                  showPergunta >= index+2
+                                  }>
                                   <LetraAlternativa>
-                                    {index +1})
+                                    {index == 0?'A':index == 1?'B':index == 2?'C':index == 3?'D':''})
                                   </LetraAlternativa>
                                     {alternativa.name}
                                 </TextoAlternativa>

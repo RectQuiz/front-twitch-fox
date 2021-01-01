@@ -109,7 +109,7 @@ export const ContentAlternativa = styled.button`
     border-radius:3px;
     border: solid 2px #fff;
     flex-direction:row;
-    justify-content:center;
+    justify-content:flex-start;
     align-items:center;
     /* margin:5px; */
     margin-bottom:10px;
@@ -126,6 +126,7 @@ export const ContentAlternativa = styled.button`
 `;
 
 export const TextoAlternativa = styled.span`
+    min-width:40px;
     color:#fff;
     font-weight:bold;
     font-size:18px;

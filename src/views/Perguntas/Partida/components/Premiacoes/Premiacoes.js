@@ -16,7 +16,7 @@ import {
     ImageAjuda
 } from './styles';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import image_c4 from '../../../../../assets/images/c4.png';
+import image_granada from '../../../../../assets/images/granada_2.png';
 import image_defuse from '../../../../../assets/images/defuse.png';
 import Partida from '../../Partida';
 
@@ -92,7 +92,7 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
                 <>
                   <ContainerAjudas style={styleAjudas}>
                     <ContentAjuda status={partida.ajuda_1} onClick={()=>setAjuda(1)}>
-                      <ImageAjuda src={image_c4}/>
+                      <ImageAjuda src={image_granada}/>
                     </ContentAjuda>
                     <ContentAjuda status={partida.ajuda_2} onClick={()=>setAjuda(2)}>
                       <ImageAjuda src={image_defuse}/>

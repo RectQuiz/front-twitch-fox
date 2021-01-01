@@ -12,8 +12,12 @@ import { loadPremiacoes } from '../../../store/modules/premiacao/actions';
 import { loadPerguntas } from '../../../store/modules/pergunta/actions';
 import { loadPartidaAtual, cadastrarPartida, atualizarPartida } from '../../../store/modules/partida/actions';
 
-import MusicaC4 from '../../../assets/sounds/c4.mp3';
+import MusicaGranada from '../../../assets/sounds/granada.mp3';
 import MusicaDefuse from '../../../assets/sounds/defuse.mp3';
+import MusicaInicio from '../../../assets/sounds/aparecer_pergunta.mp3';
+import MusicaErrar from '../../../assets/sounds/errou.mp3';
+import MusicaAcertar from '../../../assets/sounds/acertou.mp3';
+import MusicaTimer from '../../../assets/sounds/timer.mp3';
 function Partida({history}) {
 
   const dispatch = useDispatch();
@@ -21,8 +25,13 @@ function Partida({history}) {
     ajuda1:false,
     ajuda2:false
   });
-  const [ musicaC4, setMusicaC4 ] = useState(new Audio(MusicaC4));
+  const [ musicaGranada, setMusicaGranada ] = useState(new Audio(MusicaGranada));
   const [ musicaDefuse, setMusicaDefuse ] = useState(new Audio(MusicaDefuse));
+  const [ musica, setMusica ] = useState(new Audio(MusicaInicio));
+  const [ musicaErrar, setMusicaErrar ] = useState(new Audio(MusicaErrar));
+  const [ musicaAcertar, setMusicaAcertar ] = useState(new Audio(MusicaAcertar));
+  const [ musicaTimer, setMusicaTimer ] = useState(new Audio(MusicaTimer));
+
   const [ statusRodada, setStatuRodada ] = useState(false);
   const [ statusTimer, setStatusTimer ] = useState(false);
   const { premiacoes, loading:loadingPremiacao, errors:errorsPremiacao, status:statusPremiacao } = useSelector(({ PremiacaoReducer }) => PremiacaoReducer);
@@ -34,6 +43,12 @@ function Partida({history}) {
   // console.log('status: ',status);
 
   useEffect(()=>{
+      musica.preload = 'auto';
+      musicaErrar.preload = 'auto';
+      musicaAcertar.preload = 'auto';
+      musicaGranada.preload = 'auto';
+      musicaDefuse.preload = 'auto';
+      musicaTimer.preload = 'auto';
       dispatch(loadPartidaAtual());
       dispatch(loadPremiacoes());
       dispatch(loadPerguntas());
@@ -48,19 +63,23 @@ function Partida({history}) {
 
   function setAjuda(id) {
     if(statusRodada){
-      if (id == 1 && partida.ajuda_1 == false) {
-        musicaC4.play();
-        dispatch(atualizarPartida({
-          id:partida._id,
-          ajuda_1:true
-        }));
+      if (id == 1 && partida.ajuda_1 == false && statusTimer) {
+        musicaGranada.play();
+        setTimeout(() => {
+          dispatch(atualizarPartida({
+            id:partida._id,
+            ajuda_1:true
+          }));
+        }, 1000);
       }
       if (id == 2 && partida.ajuda_2 == false && statusTimer) {
         musicaDefuse.play();
-        dispatch(atualizarPartida({
-          id:partida._id,
-          ajuda_2:true
-        }));
+        setTimeout(() => {
+          dispatch(atualizarPartida({
+            id:partida._id,
+            ajuda_2:true
+          }));
+        }, 1000);
       }
     }
   }
