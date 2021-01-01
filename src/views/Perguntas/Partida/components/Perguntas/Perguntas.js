@@ -132,7 +132,7 @@ function Perguntas({
   
   useEffect(()=>{
 
-    if (statusRodada && (pergunta&&partida) && partida.ajuda_2 == true && statusTimer == true) {
+    if (statusRodada && (pergunta&&partida) && partida.ajuda_2 == true) {
       console.log('Ajuda 2 usada: ',partida);
       addTime(8);
     }else{

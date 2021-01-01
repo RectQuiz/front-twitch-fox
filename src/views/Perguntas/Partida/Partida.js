@@ -72,7 +72,7 @@ function Partida({history}) {
           }));
         }, 1000);
       }
-      if (id == 2 && partida.ajuda_2 == false && statusTimer) {
+      if (id == 2 && partida.ajuda_2 == false) {
         musicaDefuse.play();
         setTimeout(() => {
           dispatch(atualizarPartida({
