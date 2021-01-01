@@ -30,7 +30,10 @@ import {
 
     ContainerResultado,
     ContentResultado,
-    TituloResultado
+    TituloResultado,
+
+    ContainerTimerNovo,
+    ContentTimerNovo
 } from './styles';
 import Vazio from '../../../../../assets/images/vazio.png';
 import MusicaInicio from '../../../../../assets/sounds/aparecer_pergunta.mp3';
@@ -324,11 +327,6 @@ function Perguntas({
                       PERGUNTA {partida?(partida.quant_acertos == 0?1:partida.quant_acertos < 15?partida.quant_acertos + 1:'PARTIDA FINALIZADA'):0}
                     </Timer>
                   </ContainerTimer>
-                  <ContainerTimer>
-                    <Timer>
-                      {timer}
-                    </Timer>
-                  </ContainerTimer>
                 </HeaderPergunta>
               )
             }
@@ -351,7 +349,7 @@ function Perguntas({
                   <ContainerResultado>
                     <ContentResultado>
                       <TituloResultado>
-                        {statusResposta?'PARABENS VOCÊ ACERTOU!':'VOCÊ ERROU!'}
+                        {statusResposta?'A C4 FOI DESARMADA!':'A C4 EXPLODIU!'}
                       </TituloResultado>
                       <ContainerOpcoesPremios2>
                             {
@@ -539,7 +537,13 @@ function Perguntas({
             </ContainerOpcoesPremios>
           </ContainerOpcoes>
           </ContainerPergunta>
-          
+          <ContainerTimerNovo>
+            <ContentTimerNovo>
+              <Timer>
+                {timer}
+              </Timer>
+            </ContentTimerNovo>
+          </ContainerTimerNovo>
       </Container>
   );
 }

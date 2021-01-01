@@ -7,15 +7,21 @@ export const Container = styled.div`
   padding-left:25px;
   padding-bottom:20px;
   padding-right:600px;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+  align-items:center;
 `;
 
 export const ContainerPergunta = styled.div`
     /* background-color:blue; */
+    flex:9;
     padding:10px;
+    padding-right:20px;
     display:flex;
     flex-direction:column;
     justify-content:flex-end;
-    align-items:center;
+    align-items:flex-end;
     width:auto;
 `;
 
@@ -191,7 +197,7 @@ export const ContainerOpcoesJogo = styled.div`
     
     flex:5;
     /* background-color:green; */
-    padding-right:15px;
+    padding-right:5px;
 `;
 
 export const ContainerOpcoesPremios = styled.div`
@@ -288,4 +294,28 @@ export const ContentResultado = styled.div`
 export const TituloResultado = styled.span`
     color:#fff;
     font-weight:bold;
+`;
+
+export const ContainerTimerNovo = styled.div`
+    flex:1;
+    /* background-color:#0B0530; */
+    padding:7px;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    /* border:2px solid #fff;
+    border-radius:3px; */
+`;
+
+export const ContentTimerNovo = styled.div`
+    width:70%;
+    background-color:#0B0530;
+    border:2px solid #fff;
+    border-radius:3px;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+
 `;
