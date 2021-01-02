@@ -63,7 +63,7 @@ function Partida({history}) {
 
   function setAjuda(id) {
     if(statusRodada){
-      if (id == 1 && partida.ajuda_1 == false && statusTimer) {
+      if (id == 1 && partida.ajuda_1 == false) {
         musicaGranada.play();
         setTimeout(() => {
           dispatch(atualizarPartida({

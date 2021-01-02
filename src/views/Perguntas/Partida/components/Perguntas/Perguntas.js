@@ -101,7 +101,7 @@ function Perguntas({
 
   // console.log('alternativasTiradas: ',alternativasTiradas);
   useEffect(()=>{
-    if (statusRodada && (pergunta&&partida) && partida.ajuda_1 == true && statusTimer == true) {
+    if (statusRodada && (pergunta&&partida) && partida.ajuda_1 == true) {
       console.log('Ajuda 1 usada: ',partida);
       // musicaC4.play();
       let alternativa1 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
@@ -358,7 +358,7 @@ function Perguntas({
                 <HeaderPergunta>
                   <ContainerTimer onClick={()=>EscolherPergunta()}>
                     <Timer status={showPergunta >= 1}>
-                      PERGUNTA {partida?(partida.quant_acertos == 0?1:partida.quant_acertos < 15?partida.quant_acertos + 1:'PARTIDA FINALIZADA'):0}
+                      {partida?(partida.quant_acertos == 0?`PERGUNTA ${1}`:partida.quant_acertos < 15?`PERGUNTA ${partida.quant_acertos + 1}`:'PARTIDA FINALIZADA'):0}
                     </Timer>
                   </ContainerTimer>
                 </HeaderPergunta>

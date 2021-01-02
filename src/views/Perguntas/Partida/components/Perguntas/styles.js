@@ -335,6 +335,7 @@ export const ContentTimerNovo = styled.div`
     position:relative;
 
 `;
+
 export const TimerC4 = styled.span`
     font-weight:bold;
     font-size:15px;

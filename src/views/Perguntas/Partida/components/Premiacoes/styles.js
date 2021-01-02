@@ -158,12 +158,12 @@ export const ContentAjuda = styled.button`
   border-radius: 5px;
   overflow: hidden;
   /* margin-right:30px; */
-  background-color:#1c1c1c;
-  box-shadow: 1px 1px 15px -5px black;
+  /* background-color:#141414; */
+  /* box-shadow: 1px 1px 15px -5px black; */
   transition: all .3s ease;
-  background-color:#1c1c1c;
   padding:0.1vw;
-  opacity:${(props)=>props.status?0.4:1};
+  opacity:${(props)=>props.status?0.0:1};
+  filter:${(props)=>props.status?'brightness(100%)':'brightness(200%)'};
   /* cursor: pointer; */
   :focus{
       outline: thin dotted;
@@ -177,8 +177,8 @@ export const ImageAjuda = styled.img`
   height: 100%;
   width: 100%;
   border-radius: 5px;
-  background-color:#fff;
-  border: 2px solid #141414;
+  /* background-color:#141414; */
+  /* border: 2px solid #141414; */
   transition: all .3s ease;
 `;
 export const ContatoCreator = styled.div`

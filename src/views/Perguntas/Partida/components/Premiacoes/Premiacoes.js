@@ -53,7 +53,14 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
   function logicaCor2(indice) {
     return (
         partida.quant_acertos+1 == indice?'#0B0530':
-        '#fff'
+        indice == 5 && partida.quant_acertos >= 5?'#fff':
+        indice == 10 && partida.quant_acertos >= 10?'#fff':
+        indice == 15 && partida.quant_acertos == 15?'#fff':
+          indice == 5?'#FFD700':
+          indice == 10?'#FFD700':
+          indice == 15?'#C5142F':
+          '#fff'
+
     );
   }
 
@@ -63,7 +70,7 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
       '	#FF8C00':
       partida.nivel.number >= 3 && indice == 10 && partida.quant_acertos >= 10?
       '	#FF8C00':
-      partida.nivel.number >= 4 && indice == 15 && partida.quant_acertos >= 15?
+      partida.nivel.number >= 3 && indice == 15 && partida.quant_acertos >= 15?
       '	#FF8C00':
       (
         partida.quant_acertos+1 == indice?'#FFD700':
