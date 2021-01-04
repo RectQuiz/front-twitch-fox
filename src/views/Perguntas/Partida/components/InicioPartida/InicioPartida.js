@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 
 import {
     Container,
+    Content,
     ContainerAjudas,
     ContentAjuda,
     AjudaImg,
 
     ContainerBotoes,
     ContentBotao,
-    ContentBotaoRandom
+    ContentBotaoRandom,
+    ContentBotoes
 } from './styles';
 import { FaRandom } from 'react-icons/fa';
 import image_granada from '../../../../../assets/images/granada_2.png';
@@ -88,46 +90,50 @@ function InicioPartida({partida}) {
 
     return (
         <Container>
-            <ContainerAjudas>
-                {
-                    ajudas.map((ajuda)=>{
-                        return (
-                            <ContentAjuda
-                                onClick={()=>escolherAjuda(ajuda)}
-                                selected={ajudaSelecionada&&ajudaSelecionada.number == ajuda.number}
-                                random={ajudaAleatoria&&ajudaAleatoria.number == ajuda.number}
-                            >
-                                <AjudaImg src={ajuda.image}/>
-                            </ContentAjuda>
-                        )
-                    })
-                }
-                <ContentAjuda
-                    selected={true}
-                >
-                    <AjudaImg src={image_defuse}/>
-                </ContentAjuda>
-            </ContainerAjudas>
-            <ContainerBotoes>
-                {
-                    ajudaSelecionada && !ajudaAleatoria?
-                    (
-                        <ContentBotaoRandom onClick={escolherAjudaAleatoria}>
-                            <FaRandom  size={70} color={'#fff'}/>
-                        </ContentBotaoRandom>
-                    ):
-                    (null)
-                }
-                {
-                    ajudaSelecionada && ajudaAleatoria?
-                    (
-                        <ContentBotao onClick={iniciarPartida}>
-                            INICIAR PARTIDA
-                        </ContentBotao>
-                    ):
-                    (null)
-                }
-            </ContainerBotoes>
+            {/* <Content> */}
+                <ContainerAjudas>
+                    {
+                        ajudas.map((ajuda)=>{
+                            return (
+                                <ContentAjuda
+                                    onClick={()=>escolherAjuda(ajuda)}
+                                    selected={ajudaSelecionada&&ajudaSelecionada.number == ajuda.number}
+                                    random={ajudaAleatoria&&ajudaAleatoria.number == ajuda.number}
+                                >
+                                    <AjudaImg src={ajuda.image}/>
+                                </ContentAjuda>
+                            )
+                        })
+                    }
+                    <ContentAjuda
+                        selected={true}
+                    >
+                        <AjudaImg src={image_defuse}/>
+                    </ContentAjuda>
+                </ContainerAjudas>
+                <ContainerBotoes>
+                    <ContentBotoes>
+                        {
+                            ajudaSelecionada && !ajudaAleatoria?
+                            (
+                                <ContentBotaoRandom onClick={escolherAjudaAleatoria}>
+                                    <FaRandom  size={70} color={'#fff'}/>
+                                </ContentBotaoRandom>
+                            ):
+                            (null)
+                        }
+                        {
+                            ajudaSelecionada && ajudaAleatoria?
+                            (
+                                <ContentBotao onClick={iniciarPartida}>
+                                    INICIAR PARTIDA
+                                </ContentBotao>
+                            ):
+                            (null)
+                        }
+                    </ContentBotoes>
+                </ContainerBotoes>
+            {/* </Content> */}
         </Container>
     );
 }

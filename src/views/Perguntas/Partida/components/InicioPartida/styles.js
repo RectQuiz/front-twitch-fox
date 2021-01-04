@@ -9,8 +9,18 @@ export const Container = styled.div`
     display:flex;
     flex-direction:column;
     justify-content:flex-start;
-    align-items:center;
-    padding-right:600px;
+    align-items:flex-end;
+    padding-right:750px;
+`;
+
+export const Content = styled.div`
+    width:100%;
+    /* background-color:green; */
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-end;
+    padding-right:150px;
 `;
 
 export const ContainerAjudas = styled.div`
@@ -58,11 +68,20 @@ export const AjudaImg = styled.img`
 
 export const ContainerBotoes = styled.div`
     display:flex;
-    flex-direction:column;
-    justify-content:space-between;
+    flex-direction:row;
+    justify-content:flex-end;
     align-items:center;
     /* background-color:red; */
     width:100%;
+`;
+
+export const ContentBotoes = styled.div`
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    /* background-color:yellow; */
+    width:65%;
 `;
 
 export const ContentBotao = styled.button`
@@ -74,6 +93,7 @@ export const ContentBotao = styled.button`
     color:#000;
     font-weight:bold;
 `;
+
 
 export const ContentBotaoRandom = styled.button`
     padding:10px;
