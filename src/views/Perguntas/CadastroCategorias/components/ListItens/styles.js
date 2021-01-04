@@ -75,7 +75,7 @@ export const ContainerItem = styled.div`
     margin-bottom:10px;
     padding:10px;
     border-radius:12px;
-    border:${(props)=>props.ativa?'4px solid #363636':'4px solid red'};
+    border: 4px solid #363636;
 `;
 
 export const ContentItem = styled.div`
@@ -100,15 +100,14 @@ export const ContentActionItem = styled.div`
 `;
 
 export const DeleteItem = styled.button`
-    background-color:${(props)=>props.color};
+    background-color:#DC143C;
     padding-top:5px;
     padding-bottom:5px;
     padding-left:15px;
     padding-right:15px;
     border-radius:10px;
     min-width:20%;
-    margin-left:10px;
-    color:${(props)=>props.color2?props.color2:'#fff'};
+    color:#fff;
     /* border: 2px solid #141414; */
     box-shadow: 0px 0px 3px 0px #696969;
     :active {
@@ -119,24 +118,4 @@ export const DeleteItem = styled.button`
         outline: 0px auto -webkit-focus-ring-color;
         outline-offset: 0px;
     }
-`;
-
-export const ContainerAlternativas = styled.div`
-
-`;
-
-export const TituloAlternativas = styled.span`
-    color:#DDE117;
-    font-weight:bold;
-`;
-
-export const ContentAlternativas = styled.div`
-    border: 2px solid ${(props)=>props.certa?'#3CB371':'#363636'};
-    border-radius:10px;
-    padding:7px;
-    margin-top:10px;
-`;
-
-export const TextAlternativa = styled.span`
-    color:#fff;
 `;

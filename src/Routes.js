@@ -17,6 +17,7 @@ const Routes = () => {
       <PrivateRoute component={View.CadastroPerguntas} exact layout={Simple} path="/perguntas/cadastro" />
       <PrivateRoute component={View.CadastrarNiveis} exact layout={Simple} path="/nivel/cadastro" />
       <PrivateRoute component={View.CadastroPremiacao} exact layout={Simple} path="/premiacao/cadastro" />
+      <PrivateRoute component={View.CadastroCategorias} exact layout={Simple} path="/categoria/cadastro" />
       <PrivateRoute component={View.Partida} exact layout={Simple} path="/partida" />
       {/* <PublicRoute
         component={View.CadPessoaFisica}

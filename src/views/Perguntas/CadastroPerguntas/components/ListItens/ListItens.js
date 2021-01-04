@@ -12,12 +12,17 @@ import {
     ContentItem,
     TitleItem,
     ContentActionItem,
-    DeleteItem
+    DeleteItem,
+
+    ContainerAlternativas,
+    TituloAlternativas,
+    ContentAlternativas,
+    TextAlternativa
 } from './styles';
 
-function ListItens({perguntas,deletarPergunta}) {
+function ListItens({perguntas,deletarPergunta,ChangeStatusPergunta,quant_perguntas}) {
 
-    console.log('perguntas: ',perguntas);
+console.log('perguntas: ',perguntas);
 
   return (
       <Container>
@@ -26,6 +31,11 @@ function ListItens({perguntas,deletarPergunta}) {
                 <HeaderList>
                     <TitleList>
                         Perguntas cadastradas
+                    </TitleList>
+                    <TitleList>
+                        {`NIVEL 1 = ${quant_perguntas.quant_perguntas_1}`}<br/>
+                        {`NIVEL 2 = ${quant_perguntas.quant_perguntas_2}`}<br/>
+                        {`NIVEL 3 = ${quant_perguntas.quant_perguntas_3}`}<br/>
                     </TitleList>
                 </HeaderList>
                 <ContentList>
@@ -37,14 +47,34 @@ function ListItens({perguntas,deletarPergunta}) {
                                     <ContainerItem ativa={pergunta.ativa} key={pergunta._id}>
                                         <ContentItem>
                                             <TitleItem>
-                                                {`${pergunta.titulo} - ${pergunta.nivel?pergunta.nivel.name:'Nivel não informado'}`}
+                                                {`${pergunta.titulo} - ${pergunta.nivel?pergunta.nivel.name:'Nivel não informado'} - ${pergunta.categoria?pergunta.categoria.name:'Nivel não informado'}`}
                                             </TitleItem>
                                             <ContentActionItem>
-                                                <DeleteItem onClick={()=>deletarPergunta(pergunta._id)}>
+                                                <DeleteItem color={'#DC143C'} onClick={()=>deletarPergunta(pergunta._id)}>
                                                     Deletar
+                                                </DeleteItem>
+                                                <DeleteItem color2={'#000'} color={'#DDE117'} onClick={()=>ChangeStatusPergunta(pergunta)}>
+                                                    Mudar status
                                                 </DeleteItem>
                                             </ContentActionItem>
                                         </ContentItem>
+                                        <ContainerAlternativas>
+                                            <TituloAlternativas>
+                                                ALTERNATIVAS:
+                                            </TituloAlternativas>
+                                            {
+                                                pergunta.alternativas.map((alternativa,index)=>{
+                                                   return(
+                                                    <ContentAlternativas certa={alternativa.number == pergunta.resposta}>
+                                                        <TextAlternativa>
+                                                            {index == 0?'A ) ':index == 1?'B ) ':index == 2?'C ) ':index == 3?'D ) ':''}
+                                                            {alternativa.name}
+                                                        </TextAlternativa>
+                                                    </ContentAlternativas>
+                                                   )
+                                                })
+                                            }
+                                        </ContainerAlternativas>
                                     </ContainerItem>
                                 )
                             })

@@ -1,23 +1,16 @@
 import { apiWithToken } from '../api';
 const token = localStorage.getItem('@siteJokerz/token');
 const api = apiWithToken(token);
-const resouceUrl = '/adm/perguntas';
+const resouceUrl = '/adm/categorias';
 
-export const registerPergunta = async (params) => {
+export const registerCategoria = async (params) => {
   params = params ? params : {};
   return await api.post(`${resouceUrl}`, {
       ...params
   });
 };
 
-export const atualizarPergunta = async (params) => {
-  params = params ? params : {};
-  return await api.put(`${resouceUrl}/${params.id}`, {
-      ...params
-  });
-};
-
-export const loadPerguntas = async (params) => {
+export const loadCategorias = async (params) => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     let page = urlParams.has('page') ? { page: urlParams.get('page') } : {};
@@ -34,10 +27,6 @@ export const loadPerguntas = async (params) => {
     });
 };
 
-export const deletePergunta = async (id) => {
+export const deleteCategoria = async (id) => {
     return await api.delete(`${resouceUrl}/${id}`);
-};
-
-export const loadQuantPerguntas = async () => {
-    return await api.get(`${resouceUrl}/status`);
 };

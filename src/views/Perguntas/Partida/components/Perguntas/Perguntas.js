@@ -36,7 +36,13 @@ import {
     ContentTimerNovo,
     TimerC4,
     ContentImageC4,
-    OpcoesPremioC4
+    OpcoesPremioC4,
+
+    ContainerPainel,
+    ContainerOpcoesPainel,
+
+    ContentImageResultado,
+    ContentOpcoesPremioResultado
 } from './styles';
 import Vazio from '../../../../../assets/images/vazio.png';
 import c42 from '../../../../../assets/images/C42.png';
@@ -47,7 +53,11 @@ import MusicaTimer from '../../../../../assets/sounds/timer.mp3';
 // import MusicaC4 from '../../../../../assets/sounds/c4.mp3';
 import { useDispatch } from 'react-redux';
 import { atualizarPartida } from '../../../../../store/modules/partida/actions';
-import { atualizarPergunta } from '../../../../../store/modules/pergunta/actions';
+import { atualizarPergunta, loadPerguntas } from '../../../../../store/modules/pergunta/actions';
+import MusicaGranada from '../../../../../assets/sounds/granada.mp3';
+import MusicaMolotov from '../../../../../assets/sounds/molotov.mp3';
+import MusicaSmoke from '../../../../../assets/sounds/smoke.mp3';
+import MusicaFlash from '../../../../../assets/sounds/flash.mp3';
 
 function Perguntas({
   partida,
@@ -57,7 +67,8 @@ function Perguntas({
   statusRodada,
   setStatuRodada,
   statusTimer,
-  setStatusTimer
+  setStatusTimer,
+  setAjuda
 }) {
   const dispatch = useDispatch();
   const timerRef = useRef();
@@ -77,7 +88,12 @@ function Perguntas({
   const [ statusResultado, setStatusResultado ] = useState(false);
   const [ statusResposta, setStatusResposta ] = useState(false);
   const [ showResposta, setShowResposta ] = useState(false);
-
+  const [ showParar, setShowParar ] = useState(false);
+  
+  const [ musicaGranada, setMusicaGranada ] = useState(new Audio(MusicaGranada));
+  const [ musicaMolotov, setMusicaMolotov ] = useState(new Audio(MusicaMolotov));
+  const [ musicaSmoke, setMusicaSmoke ] = useState(new Audio(MusicaSmoke));
+  const [ musicaFlash, setMusicaFlash ] = useState(new Audio(MusicaFlash));
   // const [ musicaC4, setMusicaC4 ] = useState(new Audio(MusicaC4));
 
 
@@ -86,6 +102,10 @@ function Perguntas({
     musicaErrar.preload = 'auto';
     musicaAcertar.preload = 'auto';
     musicaTimer.preload = 'auto';
+    musicaGranada.preload = 'auto';
+    musicaMolotov.preload = 'auto';
+    musicaSmoke.preload = 'auto';
+    musicaFlash.preload = 'auto';
     if (partida && premiacoes) {
       if(partida.quant_acertos > 0){
         EscolherOpcoesPremiosErrar();
@@ -103,7 +123,31 @@ function Perguntas({
   useEffect(()=>{
     if (statusRodada && (pergunta&&partida) && partida.ajuda_1 == true) {
       console.log('Ajuda 1 usada: ',partida);
-      // musicaC4.play();
+      logicaAjuda(0);
+    }
+  },[partida&&partida.ajuda_1]);
+  
+  useEffect(()=>{
+    if (statusRodada && (pergunta&&partida) && partida.ajuda_2 == true) {
+      console.log('Ajuda 2 usada: ',partida);
+      logicaAjuda(1);
+    }
+  },[partida&&partida.ajuda_2]);
+  
+  useEffect(()=>{
+
+    if (statusRodada && (pergunta&&partida) && partida.ajuda_3 == true) {
+      console.log('Ajuda 2 usada: ',partida);
+      addTime(8);
+    }else{
+      console.log('n foi 2');
+    }
+
+  },[partida&&partida.ajuda_3]);
+  
+  function logicaAjuda(index) {
+    if (partida.ajudas[index].number == 1) {
+      musicaGranada.play();
       let alternativa1 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
       let alternativa2 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
       while(alternativa2 == alternativa1 || (pergunta.alternativas[alternativa1].number == pergunta.resposta || pergunta.alternativas[alternativa2].number == pergunta.resposta)){ 
@@ -111,36 +155,61 @@ function Perguntas({
         alternativa1 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
         console.log('entrou: ');
       }
-      console.log('pergunta.alternativas[alternativa1].number: ',pergunta.alternativas[alternativa1].number);
-      console.log('pergunta.alternativas[alternativa2].number: ',pergunta.alternativas[alternativa2].number);
-      console.log('alternativa1: ',alternativa1);
-      console.log('alternativa2: ',alternativa2);
-      console.log('pergunta.resposta: ',pergunta.resposta);
-      addTime(4);
+      addTime(5);
       setAlternativasTiradas({
         alternativa1:alternativa1,
         alternativa2:alternativa2
       });
-    }else{
-      console.log('n foi 1');
-      console.log('statusRodada: ',statusRodada);
-      console.log('pergunta: ',pergunta);
-      console.log('partida: ',partida);
     }
-
-  },[partida&&partida.ajuda_1]);
-  
-  useEffect(()=>{
-
-    if (statusRodada && (pergunta&&partida) && partida.ajuda_2 == true) {
-      console.log('Ajuda 2 usada: ',partida);
-      addTime(8);
-    }else{
-      console.log('n foi 2');
+    if (partida.ajudas[index].number == 2) {
+      console.log('flash');
+      musicaFlash.play();
+      clearInterval(ref);
+      setTimer('00:00');
     }
+    if (partida.ajudas[index].number == 3) {
+      console.log('molotov');
+      musicaMolotov.play();
+      let quant = parseInt(Math.random() * (3 - 1) + 1);
+      console.log('quant: ',quant);
+      let alternativa1 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
+      let alternativa2 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
+      let alternativa3 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
+      while(
+          alternativa2 == alternativa1 ||
+          (
+            pergunta.alternativas[alternativa1].number == pergunta.resposta ||
+            pergunta.alternativas[alternativa2].number == pergunta.resposta ||
+            pergunta.alternativas[alternativa3].number == pergunta.resposta
+          )
+      ){ 
+        alternativa2 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
+        alternativa1 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
+        alternativa3 = parseInt(Math.random() * (pergunta.alternativas.length - 0) + 0);
+        console.log('entrou: ');
+      }
+      addTime(5);
+      setAlternativasTiradas({
+        alternativa1:quant >= 1?alternativa1:{},
+        alternativa2:quant >= 2?alternativa2:{},
+        alternativa3:quant >= 3?alternativa3:{}
+      });
+    }
+    if (partida.ajudas[index].number == 4) {
+      console.log('smoke');
+      musicaSmoke.play();
+      clearInterval(ref);
+      setTimer('00:00');
+      setShowPergunta(0);
+      setAlternativasTiradas({});
+      setAlternativaSelecionada({});
+      setShowResposta(false);
 
-  },[partida&&partida.ajuda_2]);
-  
+      setStatuRodada(false);
+      setStatusTimer(false);
+    }
+  }
+
   function startTimer(duration,status=null) {
     console.log('status: ',status);
     console.log('statusTimer: ',statusTimer);
@@ -173,7 +242,9 @@ function Perguntas({
   }
 
   function selecionarAlternativa(alternativa) {
-    setAlternativaSelecionada(alternativa);
+    if (alternativa != null && showPergunta >= 5) {
+      setAlternativaSelecionada(alternativa);
+    }
   }
   
   function verificarResposta() {
@@ -182,14 +253,18 @@ function Perguntas({
       if (!showResposta) {
         if (alternativaSelecionada.number == pergunta.resposta) {
           musicaAcertar.play();
+          clearInterval(ref);
+          setTimer('00:00');
         }else{
           musicaErrar.play();
+          clearInterval(ref);
+          setTimer('00:00');
         }
         setShowResposta(true);
       }else{
         if (alternativaSelecionada.number == pergunta.resposta) {
             // musicaAcertar.play();
-            setTimeout(() => {
+            // setTimeout(() => {
               console.log('acertou');
               let partidaChange = {
                 quant_acertos: partida.quant_acertos+1,
@@ -206,25 +281,21 @@ function Perguntas({
               setShowResposta(false);
       
               setStatuRodada(false);
-              clearInterval(ref);
               setStatusTimer(false);
-              setTimer('00:00');
-            }, 1000);
+            // }, 1000);
       }else{
         // musicaErrar.play();
-        setTimeout(() => {
+        // setTimeout(() => {
           console.log('errou');
           setShowPergunta(0);
           setStatusResultado(true);
           setStatusResposta(false);
           setAlternativasTiradas({});
           setStatuRodada(false);
-          clearInterval(ref);
           setStatusTimer(false);
           setAlternativaSelecionada({});
-          setTimer('00:00');
           setShowResposta(false);
-        }, 1000);
+        // }, 1000);
       }
     }
     }
@@ -244,22 +315,32 @@ function Perguntas({
   }
 
   function EscolherPergunta() {
-    let perguntasDoNivel = perguntas.filter((pergunta)=>{
-      return pergunta.nivel.number == partida.nivel.number && pergunta.ativa == true;
-    });
-    console.log('perguntasDoNivel: ',perguntasDoNivel);
+    if (showPergunta == 0) {
+      dispatch(loadPerguntas());
+    }
     if (statusRodada == true && showPergunta < 5) {
       setShowPergunta(showPergunta+1);
     }else{
+      let perguntasDoNivel = perguntas.filter((pergunta2)=>{
+        if (pergunta && pergunta.categoria) {
+          console.log('pergunta2: ',pergunta2);
+          console.log('pergunta: ',pergunta);
+          return pergunta2._id != pergunta._id && pergunta2.nivel.number == partida.nivel.number && (pergunta2.categoria.name != pergunta.categoria.name);
+        }else{
+          return pergunta2.nivel.number == partida.nivel.number;
+        }
+      });
+      console.log('perguntasDoNivel: ',perguntasDoNivel);
       if (perguntasDoNivel.length > 0 && partida.quant_acertos < 15 && showPergunta == 0) {
         musica.play();
-        setTimeout(() => {
+        // setTimeout(() => {
           setShowPergunta(1);
           let IndexperguntaAtual = Math.random() * (perguntasDoNivel.length - 0) + 0;
           let perguntaAtual = perguntasDoNivel[parseInt(IndexperguntaAtual)];
           setTimer(organizarTempo(perguntaAtual.tempo));
           setPergunta(perguntaAtual);
           setStatuRodada(true);
+          console.log('foi');
           //********************************************************** */
           //**********************************************************
           //***  COMENTAR A LINHA A BAIXO QUANDO FOR FAZER TESTES  ***
@@ -268,7 +349,7 @@ function Perguntas({
           // dispatch(atualizarPergunta({id:perguntaAtual._id,ativa:false}));
     
           console.log('perguntaAtual: ',perguntaAtual);
-        }, 1000);
+        // }, 1000);
       }else{
       }
     }
@@ -343,6 +424,24 @@ function Perguntas({
     dispatch(atualizarPartida(partidaChange));
     history.push('user/'+nickname);
   }
+  
+  function pararPartida() {
+    if(!statusRodada){
+      console.log('parando');
+      let partidaChange = {
+        status:'parada',
+        id:partida._id
+      }
+      clearInterval(ref);
+      setTimer('00:00');
+      setStatusResultado(true);
+      setStatuRodada(false);
+      setStatusTimer(false);
+      setStatusResposta(false);
+      setShowParar(true);
+      dispatch(atualizarPartida(partidaChange));
+    }
+  }
 
   function verificarAlternativa(alternativa) {
     return alternativa.number == pergunta.resposta;
@@ -352,11 +451,125 @@ function Perguntas({
       <Container>
           <ContainerPergunta>
 
+            <ContainerPainel>
+              {
+                statusResultado?
+                (
+                  statusResposta?
+                  (
+                    <ContainerOpcoesPainel>
+                      <ContentOpcao flex={1}>
+                        <ButtonOpcao onClick={()=>setStatusResultado(false)} color={'#0D7F35'}>
+                            CONTINUAR
+                        </ButtonOpcao>
+                      </ContentOpcao>
+                    </ContainerOpcoesPainel>
+                  ):
+                  (
+                    <ContainerOpcoesPainel>
+                      <ContentOpcao flex={1}>
+                        <ButtonOpcao onClick={()=>encerraPartida()} color={'#C5142F'}>
+                            ENCERRAR
+                        </ButtonOpcao>
+                      </ContentOpcao>
+                    </ContainerOpcoesPainel>
+                  )
+                ):
+                (
+                  <>
+                    {/*BOTOES*/}
+                    <>
+                    <ContainerOpcoesPainel>
+                      <ContentOpcao flex={2}>
+                        <ButtonOpcao onClick={encerraPartida} color={'#C5142F'}>
+                            ENCERRAR
+                        </ButtonOpcao>
+                      </ContentOpcao>
+                      <ContentOpcao flex={2}>
+                        <ButtonOpcao onClick={pararPartida} color={'#A59D0E'}>
+                            PARAR
+                        </ButtonOpcao>
+                      </ContentOpcao>
+                      <ContentOpcao flex={2}>
+                        <ButtonOpcao onClick={verificarResposta} color={'#0D7F35'}>
+                            VERIFICAR
+                        </ButtonOpcao>
+                      </ContentOpcao>
+                      <ContentOpcao flex={2}>
+                        <ButtonOpcao onClick={()=>EscolherPergunta()} color={'#A59D0E'}>
+                            PERGUNTA
+                        </ButtonOpcao>
+                      </ContentOpcao>
+                      <ContentOpcao flex={2}>
+                        <ButtonOpcao onClick={()=>startTimer(pergunta?pergunta.tempo:0)} color={'#fff'}>
+                            TEMPO
+                        </ButtonOpcao>
+                      </ContentOpcao>
+                    </ContainerOpcoesPainel>
+                    </>
+                    {/*ALTERNATIVAS*/}
+                    <>
+                      <ContainerOpcoesPainel>
+                        <ContentOpcao flex={2.5}>
+                          <ButtonOpcao onClick={()=>selecionarAlternativa(pergunta?pergunta.alternativas[0]:null)} color={'#A59D0E'}>
+                              A )
+                          </ButtonOpcao >
+                        </ContentOpcao>
+                        <ContentOpcao flex={2.5}>
+                          <ButtonOpcao onClick={()=>selecionarAlternativa(pergunta?pergunta.alternativas[1]:null)} color={'#A59D0E'}>
+                              B )
+                          </ButtonOpcao>
+                        </ContentOpcao>
+                        <ContentOpcao flex={2.5}>
+                          <ButtonOpcao onClick={()=>selecionarAlternativa(pergunta?pergunta.alternativas[2]:null)} color={'#A59D0E'}>
+                              C )
+                          </ButtonOpcao>
+                        </ContentOpcao>
+                        <ContentOpcao flex={2.5}>
+                          <ButtonOpcao onClick={()=>selecionarAlternativa(pergunta?pergunta.alternativas[3]:null)} color={'#A59D0E'}>
+                              D )
+                          </ButtonOpcao>
+                        </ContentOpcao>
+                      </ContainerOpcoesPainel>
+                    </>
+                    {/*AJUDAS*/}
+                    <>
+                      <ContainerOpcoesPainel>
+                        {
+                          partida&&partida.ajudas.map((ajuda,index)=>{
+                            return(
+                              <ContentOpcao flex={partida.ajudas.length / 10}>
+                                <ButtonOpcao 
+                                  onClick={()=>setAjuda(index+1)} 
+                                  color={
+                                    ajuda.number == 1?'#3CB371':ajuda.number == 2?'#fff':
+                                    ajuda.number == 3?'#B22222':ajuda.number == 4?'#B0C4DE':
+                                    '#fff'
+                                  }
+                                  >
+                                    {ajuda.name}
+                                </ButtonOpcao>
+                              </ContentOpcao>
+                            )
+                          })
+                        }
+                        <ContentOpcao flex={partida.ajudas.length / 10}>
+                          <ButtonOpcao onClick={()=>setAjuda(3)} color={'#A59D0E'}>
+                              DEFUSE
+                          </ButtonOpcao>
+                        </ContentOpcao>
+                        </ContainerOpcoesPainel>
+                    </>
+                  </>
+                )
+              }
+            </ContainerPainel>
+
             {
               !statusResultado&&
               (
                 <HeaderPergunta>
-                  <ContainerTimer onClick={()=>EscolherPergunta()}>
+                  <ContainerTimer>
                     <Timer status={showPergunta >= 1}>
                       {partida?(partida.quant_acertos == 0?`PERGUNTA ${1}`:partida.quant_acertos < 15?`PERGUNTA ${partida.quant_acertos + 1}`:'PARTIDA FINALIZADA'):0}
                     </Timer>
@@ -383,46 +596,47 @@ function Perguntas({
                   <ContainerResultado>
                     <ContentResultado>
                       <TituloResultado>
-                        {statusResposta?'A C4 FOI DESARMADA!':'A C4 EXPLODIU!'}
+                        {showParar?'VOCÊ FUGIU DA C4!':statusResposta?'A C4 FOI DESARMADA!':'A C4 EXPLODIU!'}
                       </TituloResultado>
                       <ContainerOpcoesPremios2>
                             {
                               statusResposta?
                               (
-                                <ContentOpcoesPremio>
-                                  <ContentImage>
+                                <ContentOpcoesPremioResultado>
+                                  <ContentImageResultado>
                                     <OpcoesPremio src={imagesOptionsParar}/>
-                                  </ContentImage>
+                                  </ContentImageResultado>
                                   <ContentLabelOpcoesPremio>
-                                    <LabelOpcoesPremio color={'#0D7F35'} fundo={'#0D7F35'}>
+                                    <LabelOpcoesPremio color={'#fff'} fundo={'#0D7F35'}>
                                       GANHOU
                                     </LabelOpcoesPremio>
                                   </ContentLabelOpcoesPremio>
-                                </ContentOpcoesPremio>
+                                </ContentOpcoesPremioResultado>
                               ):
                               (
-                                <ContentOpcoesPremio>
-                                  <ContentImage>
-                                    <OpcoesPremio src={imagesOptionsErrar}/>
-                                  </ContentImage>
+
+                                <ContentOpcoesPremioResultado>
+                                  <ContentImageResultado>
+                                    <OpcoesPremio src={showParar?imagesOptionsParar:imagesOptionsErrar}/>
+                                  </ContentImageResultado>
                                   {
                                     imagesOptionsErrar != Vazio?
                                     (
                                       <ContentLabelOpcoesPremio>
-                                        <LabelOpcoesPremio color={'#0D7F35'} fundo={'#0D7F35'}>
+                                        <LabelOpcoesPremio color={'#fff'} fundo={'#0D7F35'}>
                                           GANHOU
                                         </LabelOpcoesPremio>
                                       </ContentLabelOpcoesPremio>
                                     ):
                                     (
                                       <ContentLabelOpcoesPremio>
-                                        <LabelOpcoesPremio color={'#C5142F'} fundo={'#C5142F'}>
+                                        <LabelOpcoesPremio color={'#fff'} fundo={'#C5142F'}>
                                           PERDEU
                                         </LabelOpcoesPremio>
                                       </ContentLabelOpcoesPremio>
                                     )
                                   }
-                                </ContentOpcoesPremio>
+                                </ContentOpcoesPremioResultado>
                               )
                             }
                       </ContainerOpcoesPremios2>
@@ -436,7 +650,6 @@ function Perguntas({
                         pergunta.alternativas.map((alternativa,index)=>{
                             return (
                               <ContentAlternativa
-                                onClick={()=>selecionarAlternativa(alternativa)}
                                 statusSelect={alternativaSelecionada._id == alternativa._id}
                                 key={alternativa._id}
                                 statusResposta={verificarAlternativa(alternativa)}
@@ -457,7 +670,8 @@ function Perguntas({
                                       statusResposta={verificarAlternativa(alternativa)}
                                       showResposta={showResposta}
                                     >
-                                      {index == 0?'A':index == 1?'B':index == 2?'C':index == 3?'D':''})
+                                      {index == 0?'A':index == 1?'B':index == 2?'C':index == 3?'D':''}
+                                  )
                                     </LetraAlternativa>
                                       {alternativa.name}
                                 </TextoAlternativa>
@@ -506,59 +720,15 @@ function Perguntas({
               }
 
             </ContentPergunta>
-
+            
             <ContainerOpcoes>
-              {
-                statusResultado?
-                (
-                  statusResposta?
-                  (
-                    <ContainerOpcoesJogo>
-                      <ContentOpcao>
-                        <ButtonOpcao onClick={()=>setStatusResultado(false)} color={'#0D7F35'}>
-                            CONTINUAR
-                        </ButtonOpcao>
-                      </ContentOpcao>
-                    </ContainerOpcoesJogo>
-                  ):
-                  (
-                    <ContainerOpcoesJogo>
-                      <ContentOpcao>
-                        <ButtonOpcao onClick={()=>encerraPartida()} color={'#C5142F'}>
-                            ENCERRAR
-                        </ButtonOpcao>
-                      </ContentOpcao>
-                    </ContainerOpcoesJogo>
-                  )
-                ):
-                (
-                  <ContainerOpcoesJogo>
-                    <ContentOpcao>
-                      <ButtonOpcao onClick={encerraPartida} color={'#C5142F'}>
-                          ENCERRAR
-                      </ButtonOpcao>
-                    </ContentOpcao>
-                    <ContentOpcao>
-                      <ButtonOpcao color={'#A59D0E'} onClick={()=>startTimer(pergunta?pergunta.tempo:0)}>
-                          TEMPO
-                      </ButtonOpcao>
-                    </ContentOpcao>
-                    <ContentOpcao>
-                      <ButtonOpcao onClick={verificarResposta} color={'#0D7F35'}>
-                          VERIFICAR
-                      </ButtonOpcao>
-                    </ContentOpcao>
-                  </ContainerOpcoesJogo>
-                )
-              }
-
               <ContainerOpcoesPremios>
                 <ContentOpcoesPremio>
                   <ContentImage>
                     <OpcoesPremio src={imagesOptionsErrar}/>
                   </ContentImage>
                   <ContentLabelOpcoesPremio>
-                    <LabelOpcoesPremio color={'#C5142F'} fundo={'#C5142F'}>
+                    <LabelOpcoesPremio color={'#fff'} fundo={'#C5142F'}>
                       ERRAR
                     </LabelOpcoesPremio>
                   </ContentLabelOpcoesPremio>
@@ -568,7 +738,7 @@ function Perguntas({
                     <OpcoesPremio src={imagesOptionsParar}/>
                   </ContentImage>
                   <ContentLabelOpcoesPremio>
-                    <LabelOpcoesPremio color={'#A59D0E'} fundo={'#D0C60C'}>
+                    <LabelOpcoesPremio color={'#000'} fundo={'#D0C60C'}>
                       PARAR
                     </LabelOpcoesPremio>
                   </ContentLabelOpcoesPremio>
@@ -578,14 +748,16 @@ function Perguntas({
                     <OpcoesPremio src={imagesOptionsAcertar}/>
                   </ContentImage>
                   <ContentLabelOpcoesPremio>
-                    <LabelOpcoesPremio color={'#0D7F35'} fundo={'#0D7F35'}>
+                    <LabelOpcoesPremio color={'#fff'} fundo={'#0D7F35'}>
                       ACERTAR
                     </LabelOpcoesPremio>
                   </ContentLabelOpcoesPremio>
                 </ContentOpcoesPremio>
-            </ContainerOpcoesPremios>
-          </ContainerOpcoes>
+              </ContainerOpcoesPremios>
+            </ContainerOpcoes>
+          
           </ContainerPergunta>
+
           <ContainerTimerNovo>
             <ContentTimerNovo>
               <ContentImageC4>
@@ -596,6 +768,7 @@ function Perguntas({
               </TimerC4>
             </ContentTimerNovo>
           </ContainerTimerNovo>
+
       </Container>
   );
 }

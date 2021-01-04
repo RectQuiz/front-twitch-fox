@@ -4,6 +4,10 @@ export const loadPerguntas = () => ({
   type: actions.LOAD_PERGUNTAS
 });
 
+export const LoadQuantPerguntas = () => ({
+    type: actions.LOAD_QUANT_PERGUNTAS
+});
+
 export const cadastrarPergunta = (pergunta) => ({
     type: actions.CADASTRAR_PERGUNTA,
     pergunta:pergunta
@@ -22,6 +26,11 @@ export const deletePergunta = (id) => ({
 export const setPerguntas = (perguntas) => ({
     type: actions.SET_PERGUNTAS,
     perguntas:perguntas
+});
+
+export const setQuantPerguntas = (quant_perguntas) => ({
+    type: actions.SET_QUANT_PERGUNTAS,
+    quant_perguntas:quant_perguntas
 });
 
 export const setLoadingPergunta = (loading) => ({

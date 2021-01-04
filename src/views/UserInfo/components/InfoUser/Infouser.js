@@ -204,6 +204,12 @@ function InfoUser({
                                                 <a  href="/nivel/cadastro">Níveis</a>
                                             </ItemLabelInfoPerguntas>
                                         </ContainerValuePerguntas>
+                                        
+                                        <ContainerValuePerguntas> 
+                                            <ItemLabelInfoPerguntas>
+                                                <a  href="/categoria/cadastro">Categorias</a>
+                                            </ItemLabelInfoPerguntas>
+                                        </ContainerValuePerguntas>
         
                                     </ContentValueInfoPerguntas>
                                 </ContentItemInfoChannels>

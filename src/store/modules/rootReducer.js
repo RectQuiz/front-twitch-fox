@@ -7,6 +7,7 @@ import { NivelReducer } from './nivel/reducer';
 import { PerguntaReducer } from './pergunta/reducer';
 import { PremiacaoReducer } from './premiacao/reducer';
 import { PartidaReducer } from './partida/reducer';
+import { CategoriaReducer } from './categoria/reducer';
 
 
 export default combineReducers({
@@ -17,5 +18,6 @@ export default combineReducers({
     NivelReducer,
     PerguntaReducer,
     PremiacaoReducer,
-    PartidaReducer
+    PartidaReducer,
+    CategoriaReducer
 });

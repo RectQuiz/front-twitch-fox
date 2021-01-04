@@ -5,12 +5,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   loadPerguntas,
   cadastrarPergunta,
-  deletePergunta
+  deletePergunta,
+  atualizarPergunta,
+  LoadQuantPerguntas
 } from '../../../store/modules/pergunta/actions';
 
 import {
   loadNiveis
 } from '../../../store/modules/nivel/actions';
+
+import {
+  loadCategorias
+} from '../../../store/modules/categoria/actions';
 
 import {
   Content,
@@ -21,7 +27,8 @@ import {
 function CadastroPerguntas() {
   const dispatch = useDispatch();
   const { niveis, loading:loadingNivel, errors:errorsNivel, status:statusNivel, response:responseNivel } = useSelector(({ NivelReducer }) => NivelReducer);
-  const { perguntas, loading, errors, status, response } = useSelector(({ PerguntaReducer }) => PerguntaReducer);
+  const { perguntas, loading, errors, status, response, quant_perguntas } = useSelector(({ PerguntaReducer }) => PerguntaReducer);
+  const { categorias } = useSelector(({ CategoriaReducer }) => CategoriaReducer);
 
   // console.log('List perguntas: ',perguntas);
   // console.log('loading perguntas: ',loading);
@@ -30,6 +37,8 @@ function CadastroPerguntas() {
   // console.log('response perguntas: ',response);
 
   useEffect(()=>{
+      dispatch(loadCategorias());
+      dispatch(LoadQuantPerguntas());
       dispatch(loadPerguntas());
       dispatch(loadNiveis());
   },[]);
@@ -42,6 +51,14 @@ function CadastroPerguntas() {
   function deletarPergunta(id) {
     dispatch(deletePergunta(id));
   }
+
+  function ChangeStatusPergunta(pergunta) {
+    let newPergunta = {
+      ativa:!pergunta.ativa,
+      id:pergunta._id
+    }
+    dispatch(atualizarPergunta(newPergunta));
+  }
   
   return (
     <Content>
@@ -49,10 +66,13 @@ function CadastroPerguntas() {
             <FormCadastro
               registrarPergunta={registrarPergunta}
               niveis={niveis}
+              categorias={categorias}
             />
             <ListItens
+              quant_perguntas={quant_perguntas}
               perguntas={perguntas}
               deletarPergunta={deletarPergunta}
+              ChangeStatusPergunta={ChangeStatusPergunta}
             />
             <Loading
               show={(loading && loadingNivel) || (!loading && loadingNivel) || (loading && !loadingNivel) }

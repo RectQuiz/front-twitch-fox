@@ -10,7 +10,7 @@ export const Container = styled.div`
   display:flex;
   flex-direction:row;
   justify-content:flex-start;
-  align-items:center;
+  align-items:flex-end;
 `;
 
 export const ContainerPergunta = styled.div`
@@ -34,7 +34,7 @@ export const HeaderPergunta = styled.div`
     align-items:center;
 `;
 
-export const ContainerTimer = styled.button`
+export const ContainerTimer = styled.div`
     /* width:20%; */
     background-color:#0B0530;
     /* padding:7px; */
@@ -107,7 +107,7 @@ export const TituloPergunta = styled.span`
     filter: ${(props)=>props.status?'blur(0px)':'blur(10px)'};
 `;
 
-export const ContentAlternativa = styled.button`
+export const ContentAlternativa = styled.div`
     width:49%;
     background-color:${(props)=>{
         return props.statusSelect && props.showResposta && props.statusResposta?'#0D7F35':
@@ -178,41 +178,19 @@ export const ContainerOpcoes = styled.div`
     justify-content:space-between;
     align-items:center;
     padding-top:5px;
-    padding-left:5px;
-    padding-right:5px;
+    /* padding-left:5px; */
+    /* padding-right:5px; */
     /* background-color:blue; */
-`;
-
-export const ContentOpcao = styled.div`
-    padding:10px;
-`;
-
-export const ButtonOpcao = styled.button`
-  background-color:#fff;
-  border-radius:10px;
-  padding:10px;
-  color:${(props)=>props.color?props.color:'#0B0530'};
-  font-weight:bold;
-    box-shadow: 0px 0px 3px 0px #696969;
-    :active {
-        box-shadow: 0px 0px 0px 0px #696969;
-    }
-    :focus{
-        outline: thin dotted;
-        outline: 0px auto -webkit-focus-ring-color;
-        outline-offset: 0px;
-    }
 `;
 
 export const ContainerOpcoesJogo = styled.div`
     display:flex;
     flex-direction:row;
-    justify-content:space-between;
+    justify-content:flex-start;
     align-items:center;
-    
-    flex:5;
+    padding-bottom:100px;
     /* background-color:green; */
-    padding-right:5px;
+    /* padding-right:5px; */
 `;
 
 export const ContainerOpcoesPremios = styled.div`
@@ -222,7 +200,7 @@ export const ContainerOpcoesPremios = styled.div`
     align-items:center;
     /* background-color:red; */
     flex:5;
-    padding-left:15px;
+    /* padding-left:15px; */
 `;
 
 export const ContainerOpcoesPremios2 = styled.div`
@@ -234,11 +212,35 @@ export const ContainerOpcoesPremios2 = styled.div`
     flex:5;
     padding-top:20px;
     padding-bottom:20px;
+    margin-left:10px;
 `;
 
 export const ContentOpcoesPremio = styled.button`
-    height: 5vw;
+    height: 6vw;
     width: 5vw;
+    border-radius:7px;
+    overflow: hidden;
+    border:2px solid #fff;
+    border-bottom-right-radius:0px;
+    border-bottom-left-radius:0px;
+    background-color:#0B0530;
+    box-shadow: 1px 1px 15px -5px black;
+    opacity:${(props)=>props.status?0.4:1};
+    /* cursor: pointer; */
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+    :focus{
+        outline: thin dotted;
+        outline: 0px auto -webkit-focus-ring-color;
+        outline-offset: 0px;
+    }
+`;
+
+export const ContentOpcoesPremioResultado = styled.div`
+    height: 7vw;
+    width: 7vw;
     border-radius:7px;
     overflow: hidden;
     border:2px solid #fff;
@@ -263,6 +265,7 @@ export const OpcoesPremio = styled.img`
     object-fit: contain;
     width: 100%;
     height:100%;
+    border-radius:3px;
     /* border-radius: 50%; */
     /* background-color:#fff; */
     /* border: 2px solid #141414; */
@@ -274,7 +277,8 @@ export const ContentLabelOpcoesPremio = styled.div`
 `;
 
 export const LabelOpcoesPremio = styled.div`
-    background-color:${(props)=>props.color?props.color:'#0B0530'};
+    background-color:${(props)=>props.fundo?props.fundo:'#0B0530'};
+    color:${(props)=>props.color?props.color:'#0B0530'};
     width:100%;
     height:100%;
     font-weight:bold;
@@ -290,12 +294,19 @@ export const ContentImage = styled.div`
     padding:3px;
 `;
 
+export const ContentImageResultado = styled.div`
+    /* background-color:yellow; */
+    height:70%;
+    padding:3px;
+`;
+
 export const ContainerResultado = styled.div`
     width:100%;
     background-color:#0B0530;
     border: 2px solid #fff;
     border-radius:3px;
     padding:5px;
+    margin-bottom:10px;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -303,12 +314,23 @@ export const ContainerResultado = styled.div`
 `;
 
 export const ContentResultado = styled.div`
-
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    /* background-color:red; */
+    padding-left:30px;
+    padding-right:30px;
 `;
 
 export const TituloResultado = styled.span`
     color:#fff;
     font-weight:bold;
+    font-size:30px;
+    /* background-color:green; */
+    flex:5;
+    text-align:center;
 `;
 
 export const ContainerTimerNovo = styled.div`
@@ -319,6 +341,7 @@ export const ContainerTimerNovo = styled.div`
     flex-direction:row;
     justify-content:center;
     align-items:center;
+    padding-bottom:100px;
     /* border:2px solid #fff;
     border-radius:3px; */
 `;
@@ -345,10 +368,15 @@ export const TimerC4 = styled.span`
     left:67px;
 `;
 
-export const ContentImageC4 = styled.div`
+export const ContentImageC4 = styled.button`
     /* background-color:yellow; */
     width:160px;
     height:170px;
+    :focus{
+        outline: thin dotted;
+        outline: 0px auto -webkit-focus-ring-color;
+        outline-offset: 0px;
+    }
 
     /* padding:3px; */
 `;
@@ -360,4 +388,63 @@ export const OpcoesPremioC4 = styled.img`
     /* border-radius: 50%; */
     /* background-color:#fff; */
     /* border: 2px solid #141414; */
+`;
+
+export const ContainerPainel = styled.div`
+    width:65%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    /* padding-left:5px; */
+    /* padding-right:5px; */
+    background-color:#fff;
+    border:2px solid #fff;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:150px;
+    flex-wrap:wrap;
+`;
+
+export const ContainerOpcoesPainel = styled.div`
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    /* flex-wrap:wrap; */
+    /* padding-bottom:100px; */
+    /* background-color:green; */
+    width:100%;
+    /* padding-right:5px; */
+`;
+
+export const ContentOpcao = styled.div`
+    /* padding-right:15px; */
+    margin:5px;
+    flex:${(props)=>props.flex?props.flex:3};
+    /* background-color:blue; */
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+`;
+
+export const ButtonOpcao = styled.button`
+  background-color:#0B0530;
+  border: 2px solid #fff;
+  border-radius:10px;
+  padding:10px;
+  width:100%;
+  color:${(props)=>props.color?props.color:'#0B0530'};
+  font-weight:bold;
+    box-shadow: 0px 0px 3px 0px #696969;
+    :active {
+        box-shadow: 0px 0px 0px 0px #696969;
+    }
+    :focus{
+        outline: thin dotted;
+        outline: 0px auto -webkit-focus-ring-color;
+        outline-offset: 0px;
+    }
+   text-transform:uppercase;
 `;

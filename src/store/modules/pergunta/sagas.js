@@ -102,6 +102,36 @@ function* loadPerguntasWorker() {
   }
 }
 
+function* loadQuantPerguntasWorker() {
+  yield put(actions.setLoadingPergunta(true));
+  yield put(actions.setStatusPergunta(0));
+  yield put(actions.setResponsePergunta({}));
+  yield put(actions.setErrorPergunta(''));
+  try {
+    const response = yield call(Pergunta.loadQuantPerguntas,{});
+    yield put(actions.setQuantPerguntas(response.data.data));
+    yield put(actions.setLoadingPergunta(false));
+    yield put(actions.setErrorPergunta(''));
+    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setResponsePergunta(response));
+    yield put(actions.setStatusPergunta(response.status));
+  } catch (error) {
+    yield put(actions.setLoadingPergunta(false));
+    yield put(actions.setStatusPergunta(error.status));
+    if (error.response) {
+      yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
+      yield put(actions.setErrorPergunta(error.response.data.message));
+      yield put(actions.setStatusPergunta(error.response.status));
+    } else if (error.request) {
+      yield put(setErrorGeneral(error.message,true,error.request.status));
+      yield put(actions.setErrorPergunta({ data: error.message }));
+      yield put(actions.setStatusPergunta(error.request.status));
+    } else {
+      yield put(actions.setErrorPergunta({ data: error.message }));
+    }
+  }
+}
+
 function* deletarPerguntaWorker({id}) {
     yield put(actions.setLoadingPergunta(true));
     yield put(actions.setStatusPergunta(0));
@@ -137,6 +167,7 @@ function* watcherAnalise() {
   yield takeLatest(actionType.ATUALIZAR_PERGUNTA, atualizarPerguntaWorker);
   yield takeLatest(actionType.LOAD_PERGUNTAS, loadPerguntasWorker);
   yield takeLatest(actionType.DELETE_PERGUNTA, deletarPerguntaWorker);
+  yield takeLatest(actionType.LOAD_QUANT_PERGUNTAS, loadQuantPerguntasWorker);
 }
 
 export default function* saga() {

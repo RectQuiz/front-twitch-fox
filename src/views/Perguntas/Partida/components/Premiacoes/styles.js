@@ -76,6 +76,8 @@ export const ContainerPremio = styled.div`
   /* padding-left:7px; */
   padding-right:7px;
   margin-bottom:10px;
+  padding-left:20px;
+  padding-right:20px;
 `;
 
 export const ContentIndicePremio = styled.div`
@@ -148,6 +150,7 @@ export const ContainerAjudas = styled.div`
   /* padding-top:10px; */
   /* padding-left:15px;
   padding-right:15px; */
+  /* display:${(props)=>props.status?'none':'flex'}; */
 `;
 
 export const ContentAjuda = styled.button`
@@ -162,8 +165,8 @@ export const ContentAjuda = styled.button`
   /* box-shadow: 1px 1px 15px -5px black; */
   transition: all .3s ease;
   padding:0.1vw;
-  opacity:${(props)=>props.status?0.0:1};
-  filter:${(props)=>props.status?'brightness(100%)':'brightness(200%)'};
+  opacity:${(props)=>props.status?0.1:1};
+  filter:${(props)=>props.status?'brightness(100%)':'brightness(130%)'};
   /* cursor: pointer; */
   :focus{
       outline: thin dotted;

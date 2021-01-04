@@ -2,41 +2,35 @@ import * as actions from './actionTypes';
 
 const initial_state = {
     response: {},
-    perguntas: null,
+    categorias: null,
     loading: false,
     errors: '',
-    status:0,
-    quant_perguntas:{}
+    status:0
 }
 
-export const PerguntaReducer = (state = initial_state, action) => {
+export const CategoriaReducer = (state = initial_state, action) => {
   switch (action.type) {
-    case actions.SET_QUANT_PERGUNTAS:
+    case actions.SET_CATEGORIAS:
       return {
         ...state,
-        quant_perguntas: action.quant_perguntas,
+        categorias: action.categorias,
       };
-    case actions.SET_PERGUNTAS:
-      return {
-        ...state,
-        perguntas: action.perguntas,
-      };
-    case actions.SET_LOADING_PERGUNTA:
+    case actions.SET_LOADING_CATEGORIA:
       return {
         ...state,
         loading: action.loading
       };
-    case actions.SET_RESPONSE_PERGUNTA:
+    case actions.SET_RESPONSE_CATEGORIA:
       return {
         ...state,
         response: action.response
       };
-    case actions.SET_STATUS_PERGUNTA:
+    case actions.SET_STATUS_CATEGORIA:
       return {
         ...state,
         status: action.status
       };
-    case actions.SET_ERROR_PERGUNTA:
+    case actions.SET_ERROR_CATEGORIA:
       return {
         ...state,
         errors: action.errors,

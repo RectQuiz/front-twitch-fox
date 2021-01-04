@@ -6,18 +6,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   Content,
   BackgroundColor,
-  ContainerPartida
+  ContainerPartida,
+  ContainerPrePartida
 } from './styles';
 import { loadPremiacoes } from '../../../store/modules/premiacao/actions';
 import { loadPerguntas } from '../../../store/modules/pergunta/actions';
 import { loadPartidaAtual, cadastrarPartida, atualizarPartida } from '../../../store/modules/partida/actions';
 
-import MusicaGranada from '../../../assets/sounds/granada.mp3';
 import MusicaDefuse from '../../../assets/sounds/defuse.mp3';
 import MusicaInicio from '../../../assets/sounds/aparecer_pergunta.mp3';
 import MusicaErrar from '../../../assets/sounds/errou.mp3';
 import MusicaAcertar from '../../../assets/sounds/acertou.mp3';
 import MusicaTimer from '../../../assets/sounds/timer.mp3';
+import { ContainerPremio } from './components/Premiacoes/styles';
+import InicioPartida from './components/InicioPartida';
 function Partida({history}) {
 
   const dispatch = useDispatch();
@@ -25,7 +27,6 @@ function Partida({history}) {
     ajuda1:false,
     ajuda2:false
   });
-  const [ musicaGranada, setMusicaGranada ] = useState(new Audio(MusicaGranada));
   const [ musicaDefuse, setMusicaDefuse ] = useState(new Audio(MusicaDefuse));
   const [ musica, setMusica ] = useState(new Audio(MusicaInicio));
   const [ musicaErrar, setMusicaErrar ] = useState(new Audio(MusicaErrar));
@@ -46,7 +47,6 @@ function Partida({history}) {
       musica.preload = 'auto';
       musicaErrar.preload = 'auto';
       musicaAcertar.preload = 'auto';
-      musicaGranada.preload = 'auto';
       musicaDefuse.preload = 'auto';
       musicaTimer.preload = 'auto';
       dispatch(loadPartidaAtual());
@@ -63,23 +63,40 @@ function Partida({history}) {
 
   function setAjuda(id) {
     if(statusRodada){
-      if (id == 1 && partida.ajuda_1 == false) {
-        musicaGranada.play();
-        setTimeout(() => {
-          dispatch(atualizarPartida({
-            id:partida._id,
-            ajuda_1:true
-          }));
-        }, 1000);
-      }
-      if (id == 2 && partida.ajuda_2 == false) {
-        musicaDefuse.play();
-        setTimeout(() => {
-          dispatch(atualizarPartida({
-            id:partida._id,
-            ajuda_2:true
-          }));
-        }, 1000);
+      console.log('id: ',id);
+      switch (id) {
+        case 1:
+          if (partida.ajuda_1 == false) {
+            // musicaGranada.play();
+            dispatch(atualizarPartida({
+              id:partida._id,
+              ajuda_1:true
+            }));
+            console.log('Ajuda 1');
+          }
+          break;
+        case 2:
+          if (partida.ajuda_2 == false) {
+            // musicaDefuse.play();
+            dispatch(atualizarPartida({
+              id:partida._id,
+              ajuda_2:true
+            }));
+            console.log('Ajuda 2');
+          }
+          break;
+        case 3:
+          if (partida.ajuda_3 == false) {
+            musicaDefuse.play();
+            dispatch(atualizarPartida({
+              id:partida._id,
+              ajuda_3:true
+            }));
+            console.log('Ajuda 3');
+          }
+            break;
+        default:
+          break;
       }
     }
   }
@@ -87,25 +104,40 @@ function Partida({history}) {
   return (
     <Content>
         <BackgroundColor>
-          <ContainerPartida>
-            <Premiacoes
-              statusRodada={statusRodada}
-              partida={partida}
-              ajudas={ajudas}
-              setAjuda={setAjuda}
-              premiacoes={premiacoes}
-            />
-            <Perguntas
-              statusRodada={statusRodada}
-              setStatuRodada={setStatuRodada}
-              history={history}
-              premiacoes={premiacoes}
-              partida={partida}
-              perguntas={perguntas}
-              statusTimer={statusTimer}
-              setStatusTimer={setStatusTimer}
-            />
-          </ContainerPartida>
+          {
+            partida?
+            (
+              partida.ajudas.length == 0?
+              (
+                <ContainerPrePartida>
+                  <InicioPartida partida={partida}/>
+                </ContainerPrePartida>
+              ):
+              (
+                <ContainerPartida>
+                  <Premiacoes
+                    statusRodada={statusRodada}
+                    partida={partida}
+                    ajudas={ajudas}
+                    setAjuda={setAjuda}
+                    premiacoes={premiacoes}
+                  />
+                  <Perguntas
+                    statusRodada={statusRodada}
+                    setStatuRodada={setStatuRodada}
+                    history={history}
+                    premiacoes={premiacoes}
+                    partida={partida}
+                    perguntas={perguntas}
+                    statusTimer={statusTimer}
+                    setStatusTimer={setStatusTimer}
+                    setAjuda={setAjuda}
+                  />
+                </ContainerPartida>
+              )
+            ):
+            (null)
+          }
           {/* <Footer/> */}
           <Loading
             show={ loading || loadingPergunta || loadingPremiacao }

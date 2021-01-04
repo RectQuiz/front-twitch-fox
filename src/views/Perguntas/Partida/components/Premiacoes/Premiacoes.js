@@ -18,15 +18,18 @@ import {
 } from './styles';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import image_granada from '../../../../../assets/images/granada_2.png';
+import image_flash from '../../../../../assets/images/flash.png';
+import image_molotov from '../../../../../assets/images/molotov.png';
+import image_smoke from '../../../../../assets/images/smoke.png';
 import image_defuse from '../../../../../assets/images/defuse.png';
 import Partida from '../../Partida';
+import { GiPopcorn, GiKing } from 'react-icons/gi';
 
 function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
   const [ stateArrow, setStateArrow ] = useState(true);
   const [ styleAjudas, setStyleAjudas ] = useState({});
   const [ styleArrow, setStyleArrow ] = useState({});
   const [ stylePremiosContent, setStylePremiosContent ] = useState({});
-
   // console.log('premiacoes: ',premiacoes);
   // console.log('partida: ',partida);
 
@@ -48,6 +51,51 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
       setStyleAjudas({});
       setStylePremiosContent({});
     }
+  }
+
+  function image_ajuda(ajuda) {
+    let number = partida.ajudas[0].number;
+    let number_2 = partida.ajudas[1].number;
+    let image;
+    if (ajuda == 1) {
+      switch (number) {
+        case 1:
+          image = image_granada;
+          break;
+        case 2:
+          image = image_flash;
+          break;
+        case 3:
+          image = image_molotov;
+          break;
+        case 4:
+          image = image_smoke;
+          break;
+      
+        default:
+          break;
+      }
+    }
+    if (ajuda == 2) {
+      switch (number_2) {
+        case 1:
+          image = image_granada;
+          break;
+        case 2:
+          image = image_flash;
+          break;
+        case 3:
+          image = image_molotov;
+          break;
+        case 4:
+          image = image_smoke;
+          break;
+      
+        default:
+          break;
+      }
+    }
+    return image;
   }
 
   function logicaCor2(indice) {
@@ -79,7 +127,6 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
     );
   }
   
-
   return (
       <Container>
           <ContainerArrow style={styleArrow}>
@@ -98,11 +145,14 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
               partida &&
               (
                 <>
-                  <ContainerAjudas style={styleAjudas}>
-                    <ContentAjuda status={partida.ajuda_1} onClick={()=>setAjuda(1)}>
-                      <ImageAjuda src={image_granada}/>
+                  <ContainerAjudas status={partida.ajuda_1 && partida.ajuda_2} style={styleAjudas}>
+                    <ContentAjuda status={partida.ajuda_1}>
+                      <ImageAjuda src={image_ajuda(1)}/>
                     </ContentAjuda>
-                    <ContentAjuda status={partida.ajuda_2} onClick={()=>setAjuda(2)}>
+                    <ContentAjuda status={partida.ajuda_2}>
+                      <ImageAjuda src={image_ajuda(2)}/>
+                    </ContentAjuda>
+                    <ContentAjuda status={partida.ajuda_3}>
                       <ImageAjuda src={image_defuse}/>
                     </ContentAjuda>
                   </ContainerAjudas>
@@ -122,7 +172,9 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
                             </ContentImagePremio>
                             <ContentNomePremio>
                               <NomePremio>
-                                {premiacao.titulo}
+                                {`${premiacao.titulo} - `}
+                                {`${premiacao.valor}`}
+                                <GiPopcorn/>
                               </NomePremio>
                             </ContentNomePremio>
                           </ContainerPremio>

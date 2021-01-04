@@ -30,3 +30,12 @@ export const ContainerPartida = styled.div`
     justify-content:flex-end;
     align-items:flex-start;
 `;
+
+export const ContainerPrePartida = styled.div`
+    width:100%;
+    /* background-color:#fff; */
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:flex-start;
+`;

@@ -22,7 +22,7 @@ import Select from 'react-select';
 import { initialvalues } from './initialvalues';
 import perguntaSchema from './perguntaSchema';
 
-function FormCadastro({registrarPergunta,niveis}) {
+function FormCadastro({registrarPergunta,niveis,categorias}) {
 
   const {
     values,
@@ -107,19 +107,31 @@ function FormCadastro({registrarPergunta,niveis}) {
                     {touched["nivel"] && errors["nivel"]}
                   </ErroForm>
                 </ContainerInput>
-
+                
                 <ContainerInput>
                   <LabelForm>
-                      Categoria da pergunta:
+                      Categoria da Pergunta:
                   </LabelForm>
-                  <InputForm
-                        type="text"
-                        name="categoria"
-                        id="categoria"
-                        className="categoria"
-                        value={values.categoria} // We also bind our email value
-                        {...getFieldProps("categoria")}
-                  />
+                  <ContentSelect>
+                    <SelectNivel
+                      name="categoria"
+                      id="categoria"
+                      {...getFieldProps("categoria")}
+                      value={values.categoria}
+                    >
+                      <OptionSelectNivel value={''} >.::SELECIONE UMA CATEGORIA::.</OptionSelectNivel>
+                      {
+                        categorias != null?
+                        categorias.map((categoria)=>{
+                          return(
+                            <OptionSelectNivel value={categoria._id} >{categoria.name}</OptionSelectNivel>
+                          )
+                        })
+                        :
+                        null
+                      }
+                    </SelectNivel>
+                  </ContentSelect>
                   <ErroForm className="errorMessage">
                     {touched["categoria"] && errors["categoria"]}
                   </ErroForm>
