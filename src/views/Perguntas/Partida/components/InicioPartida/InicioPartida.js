@@ -16,6 +16,7 @@ import image_defuse from '../../../../../assets/images/defuse.png';
 import image_flash from '../../../../../assets/images/flash.png';
 import image_molotov from '../../../../../assets/images/molotov.png';
 import image_smoke from '../../../../../assets/images/smoke.png';
+import MusicaComprar from '../../../../../assets/sounds/comprar.mp3';
 import { useDispatch } from 'react-redux';
 import { atualizarPartida } from '../../../../../store/modules/partida/actions';
 
@@ -24,6 +25,8 @@ function InicioPartida({partida}) {
 
     const [ ajudaSelecionada,  setAjudaSelecionada] = useState(null);
     const [ ajudaAleatoria,  setAjudaAleatoria] = useState(null);
+    const [ musicaComprar, setMusicaComprar ] = useState(new Audio(MusicaComprar));
+    musicaComprar.preload = 'auto';
     const ajudas = [
         {
             name:'Granada',
@@ -49,12 +52,14 @@ function InicioPartida({partida}) {
 
     function escolherAjuda(ajuda) {
         if (!ajudaSelecionada) {
+            musicaComprar.play();
             setAjudaSelecionada(ajuda);
             console.log('ajudaSelecionada: ',ajuda);
         }
     }
     
     function escolherAjudaAleatoria() {
+        musicaComprar.play();
         let ajudaRandom = parseInt(Math.random() * (ajudas.length - 0) + 0);
         console.log('ajudaRandom: ',ajudaRandom);
         console.log('ajudas[ajudaRandom].number: ',ajudas[ajudaRandom].number);
@@ -97,6 +102,11 @@ function InicioPartida({partida}) {
                         )
                     })
                 }
+                <ContentAjuda
+                    selected={true}
+                >
+                    <AjudaImg src={image_defuse}/>
+                </ContentAjuda>
             </ContainerAjudas>
             <ContainerBotoes>
                 {

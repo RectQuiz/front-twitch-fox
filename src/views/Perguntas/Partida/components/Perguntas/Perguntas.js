@@ -426,7 +426,7 @@ function Perguntas({
   }
   
   function pararPartida() {
-    if(!statusRodada){
+    // if(!statusRodada){
       console.log('parando');
       let partidaChange = {
         status:'parada',
@@ -440,7 +440,7 @@ function Perguntas({
       setStatusResposta(false);
       setShowParar(true);
       dispatch(atualizarPartida(partidaChange));
-    }
+    // }
   }
 
   function verificarAlternativa(alternativa) {
