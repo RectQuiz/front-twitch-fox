@@ -14,7 +14,10 @@ import {
     ContainerAjudas,
     ContentAjuda,
     ImageAjuda,
-    ContatoCreator
+    ContatoCreator,
+
+    ContentImageFacao,
+    ImageFacao
 } from './styles';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import image_granada from '../../../../../assets/images/granada_2.png';
@@ -22,6 +25,7 @@ import image_flash from '../../../../../assets/images/flash.png';
 import image_molotov from '../../../../../assets/images/molotov.png';
 import image_smoke from '../../../../../assets/images/smoke.png';
 import image_defuse from '../../../../../assets/images/defuse.png';
+import image_facao from '../../../../../assets/images/facao.png';
 import Partida from '../../Partida';
 import { GiPopcorn, GiKing } from 'react-icons/gi';
 
@@ -145,22 +149,9 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
               partida &&
               (
                 <>
-                  {
-                    partida.ajudas.length > 0&&
-                    (
-                      <ContainerAjudas status={partida.ajuda_1 && partida.ajuda_2} style={styleAjudas}>
-                        <ContentAjuda status={partida.ajuda_1}>
-                          <ImageAjuda src={image_ajuda(1)}/>
-                        </ContentAjuda>
-                        <ContentAjuda status={partida.ajuda_2}>
-                          <ImageAjuda src={image_ajuda(2)}/>
-                        </ContentAjuda>
-                        <ContentAjuda status={partida.ajuda_3}>
-                          <ImageAjuda src={image_defuse}/>
-                        </ContentAjuda>
-                      </ContainerAjudas>
-                    )
-                  }
+                  <ContentImageFacao>
+                    <ImageFacao src={image_facao}/>
+                  </ContentImageFacao>
                   {
                     stateArrow && premiacoes != null?
                     (
@@ -187,6 +178,22 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
                       })
                     ):
                     (<></>)
+                }
+                {
+                  partida.ajudas.length > 0&&
+                  (
+                    <ContainerAjudas status={partida.ajuda_1 && partida.ajuda_2} style={styleAjudas}>
+                      <ContentAjuda status={partida.ajuda_1}>
+                        <ImageAjuda src={image_ajuda(1)}/>
+                      </ContentAjuda>
+                      <ContentAjuda status={partida.ajuda_2}>
+                        <ImageAjuda src={image_ajuda(2)}/>
+                      </ContentAjuda>
+                      <ContentAjuda status={partida.ajuda_3}>
+                        <ImageAjuda src={image_defuse}/>
+                      </ContentAjuda>
+                    </ContainerAjudas>
+                  )
                 }
                 <ContatoCreator>
                   Feito por: Argério Queiroz<br/>

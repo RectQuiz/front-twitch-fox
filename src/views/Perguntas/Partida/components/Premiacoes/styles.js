@@ -21,7 +21,7 @@ export const Content = styled.div`
   background-color: #05060D;
   height:100%;
   width:100%;
-  padding:15px;
+  padding:10px;
   /* padding-top:90px; */
   display:flex;
   flex-direction:column;
@@ -192,7 +192,31 @@ export const ContatoCreator = styled.div`
     align-items:flex-end;
     /* background-color:red; */
     color:#fff;
-    font-size:10px;
+    font-size:14px;
     height:100%;
+    /* padding:7px; */
+
+`;
+
+export const ImageFacao = styled.img`
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  /* background-color:#141414; */
+  /* border: 2px solid #141414; */
+  transition: all .3s ease;
+`;
+export const ContentImageFacao = styled.div`
+    width:70%;
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    align-items:flex-end;
+    /* background-color:red; */
+    color:#fff;
+    font-size:14px;
+    height:100%;
+    padding:7px;
 
 `;
