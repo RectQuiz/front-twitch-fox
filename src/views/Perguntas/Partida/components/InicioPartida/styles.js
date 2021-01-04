@@ -10,10 +10,11 @@ export const Container = styled.div`
     flex-direction:column;
     justify-content:flex-start;
     align-items:center;
+    padding-right:600px;
 `;
 
 export const ContainerAjudas = styled.div`
-    width:40%;
+    width:65%;
     /* background-color:blue; */
     padding:10px;
     display:flex;

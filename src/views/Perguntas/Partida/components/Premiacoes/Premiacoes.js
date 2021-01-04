@@ -145,17 +145,22 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
               partida &&
               (
                 <>
-                  <ContainerAjudas status={partida.ajuda_1 && partida.ajuda_2} style={styleAjudas}>
-                    <ContentAjuda status={partida.ajuda_1}>
-                      <ImageAjuda src={image_ajuda(1)}/>
-                    </ContentAjuda>
-                    <ContentAjuda status={partida.ajuda_2}>
-                      <ImageAjuda src={image_ajuda(2)}/>
-                    </ContentAjuda>
-                    <ContentAjuda status={partida.ajuda_3}>
-                      <ImageAjuda src={image_defuse}/>
-                    </ContentAjuda>
-                  </ContainerAjudas>
+                  {
+                    partida.ajudas.length > 0&&
+                    (
+                      <ContainerAjudas status={partida.ajuda_1 && partida.ajuda_2} style={styleAjudas}>
+                        <ContentAjuda status={partida.ajuda_1}>
+                          <ImageAjuda src={image_ajuda(1)}/>
+                        </ContentAjuda>
+                        <ContentAjuda status={partida.ajuda_2}>
+                          <ImageAjuda src={image_ajuda(2)}/>
+                        </ContentAjuda>
+                        <ContentAjuda status={partida.ajuda_3}>
+                          <ImageAjuda src={image_defuse}/>
+                        </ContentAjuda>
+                      </ContainerAjudas>
+                    )
+                  }
                   {
                     stateArrow && premiacoes != null?
                     (

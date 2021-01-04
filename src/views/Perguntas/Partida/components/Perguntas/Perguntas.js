@@ -620,7 +620,7 @@ function Perguntas({
                                     <OpcoesPremio src={showParar?imagesOptionsParar:imagesOptionsErrar}/>
                                   </ContentImageResultado>
                                     <ContentLabelOpcoesPremio>
-                                      <LabelOpcoesPremio color={'#fff'} fundo={showParar?(imagesOptionsParar != Vazio?'#0D7F35':'#C5142F'):imagesOptionsErrar != Vazio?'#0D7F35':'#C5142F'}>
+                                      <LabelOpcoesPremio color={'#fff'} fundo={showParar?(imagesOptionsParar != Vazio?'#D0C60C':'#C5142F'):imagesOptionsErrar != Vazio?'#0D7F35':'#C5142F'}>
                                         {showParar?(imagesOptionsParar != Vazio?'GUARDOU':'PERDEU'):imagesOptionsErrar != Vazio?'GANHOU':'PERDEU'}
                                       </LabelOpcoesPremio>
                                     </ContentLabelOpcoesPremio>

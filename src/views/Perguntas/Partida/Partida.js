@@ -110,6 +110,13 @@ function Partida({history}) {
               partida.ajudas.length == 0?
               (
                 <ContainerPrePartida>
+                  <Premiacoes
+                    statusRodada={statusRodada}
+                    partida={partida}
+                    ajudas={ajudas}
+                    setAjuda={setAjuda}
+                    premiacoes={premiacoes}
+                  />
                   <InicioPartida partida={partida}/>
                 </ContainerPrePartida>
               ):
