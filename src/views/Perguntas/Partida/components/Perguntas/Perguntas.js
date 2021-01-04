@@ -439,7 +439,7 @@ function Perguntas({
       setStatusTimer(false);
       setStatusResposta(false);
       setShowParar(true);
-      dispatch(atualizarPartida(partidaChange));
+      // dispatch(atualizarPartida(partidaChange));
     // }
   }
 
@@ -619,23 +619,11 @@ function Perguntas({
                                   <ContentImageResultado>
                                     <OpcoesPremio src={showParar?imagesOptionsParar:imagesOptionsErrar}/>
                                   </ContentImageResultado>
-                                  {
-                                    imagesOptionsErrar != Vazio?
-                                    (
-                                      <ContentLabelOpcoesPremio>
-                                        <LabelOpcoesPremio color={'#fff'} fundo={'#0D7F35'}>
-                                          GANHOU
-                                        </LabelOpcoesPremio>
-                                      </ContentLabelOpcoesPremio>
-                                    ):
-                                    (
-                                      <ContentLabelOpcoesPremio>
-                                        <LabelOpcoesPremio color={'#fff'} fundo={'#C5142F'}>
-                                          PERDEU
-                                        </LabelOpcoesPremio>
-                                      </ContentLabelOpcoesPremio>
-                                    )
-                                  }
+                                    <ContentLabelOpcoesPremio>
+                                      <LabelOpcoesPremio color={'#fff'} fundo={showParar?(imagesOptionsParar != Vazio?'#0D7F35':'#C5142F'):imagesOptionsErrar != Vazio?'#0D7F35':'#C5142F'}>
+                                        {showParar?(imagesOptionsParar != Vazio?'GUARDOU':'PERDEU'):imagesOptionsErrar != Vazio?'GANHOU':'PERDEU'}
+                                      </LabelOpcoesPremio>
+                                    </ContentLabelOpcoesPremio>
                                 </ContentOpcoesPremioResultado>
                               )
                             }
