@@ -58,6 +58,7 @@ import MusicaGranada from '../../../../../assets/sounds/granada.mp3';
 import MusicaMolotov from '../../../../../assets/sounds/molotov.mp3';
 import MusicaSmoke from '../../../../../assets/sounds/smoke.mp3';
 import MusicaFlash from '../../../../../assets/sounds/flash.mp3';
+import MusicaParar from '../../../../../assets/sounds/parar.mp3';
 
 function Perguntas({
   partida,
@@ -84,6 +85,7 @@ function Perguntas({
   const [ musicaErrar, setMusicaErrar ] = useState(new Audio(MusicaErrar));
   const [ musicaAcertar, setMusicaAcertar ] = useState(new Audio(MusicaAcertar));
   const [ musicaTimer, setMusicaTimer ] = useState(new Audio(MusicaTimer));
+  const [ musicaParar, setMusicaParar ] = useState(new Audio(MusicaParar));
   const [ showPergunta, setShowPergunta ] = useState(0); 
   const [ statusResultado, setStatusResultado ] = useState(false);
   const [ statusResposta, setStatusResposta ] = useState(false);
@@ -106,6 +108,8 @@ function Perguntas({
     musicaMolotov.preload = 'auto';
     musicaSmoke.preload = 'auto';
     musicaFlash.preload = 'auto';
+    musicaParar.preload = 'auto';
+    
     if (partida && premiacoes) {
       if(partida.quant_acertos > 0){
         EscolherOpcoesPremiosErrar();
@@ -432,6 +436,7 @@ function Perguntas({
         status:'parada',
         id:partida._id
       }
+      musicaParar.play();
       clearInterval(ref);
       setTimer('00:00');
       setStatusResultado(true);
@@ -620,7 +625,9 @@ function Perguntas({
                                     <OpcoesPremio src={showParar?imagesOptionsParar:imagesOptionsErrar}/>
                                   </ContentImageResultado>
                                     <ContentLabelOpcoesPremio>
-                                      <LabelOpcoesPremio color={'#fff'} fundo={showParar?(imagesOptionsParar != Vazio?'#D0C60C':'#C5142F'):imagesOptionsErrar != Vazio?'#0D7F35':'#C5142F'}>
+                                      <LabelOpcoesPremio
+                                        color={showParar?(imagesOptionsParar != Vazio?'#000':'#fff'):imagesOptionsErrar != Vazio?'#fff':'#fff'}
+                                        fundo={showParar?(imagesOptionsParar != Vazio?'#D0C60C':'#C5142F'):imagesOptionsErrar != Vazio?'#0D7F35':'#C5142F'}>
                                         {showParar?(imagesOptionsParar != Vazio?'GUARDOU':'PERDEU'):imagesOptionsErrar != Vazio?'GANHOU':'PERDEU'}
                                       </LabelOpcoesPremio>
                                     </ContentLabelOpcoesPremio>
