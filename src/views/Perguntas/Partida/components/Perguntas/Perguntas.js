@@ -329,9 +329,12 @@ function Perguntas({
         if (pergunta && pergunta.categoria) {
           console.log('pergunta2: ',pergunta2);
           console.log('pergunta: ',pergunta);
-          return pergunta2._id != pergunta._id && pergunta2.nivel.number == partida.nivel.number && (pergunta2.categoria.name != pergunta.categoria.name);
+          return pergunta2._id != pergunta._id && 
+          pergunta2.nivel.number == partida.nivel.number && 
+          (pergunta2.categoria.name != pergunta.categoria.name) &&
+          pergunta2.ativa == true;
         }else{
-          return pergunta2.nivel.number == partida.nivel.number;
+          return pergunta2.nivel.number == partida.nivel.number && pergunta2.ativa == true;;
         }
       });
       console.log('perguntasDoNivel: ',perguntasDoNivel);

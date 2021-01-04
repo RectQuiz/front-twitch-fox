@@ -83,6 +83,7 @@ export const ContainerTitulo = styled.div`
     flex-direction:row;
     justify-content: center;
     align-items:center;
+    overflow:auto;
 `;
 
 export const ContainerAlternativas = styled.div`
