@@ -10,9 +10,13 @@ import Parceiros from './components/Parceiros';
 import fundo from '../../assets/images/fundo.jpg';
 import Footer from '../../components/Footer';
 import { BackgroundColor, Content } from './styles';
+import { loadInfoUser } from '../../store/modules/user/actions';
+import { useDispatch } from 'react-redux';
 
 export default function Home({history}){
+    const dispatch = useDispatch();
     const [ products, setProducts ] = useState([]);
+
     useEffect(()=>{
         const load_products = async()=>{
             try {
@@ -41,6 +45,15 @@ export default function Home({history}){
             }
         }
         load_products();
+    },[]);
+    
+    useEffect(()=>{
+        const token = localStorage.getItem('@siteJokerz/token');
+        console.log("token Home: ",token);
+        if (token) {
+            console.log('loadInfoUser Home');
+            dispatch(loadInfoUser());
+        }
     },[]);
 
     return (

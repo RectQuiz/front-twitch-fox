@@ -12,6 +12,7 @@ const PrivateRoute = ({ layout: Layout, component: Component, ...rest })=>{
     if (nickname && token) {
         isAuth = true;
     }
+    
     return (
       <Route
         {...rest}

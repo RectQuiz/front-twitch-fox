@@ -86,6 +86,7 @@ function FormCadastro({registrarNivel}) {
                     {touched["number"] && errors["number"]}
                   </ErroForm>
                 </ContainerInput>
+                
                 <ContainerButton>
                   <ButtonForm type="submit">
                       Cadastrar

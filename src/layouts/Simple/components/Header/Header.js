@@ -24,12 +24,20 @@ import { useHistory } from 'react-router-dom';
 import logo from '../../../../assets/images/logo.png';
 import menu from '../../../../assets/images/menu.png';
 import { Link } from 'react-router-dom';
-export default function Header({open, setOpen, logar, loadingAuth }){
+export default function Header({
+    open,
+    setOpen,
+    logar,
+    loadingAuth,
+    nickname,
+    user,
+    loadingUser
+}){
     let history = useHistory();
-    const [ nickname, setNickname] = useState(null);
     const [ itemSelect, setItemSelect] = useState(0);
     const [ dropDawnMobile, setDropDawnMobile] = useState(false);
-    console.log("itemSelect: ",itemSelect);
+
+    // console.log("itemSelect: ",itemSelect);
     const headers = [
         {
             name:"HOME",
@@ -52,16 +60,6 @@ export default function Header({open, setOpen, logar, loadingAuth }){
         //     rota:"#about"
         // }
     ]
-
-    useEffect(()=>{
-        const nickname = localStorage.getItem('@siteJokerz/nickname');
-        const token = localStorage.getItem('@siteJokerz/token');
-        if (nickname && token) {
-            setNickname(nickname);
-        }else{
-            setNickname(null);
-        }
-    });
     
     const setVisibleDropDownMobile = ()=>{
         console.log('visibleInfoUser: ',dropDawnMobile);
@@ -87,6 +85,7 @@ export default function Header({open, setOpen, logar, loadingAuth }){
         <Container>
             <Content>
                 <ContentBig>
+
                     <ContainerLogo>
                         <ImageLogo
                             src={logo}
@@ -96,6 +95,7 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                             TeamJokerz
                         </TitleLogo>
                     </ContainerLogo>
+
                     <ContainerButtonsNav>
                         {
                             headers.map((header)=>(
@@ -123,9 +123,22 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                                             </Nickname>
                                         </ContentNickname>
                                         <ContainerDropDown className='dropDownNicname'>
-                                            <ItemDropDown>
-                                                <a style={styleTaga} href={`/user/${nickname}`}>Perfil</a>
-                                            </ItemDropDown>
+                                            {
+                                                !loadingUser && user&&
+                                                (
+                                                    user.streamer?
+                                                    (
+                                                        <ItemDropDown>
+                                                            <a style={styleTaga} href={`/dashboard`}>Dashboard</a>
+                                                        </ItemDropDown>
+                                                    ):
+                                                    (
+                                                        <ItemDropDown>
+                                                            <a style={styleTaga} href={`/user`}>Perfil</a>
+                                                        </ItemDropDown>
+                                                    )
+                                                )
+                                            }
                                             <ItemDropDown style={{padding:10}} onClick={logOut}>
                                                 Sair
                                             </ItemDropDown>
@@ -135,12 +148,15 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                             )
                         }
                     </ContainerButtonsNav>
+
                     <ContainerButtonMenu onClick={()=>setOpen(!open)}>
                         <ImageMenu
                             src={menu}
                         />
                     </ContainerButtonMenu>
+
                 </ContentBig>
+
                 <ContentSmall open={open}>
                         <Ul open={open}>
                             
@@ -161,7 +177,7 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                             {
                                 !loadingAuth && 
                                 (
-                                    !nickname?(
+                                    !nickname && (!loadingUser && !user)?(
                                         <ButtonAuth onClick={logar}>LOGIN COM A TWITCH</ButtonAuth>
                                     ):
                                     (
@@ -172,8 +188,24 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                                                 </Nickname>
                                             </ContentNickname>
                                             <ContainerDropDownMobile status={dropDawnMobile}  className='dropDownMobile'>
+                                                {
+                                                    !loadingUser && user&&
+                                                    (
+                                                        user.streamer?
+                                                        (
+                                                            <ItemDropDownMobile>
+                                                                <a style={styleTaga} href={`/dashboard`}>Dashboard</a>
+                                                            </ItemDropDownMobile>
+                                                        ):
+                                                        (
+                                                            <ItemDropDownMobile>
+                                                                <a style={styleTaga} href={`/user`}>Perfil</a>
+                                                            </ItemDropDownMobile>
+                                                        )
+                                                    )
+                                                }
                                                 <ItemDropDownMobile>
-                                                    <a style={styleTaga} href={`/user/${nickname}`}>Perfil</a>
+                                                    <a style={styleTaga} href={`/user`}>Perfil</a>
                                                 </ItemDropDownMobile>
                                                 <ItemDropDownMobile onClick={logOut}>
                                                     Sair
@@ -185,6 +217,7 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                             }
                         </Ul>
                 </ContentSmall>
+
             </Content>
         </Container>
 

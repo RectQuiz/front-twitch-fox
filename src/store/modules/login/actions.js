@@ -35,3 +35,8 @@ export const setError = (errors) => ({
     type: actions.SET_ERROR_LOGIN,
     errors:errors
 });
+
+export const loginAdmin = (values) => ({
+    type: actions.LOGIN_ADMIN,
+    values:values
+});

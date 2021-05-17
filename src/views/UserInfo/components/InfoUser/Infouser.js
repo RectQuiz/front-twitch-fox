@@ -173,7 +173,8 @@ function InfoUser({
                         
                         {/* PERGUNTAS */}
                         {
-                            admin?
+                            // admin?
+                            false?
                             (
                                 <ContentItemInfoChannels>
                                     <ItemLabelChannels>

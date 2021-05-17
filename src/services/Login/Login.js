@@ -28,4 +28,9 @@ export const authCodeTwitch = async (params) => {
       ? { search: urlParams.get('search') }
       : {};
     return await api.get(`${resouceUrl}/twitch_person?code=${params.code}`);
-  };
+};
+
+export const loginUserAdmin = async (params) => {
+  params = params ? params : {};
+  return await api.post(`${resouceUrl}/login_streamer`,params);
+};

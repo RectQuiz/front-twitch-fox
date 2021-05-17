@@ -22,7 +22,7 @@ function Loja() {
   });
   // const [ modalInfoProduct, setModalInfoProduct ] = useState(false);
   const token = localStorage.getItem('@siteJokerz/token');
-//   console.log('token: ',token);
+  //   console.log('token: ',token);
 
   const setModalInfoProduct = (status_set)=>{
     if (status_set != status) {

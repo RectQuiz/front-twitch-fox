@@ -7,6 +7,7 @@ import {
     BackgroundColor,
     ContentInfoUser
 } from './styles';
+
 import {
     loadInfoUser,
     setStatus,
@@ -17,10 +18,16 @@ import {
 import { Footer } from '../../components';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { InfoUser } from './components';
+import { Redirect } from 'react-router-dom';
 
-function UserInfo() {
+function UserInfo(props) {
+    const { location, history } = props;
+    useEffect(()=>{
+        console.log('loadInfoUser UserInfo');
+        dispatch(loadInfoUser());
+    },[]);
     const dispatch = useDispatch();
-    const { nick_user } = useParams();
+    // const { nick_user } = useParams();
     const { user, users, loading, errors, status } = useSelector(({ UserReducer }) => UserReducer);
     const [ typeSelected, setTypeSelected ] = useState({ value: '', label: 'SELECIONE::::' });
     const [ selectedPrimaryAccount, setSelectedPrimaryAccount ] = useState({ value: '', label: 'SELECIONE::::' });
@@ -28,13 +35,7 @@ function UserInfo() {
         { value: 'secondary', label: 'Secundaria' },
         { value: 'primary', label: 'Primaria' },
       ];
-    // console.log('nick_user: ',nick_user);
-    // console.log('users: ',users);
 
-    useEffect(()=>{
-        // console.log('loadInfoUser UserInfo');
-        dispatch(loadInfoUser());
-    },[]);
 
     useEffect(()=>{
         if (status == 200 && errors.length == 0 && loading == false) {
@@ -79,30 +80,39 @@ function UserInfo() {
     return (
         <Content>
             <BackgroundColor>
-            {
-                loading?
                 (
-                    <ScaleLoader
-                        // css={override}
-                        color="#DC143C"
-                        height={60}
-                        width={7}
-                        margin={7}
-                        loading={true}
-                    />
-                ):
-                (
-                    user &&
-                    <InfoUser
-                        users={users}
-                        user={user}
-                        typesAccount={typesAccount}
-                        addTypeAccount={addTypeAccount}
-                        typeSelected={typeSelected}
-                        addPrimaryAccount={addPrimaryAccount}
-                    />
+                    {
+                        loading?
+                        (
+                            <ScaleLoader
+                                color="#DC143C"
+                                height={60}
+                                width={7}
+                                margin={7}
+                                loading={true}
+                            />
+                        ):
+                        (
+                            user? 
+                            (
+                                !user.streamer ? 
+                                (
+                                    <InfoUser
+                                        users={users}
+                                        user={user}
+                                        typesAccount={typesAccount}
+                                        addTypeAccount={addTypeAccount}
+                                        typeSelected={typeSelected}
+                                        addPrimaryAccount={addPrimaryAccount}
+                                    />
+                                )
+                                :(<Redirect to={{pathname:'/home', state:{from:location}}} />)
+                            )
+                            :(<></>)
+                            
+                        )
+                    }
                 )
-            }
             <Footer/>
             </BackgroundColor>
         </Content>

@@ -13,7 +13,9 @@ export const loadInfoUser = async (params) => {
   let search = urlParams.has('search')
     ? { search: urlParams.get('search') }
     : {};
-  return await api.get(`${resouceUrl}/info`, {
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  return await api_.get(`${resouceUrl}/info`, {
     params: {
       ...params,
       ...page,
