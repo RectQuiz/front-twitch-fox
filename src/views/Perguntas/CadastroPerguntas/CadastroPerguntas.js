@@ -44,7 +44,7 @@ function CadastroPerguntas() {
   },[]);
 
   function registrarPergunta(pergunta) {
-    console.log('deletando pergunta');
+    console.log('registrando pergunta');
     dispatch(cadastrarPergunta(pergunta));
   }
 

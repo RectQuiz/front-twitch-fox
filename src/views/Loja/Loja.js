@@ -35,7 +35,7 @@ function Loja() {
       if (token) {
         dispatch(loadInfoUser());
       }
-      load_products();
+      load_products(1);
   },[]);
 
   const load_products = async(page)=>{

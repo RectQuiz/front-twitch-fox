@@ -89,6 +89,9 @@ export const ContainerButtonsNav = styled.nav`
     @media (max-width: 990px) {
         display:none;
     }
+    .item{
+        color: #DC143C;
+    }
     
 `;
 

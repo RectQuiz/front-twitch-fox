@@ -13,21 +13,21 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  /* background-color: #bdbdbd; */
-  width: 100%;
-  max-width: 1150px;
-  display: flex;
-  flex-direction:row;
-  align-items: center;
-  justify-content:flex-start;
-  border-width:1px;
-  border-color:#bdbdbd;
-  /* @media (max-width: 500px) { */
+    /* background-color: #bdbdbd; */
+    width: 100%;
+    max-width: 1150px;
+    display: flex;
     flex-direction:row;
-    flex-wrap:wrap;
-  padding-bottom:40px;
-  flex:1;
-  /* } */
+    align-items: center;
+    justify-content:flex-start;
+    border-width:1px;
+    border-color:#bdbdbd;
+    /* @media (max-width: 500px) { */
+        flex-direction:row;
+        flex-wrap:wrap;
+    padding-bottom:40px;
+    flex:1;
+    /* } */
 `;
 
 //info

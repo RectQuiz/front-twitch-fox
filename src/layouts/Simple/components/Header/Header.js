@@ -27,7 +27,31 @@ import { Link } from 'react-router-dom';
 export default function Header({open, setOpen, logar, loadingAuth }){
     let history = useHistory();
     const [ nickname, setNickname] = useState(null);
+    const [ itemSelect, setItemSelect] = useState(0);
     const [ dropDawnMobile, setDropDawnMobile] = useState(false);
+    console.log("itemSelect: ",itemSelect);
+    const headers = [
+        {
+            name:"HOME",
+            index:0,
+            rota:"/"
+        },
+        {
+            name:"LOJA",
+            index:1,
+            rota:"/loja"
+        },
+        // {
+        //     name:"PARCEIROS",
+        //     index:2,
+        //     rota:"#contact"
+        // },
+        // {
+        //     name:"CONTATO",
+        //     index:3,
+        //     rota:"#about"
+        // }
+    ]
 
     useEffect(()=>{
         const nickname = localStorage.getItem('@siteJokerz/nickname');
@@ -55,6 +79,10 @@ export default function Header({open, setOpen, logar, loadingAuth }){
         window.location.reload(false);
     }
 
+    function selectItem(number) {
+        setItemSelect(number);
+    }
+
     return (
         <Container>
             <Content>
@@ -69,10 +97,18 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                         </TitleLogo>
                     </ContainerLogo>
                     <ContainerButtonsNav>
-                        <a style={styleTaga} href="/">HOME</a>
-                        <a style={styleTaga} href="/loja">LOJA</a>
-                        <a style={styleTaga} href="#contact">PARCEIROS</a>
-                        <a style={styleTaga} href="#about">CONTATO</a>
+                        {
+                            headers.map((header)=>(
+                                <a 
+                                    style={styleTaga} 
+                                    className={`${itemSelect == header.index?"item":""}`} 
+                                    onClick={()=>selectItem(header.index)} 
+                                    href={header.rota}
+                                >
+                                        {header.name}
+                                </a>
+                            ))
+                        }
                         {
                             !loadingAuth && 
                             (
@@ -107,10 +143,21 @@ export default function Header({open, setOpen, logar, loadingAuth }){
                 </ContentBig>
                 <ContentSmall open={open}>
                         <Ul open={open}>
-                            <li><a style={styleTaga} href="/">HOME</a></li>
-                            <li><a style={styleTaga} href="/loja">LOJA</a></li>
-                            <li><a style={styleTaga} href="#contact">PARCEIROS</a></li>
-                            <li><a style={styleTaga} href="#about">CONTATO</a></li>
+                            
+                            {
+                                headers.map((header)=>(
+                                    
+                                    <li>
+                                        <a 
+                                            style={styleTaga} 
+                                            href={header.rota}
+                                            onClick={()=>selectItem(header.index)} 
+                                        >
+                                            {header.name}
+                                        </a>
+                                    </li>
+                                ))
+                            }
                             {
                                 !loadingAuth && 
                                 (

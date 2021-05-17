@@ -60,6 +60,7 @@ function FormCadastro({registrarPergunta,niveis,categorias}) {
                       CADASTRO DE PERGUNTAS
                   </TitleForm>
               </HeaderForm>
+
               <ContentForm>
 
                 <ContainerInput>
@@ -261,6 +262,7 @@ function FormCadastro({registrarPergunta,niveis,categorias}) {
                   </ButtonForm>
                 </ContainerButton>
               </ContentForm>
+              
             </FormNivel>
           </Content>
       </Container>
