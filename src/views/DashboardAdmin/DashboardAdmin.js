@@ -6,7 +6,8 @@ import { loadInfoUser } from '../../store/modules/user/actions';
 
 import {
     Content,
-    BackgroundColor
+    BackgroundColor,
+    ContentBodyDash
 } from './styles';
 // import { FormLogin } from './components';
 
@@ -26,7 +27,7 @@ function DashboardAdmin() {
             <BackgroundColor>
                 
                     {
-                        false?
+                        loadingUser?
                         (
                             <ScaleLoader
                                 // css={override}
@@ -38,10 +39,12 @@ function DashboardAdmin() {
                             />
                         ):
                         (
-                            <></>
+                            <ContentBodyDash>
+                                HOME
+                            </ContentBodyDash>
                         )
                     }
-                <Footer/>
+                {/* <Footer/> */}
             </BackgroundColor>
         </Content>
     );

@@ -83,7 +83,7 @@ function FormLogin({login}) {
                     
                     <ContainerButton>
                         <ButtonForm type="submit">
-                            Cadastrar
+                            Entrar
                         </ButtonForm>
                     </ContainerButton>
 

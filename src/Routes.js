@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import { PrivateRoute, PublicRoute } from './components';
 import * as View from './views';
-import { Simple } from './layouts';
+import { Simple, Dashboard } from './layouts';
 // import { useDispatch } from 'react-redux';
 // import { cadastro_pessoa_response } from '~/store/modules/uf/action';
 // import { login_auth } from '~/store/modules/login/action';
@@ -21,7 +21,7 @@ const Routes = () => {
       <PrivateRoute component={View.CadastroPremiacao} exact layout={Simple} path="/premiacao/cadastro" />
       <PrivateRoute component={View.CadastroCategorias} exact layout={Simple} path="/categoria/cadastro" />
       <PrivateRoute component={View.Partida} exact layout={Simple} path="/partida" />
-      <PrivateRoute component={View.DashboardAdmin} exact layout={Simple} path="/dashboard" />
+      <PrivateRoute component={View.DashboardAdmin} exact layout={Dashboard} path="/dashboard" />
       {/* <PublicRoute
         component={View.CadPessoaFisica}
         exact

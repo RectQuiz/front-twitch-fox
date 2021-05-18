@@ -8,6 +8,7 @@ import { PerguntaReducer } from './pergunta/reducer';
 import { PremiacaoReducer } from './premiacao/reducer';
 import { PartidaReducer } from './partida/reducer';
 import { CategoriaReducer } from './categoria/reducer';
+import { MenuAdminReducer } from './menuAdmin/reducer';
 
 
 export default combineReducers({
@@ -19,5 +20,6 @@ export default combineReducers({
     PerguntaReducer,
     PremiacaoReducer,
     PartidaReducer,
-    CategoriaReducer
+    CategoriaReducer,
+    MenuAdminReducer
 });
