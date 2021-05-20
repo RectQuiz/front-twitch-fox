@@ -9,6 +9,7 @@ import { PremiacaoReducer } from './premiacao/reducer';
 import { PartidaReducer } from './partida/reducer';
 import { CategoriaReducer } from './categoria/reducer';
 import { MenuAdminReducer } from './menuAdmin/reducer';
+import { ProductsReducer } from './products/reducer';
 
 
 export default combineReducers({
@@ -21,5 +22,6 @@ export default combineReducers({
     PremiacaoReducer,
     PartidaReducer,
     CategoriaReducer,
-    MenuAdminReducer
+    MenuAdminReducer,
+    ProductsReducer
 });

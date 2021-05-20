@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ScaleLoader from "react-spinners/ScaleLoader";
-import { Footer } from '../../components';
+import { Footer, HeaderDashBoard } from '../../components';
 import { loadInfoUser } from '../../store/modules/user/actions';
 
 import {
@@ -40,7 +40,8 @@ function DashboardAdmin() {
                         ):
                         (
                             <ContentBodyDash>
-                                HOME
+                                <HeaderDashBoard title={"Sua aréa de informações gerais"} subtitle={"Aréa para vizualizar informações gerais."} />
+                                    HOME
                             </ContentBodyDash>
                         )
                     }

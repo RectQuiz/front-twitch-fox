@@ -19,7 +19,8 @@ import { ModalInfoProduct, CardProduct } from '../../../../components';
 
 export default function Products({
     products,
-    pagination,
+    totalPages,
+    currentPage,
     load_products,
     modal,
     setModal,
@@ -94,7 +95,7 @@ export default function Products({
                                 nextLabel={"next"}
                                 breakLabel={"..."}
                                 breakClassName={"break-me"}
-                                pageCount={pagination.totalPages}
+                                pageCount={totalPages}
                                 marginPagesDisplayed={1}
                                 pageRangeDisplayed={2}
                                 onPageChange={pageClick}

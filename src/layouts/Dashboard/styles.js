@@ -16,10 +16,10 @@ export const Container = styled.div`
 //MENU LATERAL
 export const MenuLateral = styled.div`
     background-color:${colors.secondary_dashboard};
-    position:absolute;
+    position:fixed;
     /* height:100%; */
     z-index:7;
-    border-radius:30px;
+    border-radius: 1vw;
     top: 30px;
     left: 30px;
     bottom: 30px;
@@ -27,6 +27,9 @@ export const MenuLateral = styled.div`
     width:300px;
     box-shadow: 0px 0px 20px 0.1px;
     min-width:300px;
+    @media (max-width: 500px) {
+        display: none;
+    }
 `;
     //HEADER MENU LATERAL
     export const HearderMenuLateral = styled.div`

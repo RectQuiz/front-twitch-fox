@@ -6,6 +6,7 @@ import perguntaSaga from './pergunta/sagas';
 import premiacaoSaga from './premiacao/sagas';
 import partidaSaga from './partida/sagas';
 import categoriaSaga from './categoria/sagas';
+import productsSaga from './products/sagas';
 
 
 export default function* () {
@@ -17,5 +18,6 @@ export default function* () {
     fork(premiacaoSaga),
     fork(partidaSaga),
     fork(categoriaSaga),
+    fork(productsSaga),
   ]);
 }

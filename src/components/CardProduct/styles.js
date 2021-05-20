@@ -12,7 +12,11 @@ export const ContainerCard = styled.div`
     @media (max-width: 500px) {
         width:100%;
         height:${sizeCardH}px;
-    }
+    }:focus {
+            border: none;
+            outline:none;
+            outline-style: none;
+        }
 `;
 
 export const Card = styled.button`
@@ -30,10 +34,18 @@ export const Card = styled.button`
     padding:10px;
     :hover{
         background-color:${({promo})=>promo?'rgba(171,154,77,0.4)':'rgba(55,56,71)'};
-    .imageProduct{
-        transform:scale(1.05);
-        filter: brightness(200%);
+        .imageProduct{
+            transform:scale(1.05);
+            filter: brightness(200%);
+        }
     }
+    :active {
+        transform: translateY(4px);
+    }
+    :focus {
+        border: none;
+        outline:none;
+        outline-style: none;
     }
 `;
 

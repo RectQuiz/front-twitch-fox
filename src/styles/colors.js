@@ -7,5 +7,10 @@ export default {
     white:"#fff",
     primary_dashboard:"#fff",
     secondary_dashboard:"#05060D",
-    dedtail2:"#A9A9A9"
+    dedtail2:"#A9A9A9",
+    black:"#000",
+    green:"green",
+    brown:"bronw",
+    primary_geral:"#DC143C",
+    primary_geral_dark:"#800000",
 }

@@ -32,7 +32,9 @@ export const ContentBodyDash = styled.div`
     /* background-color:${colors.red}; */
     border-radius:30px;
     /* border: 4px solid #000; */
-    flex:1;
+    /* flex:1; */
+    height: 100%;
+    padding: 20px;
     width:100%;
     display:flex;
     flex-direction:column;
@@ -41,3 +43,23 @@ export const ContentBodyDash = styled.div`
     /* color:#000;
     font-size:30px; */
 `;
+
+export const ContentRowDashBoard = styled.div`
+    /* background-color:${colors.red}; */
+    width: 100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:flex-start;
+`;
+
+export const ContentColumDashBoard = styled.div`
+    /* background-color:${colors.red}; */
+    /* width: 100%; */
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+    flex:${(props)=>props.flex?props.flex:1};
+`;
+

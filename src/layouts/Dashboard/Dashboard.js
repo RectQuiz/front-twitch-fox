@@ -40,25 +40,25 @@ function Dashboard(props) {
     const { children } = props;
     const [ itensMenu, setItensMenu ] = useState([
         {   
-            path:"dashboard",
+            path:"/dashboard",
             name:"Home",
             icon:<FaHome style={{flex:2}} size={22} color={colors.white} />
         },
         {
-            path:"dashboard",
+            path:"/dashboard/loja",
             name:"Produtos Loja",
             icon:<FaStore style={{flex:2}} size={22} color={colors.white} />
         },
-        {
-            path:"dashboard",
-            name:"teste3",
-            icon:<FaSquare style={{flex:2}} size={22} color={colors.white} />
-        },
-        {
-            path:"dashboard",
-            name:"teste4",
-            icon:<FaSquare style={{flex:2}} size={22} color={colors.white} />
-        }
+        // {
+        //     path:"/dashboard",
+        //     name:"teste3",
+        //     icon:<FaSquare style={{flex:2}} size={22} color={colors.white} />
+        // },
+        // {
+        //     path:"/dashboard",
+        //     name:"teste4",
+        //     icon:<FaSquare style={{flex:2}} size={22} color={colors.white} />
+        // }
     ]);
     const { user, users, loading, errors, status } = useSelector(({ UserReducer }) => UserReducer);
     const { item_selected } = useSelector(({ MenuAdminReducer }) => MenuAdminReducer);
@@ -67,6 +67,7 @@ function Dashboard(props) {
     function selectItemMenu(item,index) {
         item.index = index;
         dispatch(SelectItemMenuAdmin(item));
+        console.log("item.path: ",item.path);
         history.push(item.path);
     }
 

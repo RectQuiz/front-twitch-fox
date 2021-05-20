@@ -35,7 +35,8 @@ function ModalInfoProduct({
     show,
     infoProduct
 }) {
-    let image = `https://steamcommunity-a.akamaihd.net/economy/image/${infoProduct.image}`;
+    // let image = `https://steamcommunity-a.akamaihd.net/economy/image/${infoProduct.image}`;
+    let image = infoProduct.image;
 
     const dispatch = useDispatch();
     const { user } = useSelector(({ UserReducer }) => UserReducer);

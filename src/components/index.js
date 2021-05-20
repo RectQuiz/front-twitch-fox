@@ -5,3 +5,4 @@ export { default as Footer } from './Footer';
 export { default as ModalInfoProduct } from './ModalInfoProduct';
 export { default as ModalError } from './ModalError';
 export { default as Loading } from './Loading';
+export { default as HeaderDashBoard } from './HeaderDashBoard';
