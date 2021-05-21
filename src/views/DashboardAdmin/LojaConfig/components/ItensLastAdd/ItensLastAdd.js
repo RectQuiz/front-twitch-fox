@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CardProduct, ModalInfoProduct } from '../../../../components';
+import { CardProduct, ModalInfoProduct } from '../../../../../components';
 
 import ReactPaginate from 'react-paginate';
 import { GiPopcorn } from 'react-icons/gi';
@@ -75,7 +75,7 @@ function ItensLastAdd({products, totalPages, flex, setModal, modal, load_product
                 {
                     productSelect &&
                     (
-                        <ModalInfoProduct infoProduct={productSelect} show={modal} handleClose={handleClose}/>
+                        <ModalInfoProduct setModal={setModal} infoProduct={productSelect} show={modal} handleClose={handleClose}/>
                     )
                 }
             </Container>

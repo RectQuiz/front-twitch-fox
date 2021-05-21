@@ -21,9 +21,12 @@ const Routes = () => {
       <PrivateRoute component={View.CadastroPremiacao} exact layout={Simple} path="/premiacao/cadastro" />
       <PrivateRoute component={View.CadastroCategorias} exact layout={Simple} path="/categoria/cadastro" />
       <PrivateRoute component={View.Partida} exact layout={Simple} path="/partida" />
-      <PrivateRoute component={View.DashboardAdmin} exact layout={Dashboard} path="/dashboard/home" />
-      <PrivateRoute component={View.DashboardAdmin} exact layout={Dashboard} path="/dashboard" />
+
+
+      <PrivateRoute component={View.HomeDashBoard} exact layout={Dashboard} path="/dashboard/home" />
+      <PrivateRoute component={View.HomeDashBoard} exact layout={Dashboard} path="/dashboard" />
       <PrivateRoute component={View.LojaConfig} exact layout={Dashboard} path="/dashboard/loja" />
+      <PrivateRoute component={View.CreateProduct} exact layout={Dashboard} path="/dashboard/product/create" />
       {/* <PublicRoute
         component={View.CadPessoaFisica}
         exact

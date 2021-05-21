@@ -143,24 +143,15 @@ export const MenuLateral = styled.div`
     `;
 
         //ITEM MENU LATERAL
-        export const ContainerItem = styled.button`
+        export const ContainerItem = styled.div`
             width:100%;
             /* background-color:${colors.red}; */
-            padding-top:10px;
-            padding-bottom:10px;
-            margin-bottom:25px;
+            /* padding-top:10px;
+            padding-bottom:10px; */
+            /* margin-bottom:15px; */
             border: 2px solid ${colors.secondary_dashboard};
             border-radius:10px;
-            border-color:${(props)=>props.selected?colors.dedtail2:colors.secondary_dashboard};
-            :active {
-                box-shadow: 0px 0px 0px 0px #4F4F4F;
-                border-color: ${colors.dedtail2};
-            }
-            :focus{
-                outline: thin dotted;
-                outline: 0px auto -webkit-focus-ring-color;
-                outline-offset: 0px;
-            }
+            /* border-color:${(props)=>props.selected?colors.dedtail2:colors.secondary_dashboard}; */
         `;
 
         export const ContentItem = styled.div`
@@ -191,6 +182,7 @@ export const MenuLateral = styled.div`
             white-space: nowrap;
             overflow: hidden;
             text-overflow:ellipsis;
+            cursor:pointer;
         `;
         
         export const TitleItem = styled.p`
@@ -206,6 +198,7 @@ export const MenuLateral = styled.div`
         })`
             flex:2;
         `;
+
 
 //CONTENT DASHBOARD
 export const ContentDashboard = styled.div`

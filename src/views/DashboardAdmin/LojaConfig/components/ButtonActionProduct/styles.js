@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import colors from '../../../../styles/colors';
+import colors from '../../../../../styles/colors';
 
 export const Container = styled.div`
   /* padding: 15px; */
@@ -16,7 +16,7 @@ export const Container = styled.div`
 export const ContentButton = styled.button`
     border-radius: 1vw;
     background-color: ${colors.red}; /* For browsers that do not support gradients */
-    background-image: linear-gradient(to right,${colors.primary_geral}, ${colors.primary_geral_dark});
+    background-image: linear-gradient(to right,${(props)=>props.color1?props.color1:colors.primary_dashboard}, ${(props)=>props.color2?props.color2:colors.secondary_dashboard});
     width: 13vw;
     height: 13vw;
     display: flex;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import colors from '../../../../styles/colors';
+import colors from '../../../../../styles/colors';
 
 export const Container = styled.div`
   flex:${(props)=>props.flex?props.flex:1};
@@ -10,6 +10,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content:center;
   height:auto;
+  min-height: 78vh;
   /* padding-top:40px; */
   padding-bottom:40px;
   border-radius: 1vw;

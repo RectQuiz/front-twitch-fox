@@ -23,16 +23,21 @@ import {
         IconFimItemInfoUser,
         //LISTA MENU LATERAL
         ListaMenuLateral,
-        ContainerItem,
-        ContentItem,
-        IconInicioItem,
-        ContentTitleItem,
-        TitleItem,
-        IconFimItem,
+            //ITEM MENU LATERAL
+            ContainerItem,
+            ContentItem,
+            IconInicioItem,
+            ContentTitleItem,
+            TitleItem,
+            IconFimItem,
+            inputAccordion,
+                //SUBITEM MENU LATERAL
+                ContentSubItem,
+                LabelSubItem,
     //CONTENT DASHBOARD
     ContentDashboard
-
 } from './styles';
+import { Accordion } from './components';
 
 function Dashboard(props) {
     const dispatch = useDispatch();
@@ -40,32 +45,38 @@ function Dashboard(props) {
     const { children } = props;
     const [ itensMenu, setItensMenu ] = useState([
         {   
-            path:"/dashboard",
             name:"Home",
-            icon:<FaHome style={{flex:2}} size={22} color={colors.white} />
+            icon:<FaHome style={{flex:2}} size={22} color={colors.white} />,
+            subitens:[
+                {
+                    name:"Home",
+                    path:"/dashboard",
+                    index:1.1
+                }
+            ]
         },
         {
-            path:"/dashboard/loja",
             name:"Produtos Loja",
-            icon:<FaStore style={{flex:2}} size={22} color={colors.white} />
-        },
-        // {
-        //     path:"/dashboard",
-        //     name:"teste3",
-        //     icon:<FaSquare style={{flex:2}} size={22} color={colors.white} />
-        // },
-        // {
-        //     path:"/dashboard",
-        //     name:"teste4",
-        //     icon:<FaSquare style={{flex:2}} size={22} color={colors.white} />
-        // }
+            icon:<FaStore style={{flex:2}} size={22} color={colors.white} />,
+            subitens:[
+                {
+                    name:"Lista de produtos",
+                    path:"/dashboard/loja",
+                    index:2.1
+                },
+                {
+                    name:"Cradastrar produto",
+                    path:"/dashboard/product/create",
+                    index:2.2
+                }
+            ]
+        }
     ]);
     const { user, users, loading, errors, status } = useSelector(({ UserReducer }) => UserReducer);
     const { item_selected } = useSelector(({ MenuAdminReducer }) => MenuAdminReducer);
     console.log("item_selected: ",item_selected);
 
-    function selectItemMenu(item,index) {
-        item.index = index;
+    function selectItemMenu(item) {
         dispatch(SelectItemMenuAdmin(item));
         console.log("item.path: ",item.path);
         history.push(item.path);
@@ -116,19 +127,15 @@ function Dashboard(props) {
                 {/* LISTA DE SUBMENUS DO MENU LATERAL */}
                 <ListaMenuLateral>
                     {
-                        itensMenu.map((item,index)=>(
-                            <ContainerItem selected={item_selected && item_selected.index == index} onClick={()=>selectItemMenu(item,index)} >
-            
-                                <ContentItem>
-                                    {item.icon}
-                                    {/* <IconInicioItem /> */}
-                                    <ContentTitleItem title={item.name}>
-                                        {/* <TitleItem> */}
-                                            {item.name}
-                                        {/* </TitleItem> */}
-                                    </ContentTitleItem>
-                                    <IconFimItem />
-                                </ContentItem>
+                        itensMenu.map((item)=>(
+                            <ContainerItem>
+                                
+                                <Accordion
+                                    title={item.name}
+                                    subitens={item.subitens}
+                                    selectItemMenu={selectItemMenu}
+                                    item_selected={item_selected}
+                                />
             
                             </ContainerItem>
                         ))

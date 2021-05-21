@@ -1,4 +1,5 @@
 import React from 'react';
+import ModalCreateProduct from '../../../../../components/ModalCreateProduct';
 
 import {
     Container,
@@ -6,14 +7,16 @@ import {
     TextButton
 } from './styles';
 
-function ButtonAddProduct({
+function ButtonActionProduct({
     iconButton,
     textButton,
-    flex
+    onClick,
+    color1,
+    color2
 }) {
   return (
-      <Container flex={flex}>
-          <ContentButton>
+      <Container>
+          <ContentButton color1={color1} color2={color2} onClick={onClick}>
             {iconButton}
             <TextButton>
                 {textButton}
@@ -23,4 +26,4 @@ function ButtonAddProduct({
   );
 }
 
-export default ButtonAddProduct;
+export default ButtonActionProduct;

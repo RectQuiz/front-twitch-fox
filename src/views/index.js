@@ -5,4 +5,3 @@ export * from './UserInfo';
 export * from './Perguntas';
 export * from './LoginAdmin';
 export * from './DashboardAdmin';
-export * from './LojaConfig';

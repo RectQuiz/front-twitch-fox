@@ -33,7 +33,8 @@ import { MdTitle, MdSubtitles } from 'react-icons/md';
 
 function ModalInfoProduct({
     show,
-    infoProduct
+    infoProduct,
+    setModal
 }) {
     // let image = `https://steamcommunity-a.akamaihd.net/economy/image/${infoProduct.image}`;
     let image = infoProduct.image;
@@ -46,6 +47,7 @@ function ModalInfoProduct({
         console.log(e.currentTarget);
         if (e.target === e.currentTarget) {
             dispatch(setStatusModal(false));
+            setModal(false);
         }
     }
 
@@ -106,9 +108,7 @@ function ModalInfoProduct({
                             <Amount>
                                 <FiShoppingBag/>  Estoque: {infoProduct.amount}
                             </Amount>
-                        </ContentInfoCard>
-                    
-                        <ContentButtonAdd>
+                            <ContentButtonAdd>
                             {
                                 user?
                                 (
@@ -148,7 +148,7 @@ function ModalInfoProduct({
                                 )
                             }
                         </ContentButtonAdd>
-
+                        </ContentInfoCard>
                     </ContentCardInfo>
                 </Container>
             )

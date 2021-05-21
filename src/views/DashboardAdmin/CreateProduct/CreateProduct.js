@@ -1,25 +1,25 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ScaleLoader from "react-spinners/ScaleLoader";
-import { Footer, HeaderDashBoard } from '../../components';
-import { loadInfoUser } from '../../store/modules/user/actions';
+import { Footer, HeaderDashBoard } from '../../../components';
+import { SelectItemMenuAdmin } from '../../../store/modules/menuAdmin/actions';
+import { loadInfoUser } from '../../../store/modules/user/actions';
 
 import {
     Content,
     BackgroundColor,
     ContentBodyDash
 } from './styles';
-// import { FormLogin } from './components';
 
-
-function DashboardAdmin() {
+function CreateProduct() {
     const dispatch = useDispatch();
     const { user, users, loading:loadingUser, errors:errorsUser, status:statusUser } = useSelector(({ UserReducer }) => UserReducer);
     console.log("user: ",user);
 
     useEffect(()=>{
-        console.log('loadInfoUser DashboardAdmin');
+        console.log('loadInfoUser CreateProduct');
         dispatch(loadInfoUser());
+        dispatch(SelectItemMenuAdmin({index:2.2}));
     },[]);
 
     return (
@@ -40,7 +40,10 @@ function DashboardAdmin() {
                         ):
                         (
                             <ContentBodyDash>
-                                <HeaderDashBoard title={"Sua aréa de informações gerais"} subtitle={"Aréa para vizualizar informações gerais."} />
+                                <HeaderDashBoard
+                                    title={"Cadastrar produto"}
+                                    subtitle={"Áre para cadastrar um novo produto."}
+                                />
                                     HOME
                             </ContentBodyDash>
                         )
@@ -51,4 +54,4 @@ function DashboardAdmin() {
     );
 }
 
-export default DashboardAdmin;
+export default CreateProduct;

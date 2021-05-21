@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../styles/colors';
 
 export const Container = styled.div`
     display: flex; /* Hidden by default */
@@ -24,6 +25,7 @@ export const ContentCardInfo = styled.div`
     /* width:100%; */
     max-height:100%;
     min-height:70vh;
+    min-width:30vw;
     height:auto;
     /* max-width:25vw; */
     /* min-width:25vw; */
@@ -58,7 +60,7 @@ export const ContentImage = styled.div`
     min-height:50%;
     max-height:50%;
     background-color:rgba(0,0,0,0.4);
-    padding:15px;
+    /* padding:15px; */
     border-radius:7px 7px 0px 0px;
     display:flex;
     flex-direction:column;
@@ -231,4 +233,89 @@ export const ButtonAdd = styled.button`
     border-radius:7px;
     text-transform:uppercase;
     padding:10px;
+`;
+
+export const InputFormFile = styled.input`
+    display: none !important;
+`;
+
+export const LabelInputfile = styled.label`
+    border-radius: 5px;
+    border: 2px solid #141414;
+    background-color:#1c1c1c;
+    color: #fff;
+    cursor: pointer;
+    padding: 6px 20px;
+    border-bottom-right-radius:0px;
+    border-top-right-radius:0px;
+    height:35px;
+`;
+
+export const ContentInputFile = styled.div`
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    align-items:center;
+    padding:10px;
+    /* background-color:red; */
+`;
+
+export const ContentImageInput = styled.label`
+    position: relative;
+	height: 100%;
+	width: 28vw;
+    min-width:200px;
+    min-height:200px;
+	/* margin: 50px auto; */
+	/* border-radius: 50%; */
+	overflow: hidden;
+    /* background-color:#1c1c; */
+	/* box-shadow: 1px 1px 15px -5px black; */
+	transition: all .3s ease;
+    /* background-color:#1c1c1c; */
+        border: none;
+        outline: none;
+    padding:0.7vw;
+	&:hover{
+		transform: scale(1.05);
+	}
+`;
+
+export const ContentImageInputEmpty = styled.label`
+    position: relative;
+	height: 100%;
+	width: 28vw;
+    min-width:200px;
+    min-height:200px;
+	overflow: hidden;
+	transition: all .3s ease;
+    border: none;
+    outline: none;
+    padding:0.7vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+	&:hover{
+		transform: scale(1.1);
+	}
+`;
+
+export const ImagePremioCad = styled.img`
+    vertical-align: middle;
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+    border: none !important;
+    background: transparent !important;
+    border: 1px solid ${colors.white};
+    /* border-radius: 30%; */
+    /* background-color:#fff; */
+	transition: all .3s ease;
+    :focus{
+        border: none;
+        outline: none;
+    }
+	transition: all .3s ease;
 `;
