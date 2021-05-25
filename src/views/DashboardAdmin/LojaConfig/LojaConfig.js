@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { Footer, HeaderDashBoard } from '../../../components';
 import { SelectItemMenuAdmin } from '../../../store/modules/menuAdmin/actions';
-import { loadProducts } from '../../../store/modules/products/actions';
+import { cadProductsSteam, loadProducts, setResponseProducts, setStatusProducts } from '../../../store/modules/products/actions';
 import { loadInfoUser } from '../../../store/modules/user/actions';
 import { ButtonActionProduct, ItensLastAdd } from './components';
 import { FaPlus, FaSteam } from 'react-icons/fa';
@@ -23,10 +23,9 @@ function LojaConfig() {
     const history = useHistory();
     const dispatch = useDispatch();
     const [ modalDetailItem, setModaDetailItem ] = useState(false);
-    const { user, users, loading:loadingUser, errors:errorsUser, status:statusUser } = useSelector(({ UserReducer }) => UserReducer);
-    const { products, totalPages, currentPage, loading:loadingProduct } = useSelector(({ ProductsReducer }) => ProductsReducer);
-    const { status } = useSelector(({ ModalReducer }) => ModalReducer);
-    // console.log("user: ",user);
+    const { user, users, loading:loadingUser } = useSelector(({ UserReducer }) => UserReducer);
+    const { products, totalPages, currentPage, loading:loadingProduct, errors, status } = useSelector(({ ProductsReducer }) => ProductsReducer);
+    // console.log("loadingProduct: ",loadingProduct);
 
     useEffect(()=>{
         console.log('loadInfoUser DashboardAdmin');
@@ -35,12 +34,22 @@ function LojaConfig() {
         load_products(1);
     },[]);
 
+    useEffect(()=>{
+      if (loadingProduct == false && status == 201 && errors.length == 0) {
+        dispatch(setStatusProducts(0));
+        dispatch(setResponseProducts({}));
+        load_products(1);
+      }
+    },[status]);
+
     const createProduct = ()=>{
         history.push("/dashboard/product/create");
     }
 
     const createProductSteam = ()=>{
-
+        if (!loadingProduct) {
+            dispatch(cadProductsSteam());
+        }
     }
     
     const createPromotion = ()=>{

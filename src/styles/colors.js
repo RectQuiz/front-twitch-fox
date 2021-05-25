@@ -1,5 +1,6 @@
 export default {
     red:"red",
+    red_dark:"#8B0000",
     blue:"blue",
     secundary:"#1c1c1c",
     primary:"#05060D",
@@ -19,4 +20,8 @@ export default {
     dourado:"#DAA520",
     dourado_dark:"#B8860B",
     transparent:"rgba(0,0,0,0.5)",
+    yellow:"yellow",
+    status_product_1:"#000080",
+    status_product_2:"#32CD32",
+    status_product_3:"#8B0000",
 }

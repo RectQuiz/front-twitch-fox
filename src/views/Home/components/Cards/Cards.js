@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
     Container,
-    Detail,
     Content,
     ContainerCard,
     Card,
@@ -12,7 +11,7 @@ import {
   } from './styles';
   import logo from '../../../../assets/images/logo.png';
 
-export default function Cards({}){
+export default function Cards(){
     const [ cards, setCards ] = useState([1,2,3]);
     return (
         <Container>

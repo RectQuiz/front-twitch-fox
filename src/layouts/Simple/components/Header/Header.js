@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
     Container,
     Content,
@@ -20,10 +20,10 @@ import {
     ContainerDropDownMobile,
     ItemDropDownMobile
 } from './styles';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import logo from '../../../../assets/images/logo.png';
 import menu from '../../../../assets/images/menu.png';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 export default function Header({
     open,
     setOpen,
@@ -33,7 +33,7 @@ export default function Header({
     user,
     loadingUser
 }){
-    let history = useHistory();
+    // let history = useHistory();
     const [ itemSelect, setItemSelect] = useState(0);
     const [ dropDawnMobile, setDropDawnMobile] = useState(false);
 
@@ -101,7 +101,7 @@ export default function Header({
                             headers.map((header)=>(
                                 <a 
                                     style={styleTaga} 
-                                    className={`${itemSelect == header.index?"item":""}`} 
+                                    className={`${itemSelect === header.index?"item":""}`} 
                                     onClick={()=>selectItem(header.index)} 
                                     href={header.rota}
                                 >

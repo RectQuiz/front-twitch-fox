@@ -15,7 +15,7 @@ export const Container = styled.div`
   padding-bottom:40px;
   border-radius: 1vw;
   /* border: 3px solid ${colors.secondary_dashboard}; */
-  padding: 20px;
+  /* padding: 20px; */
   margin-bottom: 15px;
 `;
 
@@ -34,6 +34,10 @@ export const Content = styled.div`
     flex-wrap:wrap;
   padding-bottom:40px;
   flex:1;
+    @media (max-width: 500px) {
+        max-width: 100vw;
+        padding: 0px;
+    }
   /* } */
 `;
 

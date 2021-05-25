@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
     Container,
     Content,
@@ -8,12 +8,13 @@ import {
   import { Link } from 'react-router-dom';
 
 
-import logo from '../../../../assets/images/logo.png';
+// import logo from '../../../../assets/images/logo.png';
 import { CardProduct } from '../../../../components';
+import { API_URL } from '../../../../services/config';
 
 export default function Cards({products}){
     // console.log('products: ',products);
-    const [ cards, setCards ] = useState([1,2,3,4]);
+    // const [ cards, setCards ] = useState([1,2,3,4]);
     return (
             products.length > 0?(
                 <Container>
@@ -23,8 +24,10 @@ export default function Cards({products}){
                             products.map((product)=>{
                                     return (
                                         <CardProduct
+                                            id={product._id}
+                                            floatvalue={product.floatvalue}
                                             key={product.id_item}
-                                            image={product.imageurl}
+                                            image={product.imageurl?product.imageurl:`${API_URL}/${product.imagepath}`}
                                             title={product.name}
                                             type={product.type}
                                             amount={product.amount}

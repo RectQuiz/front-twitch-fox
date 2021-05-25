@@ -20,8 +20,8 @@ import {
 
 function CadastroPremiacao() {
     const dispatch = useDispatch();
-    const { niveis, loading:loadingNivel, errors:errorsNivel, status:statusNivel, response:responseNivel } = useSelector(({ NivelReducer }) => NivelReducer);
-    const { premiacoes, loading, errors, status, response } = useSelector(({ PremiacaoReducer }) => PremiacaoReducer);
+    const { niveis, loading:loadingNivel } = useSelector(({ NivelReducer }) => NivelReducer);
+    const { premiacoes, loading } = useSelector(({ PremiacaoReducer }) => PremiacaoReducer);
 
     // console.log('List premiacoes: ',premiacoes);
     // console.log('loading premiacoes: ',loading);

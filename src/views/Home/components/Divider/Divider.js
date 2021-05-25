@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
     Container,
     TitleDivider,
@@ -7,7 +7,7 @@ import {
   } from './styles';
 
 export default function Divider({title}){
-    const [ cards, setCards ] = useState([1,2,3]);
+    // const [ cards, setCards ] = useState([1,2,3]);
     return (
         <Container>
             <TitleDivider>

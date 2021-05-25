@@ -26,8 +26,8 @@ import {
 
 function CadastroPerguntas() {
   const dispatch = useDispatch();
-  const { niveis, loading:loadingNivel, errors:errorsNivel, status:statusNivel, response:responseNivel } = useSelector(({ NivelReducer }) => NivelReducer);
-  const { perguntas, loading, errors, status, response, quant_perguntas } = useSelector(({ PerguntaReducer }) => PerguntaReducer);
+  const { niveis, loading:loadingNivel } = useSelector(({ NivelReducer }) => NivelReducer);
+  const { perguntas, loading, quant_perguntas } = useSelector(({ PerguntaReducer }) => PerguntaReducer);
   const { categorias } = useSelector(({ CategoriaReducer }) => CategoriaReducer);
 
   // console.log('List perguntas: ',perguntas);
@@ -41,7 +41,7 @@ function CadastroPerguntas() {
       dispatch(LoadQuantPerguntas());
       dispatch(loadPerguntas());
       dispatch(loadNiveis());
-  },[]);
+  });
 
   function registrarPergunta(pergunta) {
     console.log('registrando pergunta');

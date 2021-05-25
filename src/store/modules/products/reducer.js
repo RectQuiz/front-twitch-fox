@@ -3,6 +3,7 @@ import * as actions from './actionTypes';
 const initial_state = {
     response: {},
     products: null,
+    product: null,
     loading: false,
     errors: '',
     status:0,
@@ -18,6 +19,11 @@ export const ProductsReducer = (state = initial_state, action) => {
         products: action.products.data,
         totalPages: action.products.totalPages,
         currentPage: action.products.currentPage,
+      };
+    case actions.SET_PRODUCT:
+      return {
+        ...state,
+        product: action.product
       };
     case actions.SET_LOADING_PRODUCTS:
       return {

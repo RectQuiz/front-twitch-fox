@@ -15,7 +15,7 @@ import {
 
 function CadastroCategorias() {
   const dispatch = useDispatch();
-  const { categorias , loading, errors, status, response } = useSelector(({ CategoriaReducer }) => CategoriaReducer);
+  const { categorias , loading } = useSelector(({ CategoriaReducer }) => CategoriaReducer);
 
   // console.log('List categorias: ',categorias);
   // console.log('loading categorias: ',loading);
@@ -25,7 +25,7 @@ function CadastroCategorias() {
 
   useEffect(()=>{
       dispatch(loadCategorias());
-  },[]);
+  });
 
   function registrarCategoria(categoria) {
     console.log('deletando categorias');

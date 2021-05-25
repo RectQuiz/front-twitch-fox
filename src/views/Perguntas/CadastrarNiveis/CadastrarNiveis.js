@@ -15,7 +15,7 @@ import {
 
 function CadastrarNiveis() {
   const dispatch = useDispatch();
-  const { niveis, loading, errors, status, response } = useSelector(({ NivelReducer }) => NivelReducer);
+  const { niveis, loading } = useSelector(({ NivelReducer }) => NivelReducer);
 
   // console.log('List niveis: ',niveis);
   // console.log('loading niveis: ',loading);
@@ -25,7 +25,7 @@ function CadastrarNiveis() {
 
   useEffect(()=>{
       dispatch(loadNiveis());
-  },[]);
+  });
 
   function registrarNivel(nivel) {
     console.log('deletando nivel');

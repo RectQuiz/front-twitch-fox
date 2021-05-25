@@ -10,6 +10,11 @@ export const Container = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 500px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
   /* border-bottom: 3px solid ${colors.black}; */
   /* margin-bottom: 15px; */
 `;

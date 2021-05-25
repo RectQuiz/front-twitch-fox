@@ -30,3 +30,43 @@ export const setErrorProducts = (errors) => ({
     type: actions.SET_ERROR_PRODUCTS,
     errors:errors
 });
+
+export const cadastrarProduct = (product) => ({
+    type: actions.REGISTER_PRODUCT,
+    product:product
+});
+
+export const editProductAction = (product,id) => ({
+    type: actions.EDIT_PRODUCT,
+    params:{
+        product:product,
+        id:id
+    }
+});
+
+export const changeStatusProductAction = (product,id) => ({
+    type: actions.CHANGE_STATUS_PRODUCT,
+    params:{
+        product:product,
+        id:id
+    }
+});
+
+export const loadProduct = (id) => ({
+  type: actions.LOAD_PRODUCT,
+  id:id
+});
+
+export const setProduct = (product) => ({
+    type: actions.SET_PRODUCT,
+    product:product
+});
+
+export const cadProductsSteam = () => ({
+    type: actions.CAD_PRODUCTS_STEAM
+});
+
+export const deleteStickerProductAction = (info) => ({
+    type: actions.DELETE_STICKER_PRODUCT,
+    info:info
+});

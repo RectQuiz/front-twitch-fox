@@ -15,14 +15,14 @@ function LoginAdmin(props) {
     const dispatch = useDispatch();
     const { location, history } = props;
     let isAuth = false;
-    const { response, url_twitch, status, errors } = useSelector(({ LoginReducer }) => LoginReducer);
+    const { response, status, errors } = useSelector(({ LoginReducer }) => LoginReducer);
     // console.log('status LoginAdmin: ',status);
     useEffect(()=>{
         // console.log('responseLogin LoginAdmin: ',response);
         // console.log('url_twitch CallbackOauth: ',url_twitch);
         // console.log('status CallbackOauth: ',status);
         // console.log('staerrorstus CallbackOauth: ',errors);
-        if (status && status == 200 && response && errors.length == 0) {
+        if (status && status === 200 && response && errors.length === 0) {
             dispatch(setStatus(0));
             dispatch(setResponse({}));
             history.push('home');

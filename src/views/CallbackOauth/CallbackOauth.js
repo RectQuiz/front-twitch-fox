@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { api } from '../../services/api';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Container, Content, IconButton } from './styles';
 import { FaDiscord } from 'react-icons/fa';
 import { AiOutlineFacebook, AiFillYoutube, AiOutlineInstagram } from 'react-icons/ai';

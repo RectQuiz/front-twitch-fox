@@ -38,6 +38,7 @@ import {
     ContentDashboard
 } from './styles';
 import { Accordion } from './components';
+import { ModalError } from '../../components';
 
 function Dashboard(props) {
     const dispatch = useDispatch();
@@ -73,8 +74,9 @@ function Dashboard(props) {
         }
     ]);
     const { user, users, loading, errors, status } = useSelector(({ UserReducer }) => UserReducer);
+    const { status_error } = useSelector(({ ErrorReducer }) => ErrorReducer);
     const { item_selected } = useSelector(({ MenuAdminReducer }) => MenuAdminReducer);
-    console.log("item_selected: ",item_selected);
+    // console.log("item_selected: ",item_selected);
 
     function selectItemMenu(item) {
         dispatch(SelectItemMenuAdmin(item));
@@ -84,6 +86,7 @@ function Dashboard(props) {
 
     return (
         <Container>
+            <ModalError show={status_error}/>
 
             {/* MENU LATERAL DO LAYOUT */}
             <MenuLateral>
@@ -127,8 +130,8 @@ function Dashboard(props) {
                 {/* LISTA DE SUBMENUS DO MENU LATERAL */}
                 <ListaMenuLateral>
                     {
-                        itensMenu.map((item)=>(
-                            <ContainerItem>
+                        itensMenu.map((item,index)=>(
+                            <ContainerItem key={index}>
                                 
                                 <Accordion
                                     title={item.name}

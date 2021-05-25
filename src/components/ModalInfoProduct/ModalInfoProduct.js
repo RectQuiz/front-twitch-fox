@@ -25,16 +25,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { 
     setStatusModal
 } from '../../store/modules/modal/actions';
-import { Button } from 'react-bootstrap';
 import { GiPopcorn } from 'react-icons/gi';
-import { FaEye, FaInfoCircle } from 'react-icons/fa';
+import { FaInfoCircle } from 'react-icons/fa';
 import { FiShoppingBag } from 'react-icons/fi';
-import { MdTitle, MdSubtitles } from 'react-icons/md';
+import { MdSubtitles } from 'react-icons/md';
 
 function ModalInfoProduct({
     show,
-    infoProduct,
-    setModal
+    infoProduct
 }) {
     // let image = `https://steamcommunity-a.akamaihd.net/economy/image/${infoProduct.image}`;
     let image = infoProduct.image;
@@ -47,7 +45,6 @@ function ModalInfoProduct({
         console.log(e.currentTarget);
         if (e.target === e.currentTarget) {
             dispatch(setStatusModal(false));
-            setModal(false);
         }
     }
 
@@ -113,14 +110,14 @@ function ModalInfoProduct({
                                 user?
                                 (
                                     
-                                    user.type_account == 'pendente'?
+                                    user.type_account === 'pendente'?
                                     (
                                         <ButtonAdd disabled active={false} >
                                             Atualize seu perfil
                                         </ButtonAdd>
                                     ):
                                     (
-                                        user.type_account == 'secondary'?
+                                        user.type_account === 'secondary'?
                                         (
                                             <ButtonAdd disabled active={false} >
                                                 Apenas para contas primárias

@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Content } from '../Premiacoes/styles';
+import React, { useEffect, useState } from 'react';
 
 import {
     Container,
@@ -19,7 +18,6 @@ import {
     ContainerOpcoes,
     ContentOpcao,
     ButtonOpcao,
-    ContainerOpcoesJogo,
     ContainerOpcoesPremios,
     ContainerOpcoesPremios2,
     ContentOpcoesPremio,
@@ -53,7 +51,7 @@ import MusicaTimer from '../../../../../assets/sounds/timer.mp3';
 // import MusicaC4 from '../../../../../assets/sounds/c4.mp3';
 import { useDispatch } from 'react-redux';
 import { atualizarPartida } from '../../../../../store/modules/partida/actions';
-import { atualizarPergunta, loadPerguntas } from '../../../../../store/modules/pergunta/actions';
+import { loadPerguntas } from '../../../../../store/modules/pergunta/actions';
 import MusicaGranada from '../../../../../assets/sounds/granada.mp3';
 import MusicaMolotov from '../../../../../assets/sounds/molotov.mp3';
 import MusicaSmoke from '../../../../../assets/sounds/smoke.mp3';
@@ -72,7 +70,7 @@ function Perguntas({
   setAjuda
 }) {
   const dispatch = useDispatch();
-  const timerRef = useRef();
+  // const timerRef = useRef();
   const [ timer, setTimer ] = useState('00:00');
   const [ alternativaSelecionada, setAlternativaSelecionada ] = useState({});
   const [ pergunta, setPergunta ] = useState(null);
@@ -81,21 +79,21 @@ function Perguntas({
   const [ ref, setRef ] = useState();
   const [ alternativasTiradas, setAlternativasTiradas ] = useState([]);
   const [ imagesOptionsAcertar, setImagesOptionsAcertar ] = useState(Vazio);
-  const [ musica, setMusica ] = useState(new Audio(MusicaInicio));
-  const [ musicaErrar, setMusicaErrar ] = useState(new Audio(MusicaErrar));
-  const [ musicaAcertar, setMusicaAcertar ] = useState(new Audio(MusicaAcertar));
-  const [ musicaTimer, setMusicaTimer ] = useState(new Audio(MusicaTimer));
-  const [ musicaParar, setMusicaParar ] = useState(new Audio(MusicaParar));
+  const [ musica ] = useState(new Audio(MusicaInicio));
+  const [ musicaErrar ] = useState(new Audio(MusicaErrar));
+  const [ musicaAcertar ] = useState(new Audio(MusicaAcertar));
+  const [ musicaTimer ] = useState(new Audio(MusicaTimer));
+  const [ musicaParar ] = useState(new Audio(MusicaParar));
   const [ showPergunta, setShowPergunta ] = useState(0); 
   const [ statusResultado, setStatusResultado ] = useState(false);
   const [ statusResposta, setStatusResposta ] = useState(false);
   const [ showResposta, setShowResposta ] = useState(false);
   const [ showParar, setShowParar ] = useState(false);
   
-  const [ musicaGranada, setMusicaGranada ] = useState(new Audio(MusicaGranada));
-  const [ musicaMolotov, setMusicaMolotov ] = useState(new Audio(MusicaMolotov));
-  const [ musicaSmoke, setMusicaSmoke ] = useState(new Audio(MusicaSmoke));
-  const [ musicaFlash, setMusicaFlash ] = useState(new Audio(MusicaFlash));
+  const [ musicaGranada ] = useState(new Audio(MusicaGranada));
+  const [ musicaMolotov ] = useState(new Audio(MusicaMolotov));
+  const [ musicaSmoke ] = useState(new Audio(MusicaSmoke));
+  const [ musicaFlash ] = useState(new Audio(MusicaFlash));
   // const [ musicaC4, setMusicaC4 ] = useState(new Audio(MusicaC4));
 
 

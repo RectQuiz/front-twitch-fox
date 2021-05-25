@@ -24,6 +24,7 @@ export const ContentCardInfo = styled.div`
     /* width:100%; */
     max-height:100%;
     min-height:70vh;
+    max-width: 30vw;
     height:auto;
     /* max-width:25vw; */
     /* min-width:25vw; */

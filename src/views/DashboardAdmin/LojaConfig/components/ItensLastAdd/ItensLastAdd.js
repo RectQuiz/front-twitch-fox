@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { CardProduct, ModalInfoProduct } from '../../../../../components';
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 import ReactPaginate from 'react-paginate';
-import { GiPopcorn } from 'react-icons/gi';
+import { API_URL } from '../../../../../services/config';
 import {
     Container,
     Content,
     ContainerProducts
   } from './styles';
   import './pagination.css';
+import { useHistory } from 'react-router';
+import colors from '../../../../../styles/colors';
+import { useDispatch } from 'react-redux';
+import { changeStatusProductAction } from '../../../../../store/modules/products/actions';
 
 function ItensLastAdd({products, totalPages, flex, setModal, modal, load_products, loading}) {
+    const dispatch = useDispatch();
     const [ productSelect, setProductSelect ] = useState(null);
+    const history = useHistory();
     const pageClick = (e)=>{
         console.log(e);
         let  pageSelected = e.selected + 1;
@@ -27,22 +34,38 @@ function ItensLastAdd({products, totalPages, flex, setModal, modal, load_product
         setProductSelect(null);
         setModal(false);
     }
+
+    const editProduct = (product)=>{
+        history.push(`/dashboard/product/edit/${product._id}`);
+    }
+
+    const changeStatusProduct = (status,id)=>{
+        dispatch(changeStatusProductAction({status:status},id));
+    }
+
   return (
     products.length > 0?
         (
             <Container flex={flex}>
                 <Content>
                     {
-                        !loading&&
+                        !loading?
                         (
                             <ContainerProducts>
                                 {
                                 products.map((product,index)=>{
                                         return (
                                             <CardProduct
+                                                tradable={product.tradable?product.tradable:false}
+                                                id={product._id}
+                                                changeStatusProduct={changeStatusProduct}
+                                                status={product.status}
+                                                editProduct={()=>editProduct(product)}
+                                                floatvalue={product.floatvalue}
+                                                dash={true}
                                                 handleSelect={handleSelect}
                                                 key={index}
-                                                image={product.imageurl}
+                                                image={product.imageurl?product.imageurl:`${API_URL}/${product.imagepath}`}
                                                 title={product.name}
                                                 type={product.type}
                                                 amount={product.amount}
@@ -56,6 +79,16 @@ function ItensLastAdd({products, totalPages, flex, setModal, modal, load_product
                                     })
                                 }
                             </ContainerProducts>
+                        ):
+                        (
+                            <ScaleLoader
+                                // css={override}
+                                color={colors.primary_geral}
+                                height={60}
+                                width={7}
+                                margin={7}
+                                loading={true}
+                            />
                         )
                     }
                 </Content>
@@ -75,7 +108,7 @@ function ItensLastAdd({products, totalPages, flex, setModal, modal, load_product
                 {
                     productSelect &&
                     (
-                        <ModalInfoProduct setModal={setModal} infoProduct={productSelect} show={modal} handleClose={handleClose}/>
+                        <ModalInfoProduct infoProduct={productSelect} show={modal} handleClose={handleClose}/>
                     )
                 }
             </Container>

@@ -79,6 +79,7 @@ function FormCadastro({registrarPremiacao,niveis}) {
                       CADASTRO DE PREMIAÇÃO
                   </TitleForm>
               </HeaderForm>
+              
               <ContentForm>
 
                 <ContainerInput>

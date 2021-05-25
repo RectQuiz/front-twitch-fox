@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
     Container,
     Content,
@@ -8,19 +8,16 @@ import {
     PointsValue
   } from './styles';
 import ReactPaginate from 'react-paginate';
-import { useSelector, useDispatch } from 'react-redux';
-import { 
-    setStatusModal
-} from '../../../../store/modules/modal/actions';
 
 import './pagination.css';
 import { GiPopcorn } from 'react-icons/gi';
 import { ModalInfoProduct, CardProduct } from '../../../../components';
+import { API_URL } from '../../../../services/config';
 
 export default function Products({
     products,
     totalPages,
-    currentPage,
+    // currentPage,
     load_products,
     modal,
     setModal,
@@ -73,9 +70,11 @@ export default function Products({
                                 products.map((product,index)=>{
                                         return (
                                             <CardProduct
+                                                id={product._id}
+                                                floatvalue={product.floatvalue}
                                                 handleSelect={handleSelect}
                                                 key={index}
-                                                image={product.imageurl}
+                                                image={product.imageurl?product.imageurl:`${API_URL}/${product.imagepath}`}
                                                 title={product.name}
                                                 type={product.type}
                                                 amount={product.amount}

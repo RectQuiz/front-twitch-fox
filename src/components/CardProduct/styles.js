@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../styles/colors';
 
 const sizeCardH = 400;
 const sizeCardW = 287.5;
@@ -19,11 +20,13 @@ export const ContainerCard = styled.div`
         }
 `;
 
-export const Card = styled.button`
+export const Card = styled.div`
     width:100%;
     height:100%;
     border-width:1px;
-    /* border:1px solid #DC143C; */
+    ${({tradable})=>!tradable&&`
+        border:3px solid ${colors.red_dark};
+    `}
     border-radius:12px;
     background-color:${({promo})=>promo?'rgba(145,118,0,0.4)':'#24252f'};
     box-shadow:5px 10px 29px 0 rgba(42,45,54,.2);
@@ -32,6 +35,9 @@ export const Card = styled.button`
     align-items:center;
     justify-content:flex-start;
     padding:10px;
+    cursor: auto !important;
+    ${(props)=>!props.dash?`
+    cursor: pointer !important;
     :hover{
         background-color:${({promo})=>promo?'rgba(171,154,77,0.4)':'rgba(55,56,71)'};
         .imageProduct{
@@ -41,12 +47,13 @@ export const Card = styled.button`
     }
     :active {
         transform: translateY(4px);
-    }
+    }`:''}
     :focus {
         border: none;
         outline:none;
         outline-style: none;
     }
+    
 `;
 
 export const ImageProduct = styled.img`
@@ -71,6 +78,7 @@ export const ContentImage = styled.div`
     min-height:${(sizeCardH/2)-10}px;
     max-height:${(sizeCardH/2)-10}px;
     display:flex;
+    position:relative;
     flex-direction:column;
     align-items:center;
     justify-content:center;
@@ -136,7 +144,7 @@ export const PriceOld = styled.h5`
 
 export const Desconto = styled.h5`
     font-size:19px;
-    color:red;
+    color:${colors.red_dark};
     text-align:left;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -145,6 +153,47 @@ export const Desconto = styled.h5`
     /* background-color:#fff; */
 `;
 
+export const ContainerStatus = styled.div`
+    /* width:20%; */
+    /* padding:5px; */
+    background-color:${colors.white};
+    padding: 3px;
+    border-radius:7px;
+    /* margin-top:5px;
+    margin-bottom:10px; */
+    position: absolute;
+    top:10px;
+    left:10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    @media (max-width: 500px) {
+        display:none;
+    }
+`;
+
+export const Status = styled.div`
+    background-color: ${({status})=>{
+        switch (status) {
+            case 'cadastrado':
+                return colors.status_product_1
+                break;
+            case 'emEstoque':
+                return colors.status_product_2
+                break;
+            case 'esgotado':
+                return colors.status_product_3
+                break;
+        
+            default:
+                return colors.white
+                break;
+        }
+    }};
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+`;
 
 export const Price = styled.h5`
     font-size:19px;
@@ -198,3 +247,112 @@ export const ContentPrice = styled.div`
 //     justify-content:center;
 //     flex:5;
 // `;
+
+export const ActionCard = styled.div`
+    /* width:20%; */
+    padding:5px;
+    background-color:yellow;
+    border-radius:7px;
+    /* margin-top:5px;
+    margin-bottom:10px; */
+    position: absolute;
+    top:10px;
+    right:10px;
+    @media (max-width: 500px) {
+        display:none;
+    }
+`;
+
+export const ButtonAction = styled.div`
+    color:#000;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+`;
+
+export const ContainerFloat = styled.div`
+    /* width:20%; */
+    /* padding:5px; */
+    /* background-color:yellow; */
+    border-radius:7px;
+    /* margin-top:5px;
+    margin-bottom:10px; */
+    position: absolute;
+    bottom:10px;
+    left:10px;
+    @media (max-width: 500px) {
+        display:none;
+    }
+`;
+
+export const ContentFloat = styled.div`
+    color:${colors.white};
+    font-size:10px;
+    font-weight:bold;
+    text-transform:uppercase;
+`;
+
+export const ContentconfigButtons = styled.div`
+    display: flex;
+    flex-direction: row;
+    /* background-color: white; */
+    width: 100%;
+    justify-content: space-around;
+    padding: 5px;
+    border: 2px solid ${colors.primary_dashboard};
+    border-radius: 7px;
+`;
+
+export const EditButton = styled.button`
+    /* background-color: ${colors.white};
+    padding: 5px;
+    border-radius: 50%; */
+    :hover{
+        transform:scale(1.02);
+        filter: brightness(120%);
+    }
+    :active {
+        transform: translateY(4px);
+    }
+    :focus {
+        border: none;
+        outline:none;
+        outline-style: none;
+    }
+`;
+
+export const DeleteButton = styled.button`
+    /* background-color: ${colors.white};
+    padding: 5px;
+    border-radius: 50%; */
+    :hover{
+        transform:scale(1.02);
+        filter: brightness(120%);
+    }
+    :active {
+        transform: translateY(4px);
+    }
+    :focus {
+        border: none;
+        outline:none;
+        outline-style: none;
+    }
+`;
+
+export const ActiveButton = styled.button`
+    /* background-color: ${colors.white};
+    padding: 5px;
+    border-radius: 50%; */
+    :hover{
+        transform:scale(1.02);
+        filter: brightness(120%);
+    }
+    :active {
+        transform: translateY(4px);
+    }
+    :focus {
+        border: none;
+        outline:none;
+        outline-style: none;
+    }
+`;

@@ -1,5 +1,4 @@
 import React from 'react';
-import ModalCreateProduct from '../../../../../components/ModalCreateProduct';
 
 import {
     Container,

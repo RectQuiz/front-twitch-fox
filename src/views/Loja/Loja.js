@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Footer from '../../components/Footer';
 import Products from './components/Products';
 import { api } from '../../services/api';
@@ -36,7 +36,7 @@ function Loja() {
   },[]);
   
   const load_products = async(page)=>{
-    dispatch(loadProducts({page:page}));
+    dispatch(loadProducts({page:page, status:"emEstoque"}));
   };
 
   return(

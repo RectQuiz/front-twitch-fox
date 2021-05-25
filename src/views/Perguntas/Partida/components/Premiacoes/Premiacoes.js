@@ -26,8 +26,7 @@ import image_molotov from '../../../../../assets/images/molotov.png';
 import image_smoke from '../../../../../assets/images/smoke.png';
 import image_defuse from '../../../../../assets/images/defuse.png';
 import image_facao from '../../../../../assets/images/facao.png';
-import Partida from '../../Partida';
-import { GiPopcorn, GiKing } from 'react-icons/gi';
+import { GiPopcorn } from 'react-icons/gi';
 
 function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
   const [ stateArrow, setStateArrow ] = useState(true);
@@ -61,7 +60,7 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
     let number = partida.ajudas[0].number;
     let number_2 = partida.ajudas[1].number;
     let image;
-    if (ajuda == 1) {
+    if (ajuda === 1) {
       switch (number) {
         case 1:
           image = image_granada;
@@ -80,7 +79,7 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
           break;
       }
     }
-    if (ajuda == 2) {
+    if (ajuda === 2) {
       switch (number_2) {
         case 1:
           image = image_granada;
@@ -104,13 +103,13 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
 
   function logicaCor2(indice) {
     return (
-        partida.quant_acertos+1 == indice?'#0B0530':
-        indice == 5 && partida.quant_acertos >= 5?'#fff':
-        indice == 10 && partida.quant_acertos >= 10?'#fff':
-        indice == 15 && partida.quant_acertos == 15?'#fff':
-          indice == 5?'#FFD700':
-          indice == 10?'#FFD700':
-          indice == 15?'#C5142F':
+        partida.quant_acertos+1 === indice?'#0B0530':
+        indice === 5 && partida.quant_acertos >= 5?'#fff':
+        indice === 10 && partida.quant_acertos >= 10?'#fff':
+        indice === 15 && partida.quant_acertos === 15?'#fff':
+          indice === 5?'#FFD700':
+          indice === 10?'#FFD700':
+          indice === 15?'#C5142F':
           '#fff'
 
     );
@@ -118,14 +117,14 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
 
   function logicaCor(indice) {
     return (
-      partida.nivel.number >= 2  && indice == 5 && partida.quant_acertos >= 5?
+      partida.nivel.number >= 2  && indice === 5 && partida.quant_acertos >= 5?
       '	#FF8C00':
-      partida.nivel.number >= 3 && indice == 10 && partida.quant_acertos >= 10?
+      partida.nivel.number >= 3 && indice === 10 && partida.quant_acertos >= 10?
       '	#FF8C00':
-      partida.nivel.number >= 3 && indice == 15 && partida.quant_acertos >= 15?
+      partida.nivel.number >= 3 && indice === 15 && partida.quant_acertos >= 15?
       '	#FF8C00':
       (
-        partida.quant_acertos+1 == indice?'#FFD700':
+        partida.quant_acertos+1 === indice?'#FFD700':
         partida.quant_acertos >= indice?'#2E8B57':'#0B0530'
       )
     );

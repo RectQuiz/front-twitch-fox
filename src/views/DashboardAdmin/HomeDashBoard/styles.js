@@ -25,6 +25,11 @@ export const BackgroundColor = styled.div`
     padding-bottom:30px;
     padding-left:360px;
     padding-right:30px;
+    @media (max-width: 500px) {
+        padding-left:0px !important;
+        max-width: 100vw;
+        padding: 0px;
+    }
     /* opacity:0.3; */
 `;
 
@@ -38,6 +43,10 @@ export const ContentBodyDash = styled.div`
     flex-direction:column;
     justify-content:flex-start;
     align-items:center;
+    @media (max-width: 500px) {
+        max-width: 100vw;
+        padding: 0px;
+    }
     /* color:#000;
     font-size:30px; */
 `;

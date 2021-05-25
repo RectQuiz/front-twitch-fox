@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
     Container,
     Content,
@@ -7,12 +7,12 @@ import {
     SubTitleSlide,
     DetailHome
   } from './styles';
-  import Slider from "react-slick";
-  import logo from '../../../../assets/images/logo.png';
+//   import Slider from "react-slick";
+//   import logo from '../../../../assets/images/logo.png';
   import "react-responsive-carousel/lib/styles/carousel.min.css";
   import { Carousel } from 'react-responsive-carousel';
 
-export default function CarouselComp({}){
+export default function CarouselComp(){
     return (
         <Container>
             <Content>

@@ -1,27 +1,32 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { Footer, HeaderDashBoard } from '../../../components';
 import { SelectItemMenuAdmin } from '../../../store/modules/menuAdmin/actions';
-import { cadastrarProduct, loadProducts, setResponseProducts, setStatusProducts } from '../../../store/modules/products/actions';
+import { deleteStickerProductAction, editProductAction, loadProduct, loadProducts, setResponseProducts, setStatusProducts } from '../../../store/modules/products/actions';
 import { loadInfoUser } from '../../../store/modules/user/actions';
-import { FormCadProduct } from './components';
+import { FormEditProduct } from './components';
 
 import {
     Content,
-    BackgroundColor,
+    BackgroundColor, 
     ContentBodyDash
 } from './styles';
 
-function CreateProduct({history}) {
+function EditProduct({history}) {
     const dispatch = useDispatch();
+    const { id_product } = useParams();
     const { user, users, loading:loadingUser } = useSelector(({ UserReducer }) => UserReducer);
-    const { products, totalPages, currentPage, loading:loadingProduct, status, errors } = useSelector(({ ProductsReducer }) => ProductsReducer);
-    console.log("user: ",user);
+    const { product, products, totalPages, currentPage, loading:loadingProduct, status, errors } = useSelector(({ ProductsReducer }) => ProductsReducer);
+    // console.log("status: ",status);
+    // console.log("user: ",user);
+    // console.log("product: ",product);
 
     useEffect(()=>{
         console.log('loadInfoUser CreateProduct');
         dispatch(loadInfoUser());
+        dispatch(loadProduct(id_product));
         dispatch(SelectItemMenuAdmin({index:2.2}));
     },[]);
 
@@ -34,31 +39,51 @@ function CreateProduct({history}) {
       }
     },[status]);
 
-    function registerProduct(values) {
-        console.log("values: ",values);
+    function editProduct(values) {
+        // console.log("values: ",values);
         const data = new FormData();    
         let stickersinfo = [];
-        
+        if (values.imageurl.size && values.imageurl.size > 0 ) {
+            data.append(`imageurl`, values.imageurl);
+        }
         console.log("stickers: ",values.stickers);
         for (let i = 0; i < values.stickers.length; i++) {
-            if (values.stickers[i].file) {
+            console.log("sticker: ",values.stickers[i]);
+            if (values.stickers[i].nome.length > 0) {
                 stickersinfo.push({
                     name:values.stickers[i].nome,
                     slot:values.stickers[i].slot
                 });
+            }
+            if (values.stickers[i].file) {
                 data.append(`stickers_${values.stickers[i].slot}`, values.stickers[i].file);
             }
         }
-        
+    
         // data.append(`stickersinfo`, stickersinfo);
-        data.append(`stickersinfo`, JSON.stringify(stickersinfo));
-        data.append(`quant_stickers`, stickersinfo.length);
+        if (stickersinfo.length > 0) {
+            data.append(`stickersinfo`, JSON.stringify(stickersinfo));
+            data.append(`quant_stickers`, stickersinfo.length);
+        }
     
         Object.keys(values).forEach(key => {
-            if(key != "stickers" && key != "stickersinfo" && key != "quant_stickers") data.append(key, values[key]);
+           if(
+               key != "stickers" 
+               && key != "stickersinfo" 
+               && key != "quant_stickers"
+               && key != "imagepath"
+               && key != "imageurl"
+            ) data.append(key, values[key]);
         });
     
-        dispatch(cadastrarProduct(data));
+        dispatch(editProductAction(data,id_product));
+    }
+
+    function deleteStickerProduct(slot) {
+        dispatch(deleteStickerProductAction({
+            product_id:id_product,
+            slot:slot
+        }));
     }
 
     return (
@@ -80,10 +105,15 @@ function CreateProduct({history}) {
                         (
                             <ContentBodyDash>
                                 <HeaderDashBoard
-                                    title={"Cadastrar produto"}
-                                    subtitle={"Áre para cadastrar um novo produto."}
+                                    title={"Editar produto"}
+                                    subtitle={"Áre para editar um produto."}
                                 />
-                                <FormCadProduct registerProduct={registerProduct}/>
+                                {
+                                    product&&
+                                    (
+                                        <FormEditProduct product={product} editProduct={editProduct} deleteStickerProduct={deleteStickerProduct}/>
+                                    )
+                                }
                             </ContentBodyDash>
                         )
                     }
@@ -93,4 +123,4 @@ function CreateProduct({history}) {
     );
 }
 
-export default CreateProduct;
+export default EditProduct;

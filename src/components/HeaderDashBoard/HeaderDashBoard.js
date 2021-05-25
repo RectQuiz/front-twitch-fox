@@ -16,7 +16,8 @@ function HeaderDashBoard({title,subtitle}) {
     const history = useHistory();
     
     function backSite() {
-        history.push("/home");
+        // history.push("/home");
+        history.goBack();
     }
 
     return (

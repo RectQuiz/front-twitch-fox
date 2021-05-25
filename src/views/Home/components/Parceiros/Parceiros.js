@@ -17,7 +17,6 @@ import {
 function Parceiros() {
 
     const [ parceiros, setParceiros ] = useState([1,2,3]);
-
     return (
         <Container>
             <Content>

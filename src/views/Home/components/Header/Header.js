@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-export default function Nav({}){
+export default function Nav(){
     
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
