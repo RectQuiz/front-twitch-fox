@@ -13,22 +13,25 @@ import {
 import { useHistory } from 'react-router';
 import colors from '../../../../../styles/colors';
 import { useDispatch } from 'react-redux';
-import { changeStatusProductAction } from '../../../../../store/modules/products/actions';
+import { changeStatusProductAction, deleteProductAction } from '../../../../../store/modules/products/actions';
 
 function ItensLastAdd({products, totalPages, flex, setModal, modal, load_products, loading}) {
     const dispatch = useDispatch();
     const [ productSelect, setProductSelect ] = useState(null);
     const history = useHistory();
+
     const pageClick = (e)=>{
         console.log(e);
         let  pageSelected = e.selected + 1;
         load_products(pageSelected);
     }
+
     const handleSelect = (product)=>{
         console.log('handleSelect item');
         setProductSelect(product);
         setModal(true);
     }
+
     const handleClose = ()=>{
         console.log('handleClose item');
         setProductSelect(null);
@@ -41,6 +44,10 @@ function ItensLastAdd({products, totalPages, flex, setModal, modal, load_product
 
     const changeStatusProduct = (status,id)=>{
         dispatch(changeStatusProductAction({status:status},id));
+    }
+
+    const deleteProduct = (id)=>{
+        dispatch(deleteProductAction(id));
     }
 
   return (
@@ -56,6 +63,7 @@ function ItensLastAdd({products, totalPages, flex, setModal, modal, load_product
                                 products.map((product,index)=>{
                                         return (
                                             <CardProduct
+                                                deleteProduct={deleteProduct}
                                                 tradable={product.tradable?product.tradable:false}
                                                 id={product._id}
                                                 changeStatusProduct={changeStatusProduct}

@@ -52,7 +52,7 @@ const productSchema = yup.object().shape({
     instanceid: yup
         .string(),
     tradable: yup
-        .string()
+        .boolean()
         .required('Precisa informar se o item está vendivel na loja'),
     stickersinfo: yup
         .string(),

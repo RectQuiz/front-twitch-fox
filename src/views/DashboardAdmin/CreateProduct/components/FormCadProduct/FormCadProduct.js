@@ -12,6 +12,7 @@ import {
     TitleForm,
     ContentForm,
     ContainerInput,
+    ContainerSelectInput,
     LabelForm,
     InputForm,
     ErroForm,
@@ -25,17 +26,22 @@ import {
     InputRequirede,
 
     ContainerStickers,
+    ContentStikerInput,
+    LabelSlotSticker,
     ContentStickers,
     ContentSticker,
     ImageSticker,
     ContentStickerEmpty,
     ContainerButton,
-    ButtonForm
+    ButtonForm,
+    ContentDeleteSticker
 } from './styles';
 import colors from '../../../../../styles/colors';
+import Select from 'react-select';
 
 function FormCadProduct({registerProduct}) {
     const [ imagePreview, setImagePreview] = useState(null);
+    const [ tradableSelected, setTradableSelected ] = useState({ value: '', label: 'SELECIONE::::' });
     const [ stickers, setStickers] = useState([
         {
             nome:"",
@@ -61,7 +67,12 @@ function FormCadProduct({registerProduct}) {
             file_url:null,
             file:null
         }
-    ]);
+    ]); 
+    const typesTradable = [
+        { value:true, label: 'Comercializável' },
+        { value:false, label: 'Não comercializável' },
+      ];
+
     
     const {
       values,
@@ -152,7 +163,12 @@ function FormCadProduct({registerProduct}) {
         ]);
     }
 
-    // console.log("errors: ",errors);
+    const addTradableProduct = (selectedOption) => {
+        setFieldValue('tradable',selectedOption.value);
+        setTradableSelected(selectedOption);
+    };
+
+    console.log("tradableSelected: ",tradableSelected);
 
     return (
         <Container>
@@ -203,7 +219,10 @@ function FormCadProduct({registerProduct}) {
                     <ContainerStickers>
                             {
                                 stickers.map((sticker,index)=>(
-                                    <ContentStickers key={index}>
+                                    <ContentStikerInput>
+                                        <LabelSlotSticker>
+                                            {`STICKER SLOT ${sticker.slot}`}
+                                        </LabelSlotSticker>
                                         <ContainerInput>
                                             <InputForm
                                                     type="text"
@@ -214,41 +233,150 @@ function FormCadProduct({registerProduct}) {
                                                     onChange={(e)=>handleStickerName(e,index)}
                                             />
                                         </ContainerInput>
-                                        {
-                                            sticker.file_url?
-                                            (
-                                                <ContentSticker for={`image_sticker_${sticker.slot}`}>
-                                                    <ImageSticker  className="profile-pic" src={sticker.file_url}/>
-                                                </ContentSticker>
-                                            ):
-                                            (
-                                                <ContentStickerEmpty for={`image_sticker_${sticker.slot}`}>
-                                                    <FaPlus size={40} color={colors.white} />
-                                                </ContentStickerEmpty>
-                                            )
-                                        }
-                                        <ContentInputFile>
-                                            <InputFormFile
-                                                type="file"
-                                                name={`image_sticker_${sticker.slot}`}
-                                                id={`image_sticker_${sticker.slot}`}
-                                                onChange={(e)=>handStickerChange(e,index)}
-                                                // onBlur={handleBlur}
-                                                // touched={touched["doc"]}
-                                                style={{ display: "flex" }}
-                                                // setFieldValue={setFieldValue}
-                                                className="file-upload"
-                                                accept=".png, .gif, .jpeg, .jpg"
-                                                // {...getFieldProps("doc")}
-                                            />
-                                        </ContentInputFile>
-                                        <ErroForm>
-                                            {errors[`nome_sticker_${index}`]}
-                                        </ErroForm>
-                                    </ContentStickers>
+                                        <ContentStickers key={index}>
+                                            {
+                                                sticker.file_url?
+                                                (
+                                                    <ContentSticker for={`image_sticker_${sticker.slot}`}>
+                                                        <ImageSticker  className="profile-pic" src={sticker.file_url}/>
+                                                    </ContentSticker>
+                                                ):
+                                                (
+                                                    <ContentStickerEmpty for={`image_sticker_${sticker.slot}`}>
+                                                        <FaPlus size={40} color={colors.white} />
+                                                    </ContentStickerEmpty>
+                                                )
+                                            }
+                                            <ContentInputFile>
+                                                <InputFormFile
+                                                    type="file"
+                                                    name={`image_sticker_${sticker.slot}`}
+                                                    id={`image_sticker_${sticker.slot}`}
+                                                    onChange={(e)=>handStickerChange(e,index)}
+                                                    // onBlur={handleBlur}
+                                                    // touched={touched["doc"]}
+                                                    style={{ display: "flex" }}
+                                                    // setFieldValue={setFieldValue}
+                                                    className="file-upload"
+                                                    accept=".png, .gif, .jpeg, .jpg"
+                                                    // {...getFieldProps("doc")}
+                                                />
+                                            </ContentInputFile>
+                                            {
+                                                errors[`nome_sticker_${index}`]&&
+                                                (
+                                                    <ErroForm>
+                                                        {errors[`nome_sticker_${index}`]}
+                                                    </ErroForm>
+                                                )
+                                            }
+                                        </ContentStickers>
+                                    </ContentStikerInput>
                                 ))
                             }
                     </ContainerStickers>
+
+                    {/* name */}
+                    <ContentForm>
+                        <ContainerInput>
+                            <LabelForm>
+                                Nome do produto:
+                                <InputRequirede>*</InputRequirede>
+                            </LabelForm>
+                            <InputForm
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    className="name"
+                                    value={values.name} // We also bind our email value
+                                    {...getFieldProps("name")}
+                            />
+                            <ErroForm>
+                                {touched["name"] && errors["name"]}
+                            </ErroForm>
+                        </ContainerInput>
+                    </ContentForm>
+                    
+                    {/* name_store */}
+                    <ContentForm>
+                        <ContainerInput>
+                            <LabelForm>
+                                Nome do produto na steam:
+                                <InputRequirede>*</InputRequirede>
+                            </LabelForm>
+                            <InputForm
+                                    type="text"
+                                    name="name_store"
+                                    id="name_store"
+                                    className="name_store"
+                                    value={values.name_store} // We also bind our email value
+                                    {...getFieldProps("name_store")}
+                            />
+                            <ErroForm>
+                                {touched["name_store"] && errors["name_store"]}
+                            </ErroForm>
+                        </ContainerInput>
+                    </ContentForm>
+
+                    {/* price_real */}
+                    <ContentForm>
+                        <ContainerInput>
+                            <LabelForm>
+                                Valor em Real do produto:
+                                <InputRequirede>*</InputRequirede>
+                            </LabelForm>
+                            <InputForm
+                                    type="number"
+                                    name="price_real"
+                                    id="price_real"
+                                    className="price_real"
+                                    value={values.price_real} // We also bind our email value
+                                    {...getFieldProps("price_real")}
+                            />
+                            <ErroForm>
+                                {touched["price_real"] && errors["price_real"]}
+                            </ErroForm>
+                        </ContainerInput>
+                    </ContentForm>
+                    
+                    {/* amount */}
+                    <ContentForm>
+                        <ContainerInput>
+                            <LabelForm>
+                                Quantidade do produto em estoque:
+                                <InputRequirede>*</InputRequirede>
+                            </LabelForm>
+                            <InputForm
+                                    type="text"
+                                    name="amount"
+                                    id="amount"
+                                    className="amount"
+                                    value={values.amount} // We also bind our email value
+                                    {...getFieldProps("amount")}
+                            />
+                            <ErroForm>
+                                {touched["amount"] && errors["amount"]}
+                            </ErroForm>
+                        </ContainerInput>
+                    </ContentForm>
+
+                    {/* tradable */}
+                    <ContentForm>
+                        <ContainerSelectInput>
+                            <LabelForm>
+                               O produto está comercializável:
+                                <InputRequirede>*</InputRequirede>
+                            </LabelForm>
+                            <Select
+                                value={tradableSelected}
+                                onChange={addTradableProduct}
+                                options={typesTradable}
+                            />
+                            <ErroForm>
+                                {touched["tradable"] && errors["tradable"]}
+                            </ErroForm>
+                        </ContainerSelectInput>
+                    </ContentForm>
 
                     {/* id_owner */}
                     <ContentForm>
@@ -290,69 +418,6 @@ function FormCadProduct({registerProduct}) {
                         </ContainerInput>
                     </ContentForm>
                     
-                    {/* name */}
-                    <ContentForm>
-                        <ContainerInput>
-                            <LabelForm>
-                                Nome do produto:
-                                <InputRequirede>*</InputRequirede>
-                            </LabelForm>
-                            <InputForm
-                                    type="text"
-                                    name="name"
-                                    id="name"
-                                    className="name"
-                                    value={values.name} // We also bind our email value
-                                    {...getFieldProps("name")}
-                            />
-                            <ErroForm>
-                                {touched["name"] && errors["name"]}
-                            </ErroForm>
-                        </ContainerInput>
-                    </ContentForm>
-                    
-                    {/* price_real */}
-                    <ContentForm>
-                        <ContainerInput>
-                            <LabelForm>
-                                Valor em Real do produto:
-                                <InputRequirede>*</InputRequirede>
-                            </LabelForm>
-                            <InputForm
-                                    type="number"
-                                    name="price_real"
-                                    id="price_real"
-                                    className="price_real"
-                                    value={values.price_real} // We also bind our email value
-                                    {...getFieldProps("price_real")}
-                            />
-                            <ErroForm>
-                                {touched["price_real"] && errors["price_real"]}
-                            </ErroForm>
-                        </ContainerInput>
-                    </ContentForm>
-                    
-                    {/* name_store */}
-                    <ContentForm>
-                        <ContainerInput>
-                            <LabelForm>
-                                Nome do produto na steam:
-                                <InputRequirede>*</InputRequirede>
-                            </LabelForm>
-                            <InputForm
-                                    type="text"
-                                    name="name_store"
-                                    id="name_store"
-                                    className="name_store"
-                                    value={values.name_store} // We also bind our email value
-                                    {...getFieldProps("name_store")}
-                            />
-                            <ErroForm>
-                                {touched["name_store"] && errors["name_store"]}
-                            </ErroForm>
-                        </ContainerInput>
-                    </ContentForm>
-
                     {/* describe */}
                     <ContentForm>
                         <ContainerInput>
@@ -413,27 +478,6 @@ function FormCadProduct({registerProduct}) {
                         </ContainerInput>
                     </ContentForm>
 
-                    {/* amount */}
-                    <ContentForm>
-                        <ContainerInput>
-                            <LabelForm>
-                                Quantidade do produto em estoque:
-                                <InputRequirede>*</InputRequirede>
-                            </LabelForm>
-                            <InputForm
-                                    type="text"
-                                    name="amount"
-                                    id="amount"
-                                    className="amount"
-                                    value={values.amount} // We also bind our email value
-                                    {...getFieldProps("amount")}
-                            />
-                            <ErroForm>
-                                {touched["amount"] && errors["amount"]}
-                            </ErroForm>
-                        </ContainerInput>
-                    </ContentForm>
-
                     {/* type */}
                     <ContentForm>
                         <ContainerInput>
@@ -490,27 +534,6 @@ function FormCadProduct({registerProduct}) {
                             />
                             <ErroForm>
                                 {touched["instanceid"] && errors["instanceid"]}
-                            </ErroForm>
-                        </ContainerInput>
-                    </ContentForm>
-
-                    {/* tradable */}
-                    <ContentForm>
-                        <ContainerInput>
-                            <LabelForm>
-                               O produto está comercializável:
-                                <InputRequirede>*</InputRequirede>
-                            </LabelForm>
-                            <InputForm
-                                    type="text"
-                                    name="tradable"
-                                    id="tradable"
-                                    className="tradable"
-                                    value={values.tradable} // We also bind our email value
-                                    {...getFieldProps("tradable")}
-                            />
-                            <ErroForm>
-                                {touched["tradable"] && errors["tradable"]}
                             </ErroForm>
                         </ContainerInput>
                     </ContentForm>

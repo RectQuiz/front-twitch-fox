@@ -81,12 +81,19 @@ export const ContainerInput = styled.div`
     flex-direction:column;
     justify-content:space-between;
     align-items:flex-start;
+    padding: 5px;
     padding-bottom:10px;
     .image_premio{
         width:100%;
         text-align:center;
         /* background-color:#fff; */
     }
+`;
+
+export const ContainerSelectInput= styled.div`
+    /* background-color:#44f; */
+    width:100%;
+    padding-bottom:10px;
 `;
 
 export const LabelForm = styled.label`
@@ -198,10 +205,12 @@ export const ImagePremioCad = styled.img`
 
 export const ContentInputFile = styled.div`
     /* background-color:red; */
+    margin: 0;
 `;
 
 export const InputFormFile = styled.input`
     display: none !important;
+    margin: 0;
 `;
 
 export const InputRequirede = styled.div`
@@ -216,7 +225,7 @@ export const ContainerStickers = styled.div`
     /* background-color: ${colors.primary_dashboard}; */
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin-bottom: 20px;
     padding: 15px;
@@ -224,53 +233,97 @@ export const ContainerStickers = styled.div`
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+        flex-wrap:wrap;
+    }
+    
+`;
+
+export const ContentStikerInput = styled.div`
+    /* background-color: blue; */
+    border: 2px solid ${colors.primary_dashboard};
+    border-radius: 0.5vw;
+    width: 180px;
+    height: 200px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    overflow: hidden;
+    position:relative;
+    padding: 5px;
+    margin: 5px;
+    @media (max-width: 1400px) {
+        width:100%;
+    }
+    @media (max-width: 500px) {
+        width:100%;
     }
 `;
 
+export const LabelSlotSticker = styled.div`
+    color: ${colors.white};
+    font-weight: bold;
+`;
+
+export const ContentDeleteSticker = styled.button`
+    width: 100%;
+    background-color: ${colors.red_dark};
+    border-bottom-right-radius: 0.5vw;
+    border-bottom-left-radius: 0.5vw;
+    color:${colors.white};
+    font-weight: bold;
+`;
+
 export const ContentStickers = styled.div`
-    width:100%;
-    height:100%;
-    min-height:50%;
-    max-height:50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5vw;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    /* max-width:10vw; */
+    /* height:15vw; */
+    /* min-height:50%;
+    max-height:50%; */
     background-color:rgba(0,0,0,0.4);
     /* background-color: red; */
-    /* padding:15px; */
+    padding:3px;
     /* border-radius:7px 7px 0px 0px; */
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     overflow: hidden;
-    border-bottom: 2px solid #fff;
+    /* border-bottom: 2px solid #fff; */
     position:relative;
-    margin: 5px;
+    /* margin: 5px; */
+    @media (max-width: 1400px) {
+        width:100%;
+    }
+    @media (max-width: 500px) {
+        width:100%;
+    }
     /* margin-bottom:5px; */
 `;
 
 export const ContentSticker = styled.label`
     position: relative;
     height: 100%;
-    width: 8vw;
-    min-width:200px;
-    min-height:200px;
-    /* margin: 50px auto; */
-    /* border-radius: 50%; */
+    width: 100%;
     overflow: hidden;
-    /* background-color:#1c1c; */
-    /* box-shadow: 1px 1px 15px -5px black; */
     transition: all .3s ease;
-    /* background-color:#1c1c1c; */
+    border-radius: 0.5vw;
+    /* background-color:#fff; */
     border: none;
     outline: none;
-    padding:0.7vw;
+    /* padding: 3px; */
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    margin: 0px;
     &:hover{
         transform: scale(1.05);
     }
-    margin: 0;
 `;
 
 export const ImageSticker = styled.img`
@@ -279,7 +332,7 @@ export const ImageSticker = styled.img`
     height: 100%;
     width: 100%;
     border: none !important;
-    background: transparent !important;
+    /* background: transparent !important; */
     border: 1px solid ${colors.white};
     /* border-radius: 30%; */
     /* background-color:#fff; */
@@ -289,23 +342,25 @@ export const ImageSticker = styled.img`
         outline: none;
     }
     transition: all .3s ease;
+    margin: 0;
 `;
 
 export const ContentStickerEmpty = styled.label`
+    border-radius: 0.5vw;
     position: relative;
     height: 100%;
-    width: 28vw;
-    min-width:200px;
-    min-height:200px;
+    width: 100%;
     overflow: hidden;
     transition: all .3s ease;
+    /* background-color:#fff; */
     border: none;
     outline: none;
-    padding:0.7vw;
+    /* padding:0.7vw; */
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin: 0px;
     &:hover{
         transform: scale(1.1);
     }

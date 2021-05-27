@@ -90,6 +90,12 @@ export const ContainerInput = styled.div`
     }
 `;
 
+export const ContainerSelectInput= styled.div`
+    /* background-color:#44f; */
+    width:100%;
+    padding-bottom:10px;
+`;
+
 export const LabelForm = styled.label`
     color:#141414;
     font-weight: bold;

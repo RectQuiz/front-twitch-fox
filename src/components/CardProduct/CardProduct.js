@@ -147,12 +147,15 @@ const CardProduct = (props) => {
                                 <EditButton onClick={editProduct}>
                                     <FaRegEdit size={20} color={colors.yellow} />
                                 </EditButton>
-                                <DeleteButton onClick={deleteProduct}>
+                                <DeleteButton onClick={()=>deleteProduct(id)}>
                                     <FaTrash size={20} color={colors.red_dark} />
                                 </DeleteButton>
                                 {
                                     (
-                                        <ActiveButton onClick={()=>changeStatusProduct(status == "emEstoque"?"esgotado":(status == "cadastrado"?"emEstoque":(status == "esgotado"?"emEstoque":"cadastrado")),id)}>
+                                        <ActiveButton
+                                            active={tradable?true:(status != "esgotado" && status != "cadastrado") }
+                                            disabled={!tradable?(status == "esgotado" || status == "cadastrado"):false}
+                                            onClick={()=>changeStatusProduct(status == "emEstoque"?"esgotado":(status == "cadastrado"?"emEstoque":(status == "esgotado"?"emEstoque":"cadastrado")),id)}>
                                             <FaExchangeAlt size={20} color={status == "emEstoque"?colors.red_dark:colors.green} />
                                         </ActiveButton>
                                     )

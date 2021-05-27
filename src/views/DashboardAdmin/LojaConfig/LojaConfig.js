@@ -110,6 +110,7 @@ function LojaConfig() {
                                                 onClick={createProductSteam}
                                                 color1={colors.steam_primary}
                                                 color2={colors.black}
+                                                loading={loadingProduct}
                                             />
                                         }
                                         {

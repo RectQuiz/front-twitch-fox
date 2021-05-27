@@ -258,6 +258,7 @@ export const ActionCard = styled.div`
     position: absolute;
     top:10px;
     right:10px;
+    cursor: pointer;
     @media (max-width: 500px) {
         display:none;
     }
@@ -343,16 +344,23 @@ export const ActiveButton = styled.button`
     /* background-color: ${colors.white};
     padding: 5px;
     border-radius: 50%; */
-    :hover{
-        transform:scale(1.02);
-        filter: brightness(120%);
-    }
-    :active {
-        transform: translateY(4px);
-    }
-    :focus {
-        border: none;
-        outline:none;
-        outline-style: none;
-    }
+    ${({active})=>{
+        return active?`
+            :hover{
+                transform:scale(1.02);
+                filter: brightness(120%);
+            }
+            :active {
+                transform: translateY(4px);
+            }
+            :focus {
+                border: none;
+                outline:none;
+                outline-style: none;
+            }
+        `:`
+            opacity:0.2;
+            cursor:auto;
+        `
+    }}
 `;

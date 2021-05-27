@@ -12,6 +12,7 @@ import {
     TitleForm,
     ContentForm,
     ContainerInput,
+    ContainerSelectInput,
     LabelForm,
     InputForm,
     ErroForm,
@@ -37,9 +38,11 @@ import {
 } from './styles';
 import colors from '../../../../../styles/colors';
 import { API_URL } from '../../../../../services/config';
+import Select from 'react-select';
 
 function FormEditProduct({editProduct,product, deleteStickerProduct}) {
     const [ imagePreview, setImagePreview] = useState(null);
+    const [ tradableSelected, setTradableSelected ] = useState({ value: '', label: 'SELECIONE::::' });
     const [ stickers, setStickers] = useState([
         {
             nome:"",
@@ -66,6 +69,10 @@ function FormEditProduct({editProduct,product, deleteStickerProduct}) {
             file:null
         }
     ]);
+    const typesTradable = [
+        { value:true, label: 'Comercializável' },
+        { value:false, label: 'Não comercializável' },
+    ];
     
     const {
       values,
@@ -101,6 +108,8 @@ function FormEditProduct({editProduct,product, deleteStickerProduct}) {
                 ...stickers
             ]);
         }
+        setTradableSelected(product.tradable?typesTradable[0]:typesTradable[1]);
+        setFieldValue("tradable",product.tradable?typesTradable[0].value:typesTradable[1].value);
         // var file = new Blob([data], {type: type});
     },[product]);
     
@@ -176,6 +185,11 @@ function FormEditProduct({editProduct,product, deleteStickerProduct}) {
             ...stickers_temp
         ]);
     }
+
+    const addTradableProduct = (selectedOption) => {
+        setFieldValue('tradable',selectedOption.value);
+        setTradableSelected(selectedOption);
+    };
 
     // console.log("errors: ",errors);
     // console.log("values: ",values);
@@ -290,6 +304,108 @@ function FormEditProduct({editProduct,product, deleteStickerProduct}) {
                             }
                     </ContainerStickers>
 
+                    {/* name */}
+                    <ContentForm>
+                        <ContainerInput>
+                            <LabelForm>
+                                Nome do produto:
+                                <InputRequirede>*</InputRequirede>
+                            </LabelForm>
+                            <InputForm
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    className="name"
+                                    value={values.name} // We also bind our email value
+                                    {...getFieldProps("name")}
+                            />
+                            <ErroForm>
+                                {touched["name"] && errors["name"]}
+                            </ErroForm>
+                        </ContainerInput>
+                    </ContentForm>
+                    
+                    {/* name_store */}
+                    <ContentForm>
+                        <ContainerInput>
+                            <LabelForm>
+                                Nome do produto na steam:
+                                <InputRequirede>*</InputRequirede>
+                            </LabelForm>
+                            <InputForm
+                                    type="text"
+                                    name="name_store"
+                                    id="name_store"
+                                    className="name_store"
+                                    value={values.name_store} // We also bind our email value
+                                    {...getFieldProps("name_store")}
+                            />
+                            <ErroForm>
+                                {touched["name_store"] && errors["name_store"]}
+                            </ErroForm>
+                        </ContainerInput>
+                    </ContentForm>
+
+                    {/* price_real */}
+                    <ContentForm>
+                        <ContainerInput>
+                            <LabelForm>
+                                Valor em Real do produto:
+                                <InputRequirede>*</InputRequirede>
+                            </LabelForm>
+                            <InputForm
+                                    type="number"
+                                    name="price_real"
+                                    id="price_real"
+                                    className="price_real"
+                                    value={values.price_real} // We also bind our email value
+                                    {...getFieldProps("price_real")}
+                            />
+                            <ErroForm>
+                                {touched["price_real"] && errors["price_real"]}
+                            </ErroForm>
+                        </ContainerInput>
+                    </ContentForm>
+                    
+                    {/* amount */}
+                    <ContentForm>
+                        <ContainerInput>
+                            <LabelForm>
+                                Quantidade do produto em estoque:
+                                <InputRequirede>*</InputRequirede>
+                            </LabelForm>
+                            <InputForm
+                                    type="text"
+                                    name="amount"
+                                    id="amount"
+                                    className="amount"
+                                    value={values.amount} // We also bind our email value
+                                    {...getFieldProps("amount")}
+                            />
+                            <ErroForm>
+                                {touched["amount"] && errors["amount"]}
+                            </ErroForm>
+                        </ContainerInput>
+                    </ContentForm>
+
+                    {/* tradable */}
+                    <ContentForm>
+                        <ContainerSelectInput>
+                            <LabelForm>
+                               O produto está comercializável:
+                                <InputRequirede>*</InputRequirede>
+                            </LabelForm>
+                            <Select
+                                value={tradableSelected}
+                                onChange={addTradableProduct}
+                                options={typesTradable}
+                            />
+                            <ErroForm>
+                                {touched["tradable"] && errors["tradable"]}
+                            </ErroForm>
+                        </ContainerSelectInput>
+                    </ContentForm>
+
                     {/* id_owner */}
                     <ContentForm>
                         <ContainerInput>
@@ -330,69 +446,6 @@ function FormEditProduct({editProduct,product, deleteStickerProduct}) {
                         </ContainerInput>
                     </ContentForm>
                     
-                    {/* name */}
-                    <ContentForm>
-                        <ContainerInput>
-                            <LabelForm>
-                                Nome do produto:
-                                <InputRequirede>*</InputRequirede>
-                            </LabelForm>
-                            <InputForm
-                                    type="text"
-                                    name="name"
-                                    id="name"
-                                    className="name"
-                                    value={values.name} // We also bind our email value
-                                    {...getFieldProps("name")}
-                            />
-                            <ErroForm>
-                                {touched["name"] && errors["name"]}
-                            </ErroForm>
-                        </ContainerInput>
-                    </ContentForm>
-                    
-                    {/* price_real */}
-                    <ContentForm>
-                        <ContainerInput>
-                            <LabelForm>
-                                Valor em Real do produto:
-                                <InputRequirede>*</InputRequirede>
-                            </LabelForm>
-                            <InputForm
-                                    type="number"
-                                    name="price_real"
-                                    id="price_real"
-                                    className="price_real"
-                                    value={values.price_real} // We also bind our email value
-                                    {...getFieldProps("price_real")}
-                            />
-                            <ErroForm>
-                                {touched["price_real"] && errors["price_real"]}
-                            </ErroForm>
-                        </ContainerInput>
-                    </ContentForm>
-                    
-                    {/* name_store */}
-                    <ContentForm>
-                        <ContainerInput>
-                            <LabelForm>
-                                Nome do produto na steam:
-                                <InputRequirede>*</InputRequirede>
-                            </LabelForm>
-                            <InputForm
-                                    type="text"
-                                    name="name_store"
-                                    id="name_store"
-                                    className="name_store"
-                                    value={values.name_store} // We also bind our email value
-                                    {...getFieldProps("name_store")}
-                            />
-                            <ErroForm>
-                                {touched["name_store"] && errors["name_store"]}
-                            </ErroForm>
-                        </ContainerInput>
-                    </ContentForm>
-
                     {/* describe */}
                     <ContentForm>
                         <ContainerInput>
@@ -453,27 +506,6 @@ function FormEditProduct({editProduct,product, deleteStickerProduct}) {
                         </ContainerInput>
                     </ContentForm>
 
-                    {/* amount */}
-                    <ContentForm>
-                        <ContainerInput>
-                            <LabelForm>
-                                Quantidade do produto em estoque:
-                                <InputRequirede>*</InputRequirede>
-                            </LabelForm>
-                            <InputForm
-                                    type="text"
-                                    name="amount"
-                                    id="amount"
-                                    className="amount"
-                                    value={values.amount} // We also bind our email value
-                                    {...getFieldProps("amount")}
-                            />
-                            <ErroForm>
-                                {touched["amount"] && errors["amount"]}
-                            </ErroForm>
-                        </ContainerInput>
-                    </ContentForm>
-
                     {/* type */}
                     <ContentForm>
                         <ContainerInput>
@@ -530,27 +562,6 @@ function FormEditProduct({editProduct,product, deleteStickerProduct}) {
                             />
                             <ErroForm>
                                 {touched["instanceid"] && errors["instanceid"]}
-                            </ErroForm>
-                        </ContainerInput>
-                    </ContentForm>
-
-                    {/* tradable */}
-                    <ContentForm>
-                        <ContainerInput>
-                            <LabelForm>
-                               O produto está comercializável:
-                                <InputRequirede>*</InputRequirede>
-                            </LabelForm>
-                            <InputForm
-                                    type="text"
-                                    name="tradable"
-                                    id="tradable"
-                                    className="tradable"
-                                    value={values.tradable} // We also bind our email value
-                                    {...getFieldProps("tradable")}
-                            />
-                            <ErroForm>
-                                {touched["tradable"] && errors["tradable"]}
                             </ErroForm>
                         </ContainerInput>
                     </ContentForm>

@@ -234,6 +234,40 @@ function* deleteStickerProductSteamWorker({info}) {
   }
 }
 
+function* deleteProductWorker({id}) {
+  yield put(actions.setLoadingProducts(true));
+  yield put(actions.setStatusProducts(0));
+  yield put(actions.setErrorProducts({}));
+  yield put(actions.setResponseProducts(''));
+  try {
+    const response = yield call(Products.deleteProductService,id);
+    // console.log('response loadInfoUserhWorker: ',response);
+    yield put(actions.setErrorProducts(''));
+    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setResponseProducts(response));
+    yield put(actions.setLoadingProducts(false));
+    // yield put(actions.setResponse(response));
+    yield put(actions.setStatusProducts(response.status));
+    yield put(actions.loadProducts({page:1,last:true}));
+  } catch (error) {
+    yield put(actions.setLoadingProducts(false));
+    if (error.response) {
+        console.log('error response register product: ',error.response);
+        yield put(actions.setErrorProducts(error.response.data.message));
+        yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
+        yield put(actions.setStatusProducts(error.response.status));
+    } else if (error.request) {
+        console.log('error request register product: ',error.request);
+        yield put(setErrorGeneral(error.message,true,error.request.status));
+        yield put(actions.setErrorProducts({ data: error.message }));
+        yield put(actions.setStatusProducts(error.request.status));
+    } else {
+        console.log('error desc  register product: ',error.message);
+        yield put(actions.setErrorProducts({ data: error.message }));
+    }
+  }
+}
+
 function* watcherAnalise() {
   yield takeLatest(actionType.LOAD_PRODUCTS, loadProductsWorker);
   yield takeLatest(actionType.REGISTER_PRODUCT, registerProductWorker);
@@ -242,6 +276,7 @@ function* watcherAnalise() {
   yield takeLatest(actionType.CAD_PRODUCTS_STEAM, cadProductsSteamWorker);
   yield takeLatest(actionType.DELETE_STICKER_PRODUCT, deleteStickerProductSteamWorker);
   yield takeLatest(actionType.CHANGE_STATUS_PRODUCT, changeStatusProductWorker);
+  yield takeLatest(actionType.DELETE_PRODUCT, deleteProductWorker);
 }
 
 export default function* saga() {

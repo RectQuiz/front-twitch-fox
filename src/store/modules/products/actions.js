@@ -70,3 +70,8 @@ export const deleteStickerProductAction = (info) => ({
     type: actions.DELETE_STICKER_PRODUCT,
     info:info
 });
+
+export const deleteProductAction = (id) => ({
+    type: actions.DELETE_PRODUCT,
+    id:id
+});

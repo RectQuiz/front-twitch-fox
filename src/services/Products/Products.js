@@ -54,3 +54,9 @@ export const deleteStickerProductService = async (info) => {
   const api_ = apiWithToken(token_);
   return await api_.delete(`${resouceUrl}/sticker`,{data:info});
 };
+
+export const deleteProductService = async (id) => {
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  return await api_.delete(`${resouceUrl}/${id}`);
+};
