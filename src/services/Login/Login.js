@@ -21,7 +21,11 @@ export const getAuthUrlTwitch = async (params) => {
 
 export const authCodeTwitch = async (params) => {
     params = params ? params : {};
-    return await api.get(`${resouceUrl}/twitch_person?code=${params.code}`);
+    return await api.get(`${resouceUrl}/twitch_person`, {
+        params: {
+          ...params
+        }
+      });
 };
 
 export const loginUserAdmin = async (params) => {

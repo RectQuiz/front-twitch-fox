@@ -11,7 +11,7 @@ function* loadInfoUserhWorker({ params }) {
     // console.log('response loadInfoUserhWorker: ',response);
     yield put(actions.setInfoUser(response.data.data));
     yield put(actions.setError(''));
-    yield put(setErrorGeneral('',false,0));
+    // yield put(setErrorGeneral('',false,0));
     yield put(actions.setLoading(false));
     // yield put(actions.setResponse(response));
     yield put(actions.setStatus(response.status));

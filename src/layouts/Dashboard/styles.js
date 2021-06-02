@@ -18,7 +18,7 @@ export const MenuLateral = styled.div`
     background-color:${colors.secondary_dashboard};
     position:fixed;
     /* height:100%; */
-    z-index:7;
+    z-index:6;
     border-radius: 1vw;
     top: 30px;
     left: 30px;

@@ -24,4 +24,7 @@ export default {
     status_product_1:"#000080",
     status_product_2:"#32CD32",
     status_product_3:"#8B0000",
+    card_color:"#050000",
+    card_color_ligth:"#333643",
+    color_twitch:"#6441a5"
 }

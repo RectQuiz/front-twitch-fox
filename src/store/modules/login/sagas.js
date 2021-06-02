@@ -50,11 +50,15 @@ function* authCodeTwitchWorker({params}) {
   } catch (error) {
     yield put(actions.setLoading(false));
     yield put(actions.setStatus(error.status));
+    console.log('error asdasd: ',error);
     if (error.response) {
+      console.log('error error.response: ',error.response);
       yield put(actions.setError(error.response.data.message));
+      // yield put(actions.setResponse(error.response.data));
       yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
       yield put(actions.setStatus(error.response.status));
     } else if (error.request) {
+      console.log('error error.request: ',error.request);
       yield put(setErrorGeneral(error.message,true,error.request.status));
       yield put(actions.setError({ data: error.message }));
       yield put(actions.setStatus(error.request.status));

@@ -10,9 +10,9 @@ export const setUrlAuthTwitch = (url) => ({
     url:url
 });
 
-export const authCodeTwitch = (code) => ({
+export const authCodeTwitch = (params) => ({
     type: actions.AUTH_CODE_TWITCH,
-    params:{code:code}
+    params:params
 });
 
 

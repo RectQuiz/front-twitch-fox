@@ -25,7 +25,7 @@ function LoginAdmin(props) {
         if (status && status === 200 && response && errors.length === 0) {
             dispatch(setStatus(0));
             dispatch(setResponse({}));
-            history.push('home');
+            history.push('dashboard');
         }
     },[status]);
     const nickname = localStorage.getItem('@siteJokerz/nickname');

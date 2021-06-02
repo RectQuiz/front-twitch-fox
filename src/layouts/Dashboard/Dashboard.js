@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SelectItemMenuAdmin } from '../../store/modules/menuAdmin/actions';
 import colors from '../../styles/colors';
 import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import {
     Container,
@@ -76,16 +77,23 @@ function Dashboard(props) {
     const { user, users, loading, errors, status } = useSelector(({ UserReducer }) => UserReducer);
     const { status_error } = useSelector(({ ErrorReducer }) => ErrorReducer);
     const { item_selected } = useSelector(({ MenuAdminReducer }) => MenuAdminReducer);
-    // console.log("item_selected: ",item_selected);
-
+    console.log("status_error: ",status_error);
+    let isAuth = user?user.streamer:true;
     function selectItemMenu(item) {
         dispatch(SelectItemMenuAdmin(item));
         console.log("item.path: ",item.path);
         history.push(item.path);
     }
 
+    function openConfigUser() {
+        history.push(`/dashboard/${user._id}/config`);
+    }
+
     return (
-        <Container>
+        !isAuth ? (
+            <Redirect to={{pathname:'/home', state:{from:props.location}}}  />
+        )
+        :<Container>
             <ModalError show={status_error}/>
 
             {/* MENU LATERAL DO LAYOUT */}
@@ -97,7 +105,7 @@ function Dashboard(props) {
                         user&&
                         (
                             <TituloMenuLateral>
-                            {user.nickname}
+                                {user.nickname}
                             </TituloMenuLateral>
                         )
                     }
@@ -108,7 +116,7 @@ function Dashboard(props) {
                     user&&
                     (
                         <ContainerInfoUser>
-                            <ContentInfoUser>
+                            <ContentInfoUser onClick={openConfigUser}>
                                 <ContentImageUser>
                                     <ImageUser src="https://as2.ftcdn.net/v2/jpg/00/65/77/27/1000_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg" />
                                 </ContentImageUser>

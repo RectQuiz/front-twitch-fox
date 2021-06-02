@@ -28,12 +28,18 @@ export default function CallbackOauth({location, history}){
 
     useEffect(()=>{
         dispatch(setLoading(true));
-        console.log('location.hash id_token: ',(document.location.hash.match(/id_token=([^&]+)/) || [])[1]);
-        console.log('location.hash access_token: ',(document.location.hash.match(/access_token=([^&]+)/) || [])[1]);
+        console.log('location.hash code: ',(location.search.match(/code=([^&]+)/) || [])[1]);
+        console.log('location.hash state: ',(location.search.match(/state=([^&]+)/) || [])[1]);
         const code = (location.search.match(/code=([^&]+)/) || [])[1];
+        const state = (location.search.match(/state=([^&]+)/) || [])[1];
         if (code) {
             // setTimeout(() => {
-                dispatch(authCodeTwitch(code));
+                if (state) {
+                    console.log('location.hash state 1: ',state);
+                    dispatch(authCodeTwitch({code:code,id_user:state}));
+                }else{
+                    dispatch(authCodeTwitch({code:code}));
+                }
             // }, 5000);
         } else {
             // setTimeout(() => {
@@ -45,20 +51,35 @@ export default function CallbackOauth({location, history}){
     useEffect(()=>{
         console.log('responseLogin CallbackOauth: ',responseLogin);
         // console.log('url_twitch CallbackOauth: ',url_twitch);
-        // console.log('status CallbackOauth: ',status);
         // console.log('staerrorstus CallbackOauth: ',errors);
         if (status && status == 200 && responseLogin && errors.length == 0) {
+            const state = (location.search.match(/state=([^&]+)/) || [])[1];
             dispatch(setStatus(0));
             dispatch(setResponse({}));
-            history.push('home');
+            console.log('location.hash state 2: ',state);
+            if (state) {
+                console.log('location.hash state 3: ',state);
+                history.push(`dashboard/${responseLogin.data.user_id}/config`);
+            }else{
+                history.push('home');
+            }
         }
     },[status]);
 
     useEffect(()=>{
+        const state = (location.search.match(/state=([^&]+)/) || [])[1];
         console.log('staerrorstus CallbackOauth: ',String(errors));
+        console.log('responseLogin CallbackOauth: ',responseLogin);
+        console.log('state CallbackOauth: ',state);
         if(String(errors).length > 0 ){
             dispatch(setError(''));
-            history.push('home');
+            // history.push('home');
+            if (state) {
+                console.log('location.hash state 4: ',state);
+                history.push(`dashboard/${state}/config`);
+            }else{
+                history.push('home');
+            }
         }
     },[errors]);
     
