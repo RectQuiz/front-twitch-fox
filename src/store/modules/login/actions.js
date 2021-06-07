@@ -40,3 +40,8 @@ export const loginAdmin = (values) => ({
     type: actions.LOGIN_ADMIN,
     values:values
 });
+
+export const getUrlAuthTwitchLinkedAccountAction = (params) => ({
+    type: actions.GET_URL_AUTH_TWITCH_LINKED_ACCOUNT,
+    params
+});

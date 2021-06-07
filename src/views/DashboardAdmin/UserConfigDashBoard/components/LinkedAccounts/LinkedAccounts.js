@@ -46,7 +46,7 @@ function LinkedAccounts({user,linkedAccount}) {
                         return (
                             <ContainerItemAccount key={index}>
                                 <ItemStatus status={account.active}>
-                                    <ContentItemAccount onClick={()=>linkedAccount(account.info_accountLink.name)}>
+                                    <ContentItemAccount disabled={account.active} onClick={()=>linkedAccount(account.info_accountLink.name)}>
                                         {iconReturn(account.icon,account.color)}
                                         <LabelItemAccount>
                                             {account.info_accountLink.name}
