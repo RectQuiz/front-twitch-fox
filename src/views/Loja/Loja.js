@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Footer from '../../components/Footer';
 import Products from './components/Products';
 import { api } from '../../services/api';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,6 +10,8 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 
 import { Content, BackgroundColor } from './styles';
 import { loadProducts } from '../../store/modules/products/actions';
+import { AlertMessageSimple, Footer } from '../../components';
+import { setAlert } from '../../store/modules/alerts/actions';
 
 function Loja() {
   const { status } = useSelector(({ ModalReducer }) => ModalReducer);

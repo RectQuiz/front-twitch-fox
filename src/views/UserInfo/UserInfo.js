@@ -80,7 +80,6 @@ function UserInfo(props) {
     return (
         <Content>
             <BackgroundColor>
-                (
                     {
                         loading?
                         (
@@ -112,7 +111,6 @@ function UserInfo(props) {
                             
                         )
                     }
-                )
             <Footer/>
             </BackgroundColor>
         </Content>

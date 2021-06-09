@@ -28,7 +28,7 @@ function ListResgatePoints() {
     useEffect(()=>{
         console.log('loadInfoUser DashboardAdmin');
         dispatch(loadInfoUser());
-        dispatch(SelectItemMenuAdmin({index:2.1}));
+        dispatch(SelectItemMenuAdmin({index:3.1}));
         load_redeem_points(1);
     },[]);
 

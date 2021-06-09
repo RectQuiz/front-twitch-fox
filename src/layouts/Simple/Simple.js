@@ -11,14 +11,18 @@ import {
 import { 
   setErrorGeneral
 } from '../../store/modules/error/actions';
-import { ModalError } from '../../components';
+import { AlertMessageSimple, ModalError } from '../../components';
 import { loadInfoUser } from '../../store/modules/user/actions';
+import { setAlert } from '../../store/modules/alerts/actions';
+import { setStatusModal } from '../../store/modules/modal/actions';
+import { useHistory } from 'react-router';
 
 const Simple = (props) => {
   const { children } = props;
   const [ open, setOpen ] = useState(false);
   const [ nickname, setNickname] = useState(null);
   const dispatch = useDispatch();
+  const history = useHistory();
   const { response, url_twitch, status, errors, loading } = useSelector(({ LoginReducer }) => LoginReducer);
   const { error_general, status_error, code_general } = useSelector(({ ErrorReducer }) => ErrorReducer);
   const { status:statusModal } = useSelector(({ ModalReducer }) => ModalReducer);
@@ -52,8 +56,30 @@ const Simple = (props) => {
   useEffect(()=>{
     // console.log('error_general general: ',error_general);
     // console.log('status_error general: ',status_error);
-    // console.log('code_general general: ',code_general);
+    console.log('code_general general: ',code_general);
     if(status_error === true){
+      if (code_general == 401) {
+          console.log('fechou error modal erro 401');
+          localStorage.removeItem('@siteJokerz/token');
+          localStorage.removeItem('@siteJokerz/nickname');
+          history.push('/home');
+          dispatch(setAlert({
+            message:error_general,
+            tipo:'error',
+            time:10000
+          }));
+          dispatch(setStatusModal(false));
+          dispatch(setErrorGeneral('',false,0));
+      }else{
+          dispatch(setAlert({
+            message:error_general,
+            tipo:'error',
+            time:10000
+          }));
+          dispatch(setStatusModal(false));
+          dispatch(setErrorGeneral('',false,0));
+          // history.push('home');
+      }
     }
   },[status_error]);
 
@@ -63,7 +89,8 @@ const Simple = (props) => {
 
   return (
     <Container modal={statusModal}>
-        <ModalError show={status_error}/>
+        {/* <ModalError show={status_error}/> */}
+        <AlertMessageSimple/>
         <ContainerHeader>
           <RedesSociais/>
           <Header

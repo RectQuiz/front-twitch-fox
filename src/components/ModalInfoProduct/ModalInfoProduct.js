@@ -29,6 +29,7 @@ import { GiPopcorn } from 'react-icons/gi';
 import { FaInfoCircle } from 'react-icons/fa';
 import { FiShoppingBag } from 'react-icons/fi';
 import { MdSubtitles } from 'react-icons/md';
+import { useHistory } from 'react-router';
 
 function ModalInfoProduct({
     show,
@@ -38,6 +39,7 @@ function ModalInfoProduct({
     let image = infoProduct.image;
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const { user } = useSelector(({ UserReducer }) => UserReducer);
 
     const dimisissModal = (e)=>{
@@ -50,6 +52,10 @@ function ModalInfoProduct({
 
     const OpenActionLink = ()=>{
         window.location.assign(infoProduct.inspectLink);
+    }
+    
+    const verificarPerfil = ()=>{
+        history.push('user');
     }
 
     return (
@@ -112,7 +118,7 @@ function ModalInfoProduct({
                                     
                                     user.type_account === 'pendente'?
                                     (
-                                        <ButtonAdd disabled active={false} >
+                                        <ButtonAdd onClick={verificarPerfil} active={false} >
                                             Atualize seu perfil
                                         </ButtonAdd>
                                     ):
