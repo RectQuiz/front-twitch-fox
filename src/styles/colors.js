@@ -12,6 +12,7 @@ export default {
     dedtail3:"#363636",
     black:"#000",
     green:"green",
+    green_dark:"#006400",
     brown:"bronw",
     primary_geral:"#DC143C",
     primary_geral_dark:"#800000",
@@ -27,5 +28,6 @@ export default {
     card_color:"#050000",
     card_color_ligth:"#333643",
     color_twitch:"#6441a5",
-    color_socket:"#008080"
+    color_socket:"#008080",
+    color_sync_points:"#000080"
 }

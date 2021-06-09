@@ -58,7 +58,7 @@ export const ContentItem = styled.button`
     width: 150px;
     /* width: 50px; */
     /* max-width: 50%; */
-    background-color: ${colors.color_socket};
+    background-color: ${({color})=>color?color:colors.secondary_dashboard};
     padding: 7px;
     border-radius: 10px;
     display: flex;
@@ -71,15 +71,21 @@ export const LabelItem = styled.div`
     color:${colors.white};
     margin-left: 5px;
     font-size: 15px;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;
 
 export const StatusLinked = styled.div`
     margin-left: 10px;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;
 
 export const ItemStatus = styled.div`
     width: 270px;
-    background-color: ${({status})=>status?colors.green:colors.white};
+    background-color: ${({status})=>status?colors.green_dark:colors.white};
     color: ${({status})=>status?colors.white:colors.black};
     display: flex;
     flex-direction: row;

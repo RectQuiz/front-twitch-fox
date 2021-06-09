@@ -14,10 +14,16 @@ import {
     StatusLinked,
     ItemStatus
 } from './styles';
-import { FaExchangeAlt } from 'react-icons/fa';
+import { FaExchangeAlt, FaSyncAlt } from 'react-icons/fa';
 import colors from '../../../../../styles/colors';
 
-function PointsConfig({changeStatusPubSub, statusPubSub}) { 
+function PointsConfig({
+    changeStatusPubSub,
+    statusPubSub,
+    adminPermission,
+    pointsSyncTwitch,
+    syncPointsTwitch
+}) { 
     return (
         <Container>
             <ContainerHeader>
@@ -27,16 +33,34 @@ function PointsConfig({changeStatusPubSub, statusPubSub}) {
             </ContainerHeader>
             <ContainerBody>
                 <ContainerLista>
+                    {
+                        adminPermission&&
+                        (
+                            <ContainerItem>
+                                <ItemStatus status={statusPubSub}>
+                                    <ContentItem color={colors.color_socket} onClick={()=>changeStatusPubSub(!statusPubSub)}>
+                                        <FaExchangeAlt size={20} color={colors.white} />
+                                        <LabelItem>
+                                            Socket
+                                        </LabelItem>
+                                    </ContentItem>
+                                    <StatusLinked>
+                                            {statusPubSub?"ATIVADO":"NÃO ATIVADO"}
+                                    </StatusLinked>
+                                </ItemStatus>
+                            </ContainerItem>
+                        )
+                    }
                     <ContainerItem>
-                        <ItemStatus status={statusPubSub}>
-                            <ContentItem onClick={()=>changeStatusPubSub(!statusPubSub)}>
-                                <FaExchangeAlt size={20} color={colors.white} />
+                        <ItemStatus status={pointsSyncTwitch}>
+                            <ContentItem color={colors.dourado_dark} onClick={()=>syncPointsTwitch(!pointsSyncTwitch)}>
+                                <FaSyncAlt size={20} color={colors.white} />
                                 <LabelItem>
-                                    Socket
+                                    Sincronizar pontos
                                 </LabelItem>
                             </ContentItem>
                             <StatusLinked>
-                                    {statusPubSub?"ATIVADO":"NÃO ATIVADO"}
+                                    {pointsSyncTwitch?"SINCRONIZADO":"NÃO SINCRONIZADO"}
                             </StatusLinked>
                         </ItemStatus>
                     </ContainerItem>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaBell, FaHome, FaBackward } from 'react-icons/fa';
+import { FaBell, FaHome, FaBackward, FaSyncAlt } from 'react-icons/fa';
 import { useHistory } from 'react-router';
 import colors from '../../styles/colors';
 
@@ -12,7 +12,7 @@ import {
     ContentIcons
 } from './styles';
 
-function HeaderDashBoard({title,subtitle}) {
+function HeaderDashBoard({title,subtitle, reload = ()=>{}}) {
     const history = useHistory();
     
     function backSite() {
@@ -37,8 +37,8 @@ function HeaderDashBoard({title,subtitle}) {
                 <ContentIcons>
                     <FaBell size={30} color={colors.black}/>
                 </ContentIcons>
-                <ContentIcons>
-                    <FaHome size={30} color={colors.black}/>
+                <ContentIcons onClick={reload}>
+                    <FaSyncAlt size={30} color={colors.black}/>
                 </ContentIcons>
             </ContentIconsHeader>
         </Container>

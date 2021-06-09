@@ -78,7 +78,7 @@ function LojaConfig() {
                         ):
                         (
                             <ContentBodyDash>
-                                <HeaderDashBoard title={"Sua aréa de configuração da loja"} subtitle={"Aréa de configuração da loja."} />
+                                <HeaderDashBoard reload={()=>load_products(1)} title={"Sua aréa de configuração da loja"} subtitle={"Aréa de configuração da loja."} />
                                 <ContentRowDashBoard>
                                     {
                                         products&&<ItensLastAdd

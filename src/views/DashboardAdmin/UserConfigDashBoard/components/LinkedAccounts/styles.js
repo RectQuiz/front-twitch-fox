@@ -79,7 +79,7 @@ export const StatusLinkedAccount = styled.div`
 
 export const ItemStatus = styled.div`
     width: 270px;
-    background-color: ${({status})=>status?colors.green:colors.white};
+    background-color: ${({status})=>status?colors.green_dark:colors.white};
     color: ${({status})=>status?colors.white:colors.black};
     display: flex;
     flex-direction: row;

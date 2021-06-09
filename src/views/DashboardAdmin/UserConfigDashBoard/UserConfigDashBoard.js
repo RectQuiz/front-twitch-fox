@@ -5,7 +5,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { Footer, HeaderDashBoard } from '../../../components';
 import { getUrlAuthTwitch, getUrlAuthTwitchLinkedAccountAction } from '../../../store/modules/login/actions';
 import { SelectItemMenuAdmin } from '../../../store/modules/menuAdmin/actions';
-import { setStatuspubSub } from '../../../store/modules/twitchPubSub/actions';
+import { setStatuspubSub, syncPointsTwitchAction } from '../../../store/modules/twitchPubSub/actions';
 import { loadInfoUser } from '../../../store/modules/user/actions';
 import { LinkedAccounts, PointsConfig } from './components';
 
@@ -20,7 +20,8 @@ import {
 function UserConfigDashBoard() {
     const dispatch = useDispatch();
     const [ adminPermission , setAdminPermission ] = useState(false);
-    const [ statusPubSub, setStatusPubSub ] = useState(false);  
+    const [ statusPubSub, setStatusPubSub ] = useState(false);
+    const [ pointsSyncTwitch, setPointsSyncTwitch_ ] = useState(false);
     const { id_user } = useParams();
     const { user, users, loading:loadingUser, errors:errorsUser, status:statusUser } = useSelector(({ UserReducer }) => UserReducer);
     console.log("user: ",user);
@@ -32,6 +33,10 @@ function UserConfigDashBoard() {
         dispatch(loadInfoUser());
         dispatch(SelectItemMenuAdmin({index:3.1}));
     },[]);
+
+    function reload() {
+        dispatch(loadInfoUser());
+    }
     
     function getpermission(permission) {
         let status = false;
@@ -66,9 +71,11 @@ function UserConfigDashBoard() {
     
     useEffect(()=>{
         let admin = getpermission('admin');
-        let statusPubSub = getStatuspubSub('twitch');
+        let statusPubSub_ = getStatuspubSub('twitch');
+        let pointsSyncTwitch_ = user && user.pointsSyncTwitch?user.pointsSyncTwitch:false;
         setAdminPermission(admin);
-        setStatusPubSub(statusPubSub);
+        setStatusPubSub(statusPubSub_);
+        setPointsSyncTwitch_(pointsSyncTwitch_);
     },[user]);
 
     function linkedAccount(name) {
@@ -87,6 +94,11 @@ function UserConfigDashBoard() {
         dispatch(setStatuspubSub({active:status}));
     }
 
+    function syncPointsTwitch(status) {
+        console.log("syncPointsTwitch");
+        dispatch(syncPointsTwitchAction({active:status}));
+    }
+    
     return (
         <Content>
             <BackgroundColor>
@@ -105,9 +117,15 @@ function UserConfigDashBoard() {
                         ):
                         (
                             <ContentBodyDash>
-                                <HeaderDashBoard title={"Configuração"} subtitle={"Aréa para configuração da sua conta."} />
+                                <HeaderDashBoard reload={reload} title={"Configuração"} subtitle={"Aréa para configuração da sua conta."} />
                                 <LinkedAccounts linkedAccount={linkedAccount} user={user} />
-                                {adminPermission&&<PointsConfig changeStatusPubSub={changeStatusPubSub} statusPubSub={statusPubSub} linkedAccount={changeStatusPubSub} />}
+                                <PointsConfig
+                                    adminPermission={adminPermission}
+                                    changeStatusPubSub={changeStatusPubSub}
+                                    statusPubSub={statusPubSub}
+                                    pointsSyncTwitch={pointsSyncTwitch}
+                                    syncPointsTwitch={syncPointsTwitch}
+                                />
                             </ContentBodyDash>
                         )
                     }

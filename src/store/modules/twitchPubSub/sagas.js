@@ -35,8 +35,39 @@ function* setStatusPubSubWorker({params}) {
   }
 }
 
+function* syncPointsTwitchWorker({params}) {
+  yield put(actionsUser.setLoading(true));
+  yield put(actionsUser.setStatus(0));
+  yield put(actionsUser.setResponse({}));
+  yield put(actionsUser.setError(''));
+  try {
+    const response = yield call(TwitchPubSub.syncPointsTwitchService,params);
+    yield put(actionsUser.setLoading(false));
+    yield put(actionsUser.setError(''));
+    yield put(setErrorGeneral('',false,0));
+    yield put(actionsUser.setResponse(response));
+    yield put(actionsUser.setStatus(response.status));
+    yield put(actionsUser.loadInfoUser());
+  } catch (error) {
+    yield put(actionsUser.setLoading(false));
+    yield put(actionsUser.setStatus(error.status));
+    if (error.response) {
+      yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
+      yield put(actionsUser.setError(error.response.data.message));
+      yield put(actionsUser.setStatus(error.response.status));
+    } else if (error.request) {
+      yield put(setErrorGeneral(error.message,true,error.request.status));
+      yield put(actionsUser.setError({ data: error.message }));
+      yield put(actionsUser.setStatus(error.request.status));
+    } else {
+      yield put(actionsUser.setError({ data: error.message }));
+    }
+  }
+}
+
 function* watcherAnalise() {
   yield takeLatest(actionType.SET_STATUS_PUBSUB, setStatusPubSubWorker);
+  yield takeLatest(actionType.SYNC_POINTS_TWITCH, syncPointsTwitchWorker);
 }
 
 export default function* saga() {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaHome, FaStore, FaSquare } from 'react-icons/fa';
+import { FaHome, FaStore, FaCoins } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { SelectItemMenuAdmin } from '../../store/modules/menuAdmin/actions';
 import colors from '../../styles/colors';
@@ -72,6 +72,17 @@ function Dashboard(props) {
                     index:2.2
                 }
             ]
+        },
+        {
+            name:"Pontos",
+            icon:<FaCoins style={{flex:2}} size={22} color={colors.white} />,
+            subitens:[
+                {
+                    name:"Lista resgate de pontos",
+                    path:"/dashboard/resgatePontos",
+                    index:3.1
+                }
+            ]
         }
     ]);
     const { user, users, loading, errors, status } = useSelector(({ UserReducer }) => UserReducer);
@@ -126,7 +137,7 @@ function Dashboard(props) {
                                     {/* </NameUser> */}
                                     <br></br>
                                     {/* <InfoUser> */}
-                                        {user.active?"usuário ativo":"usuário inativo"}
+                                        {user.pointsSyncTwitch?"pontos sincronizados":"pontos não sincronizados"}
                                     {/* </InfoUser> */}
                                 </DescInfoUser>
                                 <IconFimItemInfoUser />
