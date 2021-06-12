@@ -54,6 +54,7 @@ function Loja() {
                        load_products={load_products}
                        modal={status}
                        setModal={setModalInfoProduct}
+                       loading={loading}
                     />
                 ):
                 (

@@ -22,7 +22,9 @@ export const Content = styled.div`
     justify-content:flex-start;
     border-width:1px;
     border-color:#bdbdbd;
-    /* @media (max-width: 500px) { */
+    @media (max-width: 500px) {
+        max-width: 100vw;
+    }
         flex-direction:row;
         flex-wrap:wrap;
     padding-bottom:40px;
@@ -79,6 +81,10 @@ export const ContentItemInfoChannels = styled.div`
     margin-left:10px;
     margin-right:10px;
     margin:10px;
+    @media (max-width: 500px) {
+        max-width: 100vw;
+        margin: 0;
+    }
 `;
 
 export const ItemLabelChannels = styled.div`

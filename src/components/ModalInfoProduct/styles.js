@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../styles/colors';
 
 export const Container = styled.div`
     display: flex; /* Hidden by default */
@@ -12,7 +13,7 @@ export const Container = styled.div`
     height: 100%; /* Full height */
     overflow: auto; 
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
     flex-direction:column;
     justify-content:center;
     align-items:center;
@@ -232,4 +233,58 @@ export const ButtonAdd = styled.button`
     border-radius:7px;
     text-transform:uppercase;
     padding:10px;
+`;
+
+export const ContentConfirm = styled.div`
+    max-height:100%;
+    min-height:10vh;
+    max-width: 30vw;
+    height:auto;
+    /* max-width:25vw; */
+    /* min-width:25vw; */
+    background-color:#24252f;
+    border-radius:7px;
+    border: 3px solid #141414;
+    align-self:center;
+    padding:10px;
+    overflow: hidden;
+
+    @media (max-width: 500px) {
+        max-width:300px;
+        flex-direction: row;
+    }
+    /* display: flex; */
+    /* flex-direction: row; */
+`;
+
+export const TitleConfirm = styled.div`
+    color: ${colors.white};
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+`;
+
+export const ContentButtonConfirm = styled.div`
+    width: 100%;
+    /* background-color: ${colors.dourado_dark}; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding:15px;
+`;
+
+export const ButtonConfirm = styled.button`
+    padding:10px;
+    background-color: ${({color})=>color?color:colors.white};
+    border-radius: 7px;
+    min-width: 90px;
+`;
+
+export const PriceConfirm = styled.div`
+    margin: 5px;
+    color: ${colors.dourado_dark};
 `;

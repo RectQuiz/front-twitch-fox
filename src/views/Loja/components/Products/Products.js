@@ -8,6 +8,7 @@ import {
     PointsValue
   } from './styles';
 import ReactPaginate from 'react-paginate';
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 import './pagination.css';
 import { GiPopcorn } from 'react-icons/gi';
@@ -21,7 +22,8 @@ export default function Products({
     load_products,
     modal,
     setModal,
-    user
+    user,
+    loading
 }){
     const [ productSelect, setProductSelect ] = useState(null);
     const pageClick = (e)=>{
@@ -51,43 +53,59 @@ export default function Products({
                 (
                     <Container>
                         <Content>
+
                             {
-                                user?
+                                !loading?
                                 (
-                                    <ContentInfoPoints>
-                                        <PointsLabel>
-                                            Seus Pontos: 
-                                        </PointsLabel>
-                                        <PointsValue>
-                                                {user.points} <GiPopcorn/> 
-                                        </PointsValue>
-                                    </ContentInfoPoints>
+                                    <>
+                                    {user?
+                                    (
+                                        <ContentInfoPoints>
+                                            <PointsLabel>
+                                                Seus Pontos: 
+                                            </PointsLabel>
+                                            <PointsValue>
+                                                    {user.points} <GiPopcorn/> 
+                                            </PointsValue>
+                                        </ContentInfoPoints>
+                                    ):
+                                    (null)}
+                                    <ContainerProducts>
+                                        {
+                                        products.map((product,index)=>{
+                                                return (
+                                                    <CardProduct
+                                                        id={product._id}
+                                                        floatvalue={product.floatvalue}
+                                                        handleSelect={handleSelect}
+                                                        key={index}
+                                                        image={product.imageurl?product.imageurl:`${API_URL}/${product.imagepath}`}
+                                                        title={product.name}
+                                                        type={product.type}
+                                                        amount={product.amount}
+                                                        price={product.price}
+                                                        desc={product.exterior}
+                                                        inspectLink={product.inspectGameLink}
+                                                        promo={product.promo}
+                                                        pricePromo={product.promo?product.pricePromo:null}
+                                                    />
+                                                )
+                                            })
+                                        }
+                                    </ContainerProducts>
+                                    </>
                                 ):
-                                (null)
+                                (
+                                    <ScaleLoader
+                                        // css={override}
+                                        color="#DC143C"
+                                        height={60}
+                                        width={7}
+                                        margin={7}
+                                        loading={true}
+                                    />
+                                )
                             }
-                            <ContainerProducts>
-                                {
-                                products.map((product,index)=>{
-                                        return (
-                                            <CardProduct
-                                                id={product._id}
-                                                floatvalue={product.floatvalue}
-                                                handleSelect={handleSelect}
-                                                key={index}
-                                                image={product.imageurl?product.imageurl:`${API_URL}/${product.imagepath}`}
-                                                title={product.name}
-                                                type={product.type}
-                                                amount={product.amount}
-                                                price={product.price}
-                                                desc={product.exterior}
-                                                inspectLink={product.inspectGameLink}
-                                                promo={product.promo}
-                                                pricePromo={product.promo?product.pricePromo:null}
-                                            />
-                                        )
-                                    })
-                                }
-                            </ContainerProducts>
                         </Content>
                         <ReactPaginate
                                 previousLabel={"prev"}

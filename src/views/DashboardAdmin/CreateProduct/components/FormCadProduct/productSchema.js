@@ -10,7 +10,7 @@ const SUPPORTED_FORMATS = [
 ];
 
 const productSchema = yup.object().shape({
-    id_owner: yup
+    id_owner_steam: yup
         .string(),
     class_id: yup
         .string(),

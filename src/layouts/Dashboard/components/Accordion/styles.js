@@ -92,6 +92,9 @@ export const LabelSubItem = styled.div`
     color:${(props)=>props.selected?colors.primary_geral:colors.primary_dashboard} !important;
     font-size: 14px;
     text-transform: uppercase;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;
 
 export const IconItemMarc = styled(FaCircle)`

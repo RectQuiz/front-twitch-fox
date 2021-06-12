@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import colors from '../../../../../styles/colors';
+import colors from '../../styles/colors';
 
 export const Container = styled.div`
   flex:${(props)=>props.flex?props.flex:1};
@@ -87,39 +87,40 @@ export const ContentRedeem = styled.div`
 `;
 
 export const ContentItemList = styled.div`
-  /* padding: 7px; */
-  /* background-color: ${colors.primary_dashboard}; */
-  width: 25%;
-  height: 40px;
-  text-align: center;
-  border:2px solid ${colors.black};
-  border-top-width: 0;
-  white-space:nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  /* width: 100%; */
-  padding: 5px;
-  ${
-    ({left,right})=>
-      left || right?
-      ``
-      :
-      `border-right-width: 0;`
-  }
-  ${
-    ({left})=>
-      left?
-      `border-right-width: 0;`
-      :
-      ``
-  }
-  ${
-    ({right})=>
-      right?
-      ``
-      :
-      ``
-  }
+    /* padding: 7px; */
+    /* background-color: ${colors.primary_dashboard}; */
+    width: 20%;
+    height: 40px;
+    text-align: center;
+    border:2px solid ${colors.black};
+    border-top-width: 0;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* width: 100%; */
+    padding: 5px;
+    ${
+        ({left,right})=>
+        left || right?
+        ``
+        :
+        `border-right-width: 0;`
+    }
+    ${
+        ({left})=>
+        left?
+        `border-right-width: 0;`
+        :
+        ``
+    }
+    ${
+        ({right})=>
+        right?
+        ``
+        :
+        ``
+    }
+    color:${({status})=>status == 'pendente'?colors.dedtail2:status == 'entregue'?colors.green:status== 'cancelado'?colors.red:colors.white};
     @media (max-width: 500px) {
         display: ${({important})=>important?'block':'none'};
         width: 100%;
@@ -127,28 +128,28 @@ export const ContentItemList = styled.div`
 `;
 
 export const ContentItemAcoes = styled.div`
-/* padding: 7px; */
-/* background-color: ${colors.primary_dashboard}; */
-text-align: center;
-border:2px solid ${colors.white};
-border-top-width: 0;
-/* border-bottom-width: 0; */
-width: 100%;
-${
-  ({left,right})=>
-    left || right?
-    `
-     border-left-width: 0;`
-    :
-    `border-right-width: 0;`
-}
-${
-  ({left})=>
-    left?
-    `border-right-width: 0;`
-    :
-    ``
-}
+    /* padding: 7px; */
+    /* background-color: ${colors.primary_dashboard}; */
+    text-align: center;
+    border:2px solid ${colors.white};
+    border-top-width: 0;
+    /* border-bottom-width: 0; */
+    width: 100%;
+    ${
+    ({left,right})=>
+        left || right?
+        `
+        border-left-width: 0;`
+        :
+        `border-right-width: 0;`
+    }
+    ${
+    ({left})=>
+        left?
+        `border-right-width: 0;`
+        :
+        ``
+    }
 `;
 
 export const HeaderList = styled.div`
@@ -170,7 +171,7 @@ export const ContentHeader = styled.div`
   background-color: ${colors.primary_dashboard};
   text-align: center;
   border:2px solid ${colors.black};
-  width: 25%;
+  width: 20%;
   height: 40px;
   margin: 0;
   ${

@@ -70,6 +70,16 @@ function Dashboard(props) {
                     name:"Cradastrar produto",
                     path:"/dashboard/product/create",
                     index:2.2
+                },
+                {
+                    name:"Lista de produtos resgatados",
+                    path:"/dashboard/resgateProdutos",
+                    index:2.3
+                },
+                {
+                    name:"Lista de produtos resgatados pendentes",
+                    path:"/dashboard/resgateProdutosPendentes",
+                    index:2.4
                 }
             ]
         },
@@ -80,7 +90,7 @@ function Dashboard(props) {
                 {
                     name:"Lista resgate de pontos",
                     path:"/dashboard/resgatePontos",
-                    index:3.1
+                    index:4.1
                 }
             ]
         }

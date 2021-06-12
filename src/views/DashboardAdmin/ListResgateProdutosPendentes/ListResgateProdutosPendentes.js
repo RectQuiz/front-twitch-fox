@@ -11,29 +11,28 @@ import {
     Content,
     BackgroundColor,
     ContentBodyDash,
-    ContentRowDashBoard,
-    ContentColumDashBoard
+    ContentRowDashBoard
 } from './styles';
 import { useHistory } from 'react-router';
-import { loadRedeemPoints } from '../../../store/modules/points/actions';
+import { loadRedeemProducts } from '../../../store/modules/products/actions';
 
-function ListResgatePoints() {
+function ListResgateProdutosPendentes() {
     const history = useHistory();
     const dispatch = useDispatch();
     const [ modalDetailItem, setModaDetailItem ] = useState(false);
     const { user, users, loading:loadingUser } = useSelector(({ UserReducer }) => UserReducer);
-    const { redeemPoints, totalPages, currentPage, loading:loadingPoints, errors, status } = useSelector(({ PointsReducer }) => PointsReducer);
+    const { redeemProducts, totalPages, currentPage, loading:loadingProducts } = useSelector(({ ProductsReducer }) => ProductsReducer);
 
-    console.log('redeemPoints DashboardAdmin: ',redeemPoints);
+    console.log('redeemProducts DashboardAdmin: ',redeemProducts);
     useEffect(()=>{
         console.log('loadInfoUser DashboardAdmin');
         dispatch(loadInfoUser());
-        dispatch(SelectItemMenuAdmin({index:4.1}));
-        load_redeem_points(1);
+        dispatch(SelectItemMenuAdmin({index:2.4}));
+        load_redeem_products(1);
     },[]);
 
-    const load_redeem_points = (page)=>{
-      dispatch(loadRedeemPoints({page:page,last:true}));
+    const load_redeem_products = (page)=>{
+      dispatch(loadRedeemProducts({page:page,status:'pendente'}));
     };
     
     return (
@@ -54,16 +53,16 @@ function ListResgatePoints() {
                         ):
                         (
                             <ContentBodyDash>
-                                <HeaderDashBoard reload={()=>load_redeem_points(1)} title={"Sua aréa de listagem de resgate de pontos"} subtitle={"Aréa de resgate de pontos."} />
+                                <HeaderDashBoard reload={()=>load_redeem_products(1)} title={"Aréa de resgate de produtos pendentes"} subtitle={"Sua aréa de listagem de produtos resgatados pendentes."} />
                                 <ContentRowDashBoard>
                                     {
-                                        redeemPoints&&<ListResgates
-                                        flex={redeemPoints.length > 0?8:0}
-                                        load_redeem_points={load_redeem_points}
-                                        redeemPoints={redeemPoints}
+                                        redeemProducts&&<ListResgates
+                                        flex={redeemProducts.length > 0?8:0}
+                                        load_redeem_products={load_redeem_products}
+                                        redeemProducts={redeemProducts}
                                         totalPages={totalPages}
                                         currentPage={currentPage}
-                                        loading={loadingPoints}/>
+                                        loading={loadingProducts}/>
                                     }
                                 </ContentRowDashBoard>
                             </ContentBodyDash>
@@ -75,4 +74,4 @@ function ListResgatePoints() {
     );
 }
 
-export default ListResgatePoints;
+export default ListResgateProdutosPendentes;

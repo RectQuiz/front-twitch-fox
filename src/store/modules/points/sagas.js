@@ -10,7 +10,7 @@ function* loadRedeemPointsWorker({params}) {
   yield put(actions.setResponseRedeemPoints({}));
   yield put(actions.setErrorRedeemPoints(''));
   try {
-    const response = yield call(Points.loadredeemProucts,params);
+    const response = yield call(Points.loadredeemPoints,params);
     yield put(actions.setRedeemPoints(response.data));
     yield put(actions.setLoadingRedeemPoints(false));
     yield put(actions.setErrorRedeemPoints(''));

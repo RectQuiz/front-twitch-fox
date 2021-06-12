@@ -19,12 +19,14 @@ import { Footer } from '../../components';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { InfoUser } from './components';
 import { Redirect } from 'react-router-dom';
+import { loadRedeemProducts } from '../../store/modules/products/actions';
 
 function UserInfo(props) {
     const { location, history } = props;
     useEffect(()=>{
         console.log('loadInfoUser UserInfo');
         dispatch(loadInfoUser());
+        load_redeem_products(1);
     },[]);
     const dispatch = useDispatch();
     // const { nick_user } = useParams();
@@ -52,6 +54,10 @@ function UserInfo(props) {
             dispatch(setError(''));
         }
     },[errors]);
+
+    const load_redeem_products = (page)=>{
+        dispatch(loadRedeemProducts({page:page,last:true, user:true}));
+    };
 
     const addTypeAccount = (selectedOption) => {
         if (selectedOption.value == 'primary') {
@@ -97,6 +103,7 @@ function UserInfo(props) {
                                 !user.streamer ? 
                                 (
                                     <InfoUser
+                                        load_redeem_products={load_redeem_products}
                                         users={users}
                                         user={user}
                                         typesAccount={typesAccount}

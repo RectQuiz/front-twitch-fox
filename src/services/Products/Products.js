@@ -27,7 +27,9 @@ export const registerProduct = async (params) => {
         'content-type': 'multipart/form-data'
     }
   };
-  return await api.post(`${resouceUrl}`, params,config);
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  return await api_.post(`${resouceUrl}`, params,config);
 };
 
 export const editProduct = async (params) => {
@@ -36,11 +38,15 @@ export const editProduct = async (params) => {
         'content-type': 'multipart/form-data'
     }
   };
-  return await api.put(`${resouceUrl}/${params.id}`, params.product,config);
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  return await api_.put(`${resouceUrl}/${params.id}`, params.product,config);
 };
 
 export const changeStatusProductService = async (params) => {
-  return await api.put(`${resouceUrl}/${params.id}/status`, params.product);
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  return await api_.put(`${resouceUrl}/${params.id}/status`, params.product);
 };
 
 export const cadProductSteamService = async () => {
@@ -59,4 +65,27 @@ export const deleteProductService = async (id) => {
   const token_ = localStorage.getItem('@siteJokerz/token');
   const api_ = apiWithToken(token_);
   return await api_.delete(`${resouceUrl}/${id}`);
+};
+
+export const redeemProductService = async (params) => {
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  return await api_.post(`${resouceUrl}/redeeem`,params);
+};
+
+export const loadredeemProucts = async (params) => {
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  params = params ? params : {};
+  return await api_.get(`/redeemProducts`, {
+    params: {
+      ...params
+    },
+  });
+};
+
+export const changeStatusRedeemProucts = async (redeem) => {
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  return await api_.put(`/redeemProducts`, redeem);
 };

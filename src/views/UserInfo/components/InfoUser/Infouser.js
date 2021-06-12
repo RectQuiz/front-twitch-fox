@@ -21,6 +21,8 @@ import {
     ItemLabelInfoPerguntas
 } from './styles';
 import Select from 'react-select';
+import { useSelector } from 'react-redux';
+import { ListRedeemProducts } from '../../../../components';
 
 function InfoUser({
     user,
@@ -28,8 +30,10 @@ function InfoUser({
     typesAccount,
     addTypeAccount,
     typeSelected,
-    addPrimaryAccount
+    addPrimaryAccount,
+    load_redeem_products
 }) {
+    const { redeemProducts, totalPages, currentPage, loading:loadingProducts } = useSelector(({ ProductsReducer }) => ProductsReducer);
     if (users && users.length > 0) {
         users = users.map((user)=>{
             return {
@@ -170,6 +174,31 @@ function InfoUser({
                                 </ContentItemInfoChannels>
                             )
                         }
+                        
+                        {/* RESGATES */}
+                        {
+                            user.type_account == 'primary'&&
+                            (
+                                <ContentItemInfoChannels>
+                                    <ItemLabelChannels>
+                                            PRODUTOS RESGATADOS
+                                    </ItemLabelChannels>
+                                    <ContentValueInfoChannels>
+                                            {
+                                                redeemProducts&&
+                                                <ListRedeemProducts
+                                                flex={redeemProducts.length > 0?8:0}
+                                                load_redeem_products={load_redeem_products}
+                                                redeemProducts={redeemProducts}
+                                                totalPages={totalPages}
+                                                currentPage={currentPage}
+                                                loading={loadingProducts}/>
+                                            }
+                                    </ContentValueInfoChannels>
+                                </ContentItemInfoChannels>
+                            )
+                        }
+                        
                         
                         {/* PERGUNTAS */}
                         {

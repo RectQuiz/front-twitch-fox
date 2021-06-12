@@ -8,10 +8,10 @@ import {
     Content,
     ContainerResgates,
     ContentRedeem,
-    Nickname,
-    Pipocas,
-    DataRetirada,
-    Canal
+    ContentItemList,
+    ContentItemAcoes,
+    HeaderList,
+    ContentHeader
   } from './styles';
   import './pagination.css';
 import { useHistory } from 'react-router';
@@ -44,36 +44,47 @@ function ListResgates({
         redeemPoints.length > 0?
             (
                 <Container flex={flex}>
-                    <Content>
-                        {
-                            !loading?
-                            (
-                                <ContainerResgates>
-                                    {
-                                    redeemPoints.map((redeemPoint,index)=>{
-                                            return (
-                                                <ContentRedeem>
-                                                    <Nickname>
-                                                        {redeemPoint.id_user.nickname}
-                                                    </Nickname>
-                                                    {` retirou `}
-                                                    <Pipocas>
-                                                        {redeemPoint.amount}
-                                                    </Pipocas> 
-                                                    {` pipocas, no dia `}
-                                                    <DataRetirada>
+                <Content>
+                    <HeaderList>
+                        <ContentHeader  important={true} left={true}>
+                            Nickname
+                        </ContentHeader>
+                        <ContentHeader  important={true}>
+                            Quantidade
+                        </ContentHeader>
+                        <ContentHeader>
+                            Data
+                        </ContentHeader>
+                        <ContentHeader important={true} right={true}>
+                            Canal
+                        </ContentHeader>
+                    </HeaderList>
+                    {
+                        !loading?
+                        (
+                            <ContainerResgates>
+                                {
+                                redeemPoints.map((redeemPoint,index)=>{
+                                        return (
+                                            <ContentRedeem>
+                                                <ContentItemList title={redeemPoint.id_user.nickname} important={true} left={true}>
+                                                    {redeemPoint.id_user.nickname}
+                                                </ContentItemList>
+                                                <ContentItemList title={redeemPoint.amount} important={true}>
+                                                    {redeemPoint.amount}
+                                                </ContentItemList> 
+                                                <ContentItemList title={formatDate(redeemPoint.date)}>
                                                     {formatDate(redeemPoint.date)}
-                                                    </DataRetirada> 
-                                                    {` no canal `}
-                                                    <Canal>
-                                                        {redeemPoint.id_channel.name}
-                                                    </Canal>
-                                                </ContentRedeem>
-                                            )
-                                        })
-                                    }
-                                </ContainerResgates>
-                            ):
+                                                </ContentItemList> 
+                                                <ContentItemList important={true} right={true} title={redeemPoint.id_channel.name}>
+                                                    {redeemPoint.id_channel.name}
+                                                </ContentItemList>
+                                            </ContentRedeem>
+                                        )
+                                    })
+                                }
+                            </ContainerResgates>
+                        ):
                             (
                                 <ScaleLoader
                                     // css={override}

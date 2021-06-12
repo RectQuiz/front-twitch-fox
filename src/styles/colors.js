@@ -2,6 +2,7 @@ export default {
     red:"red",
     red_dark:"#8B0000",
     blue:"blue",
+    blue_dark:'#191970',
     secundary:"#1c1c1c",
     primary:"#05060D",
     dedtail1:"#141414",

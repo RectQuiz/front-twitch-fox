@@ -406,7 +406,7 @@ function FormEditProduct({editProduct,product, deleteStickerProduct}) {
                         </ContainerSelectInput>
                     </ContentForm>
 
-                    {/* id_owner */}
+                    {/* id_owner_steam */}
                     <ContentForm>
                         <ContainerInput>
                             <LabelForm>
@@ -414,14 +414,14 @@ function FormEditProduct({editProduct,product, deleteStickerProduct}) {
                             </LabelForm>
                             <InputForm
                                     type="text"
-                                    name="id_owner"
-                                    id="id_owner"
-                                    className="id_owner"
-                                    value={values.id_owner} // We also bind our email value
-                                    {...getFieldProps("id_owner")}
+                                    name="id_owner_steam"
+                                    id="id_owner_steam"
+                                    className="id_owner_steam"
+                                    value={values.id_owner_steam} // We also bind our email value
+                                    {...getFieldProps("id_owner_steam")}
                             />
                             <ErroForm>
-                                {touched["id_owner"] && errors["id_owner"]}
+                                {touched["id_owner_steam"] && errors["id_owner_steam"]}
                             </ErroForm>
                         </ContainerInput>
                     </ContentForm>

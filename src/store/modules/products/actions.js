@@ -75,3 +75,23 @@ export const deleteProductAction = (id) => ({
     type: actions.DELETE_PRODUCT,
     id:id
 });
+
+export const redeemProductAction = (params) => ({
+    type: actions.REDEEM_PRODUCT,
+    params:params
+});
+
+export const loadRedeemProducts = (params) => ({
+    type: actions.LOAD_REDEEM_PRODUCTS,
+    params:params
+});
+
+export const setRedeemProducts = (redeem) => ({
+    type: actions.SET_REDEEM_PRODUCTS,
+    redeem:redeem
+});
+
+export const changeStatusRedeemProduct = (redeem) => ({
+    type: actions.CHANGE_STATUS_REDEEM_PRODUCT,
+    redeem:redeem
+});

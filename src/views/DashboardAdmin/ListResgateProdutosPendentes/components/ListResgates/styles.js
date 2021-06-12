@@ -89,7 +89,7 @@ export const ContentRedeem = styled.div`
 export const ContentItemList = styled.div`
   /* padding: 7px; */
   /* background-color: ${colors.primary_dashboard}; */
-  width: 25%;
+  width: 20%;
   height: 40px;
   text-align: center;
   border:2px solid ${colors.black};
@@ -127,28 +127,47 @@ export const ContentItemList = styled.div`
 `;
 
 export const ContentItemAcoes = styled.div`
-/* padding: 7px; */
-/* background-color: ${colors.primary_dashboard}; */
-text-align: center;
-border:2px solid ${colors.white};
-border-top-width: 0;
-/* border-bottom-width: 0; */
-width: 100%;
-${
-  ({left,right})=>
-    left || right?
-    `
-     border-left-width: 0;`
-    :
-    `border-right-width: 0;`
-}
-${
-  ({left})=>
-    left?
-    `border-right-width: 0;`
-    :
-    ``
-}
+  /* padding: 7px; */
+  /* background-color: ${colors.primary_dashboard}; */
+  width: 20%;
+  height: 40px;
+  text-align: center;
+  border:2px solid ${colors.black};
+  border-top-width: 0;
+  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* width: 100%; */
+  padding: 5px;
+  ${
+    ({left,right})=>
+      left || right?
+      ``
+      :
+      `border-right-width: 0;`
+  }
+  ${
+    ({left})=>
+      left?
+      `border-right-width: 0;`
+      :
+      ``
+  }
+  ${
+    ({right})=>
+      right?
+      ``
+      :
+      ``
+  }
+    @media (max-width: 500px) {
+        display: ${({important})=>important?'flex':'none'};
+        width: 100%;
+    }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 export const HeaderList = styled.div`
@@ -170,7 +189,7 @@ export const ContentHeader = styled.div`
   background-color: ${colors.primary_dashboard};
   text-align: center;
   border:2px solid ${colors.black};
-  width: 25%;
+  width: 20%;
   height: 40px;
   margin: 0;
   ${
@@ -199,4 +218,10 @@ export const ContentHeader = styled.div`
         display: ${({important})=>important?'block':'none'};
         width: 100%;
     }
+`;
+
+export const ContentAcao = styled.button`
+  padding: 5px;
+  background-color: ${({color})=>color?color:colors.white};
+  border-radius:5px;
 `;

@@ -8,7 +8,8 @@ const initial_state = {
     errors: '',
     status:0,
     totalPages:0,
-    currentPage:0
+    currentPage:0,
+    redeemProducts:null
 }
 
 export const ProductsReducer = (state = initial_state, action) => {
@@ -44,6 +45,13 @@ export const ProductsReducer = (state = initial_state, action) => {
       return {
         ...state,
         errors: action.errors,
+      };
+    case actions.SET_REDEEM_PRODUCTS:
+      return {
+        ...state,
+        redeemProducts: action.redeem.data,
+        totalPages: action.redeem.totalPages,
+        currentPage: action.redeem.currentPage,
       };
     default:
       return state;

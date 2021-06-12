@@ -4,3 +4,5 @@ export { default as CreateProduct } from './CreateProduct';
 export { default as EditProduct } from './EditProduct';
 export { default as UserConfigDashBoard } from './UserConfigDashBoard';
 export { default as ListResgatePoints } from './ListResgatePoints';
+export { default as ListResgateProdutos } from './ListResgateProdutos';
+export { default as ListResgateProdutosPendentes } from './ListResgateProdutosPendentes';

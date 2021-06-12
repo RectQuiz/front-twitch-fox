@@ -1,5 +1,5 @@
 export const initialvalues = {
-  id_owner:'',
+  id_owner_steam:'',
   class_id:'',
   name:'',
   price_real:'',
