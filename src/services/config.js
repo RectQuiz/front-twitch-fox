@@ -1,1 +1,1 @@
-export const API_URL = 'http://backjokerz:3333'
+export const API_URL = process.env.REACT_APP_URL_SERVER
