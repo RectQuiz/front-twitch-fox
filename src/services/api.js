@@ -5,7 +5,7 @@ const host = window.location.hostname;
 
 export const api = axios.create({
   
-  baseURL: `http://${host}:3333`,
+  baseURL: `https://${host}:3333`,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
@@ -15,7 +15,7 @@ export const api = axios.create({
 export const apiWithToken =(token) => (
   axios.create(
     {
-      baseURL: `http://${host}:3333`,
+      baseURL: `https://${host}:3333`,
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
