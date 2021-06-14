@@ -21,7 +21,7 @@ export default function Home({history}){
         const load_products = async()=>{
             try {
                 // let resp = await api.get(`https://steamcommunity.com/id/argerioaf/inventory/json/730/2`);
-                let resp = await api.get(`http://localhost:3333/products/promo`);
+                let resp = await api.get(`https://api.teamjokerz.com.br/products/promo`);
                 // console.log('resp itens cs: ',resp.data.data);
                 setProducts(resp.data.data);
             } catch (error) {

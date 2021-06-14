@@ -163,7 +163,7 @@ function Premiacoes({premiacoes,ajudas,setAjuda,partida}) {
                               </LabelIndicePremio>
                             </ContentIndicePremio>
                             <ContentImagePremio>
-                              <ImagePremio src={'http://localhost:3333/'+premiacao.image}/>
+                              <ImagePremio src={'https://api.teamjokerz.com.br/'+premiacao.image}/>
                             </ContentImagePremio>
                             <ContentNomePremio>
                               <NomePremio>

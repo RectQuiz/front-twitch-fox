@@ -40,7 +40,7 @@ function ListItens({premiacoes,deletarPremiacao}) {
                                     <ContainerItem key={premiacao._id}>
                                         <ContentItem>
                                             <ContentImageInput>
-                                                <ImagePremioCad src={'http://localhost:3333/'+premiacao.image}/>
+                                                <ImagePremioCad src={'https://api.teamjokerz.com.br/'+premiacao.image}/>
                                             </ContentImageInput>
                                             <TitleItem>
                                                 {`${premiacao.titulo} - ${premiacao.valor?premiacao.valor+' Pipocas':'Valor não informado'}`}
