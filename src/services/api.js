@@ -5,7 +5,7 @@ const host = window.location.hostname;
 
 export const api = axios.create({
   
-  baseURL: `https://api.teamjokerz.com.br`,
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'

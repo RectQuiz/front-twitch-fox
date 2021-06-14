@@ -1,1 +1,1 @@
-export const API_URL = 'http://backendj:3333'
+export const API_URL = 'https://api.teamjokerz.com.br'
