@@ -15,7 +15,7 @@ export const api = axios.create({
 export const apiWithToken =(token) => (
   axios.create(
     {
-      baseURL: `https://api.teamjokerz.com.br`,
+      baseURL: API_URL,
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',

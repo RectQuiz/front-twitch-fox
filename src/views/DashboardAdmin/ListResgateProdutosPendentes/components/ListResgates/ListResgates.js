@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ScaleLoader from "react-spinners/ScaleLoader";
-import { FaCheckCircle, FaRegTimesCircle } from 'react-icons/fa';
+import { FaCheckCircle, FaRegTimesCircle, FaListAlt, FaSteam } from 'react-icons/fa';
 
 import ReactPaginate from 'react-paginate';
 import { API_URL } from '../../../../../services/config';
@@ -20,6 +20,8 @@ import { useHistory } from 'react-router';
 import colors from '../../../../../styles/colors';
 import { useDispatch } from 'react-redux';
 import { changeStatusRedeemProduct } from '../../../../../store/modules/products/actions';
+import { ContentIconAlert } from '../../../../../components/AlertMessageSimple/styles';
+import { setAlert } from '../../../../../store/modules/alerts/actions';
 
 function ListResgates({
     redeemProducts,
@@ -49,6 +51,27 @@ function ListResgates({
     
     function pedidoCancelado(id_redeem) {
         dispatch(changeStatusRedeemProduct({status:'cancelado',id_redeem:id_redeem}));
+    }
+
+    function detalheProduto(id_product) {
+        console.log("id_product:",id_product._id);
+        history.push(`/dashboard/product/detail/${id_product._id}`);
+    }
+    
+    function copiarTradLink(tradelink) {
+        if (navigator.clipboard.writeText(tradelink)) {
+            dispatch(setAlert({
+              message:'Trade link copiado com sucesso!',
+              tipo:'warning',
+              time:5000
+            }));
+        } else {
+            dispatch(setAlert({
+              message:'Erro ao copiar trade link!',
+              tipo:'error',
+              time:5000
+            }));
+        }
     }
 
     return (
@@ -94,6 +117,15 @@ function ListResgates({
                                                         {redeemProduct.product_float?redeemProduct.product_float:'Não possui'}
                                                     </ContentItemList>
                                                     <ContentItemAcoes important={true} right={true}>
+                                                        <ContentAcao onClick={()=>detalheProduto(redeemProduct.product_id)} color={colors.blue}>
+                                                            <FaListAlt size={22} color={colors.white} />
+                                                        </ContentAcao>
+                                                        {
+                                                            ((redeemProduct.id_user.tradelinkSteam&&redeemProduct.id_user.tradelinkSteam.length>0)) &&
+                                                                <ContentAcao onClick={()=>copiarTradLink(redeemProduct.id_user.tradelinkSteam)} color={colors.white}>
+                                                                    <FaSteam size={22} color={colors.steam_primary} />
+                                                                </ContentAcao>
+                                                        }
                                                         <ContentAcao onClick={()=>pedidoEntregue(redeemProduct._id)} color={colors.green}>
                                                             <FaCheckCircle size={22} color={colors.white} />
                                                         </ContentAcao>

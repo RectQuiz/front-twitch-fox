@@ -39,7 +39,7 @@ import {
     ContentDashboard
 } from './styles';
 import { Accordion } from './components';
-import { ModalError } from '../../components';
+import { AlertMessageSimple, ModalError } from '../../components';
 
 function Dashboard(props) {
     const dispatch = useDispatch();
@@ -115,7 +115,7 @@ function Dashboard(props) {
             <Redirect to={{pathname:'/home', state:{from:props.location}}}  />
         )
         :<Container>
-            <ModalError show={status_error}/>
+            <AlertMessageSimple/>
 
             {/* MENU LATERAL DO LAYOUT */}
             <MenuLateral>

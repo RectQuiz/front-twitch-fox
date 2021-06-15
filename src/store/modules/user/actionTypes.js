@@ -7,3 +7,4 @@ export const SET_STATUS_USER = 'SET_STATUS_USER';
 export const SET_ERROR_USER = 'SET_ERROR_USER';
 export const SET_USERS = 'SET_USERS';
 export const SET_STATUS_TYPE_PERSON = 'SET_STATUS_TYPE_PERSON';
+export const EDIT_USER = 'EDIT_USER';

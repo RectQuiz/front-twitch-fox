@@ -44,3 +44,8 @@ export const setUsers = (users) => ({
     type: actions.SET_USERS,
     users:users
 });
+
+export const editUserAction = (params) => ({
+    type: actions.EDIT_USER,
+    params:params
+});

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GiPopcorn, GiKing } from 'react-icons/gi';
 import { MdBlock } from 'react-icons/md';
+import { FaPen, FaSave, FaRegTimesCircle } from 'react-icons/fa';
 
 import {
     Container,
@@ -18,11 +19,15 @@ import {
     TitleSelectAccount,
     ContentValueInfoPerguntas,
     ContainerValuePerguntas,
-    ItemLabelInfoPerguntas
+    ItemLabelInfoPerguntas,
+    BodyItem,
+    ActionItem,
+    InputItem
 } from './styles';
 import Select from 'react-select';
 import { useSelector } from 'react-redux';
 import { ListRedeemProducts } from '../../../../components';
+import colors from '../../../../styles/colors';
 
 function InfoUser({
     user,
@@ -31,8 +36,11 @@ function InfoUser({
     addTypeAccount,
     typeSelected,
     addPrimaryAccount,
-    load_redeem_products
+    load_redeem_products,
+    editUser
 }) {
+    const [ tradeLink, setTradeLink ] = useState((user && user.tradelinkSteam)?user.tradelinkSteam:'');
+    const [ edit, setEdit ] = useState(false);
     const { redeemProducts, totalPages, currentPage, loading:loadingProducts } = useSelector(({ ProductsReducer }) => ProductsReducer);
     if (users && users.length > 0) {
         users = users.map((user)=>{
@@ -47,6 +55,11 @@ function InfoUser({
     // let admin = user.permissions.length > 0?user.permissions.find(permission=>{
     //     return permission.ifo_permission.name == 'admin';
     // }):1;
+
+    const editTradeLink = ()=>{
+        setEdit(false);
+        editUser({tradelinkSteam:tradeLink});
+    }
     
     let admin = true;
 
@@ -93,9 +106,43 @@ function InfoUser({
                             <ItemLabelInfo>
                                     TradeLink: 
                             </ItemLabelInfo>
-                            <ItemValueInfo>
-                                    {(user && user.tradelinkSteam)?user.tradelinkSteam:'Não informado'}
-                            </ItemValueInfo>
+                            <BodyItem>
+                                {
+                                    edit?
+                                    (
+                                        <InputItem
+                                            type="text"
+                                            name="tradelinkSteam"
+                                            id="tradelinkSteam"
+                                            value={tradeLink} // We also bind our email value
+                                            onChange={(e)=>setTradeLink(e.target.value)}
+                                        />
+                                    ):
+                                    (
+                                        <ItemValueInfo>
+                                                {(user && user.tradelinkSteam)?user.tradelinkSteam:'Não informado'}
+                                        </ItemValueInfo>
+                                    )
+                                }
+                                {
+                                    edit?
+                                    (
+                                        <>
+                                            <ActionItem onClick={editTradeLink}>
+                                                <FaSave color={colors.dourado} size={20}/>
+                                            </ActionItem>
+                                            <ActionItem onClick={()=>setEdit(false)}>
+                                                <FaRegTimesCircle color={colors.red} size={20}/>
+                                            </ActionItem>
+                                        </>
+                                    ):
+                                    (
+                                        <ActionItem onClick={()=>setEdit(true)}>
+                                            <FaPen color={colors.dourado} size={20}/>
+                                        </ActionItem>
+                                    )
+                                }
+                            </BodyItem>
                         </ContentItemInfo>
             
                         {/* CANAIS */}

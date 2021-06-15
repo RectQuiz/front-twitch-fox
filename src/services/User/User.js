@@ -51,3 +51,8 @@ export const setStatusType = async (params) => {
     : {};
   return await api.post(`${resouceUrl}/type`, params);
 };
+
+export const editPerson = async (params) => {
+  params = params ? params : {};
+  return await api.put(`${resouceUrl}/${params.id}`, params.body);
+};

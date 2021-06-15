@@ -13,7 +13,8 @@ import {
     setStatus,
     setError,
     setStatusTypePerson,
-    loadAccountsForType
+    loadAccountsForType,
+    editUserAction
 } from '../../store/modules/user/actions';
 import { Footer } from '../../components';
 import ScaleLoader from "react-spinners/ScaleLoader";
@@ -82,6 +83,10 @@ function UserInfo(props) {
             }));
         }
     };
+    
+    const editUser = (body)=>{
+        dispatch(editUserAction({id:user._id,body:body}));
+    };
 
     return (
         <Content>
@@ -110,6 +115,7 @@ function UserInfo(props) {
                                         addTypeAccount={addTypeAccount}
                                         typeSelected={typeSelected}
                                         addPrimaryAccount={addPrimaryAccount}
+                                        editUser={editUser}
                                     />
                                 )
                                 :(<Redirect to={{pathname:'/home', state:{from:location}}} />)

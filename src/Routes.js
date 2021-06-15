@@ -28,6 +28,7 @@ const Routes = () => {
       <PrivateRoute component={View.LojaConfig} exact layout={Dashboard} path="/dashboard/loja" />
       <PrivateRoute component={View.CreateProduct} exact layout={Dashboard} path="/dashboard/product/create" />
       <PrivateRoute component={View.EditProduct} exact layout={Dashboard} path="/dashboard/product/edit/:id_product" />
+      <PrivateRoute component={View.DetailProduct} exact layout={Dashboard} path="/dashboard/product/detail/:id_product" />
       <PrivateRoute component={View.UserConfigDashBoard} exact layout={Dashboard} path="/dashboard/:id_user/config" />
       <PrivateRoute component={View.ListResgatePoints} exact layout={Dashboard} path="/dashboard/resgatePontos" />
       <PrivateRoute component={View.ListResgateProdutos} exact layout={Dashboard} path="/dashboard/resgateProdutos" />

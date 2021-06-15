@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../../../styles/colors';
 
 export const Container = styled.div`
     width: 100%;
@@ -46,10 +47,15 @@ export const ContentItemInfo = styled.div`
     margin-left:10px;
     margin-right:10px;
     margin:10px;
+    @media (max-width: 500px) {
+        max-width: 100vw;
+    }
 `;
 
 export const ItemLabelInfo = styled.div`
     /* width:10%; */
+    max-width: 130px;
+    min-width: 130px;
     padding:10px;
     background-color:rgba(76,76,84);
     border-top-left-radius:7px;
@@ -57,6 +63,19 @@ export const ItemLabelInfo = styled.div`
     color:#fff;
     font-size:16px;
     border:1px solid rgba(41,41,46);
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+`;
+
+export const BodyItem = styled.div`
+    width:100%;
+    /* margin: 3px; */
+    /* background-color: ${colors.blue}; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 `;
 
 export const ItemValueInfo = styled.div`
@@ -66,6 +85,28 @@ export const ItemValueInfo = styled.div`
     border-bottom-right-radius:7px;
     color:#fff;
     font-size:16px;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media (max-width: 500px) {
+        max-width: 30vw;
+    }
+`;
+
+export const ActionItem = styled.button`
+    /* width:100%; */
+    padding:10px;
+    border: 0px solid rgba(76,76,84);
+    border-left-width: 1px;
+`;
+
+export const InputItem = styled.input`
+    width:100%;
+    padding:5px;
+    border-radius:10px;
+    border: 2px solid white;
+    color:${colors.white};
+    background-color: ${colors.transparent};
 `;
 
 //channels
@@ -83,7 +124,6 @@ export const ContentItemInfoChannels = styled.div`
     margin:10px;
     @media (max-width: 500px) {
         max-width: 100vw;
-        margin: 0;
     }
 `;
 

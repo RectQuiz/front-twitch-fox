@@ -1,0 +1,1 @@
+export { default as DeatilProductInfo } from './DeatilProductInfo';
