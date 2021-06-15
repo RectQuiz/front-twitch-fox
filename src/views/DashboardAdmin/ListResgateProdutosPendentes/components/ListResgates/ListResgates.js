@@ -62,7 +62,7 @@ function ListResgates({
         if (navigator.clipboard.writeText(tradelink)) {
             dispatch(setAlert({
               message:'Trade link copiado com sucesso!',
-              tipo:'warning',
+              tipo:'success',
               time:5000
             }));
         } else {

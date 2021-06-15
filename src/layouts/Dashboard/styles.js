@@ -27,7 +27,7 @@ export const MenuLateral = styled.div`
     width:300px;
     box-shadow: 0px 0px 20px 0.1px;
     min-width:300px;
-    @media (max-width: 500px) {
+    @media (max-width: 1010px) {
         display: none;
     }
 `;

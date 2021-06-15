@@ -4,7 +4,7 @@ import { FaTimesCircle, FaInfoCircle, FaCheckCircle } from 'react-icons/fa';
 
 export const Container = styled.div`
   position: fixed;
-  top: 176px;
+  top: ${({layout})=>layout == 'simple'?'176px':layout == 'dashboard'?'20px':'176px'};
   right: 0;
   /* padding: 10px; */
   z-index: 7;

@@ -99,6 +99,7 @@ export const ContentItemList = styled.div`
   text-overflow: ellipsis;
   /* width: 100%; */
   padding: 5px;
+  display: block;
   ${
     ({left,right})=>
       left || right?
@@ -123,6 +124,8 @@ export const ContentItemList = styled.div`
     @media (max-width: 500px) {
         display: ${({important})=>important?'block':'none'};
         width: 100%;
+        padding: 0;
+        margin: 0 auto;
     }
 `;
 
@@ -136,7 +139,6 @@ export const ContentItemAcoes = styled.div`
   border-top-width: 0;
   white-space:nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
   /* width: 100%; */
   padding: 5px;
   ${
@@ -161,8 +163,18 @@ export const ContentItemAcoes = styled.div`
       ``
   }
     @media (max-width: 500px) {
-        display: ${({important})=>important?'flex':'none'};
+        display: ${({important})=>important?'block':'none'};
         width: 100%;
+        overflow-x: auto;
+        padding: 0;
+        margin: 0;
+    }
+    @media (max-width: 1200px) {
+        /* display: ${({important})=>important?'flex':'none'}; */
+        display: block;
+        overflow-x: auto;
+        padding: 0;
+        margin: 0;
     }
   display: flex;
   flex-direction: row;
@@ -224,4 +236,5 @@ export const ContentAcao = styled.button`
   padding: 5px;
   background-color: ${({color})=>color?color:colors.white};
   border-radius:5px;
+  margin: 2px;
 `;

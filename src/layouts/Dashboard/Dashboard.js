@@ -115,7 +115,7 @@ function Dashboard(props) {
             <Redirect to={{pathname:'/home', state:{from:props.location}}}  />
         )
         :<Container>
-            <AlertMessageSimple/>
+            <AlertMessageSimple layout={'dashboard'} />
 
             {/* MENU LATERAL DO LAYOUT */}
             <MenuLateral>

@@ -14,7 +14,7 @@ import {
     ContentTextAlert
 } from './styles';
 
-function AlertMessageSimple() {
+function AlertMessageSimple({layout = 'simple'}) {
     const { alerts } = useSelector(({ AlertsReducer }) => AlertsReducer);
     const dispatch = useDispatch();
 
@@ -83,7 +83,7 @@ function AlertMessageSimple() {
     },[alerts.length]);
 
     return (
-        <Container>
+        <Container layout={layout}>
             <Content>
                     {
                         alerts&&

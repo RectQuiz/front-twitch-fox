@@ -25,7 +25,7 @@ export const BackgroundColor = styled.div`
     padding-bottom:30px;
     padding-left:360px;
     padding-right:30px;
-    @media (max-width: 500px) {
+    @media (max-width: 1010px) {
         padding-left:0px !important;
         max-width: 100vw;
         padding: 0px;
