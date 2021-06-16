@@ -67,8 +67,8 @@ function ListResgates({
                                 redeemPoints.map((redeemPoint,index)=>{
                                         return (
                                             <ContentRedeem>
-                                                <ContentItemList title={redeemPoint.id_user.nickname} important={true} left={true}>
-                                                    {redeemPoint.id_user.nickname}
+                                                <ContentItemList title={redeemPoint.id_user?redeemPoint.id_user.nickname:'Usuário inesistente'} important={true} left={true}>
+                                                    {redeemPoint.id_user?redeemPoint.id_user.nickname:'Usuário inesistente'}
                                                 </ContentItemList>
                                                 <ContentItemList title={redeemPoint.amount} important={true}>
                                                     {redeemPoint.amount}
@@ -76,8 +76,8 @@ function ListResgates({
                                                 <ContentItemList title={formatDate(redeemPoint.date)}>
                                                     {formatDate(redeemPoint.date)}
                                                 </ContentItemList> 
-                                                <ContentItemList important={true} right={true} title={redeemPoint.id_channel.name}>
-                                                    {redeemPoint.id_channel.name}
+                                                <ContentItemList important={true} right={true} title={redeemPoint.id_channel?redeemPoint.id_channel.name:'Canal inesistente'}>
+                                                    {redeemPoint.id_channel?redeemPoint.id_channel.name:'Canal inesistente'}
                                                 </ContentItemList>
                                             </ContentRedeem>
                                         )

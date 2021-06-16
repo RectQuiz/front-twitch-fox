@@ -61,17 +61,17 @@ function ListResgates({
                                     redeemProducts.map((redeemProduct,index)=>{
                                             return (
                                                 <ContentRedeem>
-                                                    <ContentItemList title={redeemProduct.id_user.nickname} important={true} left={true}>
-                                                        {redeemProduct.id_user.nickname}
+                                                    <ContentItemList title={redeemProduct.id_user?redeemProduct.id_user.nickname:'Usuário inesistente'} important={true} left={true}>
+                                                        {redeemProduct.id_user?redeemProduct.id_user.nickname:'Usuário inesistente'}
                                                     </ContentItemList>
-                                                    <ContentItemList title={redeemProduct.product_id.name} important={true}>
-                                                        {redeemProduct.product_id.name}
+                                                    <ContentItemList title={redeemProduct.product_id?redeemProduct.product_id.name:'Produto inesistente'} important={true}>
+                                                        {redeemProduct.product_id?redeemProduct.product_id.name:'Produto inesistente'}
                                                     </ContentItemList> 
                                                     <ContentItemList title={formatDate(redeemProduct.date)}>
                                                         {formatDate(redeemProduct.date)}
                                                     </ContentItemList> 
-                                                    <ContentItemList important={true} right={true} title={redeemProduct.id_channel.name}>
-                                                        {redeemProduct.id_channel.name}
+                                                    <ContentItemList important={true} right={true} title={redeemProduct.id_channel?redeemProduct.id_channel.name:'Canal inisistente'}>
+                                                        {redeemProduct.id_channel?redeemProduct.id_channel.name:'Canal inisistente'}
                                                     </ContentItemList>
                                                 </ContentRedeem>
                                             )
