@@ -14,20 +14,23 @@ import {
     StatusLinkedAccount,
     ItemStatus
 } from './styles';
-import { FaTwitch } from 'react-icons/fa';
+import { FaTwitch, FaWindowRestore } from 'react-icons/fa';
 import colors from '../../../../../styles/colors';
 
 function LinkedAccounts({user,linkedAccount}) {
     const [ accounts, setAccounts ] = useState(user?user.accountsLinks:[]);  
 
     function iconReturn(icon,color) {
+        console.log(color)
         switch (icon) {
             case 'FaTwitch':
-                return <FaTwitch size={20} color={color?colors:colors.white} />
+                return <FaTwitch size={20} color={color?color:colors.white} />
                 break;
-        
+            case 'FaWindowRestore':
+                return <FaWindowRestore size={20} color={color?color:colors.white} />
+                break;
             default:
-                return <FaTwitch size={20} color={color?colors:colors.white} />
+                return <FaTwitch size={20} color={color?color:colors.white} />
                 break;
         }
     }
@@ -47,7 +50,7 @@ function LinkedAccounts({user,linkedAccount}) {
                             <ContainerItemAccount key={index}>
                                 <ItemStatus status={account.active}>
                                     <ContentItemAccount disabled={account.active} onClick={()=>linkedAccount(account.info_accountLink.name)}>
-                                        {iconReturn(account.icon,account.color)}
+                                        {iconReturn(account.info_accountLink.icon,account.info_accountLink.color)}
                                         <LabelItemAccount>
                                             {account.info_accountLink.name}
                                         </LabelItemAccount>
