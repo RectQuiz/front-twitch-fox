@@ -30,3 +30,7 @@ export const setErrorRedeemPoints = (errors) => ({
     type: actions.SET_ERROR_REDEEM_POINTS,
     errors:errors
 });
+
+export const restorePointsStreamElementsAction = () => ({
+    type: actions.RESTORE_POINTS_STREAM_ELEMENTS
+});
