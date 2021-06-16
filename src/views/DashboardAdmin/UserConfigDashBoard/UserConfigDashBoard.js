@@ -5,9 +5,10 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { Footer, HeaderDashBoard } from '../../../components';
 import { getUrlAuthTwitch, getUrlAuthTwitchLinkedAccountAction } from '../../../store/modules/login/actions';
 import { SelectItemMenuAdmin } from '../../../store/modules/menuAdmin/actions';
+import { restorePointsStreamElementsAction } from '../../../store/modules/points/actions';
 import { setStatuspubSub, syncPointsTwitchAction } from '../../../store/modules/twitchPubSub/actions';
 import { loadInfoUser } from '../../../store/modules/user/actions';
-import { LinkedAccounts, PointsConfig } from './components';
+import { LinkedAccounts, PointsConfig, StreamElementsConfig } from './components';
 
 import {
     Content,
@@ -19,14 +20,18 @@ import {
 
 function UserConfigDashBoard() {
     const dispatch = useDispatch();
+    const [ streamerPermission , setStreamerPermission ] = useState(false);
+    const [ restoreStreamElements, setrestoreStreamElements_ ] = useState(false);
     const [ adminPermission , setAdminPermission ] = useState(false);
     const [ statusPubSub, setStatusPubSub ] = useState(false);
     const [ pointsSyncTwitch, setPointsSyncTwitch_ ] = useState(false);
     const { id_user } = useParams();
     const { user, users, loading:loadingUser, errors:errorsUser, status:statusUser } = useSelector(({ UserReducer }) => UserReducer);
+    const { loading:loadingPoints } = useSelector(({ PointsReducer }) => PointsReducer);
     console.log("user: ",user);
     console.log("adminPermission: ",adminPermission);
     console.log("statusPubSub: ",statusPubSub);
+    console.log("streamerPermission: ",streamerPermission);
     
     useEffect(()=>{
         console.log('loadInfoUser DashboardAdmin UserConfigDashBoard');
@@ -38,12 +43,12 @@ function UserConfigDashBoard() {
         dispatch(loadInfoUser());
     }
     
-    function getpermission(permission) {
+    function getpermission(indice) {
         let status = false;
         let permissions = user && user.permissions?user.permissions:[];
         if (permissions.length > 0) {
             for (let i = 0; i < permissions.length; i++) {
-                status = permissions[i].ifo_permission.name == permission?true:false;
+                status = permissions[i].ifo_permission.indice == indice?true:false;
                 if (status) {
                     break;
                 }
@@ -70,7 +75,12 @@ function UserConfigDashBoard() {
     }
     
     useEffect(()=>{
-        let admin = getpermission('admin');
+        let streamer = getpermission(2);
+        let restoreStreamElements_ = user && user.restoreStreamElements?user.restoreStreamElements:false;
+        setStreamerPermission(streamer);
+        setrestoreStreamElements_(restoreStreamElements_);
+
+        let admin = getpermission(1);
         let statusPubSub_ = getStatuspubSub('twitch');
         let pointsSyncTwitch_ = user && user.pointsSyncTwitch?user.pointsSyncTwitch:false;
         setAdminPermission(admin);
@@ -92,6 +102,11 @@ function UserConfigDashBoard() {
     function changeStatusPubSub(status) {
         console.log("changeStatusPubSub");
         dispatch(setStatuspubSub({active:status}));
+    }
+
+    function restorePointsStreamElements() {
+        console.log("restorePointsStreamElements");
+        dispatch(restorePointsStreamElementsAction());
     }
 
     function syncPointsTwitch(status) {
@@ -125,6 +140,12 @@ function UserConfigDashBoard() {
                                     statusPubSub={statusPubSub}
                                     pointsSyncTwitch={pointsSyncTwitch}
                                     syncPointsTwitch={syncPointsTwitch}
+                                />
+                                <StreamElementsConfig
+                                    loading={loadingPoints}
+                                    streamerPermission={streamerPermission}
+                                    restorePointsStreamElements={restorePointsStreamElements}
+                                    restoreStreamElements={restoreStreamElements}
                                 />
                             </ContentBodyDash>
                         )
