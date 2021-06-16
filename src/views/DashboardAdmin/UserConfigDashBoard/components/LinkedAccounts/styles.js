@@ -58,7 +58,7 @@ export const ContentItemAccount = styled.button`
     width: 150px;
     /* width: 50px; */
     /* max-width: 50%; */
-    background-color: ${colors.color_twitch};
+    background-color: ${colors.secondary_dashboard};
     padding: 7px;
     border-radius: 10px;
     display: flex;
