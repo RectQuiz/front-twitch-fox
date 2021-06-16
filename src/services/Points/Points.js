@@ -11,3 +11,9 @@ export const loadredeemPoints = async (params) => {
       },
     });
 };
+
+export const restorePointsStreamElementsService = async (params) => {
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  return await api_.get(`/restorePointsStreamElements`);
+};
