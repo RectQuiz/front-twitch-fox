@@ -131,7 +131,7 @@ function Dashboard(props) {
                         active:true
                     }
                 ],
-                active:user && (user.accessTokenTwitch.length > 0 && user.refreshTokenTwitch.length > 0)?true:false
+                active:user && ((user.accessTokenTwitch && user.accessTokenTwitch.length > 0) && (user.refreshTokenTwitch && user.refreshTokenTwitch.length > 0))?true:false
             }
         ]);
     },[user]);
