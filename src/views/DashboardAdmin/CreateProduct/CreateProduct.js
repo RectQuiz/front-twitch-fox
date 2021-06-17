@@ -29,7 +29,7 @@ function CreateProduct({history}) {
       if (loadingProduct == false && status == 201 && errors.length == 0) {
         dispatch(setStatusProducts(0));
         dispatch(setResponseProducts({}));
-        dispatch(loadProducts());
+        dispatch(loadProducts({page:1,last:true}));
         history.push('/dashboard/loja');
       }
     },[status]);

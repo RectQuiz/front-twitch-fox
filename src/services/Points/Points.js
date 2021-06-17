@@ -17,3 +17,9 @@ export const restorePointsStreamElementsService = async (params) => {
   const api_ = apiWithToken(token_);
   return await api_.get(`/restorePointsStreamElements`);
 };
+
+export const syncRedeemPointPendedntesService = async (params) => {
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  return await api_.get(`${resouceUrl}/register/pendentes`);
+};

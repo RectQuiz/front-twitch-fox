@@ -29,3 +29,13 @@ export const setErrorRewards = (errors) => ({
     type: actions.SET_ERROR_REWARDS,
     errors:errors
 });
+
+export const createRewardsAction = (reward) => ({
+    type: actions.CREATE_REWARD,
+    reward:reward
+});
+
+export const deleteRewardAction = (id_reward) => ({
+    type: actions.DELETE_REWARD,
+    id_reward:id_reward
+});

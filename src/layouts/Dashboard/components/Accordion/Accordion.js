@@ -47,14 +47,18 @@ function Accordion({
       <ContainerSubItens ref={content} style={{ maxHeight: `${setHeight}`}}>
         <ContentSubItens>
             {
-                subitens.map((subitem, index)=>(
-                    <ContentSubItem key={index} onClick={()=>selectItemMenu(subitem)}>
-                        <IconItemMarc size={15} color={(item_selected && item_selected.index == subitem.index)?colors.primary_geral:colors.primary_dashboard} />
-                        <LabelSubItem selected={item_selected && item_selected.index == subitem.index}>
-                            {subitem.name}
-                        </LabelSubItem>
-                    </ContentSubItem>
-                ))
+                subitens.map((subitem, index)=>{
+                    if (subitem.active) {
+                      return (
+                        <ContentSubItem key={index} onClick={()=>selectItemMenu(subitem)}>
+                            <IconItemMarc size={15} color={(item_selected && item_selected.index == subitem.index)?colors.primary_geral:colors.primary_dashboard} />
+                            <LabelSubItem selected={item_selected && item_selected.index == subitem.index}>
+                                {subitem.name}
+                            </LabelSubItem>
+                        </ContentSubItem>
+                      )
+                    }
+                  })
             }
         </ContentSubItens>
       </ContainerSubItens>

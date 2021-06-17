@@ -4,8 +4,9 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { HeaderDashBoard } from '../../../components';
 import { SelectItemMenuAdmin } from '../../../store/modules/menuAdmin/actions';
 import { loadInfoUser } from '../../../store/modules/user/actions';
-import { ListResgates } from './components';
+import { ButtonActionProduct, ListResgates } from './components';
 import colors from '../../../styles/colors';
+import { FaSyncAlt } from 'react-icons/fa';
 
 import {
     Content,
@@ -15,7 +16,7 @@ import {
     ContentColumDashBoard
 } from './styles';
 import { useHistory } from 'react-router';
-import { loadRedeemPoints } from '../../../store/modules/points/actions';
+import { loadRedeemPoints, syncRedeemPointPendentesAction } from '../../../store/modules/points/actions';
 
 function ListResgatePoints() {
     const history = useHistory();
@@ -36,6 +37,10 @@ function ListResgatePoints() {
       dispatch(loadRedeemPoints({page:page,last:true}));
     };
     
+    const syncronizarResgatesPontosPendentes = ()=>{
+        dispatch(syncRedeemPointPendentesAction());
+    }
+
     return (
         <Content>
             <BackgroundColor>
@@ -65,6 +70,18 @@ function ListResgatePoints() {
                                         currentPage={currentPage}
                                         loading={loadingPoints}/>
                                     }
+                                    <ContentColumDashBoard flex={redeemPoints && redeemPoints.length > 0?2:1}>
+                                        {
+                                            redeemPoints&&
+                                            <ButtonActionProduct
+                                                iconButton={<FaSyncAlt size={50}color={colors.primary_dashboard} />}
+                                                textButton={"Sincronizar resgates pendentes"}
+                                                onClick={syncronizarResgatesPontosPendentes}
+                                                color1={colors.steam_primary}
+                                                color2={colors.black}
+                                            />
+                                        }
+                                    </ContentColumDashBoard>
                                 </ContentRowDashBoard>
                             </ContentBodyDash>
                         )

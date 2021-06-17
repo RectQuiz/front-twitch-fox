@@ -34,13 +34,43 @@ function* loadRewardsWorker({params}) {
   }
 }
 
-function* createRewardWorker() {
+function* createRewardWorker({reward}) {
   yield put(actions.setLoadingRewards(true));
   yield put(actions.setStatusRewards(0));
   yield put(actions.setResponseRewards({}));
   yield put(actions.setErrorRewards(''));
   try {
-    const response = yield call(Rewards.createRewardService,{});
+    const response = yield call(Rewards.createRewardService,reward);
+    yield put(actions.setLoadingRewards(false));
+    yield put(actions.setErrorRewards(''));
+    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setResponseRewards(response));
+    yield put(actions.setStatusRewards(response.status));
+    yield put(actions.loadRewards());
+  } catch (error) {
+    yield put(actions.setLoadingRewards(false));
+    yield put(actions.setStatusRewards(error.status));
+    if (error.response) {
+      yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
+      yield put(actions.setErrorRewards(error.response.data.message));
+      yield put(actions.setStatusRewards(error.response.status));
+    } else if (error.request) {
+      yield put(setErrorGeneral(error.message,true,error.request.status));
+      yield put(actions.setErrorRewards({ data: error.message }));
+      yield put(actions.setStatusRewards(error.request.status));
+    } else {
+      yield put(actions.setErrorRewards({ data: error.message }));
+    }
+  }
+}
+
+function* deleteRewardWorker({id_reward}) {
+  yield put(actions.setLoadingRewards(true));
+  yield put(actions.setStatusRewards(0));
+  yield put(actions.setResponseRewards({}));
+  yield put(actions.setErrorRewards(''));
+  try {
+    const response = yield call(Rewards.deleteRewardService,id_reward);
     yield put(actions.setLoadingRewards(false));
     yield put(actions.setErrorRewards(''));
     yield put(setErrorGeneral('',false,0));
@@ -67,6 +97,7 @@ function* createRewardWorker() {
 function* watcherAnalise() {
   yield takeLatest(actionType.LOAD_REWARDS, loadRewardsWorker);
   yield takeLatest(actionType.CREATE_REWARD, createRewardWorker);
+  yield takeLatest(actionType.DELETE_REWARD, deleteRewardWorker);
 }
 
 export default function* saga() {

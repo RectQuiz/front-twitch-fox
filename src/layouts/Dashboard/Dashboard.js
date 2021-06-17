@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaHome, FaStore, FaCoins } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { SelectItemMenuAdmin } from '../../store/modules/menuAdmin/actions';
@@ -45,90 +45,8 @@ function Dashboard(props) {
     const dispatch = useDispatch();
     let history = useHistory();
     const { children } = props;
-    const [ itensMenu, setItensMenu ] = useState([
-        {   
-            name:"Home",
-            icon:<FaHome style={{flex:2}} size={22} color={colors.white} />,
-            subitens:[
-                {
-                    name:"Home",
-                    path:"/dashboard",
-                    index:1.1
-                }
-            ]
-        },
-        {
-            name:"Produtos Loja",
-            icon:<FaStore style={{flex:2}} size={22} color={colors.white} />,
-            subitens:[
-                {
-                    name:"Lista de produtos",
-                    path:"/dashboard/loja",
-                    index:2.1
-                },
-                {
-                    name:"Cradastrar produto",
-                    path:"/dashboard/product/create",
-                    index:2.2
-                },
-                {
-                    name:"Lista de produtos resgatados",
-                    path:"/dashboard/resgateProdutos",
-                    index:2.3
-                },
-                {
-                    name:"Lista de produtos resgatados pendentes",
-                    path:"/dashboard/resgateProdutosPendentes",
-                    index:2.4
-                }
-            ]
-        },
-        {
-            name:"Pontos",
-            icon:<FaCoins style={{flex:2}} size={22} color={colors.white} />,
-            subitens:[
-                {
-                    name:"Lista resgate de pontos",
-                    path:"/dashboard/resgatePontos",
-                    index:4.1
-                }
-            ]
-        },
-        {
-            name:"Rewards",
-            icon:<FaCoins style={{flex:2}} size={22} color={colors.white} />,
-            subitens:[
-                {
-                    name:"Lista de rewards",
-                    path:"/dashboard/rewards",
-                    index:5.1
-                }
-            ]
-        },
-        {
-            name:"Rewards",
-            icon:<FaCoins style={{flex:2}} size={22} color={colors.white} />,
-            subitens:[
-                {
-                    name:"Lista de rewards",
-                    path:"/dashboard/rewards",
-                    index:5.1
-                }
-            ]
-        },
-        {
-            name:"Rewards",
-            icon:<FaCoins style={{flex:2}} size={22} color={colors.white} />,
-            subitens:[
-                {
-                    name:"Lista de rewards",
-                    path:"/dashboard/rewards",
-                    index:5.1
-                }
-            ]
-        }
-    ]);
     const { user, users, loading, errors, status } = useSelector(({ UserReducer }) => UserReducer);
+    const [ itensMenu, setItensMenu ] = useState([]);
     const { status_error } = useSelector(({ ErrorReducer }) => ErrorReducer);
     const { item_selected } = useSelector(({ MenuAdminReducer }) => MenuAdminReducer);
     console.log("status_error: ",status_error);
@@ -142,6 +60,81 @@ function Dashboard(props) {
     function openConfigUser() {
         history.push(`/dashboard/${user._id}/config`);
     }
+
+    useEffect(()=>{
+        setItensMenu([
+            {   
+                name:"Home",
+                icon:<FaHome style={{flex:2}} size={22} color={colors.white} />,
+                subitens:[
+                    {
+                        name:"Home",
+                        path:"/dashboard",
+                        index:1.1,
+                        active:true
+                    }
+                ],
+                active:true
+            },
+            {
+                name:"Produtos Loja",
+                icon:<FaStore style={{flex:2}} size={22} color={colors.white} />,
+                subitens:[
+                    {
+                        name:"Lista de produtos",
+                        path:"/dashboard/loja",
+                        index:2.1,
+                        active:true
+                    },
+                    {
+                        name:"Cradastrar produto",
+                        path:"/dashboard/product/create",
+                        index:2.2,
+                        active:true
+                    },
+                    {
+                        name:"Lista de produtos resgatados",
+                        path:"/dashboard/resgateProdutos",
+                        index:2.3,
+                        active:true
+                    },
+                    {
+                        name:"Lista de produtos resgatados pendentes",
+                        path:"/dashboard/resgateProdutosPendentes",
+                        index:2.4,
+                        active:true
+                    }
+                ],
+                active:true
+            },
+            {
+                name:"Pontos",
+                icon:<FaCoins style={{flex:2}} size={22} color={colors.white} />,
+                subitens:[
+                    {
+                        name:"Lista resgate de pontos",
+                        path:"/dashboard/resgatePontos",
+                        index:4.1,
+                        active:true
+                    }
+                ],
+                active:true
+            },
+            {
+                name:"Rewards",
+                icon:<FaCoins style={{flex:2}} size={22} color={colors.white} />,
+                subitens:[
+                    {
+                        name:"Lista de rewards",
+                        path:"/dashboard/rewards",
+                        index:5.1,
+                        active:true
+                    }
+                ],
+                active:user && (user.accessTokenTwitch.length > 0 && user.refreshTokenTwitch.length > 0)?true:false
+            }
+        ]);
+    },[user]);
 
     return (
         !isAuth ? (
@@ -192,18 +185,22 @@ function Dashboard(props) {
                 {/* LISTA DE SUBMENUS DO MENU LATERAL */}
                 <ListaMenuLateral>
                     {
-                        itensMenu.map((item,index)=>(
-                            <ContainerItem key={index}>
-                                
-                                <Accordion
-                                    title={item.name}
-                                    subitens={item.subitens}
-                                    selectItemMenu={selectItemMenu}
-                                    item_selected={item_selected}
-                                />
-            
-                            </ContainerItem>
-                        ))
+                        itensMenu.map((item,index)=>{
+                            if (item.active) {
+                              return (
+                                <ContainerItem key={index}>
+                                    
+                                    <Accordion
+                                        title={item.name}
+                                        subitens={item.subitens}
+                                        selectItemMenu={selectItemMenu}
+                                        item_selected={item_selected}
+                                    />
+                
+                                </ContainerItem>
+                            )
+                            }
+                          })
                     }
                 </ListaMenuLateral>
 

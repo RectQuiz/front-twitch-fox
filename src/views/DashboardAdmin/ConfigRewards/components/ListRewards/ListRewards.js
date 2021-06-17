@@ -11,19 +11,22 @@ import {
     ContentItemList,
     ContentItemAcoes,
     HeaderList,
-    ContentHeader
+    ContentHeader,
+    ContentAcao
   } from './styles';
   import './pagination.css';
 import { useHistory } from 'react-router';
 import colors from '../../../../../styles/colors';
 import { useDispatch } from 'react-redux';
+import { FaTrash } from 'react-icons/fa';
 
 function ListRewards({
     rewards,
     totalPages,
     flex,
     load_rewards,
-    loading
+    loading,
+    deletarReward
 }) {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -55,8 +58,11 @@ function ListRewards({
                         <ContentHeader>
                             Data
                         </ContentHeader>
-                        <ContentHeader important={true} right={true}>
+                        <ContentHeader>
                             Canal
+                        </ContentHeader>
+                        <ContentHeader important={true} right={true}>
+                            Ações
                         </ContentHeader>
                     </HeaderList>
                     {
@@ -76,9 +82,14 @@ function ListRewards({
                                                 <ContentItemList title={formatDate(reward.date)}>
                                                     {formatDate(reward.date)}
                                                 </ContentItemList> 
-                                                <ContentItemList important={true} right={true} title={reward.id_channel?reward.id_channel.name:'Canal inesistente'}>
+                                                <ContentItemList title={reward.id_channel?reward.id_channel.name:'Canal inesistente'}>
                                                     {reward.id_channel?reward.id_channel.name:'Canal inesistente'}
                                                 </ContentItemList>
+                                                <ContentItemAcoes important={true} right={true}>
+                                                    <ContentAcao onClick={()=>deletarReward(reward._id)} color={colors.red}>
+                                                        <FaTrash size={22} color={colors.white} />
+                                                    </ContentAcao>
+                                                </ContentItemAcoes>
                                             </ContentRedeem>
                                         )
                                     })

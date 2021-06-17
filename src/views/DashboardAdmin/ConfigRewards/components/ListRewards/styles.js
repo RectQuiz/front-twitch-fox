@@ -87,58 +87,23 @@ export const ContentRedeem = styled.div`
 `;
 
 export const ContentItemList = styled.div`
-  /* padding: 7px; */
-  /* background-color: ${colors.primary_dashboard}; */
-  width: 25%;
-  height: 40px;
-  text-align: center;
-  border:2px solid ${colors.black};
-  border-top-width: 0;
-  white-space:nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  /* width: 100%; */
-  padding: 5px;
-  ${
-    ({left,right})=>
-      left || right?
-      ``
-      :
-      `border-right-width: 0;`
-  }
-  ${
-    ({left})=>
-      left?
-      `border-right-width: 0;`
-      :
-      ``
-  }
-  ${
-    ({right})=>
-      right?
-      ``
-      :
-      ``
-  }
-    @media (max-width: 500px) {
-        display: ${({important})=>important?'block':'none'};
-        width: 100%;
-    }
-`;
-
-export const ContentItemAcoes = styled.div`
 /* padding: 7px; */
 /* background-color: ${colors.primary_dashboard}; */
+width: 20%;
+height: 40px;
 text-align: center;
-border:2px solid ${colors.white};
+border:2px solid ${colors.black};
 border-top-width: 0;
-/* border-bottom-width: 0; */
-width: 100%;
+white-space:nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+/* width: 100%; */
+padding: 5px;
+display: block;
 ${
   ({left,right})=>
     left || right?
-    `
-     border-left-width: 0;`
+    ``
     :
     `border-right-width: 0;`
 }
@@ -149,6 +114,19 @@ ${
     :
     ``
 }
+${
+  ({right})=>
+    right?
+    ``
+    :
+    ``
+}
+  @media (max-width: 500px) {
+      display: ${({important})=>important?'block':'none'};
+      width: 100%;
+      padding: 0;
+      margin: 0 auto;
+  }
 `;
 
 export const HeaderList = styled.div`
@@ -199,4 +177,64 @@ export const ContentHeader = styled.div`
         display: ${({important})=>important?'block':'none'};
         width: 100%;
     }
+`;
+
+export const ContentItemAcoes = styled.div`
+  /* padding: 7px; */
+  /* background-color: ${colors.primary_dashboard}; */
+  width: 20%;
+  height: 40px;
+  text-align: center;
+  border:2px solid ${colors.black};
+  border-top-width: 0;
+  white-space:nowrap;
+  overflow: hidden;
+  /* width: 100%; */
+  padding: 5px;
+  ${
+    ({left,right})=>
+      left || right?
+      ``
+      :
+      `border-right-width: 0;`
+  }
+  ${
+    ({left})=>
+      left?
+      `border-right-width: 0;`
+      :
+      ``
+  }
+  ${
+    ({right})=>
+      right?
+      ``
+      :
+      ``
+  }
+    @media (max-width: 500px) {
+        display: ${({important})=>important?'block':'none'};
+        width: 100%;
+        overflow-x: auto;
+        padding: 0;
+        margin: 0;
+    }
+    @media (max-width: 1200px) {
+        /* display: ${({important})=>important?'flex':'none'}; */
+        display: block;
+        overflow-x: auto;
+        padding: 0;
+        margin: 0;
+    }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const ContentAcao = styled.button`
+  padding: 5px;
+  background-color: ${({color})=>color?color:colors.white};
+  border-radius:5px;
+  margin: 2px;
 `;

@@ -17,3 +17,9 @@ export const createRewardService = async (reward) => {
   const api_ = apiWithToken(token_);
   return await api_.post(`${resouceUrl}`,reward);
 };
+
+export const deleteRewardService = async (id_reward) => {
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  return await api_.delete(`${resouceUrl}/${id_reward}`);
+};

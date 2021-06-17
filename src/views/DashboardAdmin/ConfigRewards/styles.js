@@ -61,11 +61,17 @@ export const ContentRowDashBoard = styled.div`
     justify-content:space-between;
     align-items:flex-start;
     flex-wrap:wrap;
+    
+    @media (max-width: 1300px) {
+        /* flex-direction:column;
+        justify-content:flex-start;
+        align-items:center; */
+    }
 `;
 
 export const ContentColumDashBoard = styled.div`
     /* background-color:${colors.red}; */
-    /* width: 100%; */
+    width: 100%;
     display:flex;
     flex-direction:${(props)=>props.flex == 1?"row":"column"};
     justify-content:${(props)=>props.flex == 1?"space-between":"flex-start"};

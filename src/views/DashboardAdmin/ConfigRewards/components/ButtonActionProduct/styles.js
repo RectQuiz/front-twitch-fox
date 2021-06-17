@@ -11,14 +11,18 @@ export const Container = styled.div`
   padding-bottom: 20px;
   padding-left: 10px;
   padding-right: 10px;
+  /* background-color: ${colors.blue}; */
 `;
 
 export const ContentButton = styled.button`
-    border-radius: 1vw;
-    background-color: ${colors.red}; /* For browsers that do not support gradients */
+    border-radius: 10px;
+    /* background-color: ${colors.red}; */
     background-image: linear-gradient(to right,${(props)=>props.color1?props.color1:colors.primary_dashboard}, ${(props)=>props.color2?props.color2:colors.secondary_dashboard});
-    width: 13vw;
-    height: 13vw;
+    width: 100%;
+    max-width: 250px;
+    min-width: 250px;
+    min-height: 250px;
+    /* height: 13vw; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,11 +39,13 @@ export const ContentButton = styled.button`
         outline:none;
         outline-style: none;
     }
+    @media (max-width: 1010px) {
+    }
     
 `;
 
 export const TextButton = styled.div`
   font-weight: bold;
-  font-size: 1.3vw;
+  font-size: 22px;
   color: ${colors.primary_dashboard};
 `;

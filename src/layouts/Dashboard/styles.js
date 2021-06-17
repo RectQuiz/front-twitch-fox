@@ -31,6 +31,31 @@ export const MenuLateral = styled.div`
     @media (max-width: 1010px) {
         display: none;
     }
+
+    ::-webkit-scrollbar {
+        width: 9px;
+        height: 9px;
+    }
+
+    ::-webkit-scrollbar-button:start:decrement,
+    ::-webkit-scrollbar-button:end:increment {
+        display: block;
+        height: 0;
+        background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-track-piece {
+        background-color: ${colors.secondary_dashboard};
+        opacity: 0.1;
+        -webkit-border-radius: 0;
+        -webkit-border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb:vertical {
+        height: 5px;
+        background-color: ${colors.dedtail3};
+        -webkit-border-radius: 8px;
+    }
 `;
     //HEADER MENU LATERAL
     export const HearderMenuLateral = styled.div`
@@ -40,7 +65,7 @@ export const MenuLateral = styled.div`
         flex-direction:row;
         justify-content:center;
         align-items:center;
-        padding:5vh;
+        padding:3vh;
     `;
     
     export const TituloMenuLateral = styled.h5`

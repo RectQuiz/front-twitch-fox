@@ -71,7 +71,7 @@ function FormCadProduct({registerProduct}) {
     const typesTradable = [
         { value:true, label: 'Comercializável' },
         { value:false, label: 'Não comercializável' },
-      ];
+    ];
 
     
     const {
