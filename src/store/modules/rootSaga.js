@@ -9,6 +9,7 @@ import categoriaSaga from './categoria/sagas';
 import productsSaga from './products/sagas';
 import twitchPubSubSaga from './twitchPubSub/sagas';
 import pointsSaga from './points/sagas';
+import rewardsSaga from './rewards/sagas';
 
 
 export default function* () {
@@ -23,5 +24,6 @@ export default function* () {
     fork(productsSaga),
     fork(twitchPubSubSaga),
     fork(pointsSaga),
+    fork(rewardsSaga),
   ]);
 }

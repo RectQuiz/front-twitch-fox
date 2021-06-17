@@ -93,6 +93,39 @@ function Dashboard(props) {
                     index:4.1
                 }
             ]
+        },
+        {
+            name:"Rewards",
+            icon:<FaCoins style={{flex:2}} size={22} color={colors.white} />,
+            subitens:[
+                {
+                    name:"Lista de rewards",
+                    path:"/dashboard/rewards",
+                    index:5.1
+                }
+            ]
+        },
+        {
+            name:"Rewards",
+            icon:<FaCoins style={{flex:2}} size={22} color={colors.white} />,
+            subitens:[
+                {
+                    name:"Lista de rewards",
+                    path:"/dashboard/rewards",
+                    index:5.1
+                }
+            ]
+        },
+        {
+            name:"Rewards",
+            icon:<FaCoins style={{flex:2}} size={22} color={colors.white} />,
+            subitens:[
+                {
+                    name:"Lista de rewards",
+                    path:"/dashboard/rewards",
+                    index:5.1
+                }
+            ]
         }
     ]);
     const { user, users, loading, errors, status } = useSelector(({ UserReducer }) => UserReducer);

@@ -42,7 +42,6 @@ function* restorePointsStreamElementsWorker() {
   yield put(actions.setErrorRedeemPoints(''));
   try {
     const response = yield call(Points.restorePointsStreamElementsService,{});
-    yield put(actions.setRedeemPoints(response.data));
     yield put(actions.setLoadingRedeemPoints(false));
     yield put(actions.setErrorRedeemPoints(''));
     yield put(setErrorGeneral('',false,0));

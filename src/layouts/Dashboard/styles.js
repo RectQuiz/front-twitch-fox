@@ -27,6 +27,7 @@ export const MenuLateral = styled.div`
     width:300px;
     box-shadow: 0px 0px 20px 0.1px;
     min-width:300px;
+    overflow:auto;
     @media (max-width: 1010px) {
         display: none;
     }
@@ -34,7 +35,6 @@ export const MenuLateral = styled.div`
     //HEADER MENU LATERAL
     export const HearderMenuLateral = styled.div`
         width:100%;
-
         /* background-color:${colors.blue}; */
         display:flex;
         flex-direction:row;
@@ -42,7 +42,7 @@ export const MenuLateral = styled.div`
         align-items:center;
         padding:5vh;
     `;
-
+    
     export const TituloMenuLateral = styled.h5`
         font-weight:bold;
         color:${colors.white};

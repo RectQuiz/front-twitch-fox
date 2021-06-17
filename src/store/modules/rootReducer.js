@@ -12,6 +12,7 @@ import { MenuAdminReducer } from './menuAdmin/reducer';
 import { ProductsReducer } from './products/reducer';
 import { PointsReducer } from './points/reducer';
 import { AlertsReducer } from './alerts/reducer';
+import { RewardsReducer } from './rewards/reducer';
 
 
 export default combineReducers({
@@ -27,5 +28,6 @@ export default combineReducers({
     MenuAdminReducer,
     ProductsReducer,
     PointsReducer,
-    AlertsReducer
+    AlertsReducer,
+    RewardsReducer
 });
