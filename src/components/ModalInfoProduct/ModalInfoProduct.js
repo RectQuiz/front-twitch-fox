@@ -4,9 +4,15 @@ import {
     Container,
     
     ContentCardInfo,
+    ContentHeader,
     ContentImage,
+    ContainerStickers,
+    ContentSticker,
+    ImageSticker,
     Image,
     ContentInfoCard,
+    HeaderInfo,
+    PaintCard,
 
     TitleCard,
     DescCard,
@@ -15,6 +21,7 @@ import {
     ButtonAction,
     ContentPrice,
     Price,
+    PriceReal,
     Desconto,
     PriceOld,
     ContentAction,
@@ -38,6 +45,7 @@ import { MdSubtitles } from 'react-icons/md';
 import { useHistory } from 'react-router';
 import colors from '../../styles/colors';
 import { redeemProductAction } from '../../store/modules/products/actions';
+import { API_URL } from '../../services/config';
 
 function ModalInfoProduct({
     show,
@@ -83,10 +91,66 @@ function ModalInfoProduct({
                         !confirm?
                         (
                             <ContentCardInfo>
-                                <ContentImage>
-                                    <Image
-                                        src={image}
-                                    />
+                                <ContentHeader>
+                                    <ContentImage>
+                                        <Image
+                                            src={image}
+                                        />
+                                        {
+                                            (infoProduct.inspectLink.trim().length > 0) && 
+                                            (
+                                                <ActionCard>
+                                                    <ButtonAction onClick={OpenActionLink}>
+                                                        Inspecionar
+                                                    </ButtonAction>
+                                                </ActionCard>
+                                            ) 
+                                        }
+                                    </ContentImage>
+                                    {
+                                        (infoProduct.stickers&& infoProduct.stickers.length > 0)&&
+                                        (
+                                            <ContainerStickers>
+                                                {
+                                                    infoProduct.stickers.map((sticker)=>{
+                                                            return(
+                                                                <ContentSticker title={sticker.name}>
+                                                                    <ImageSticker
+                                                                        src={sticker.link_img?sticker.link_img:sticker.path_img?`${API_URL}/${sticker.path_img}`:'https://cdn.neemo.com.br/uploads/settings_webdelivery/logo/3136/image-not-found.jpg'}
+                                                                    />
+                                                                </ContentSticker>
+                                                            )
+                                                    })
+                                                }
+                                            </ContainerStickers>
+                                        )
+                                    }
+                                </ContentHeader>
+                                <ContentInfoCard>
+                                    <HeaderInfo>
+                                        <TitleCard>
+                                            <FaInfoCircle size={20}/> {infoProduct.title}
+                                        </TitleCard>
+                                        {
+                                            infoProduct.desc.trim().length > 0 &&
+                                            (
+                                                <DescCard>
+                                                    {infoProduct.desc}
+                                                </DescCard>
+                                            )
+                                        }
+                                        <PaintCard>
+                                            {infoProduct.paint?infoProduct.paint:""}
+                                        </PaintCard>
+                                    </HeaderInfo>
+                                    <Amount>
+                                        <FiShoppingBag/>  Estoque: {infoProduct.amount}
+                                    </Amount>
+                                    <ContentPrice>
+                                        <PriceReal>
+                                            {`R$${infoProduct.price_real?infoProduct.price_real.toFixed(2).replace('.',','):'00.00'}`}
+                                        </PriceReal>
+                                    </ContentPrice>
                                     <ContentPrice>
                                         {
                                             infoProduct.promo && (
@@ -102,35 +166,6 @@ function ModalInfoProduct({
                                             {infoProduct.pricePromo?'-'+infoProduct.pricePromo+'%':''}
                                         </Desconto>
                                     </ContentPrice>
-                                    {
-                                        (infoProduct.inspectLink.trim().length > 0) && 
-                                        (
-                                            <ActionCard>
-                                                <ButtonAction onClick={OpenActionLink}>
-                                                    Inspecionar
-                                                </ButtonAction>
-                                            </ActionCard>
-                                        ) 
-                                    }
-                                </ContentImage>
-                                <ContentInfoCard>
-                                    <TitleCard>
-                                        <FaInfoCircle/> {infoProduct.title}
-                                    </TitleCard>
-                                    {
-                                        infoProduct.desc.trim().length > 0 &&
-                                        (
-                                            <DescCard>
-                                                <MdSubtitles/> {infoProduct.desc}
-                                            </DescCard>
-                                        )
-                                    }
-                                    
-                                    <ContentAction>
-                                    </ContentAction>
-                                    <Amount>
-                                        <FiShoppingBag/>  Estoque: {infoProduct.amount}
-                                    </Amount>
                                     <ContentButtonAdd>
                                     {
                                         user?

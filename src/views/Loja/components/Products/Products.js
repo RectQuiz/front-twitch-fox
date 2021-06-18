@@ -88,6 +88,9 @@ export default function Products({
                                                         inspectLink={product.inspectGameLink}
                                                         promo={product.promo}
                                                         pricePromo={product.promo?product.pricePromo:null}
+                                                        stickers={product.stickersinfo?product.stickersinfo:null}
+                                                        paint={product.paint?product.paint:null}
+                                                        price_real={product.price_real?product.price_real:null}
                                                     />
                                                 )
                                             })

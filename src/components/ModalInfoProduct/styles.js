@@ -23,26 +23,42 @@ export const ContentCardInfo = styled.div`
     animation-name: example;
     animation-duration: 0.5s;
     /* width:100%; */
-    max-height:100%;
-    min-height:70vh;
-    max-width: 30vw;
-    height:auto;
+    max-width:800px;
+    min-width:800px;
+    
+    max-height: 400px;
+    min-height: 400px;
     /* max-width:25vw; */
     /* min-width:25vw; */
     background-color:#24252f;
     border-radius:7px;
     border: 3px solid #141414;
     align-self:center;
-    padding:10px;
+    padding:20px;
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     
-    @media (max-width: 1000px) {
-        /* min-width:50vw; */
+    @media (max-width: 840px) {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        max-width:70%;
+        min-width:70%;
+        
+        max-height: 90vh;
+        min-height: 60vh;
     }
     
     @media (max-width: 500px) {
-        max-width:300px;
-        flex-direction: row;
+        max-width:95%;
+        min-width:95%;
+        
+        max-height: 90vh;
+        min-height: 90vh;
+        padding:10px;
     }
     /* display: flex; */
     /* flex-direction: row; */
@@ -54,11 +70,29 @@ export const ContentCardInfo = styled.div`
     }
 `;
 
+export const ContentHeader = styled.div`
+    width:70%;
+    height: 100%;
+    padding: 3px;
+    /* background-color: ${colors.dourado}; */
+    background-color:rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    @media (max-width: 840px) {
+        width:100%;
+        height: 50%;   
+    }
+`;
+
 export const ContentImage = styled.div`
+    /* min-width:50%; */
+    /* max-width:50%; */
+    /* height:100%; */
     width:100%;
-    height:100%;
-    min-height:50%;
-    max-height:50%;
+    max-width: 100%;
+    height: 100%;
     background-color:rgba(0,0,0,0.4);
     padding:15px;
     border-radius:7px 7px 0px 0px;
@@ -72,6 +106,34 @@ export const ContentImage = styled.div`
     /* margin-bottom:5px; */
 `;
 
+export const ContainerStickers = styled.div`
+    width: 100%;
+    height: 25%;
+    /* background-color: ${colors.white}; */
+    display: flex;
+    margin: 5px;
+    flex-direction:row;
+    justify-content:center;
+    /* align-items:center; */
+`;
+
+export const ContentSticker = styled.div`
+    margin: 10px;
+    max-width: 60px;
+    min-width: 60px;
+    /* background-color: ${colors.red}; */
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items: center;
+`;
+
+export const ImageSticker = styled.img`
+    max-width: 100%;
+    max-height: 100%;
+    /* background-color:red; */
+`;
+
 export const Image = styled.img`
     max-width: 100%;
     max-height: 100%;
@@ -79,22 +141,29 @@ export const Image = styled.img`
 `;
 
 export const ContentInfoCard = styled.div`
-    width:100%;
+    width:50%;
     height:100%;
-    min-height:40%;
-    max-height:40%;
+    max-height: 100%;
     /* margin-top:5px; */
-    /* background-color:#141414; */
+    /* background-color:red; */
     /* padding:15px; */
     border-radius:0px 0px 7px 7px;
-    border-top: 2px solid #fff;
+    /* border-top: 2px solid #fff; */
     display:flex;
     flex-direction:column;
     justify-content:space-between;
     align-items:flex-start;
     overflow: auto;
     overflow-x:hidden;
-    padding:17px;
+    padding-left:10px;
+    padding-right:5px;
+    @media (max-width: 840px) {
+        width:100%;
+        height: 50%;  
+        padding-left:0;
+        padding-right:0; 
+        margin-top: 10px;
+    }
     /* position: relative; */
     /* border: 2px solid #fff; */
     ::-webkit-scrollbar {
@@ -116,14 +185,34 @@ export const ContentInfoCard = styled.div`
 
     ::-webkit-scrollbar-thumb:vertical {
         height: 5px;
-        background-color: #000;
+        background-color: ${colors.dedtail3};
         -webkit-border-radius: 8px;
     }
 `;
 
-export const TitleCard = styled.h2`
+export const HeaderInfo = styled.div`
+    width: 100%;
+    padding: 15px;
+    background-color:rgba(0,0,0,0.4);
+    margin-bottom: 10px;
+`;
+
+export const TitleCard = styled.div`
     color:#fff;
     text-align:left;
+    font-size: 24px;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+`;
+
+export const PaintCard = styled.div`
+    color:#fff;
+    text-align:left;
+    font-size: 34px;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;
 
 export const DescCard = styled.h5`
@@ -142,7 +231,7 @@ export const ActionCard = styled.button`
     position: absolute;
     bottom:10px;
     right:10px;
-    @media (max-width: 500px) {
+    @media (max-width: 1000px) {
         display:none;
     }
 `;
@@ -165,9 +254,9 @@ export const ContentPrice = styled.div`
     align-items:center;
     /* padding-top:7px;
     padding-bottom:7px; */
-    position: absolute;
-    bottom:10px;
-    left:10px;
+    /* position: absolute; */
+    /* bottom:10px; */
+    /* left:10px; */
     /* bottom:50%; */
 `;
 
@@ -180,14 +269,26 @@ export const ContentAction = styled.div`
     bottom:51%;
 `;
 
-export const Price = styled.h3`
-    font-size:25px;
+export const Price = styled.div`
+    font-size:30px;
     color:orange;
     font-family:Raleway,sans-serif;
     text-align:left;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space:nowrap;
+    margin: 0;
+`;
+
+export const PriceReal = styled.div`
+    font-size:20px;
+    color:${colors.white};
+    font-family:Raleway,sans-serif;
+    text-align:left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    margin: 0;
 `;
 
 export const PriceOld = styled.h3`
@@ -216,9 +317,9 @@ export const Desconto = styled.h3`
 
 export const ContentButtonAdd = styled.div`
     padding:10px;
-    min-height:10%;
+    /* min-height:10%; */
     /* background-color:#000; */
-    max-height:10%;
+    /* max-height:10%; */
     /* position:absolute;
     top:1; */
     align-self:center;

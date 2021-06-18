@@ -94,7 +94,7 @@ function InfoUser({
                         {/* PONTOS */}
                         <ContentItemInfo>
                             <ItemLabelInfo>
-                                    Pontos Totais: 
+                                    {user.type_account == 'primary'?'Pontos Totais:':'Total do farm:'}
                             </ItemLabelInfo>
                             <ItemValueInfo style={{color:'orange'}}>
                                     {(user && user.points)?user.points:0} <GiPopcorn/>
