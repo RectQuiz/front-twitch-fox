@@ -64,16 +64,16 @@ function ListRedeemProducts({
                                     redeemProducts.map((redeemProduct,index)=>{
                                             return (
                                                 <ContentRedeem>
-                                                    <ContentItemList title={redeemProduct.id_user.nickname} important={true} left={true}>
-                                                        {redeemProduct.id_user.nickname}
+                                                    <ContentItemList title={redeemProduct.id_user?redeemProduct.id_user.nickname:'Não encontrado'} important={true} left={true}>
+                                                        {redeemProduct.id_user?redeemProduct.id_user.nickname:'Não encontrado'}
                                                     </ContentItemList>
-                                                    <ContentItemList title={redeemProduct.product_id.name} important={true}>
-                                                        {redeemProduct.product_id.name}
+                                                    <ContentItemList title={redeemProduct.product_id?redeemProduct.id_user.name:'Não encontrado'} important={true}>
+                                                        {redeemProduct.product_id?redeemProduct.id_user.name:'Não encontrado'}
                                                     </ContentItemList> 
                                                     <ContentItemList title={formatDate(redeemProduct.date)}>
                                                         {formatDate(redeemProduct.date)}
                                                     </ContentItemList> 
-                                                    <ContentItemList title={redeemProduct.id_channel.name}>
+                                                    <ContentItemList title={redeemProduct.id_channel?redeemProduct.id_channel.name:'Não encontrado'}>
                                                         {redeemProduct.id_channel.name}
                                                     </ContentItemList>
                                                     <ContentItemList status={redeemProduct.status} important={true} right={true} title={redeemProduct.status}>
