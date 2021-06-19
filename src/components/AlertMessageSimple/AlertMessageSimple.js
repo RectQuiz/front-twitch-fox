@@ -69,10 +69,10 @@ function AlertMessageSimple({layout = 'simple'}) {
         }
     }
     
-    console.log('alerts: ',alerts);
+    // console.log('alerts: ',alerts);
     
     useEffect(()=>{
-        console.log('alerts.length: ',alerts.length);
+        // console.log('alerts.length: ',alerts.length);
         if (alerts.length > 0) {
             setTimeout(() => {
                 let new_alerts = alerts;

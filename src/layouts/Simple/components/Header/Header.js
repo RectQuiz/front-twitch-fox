@@ -49,6 +49,11 @@ export default function Header({
             index:1,
             rota:"/loja"
         },
+        {
+            name:"ROLETA",
+            index:2,
+            rota:"/roleta"
+        }
         // {
         //     name:"PARCEIROS",
         //     index:2,
@@ -98,8 +103,9 @@ export default function Header({
 
                     <ContainerButtonsNav>
                         {
-                            headers.map((header)=>(
+                            headers.map((header,index)=>(
                                 <a 
+                                    key={index}
                                     style={styleTaga} 
                                     className={`${itemSelect === header.index?"item":""}`} 
                                     onClick={()=>selectItem(header.index)} 
@@ -161,9 +167,9 @@ export default function Header({
                         <Ul open={open}>
                             
                             {
-                                headers.map((header)=>(
+                                headers.map((header,index)=>(
                                     
-                                    <li>
+                                    <li key={index}>
                                         <a 
                                             style={styleTaga} 
                                             href={header.rota}
@@ -204,9 +210,6 @@ export default function Header({
                                                         )
                                                     )
                                                 }
-                                                <ItemDropDownMobile>
-                                                    <a style={styleTaga} href={`/user`}>Perfil</a>
-                                                </ItemDropDownMobile>
                                                 <ItemDropDownMobile onClick={logOut}>
                                                     Sair
                                                 </ItemDropDownMobile>

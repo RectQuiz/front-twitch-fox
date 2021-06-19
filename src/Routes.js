@@ -35,6 +35,9 @@ const Routes = () => {
       <PrivateRoute component={View.ListResgateProdutosPendentes} exact layout={Dashboard} path="/dashboard/resgateProdutosPendentes" />
       <PrivateRoute component={View.ConfigRewards} exact layout={Dashboard} path="/dashboard/rewards" />
       <PrivateRoute component={View.CreateReward} exact layout={Dashboard} path="/dashboard/rewards/create" />
+
+      <PrivateRoute component={View.Roleta} exact layout={Simple} path="/roleta" />
+
       {/* <PublicRoute
         component={View.CadPessoaFisica}
         exact

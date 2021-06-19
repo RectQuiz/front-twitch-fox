@@ -27,8 +27,8 @@ const Simple = (props) => {
   const { error_general, status_error, code_general } = useSelector(({ ErrorReducer }) => ErrorReducer);
   const { status:statusModal } = useSelector(({ ModalReducer }) => ModalReducer);
   const { user, users, loading:loadingUser, errors:errorsUser, status:statusUser } = useSelector(({ UserReducer }) => UserReducer);
-  console.log("user Simple:",user);
-  console.log("loadingUser Simple:",loadingUser);
+  // console.log("user Simple:",user);
+  // console.log("loadingUser Simple:",loadingUser);
   
   useEffect(()=>{
     const nickname = localStorage.getItem('@siteJokerz/nickname');
@@ -56,10 +56,10 @@ const Simple = (props) => {
   useEffect(()=>{
     // console.log('error_general general: ',error_general);
     // console.log('status_error general: ',status_error);
-    console.log('code_general general: ',code_general);
+    // console.log('code_general general: ',code_general);
     if(status_error === true){
       if (code_general == 401) {
-          console.log('fechou error modal erro 401');
+          // console.log('fechou error modal erro 401');
           localStorage.removeItem('@siteJokerz/token');
           localStorage.removeItem('@siteJokerz/nickname');
           history.push('/home');

@@ -139,6 +139,9 @@ function ModalInfoProduct({
                                                 </DescCard>
                                             )
                                         }
+                                        <DescCard>
+                                            Float: {infoProduct.floatvalue}
+                                        </DescCard>
                                         <PaintCard>
                                             {infoProduct.paint?infoProduct.paint:""}
                                         </PaintCard>
