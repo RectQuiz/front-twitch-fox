@@ -35,7 +35,16 @@ export const restorePointsStreamElementsAction = () => ({
     type: actions.RESTORE_POINTS_STREAM_ELEMENTS
 });
 
-
 export const syncRedeemPointPendentesAction = () => ({
     type: actions.SYNC_POINTS_REDEEM_PENDENTES
+});
+
+export const acionarRoletaAction = (params) => ({
+    type: actions.ACIONAR_ROLETA,
+    params:params
+});
+
+export const setResponseRoletaAction = (response) => ({
+    type: actions.SET_RESPONSE_ROLETA,
+    response:response
 });

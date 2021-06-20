@@ -13,6 +13,7 @@ import { ProductsReducer } from './products/reducer';
 import { PointsReducer } from './points/reducer';
 import { AlertsReducer } from './alerts/reducer';
 import { RewardsReducer } from './rewards/reducer';
+import { ChannelsReducer } from './channel/reducer';
 
 
 export default combineReducers({
@@ -29,5 +30,6 @@ export default combineReducers({
     ProductsReducer,
     PointsReducer,
     AlertsReducer,
-    RewardsReducer
+    RewardsReducer,
+    ChannelsReducer
 });

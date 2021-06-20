@@ -8,7 +8,8 @@ const initial_state = {
     errors: '',
     status:0,
     totalPages:0,
-    currentPage:0
+    currentPage:0,
+    respRoleta:null
 }
 
 export const PointsReducer = (state = initial_state, action) => {
@@ -39,6 +40,11 @@ export const PointsReducer = (state = initial_state, action) => {
       return {
         ...state,
         errors: action.errors,
+      };
+    case actions.SET_RESPONSE_ROLETA:
+      return {
+        ...state,
+        respRoleta: action.response
       };
     default:
       return state;

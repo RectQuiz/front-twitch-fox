@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../styles/colors';
 
 export const ImageFundo = styled.div`
 `;
@@ -37,7 +38,7 @@ export const ContentInfoPoints = styled.div`
   align-items:center;
   margin-left:15px;
   margin-right:15px;
-  margin-bottom:30px;
+  margin-bottom:20px;
   margin-top:30px;
 `;
 
@@ -56,5 +57,55 @@ export const PointsValue = styled.div`
     color:orange;
 `;
 
+export const ContentSelect = styled.div`
+    width: 200px;
+`;
 
+export const ContainerSelectInput = styled.div`
+`;
+
+export const LabelSelect = styled.div`
+    color: ${colors.white};
+`;
+
+export const ContentTrocarCanal = styled.button`
+    width: 200px;
+    background-color: ${colors.primary_geral_dark};
+    border-radius: 10px;
+    padding: 7px;
+    text-decoration: none;
+    cursor: pointer;
+    :active {
+        width: 190px;
+    }
+`;
+
+export const ContainerButtonTrocarCanal = styled.div`
+    color: ${colors.white};
+    text-align: center;
+`;
+
+export const ContainerInput = styled.div`
+    /* background-color:#44f; */
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding: 5px;
+    padding-bottom:10px;
+    .image_premio{
+        width:100%;
+        text-align:center;
+        /* background-color:#fff; */
+    }
+    margin-bottom: 10px;
+`;
+
+export const InputValue = styled.input`
+    width:100%;
+    padding:5px;
+    border-radius:10px;
+    border: 2px solid #141414;
+`;
 

@@ -23,3 +23,11 @@ export const syncRedeemPointPendedntesService = async (params) => {
   const api_ = apiWithToken(token_);
   return await api_.get(`${resouceUrl}/register/pendentes`);
 };
+
+export const acionarRoletaService = async (params) => {
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  let id_channel = params.id_channel?params.id_channel:'null';
+  let pontos = params.pontos?params.pontos:'null';
+  return await api_.put(`/points/${id_channel}/${pontos}/roleta`);
+};

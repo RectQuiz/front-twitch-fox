@@ -40,18 +40,18 @@ export const Content = styled.div`
 `;
 
 export const ButtonRoleta = styled.div`
-    background-color: #404040;
+    background-color: ${colors.white};
     color: #fff;
-    border: 4px solid #ffffff;
-    -webkit-box-shadow: inset 0 -8px 0 #2b2b2b;
-    -moz-box-shadow: inset 0 -8px 0 #2b2b2b;
-    box-shadow: inset 0 -8px 0 #2b2b2b;
+    /* border: 4px solid #ffffff; */
+    padding: 8px;
+    /* -webkit-box-shadow: inset 0 -8px 0 #2b2b2b;
+    -moz-box-shadow: inset 0 -8px 0 #2b2b2b; */
+    box-shadow:0px 0px 10px 3px #000;
     font-family:"avantgarde_bold", Helvetica, Arial, sans-serif;
     height: 100px;
     left: 50%;
     line-height: 100px;
     margin: -54px 0 0 -54px;
-    padding: 0;
     position: absolute;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
@@ -64,9 +64,9 @@ export const ButtonRoleta = styled.div`
     width: 100px;
     cursor: pointer;
     :active {
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        box-shadow: none;
+        /* -webkit-box-shadow: none;
+        -moz-box-shadow: none; */
+        /* box-shadow: none; */
         height: 96px;
         margin-top: -50px;
     }
@@ -92,7 +92,22 @@ export const ContentCentroRoleta = styled.ul`
     -ms-transform-origin: center center;
     -o-transform-origin: center center;
     transform-origin: center center;
-    transition: transform 3s ease;
+    transition: transform 15s ease;
+    animation-iteration-count: 3;
+    @keyframes treme {
+        0% {margin-left: 0;}
+        25% {margin-left: 5px;}
+        50% {margin-left: 0;}
+        75% {margin-left: -5px;}
+        100% {margin-left: 0;}
+    }
+    @keyframes pisca {
+        0% {border: 12px solid ${colors.white};}
+        25% {border: 12px solid ${colors.green};}
+        50% {border: 12px solid ${colors.white};}
+        75% {border: 12px solid ${colors.green};}
+        100% {border: 12px solid ${colors.white};}
+    }
 `;
 
 export const ContentItemRoleta = styled.div`
@@ -115,6 +130,7 @@ export const ContentItemRoleta = styled.div`
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     top: 0;
     width: 57%;
+    font-weight: bold;
     @media (max-width: 500px) {
         width: 65.5%;
     }
@@ -177,18 +193,67 @@ export const ContentItemRoleta = styled.div`
         -o-transform: rotate(315deg);
         transform: rotate(315deg);
     }
-    :nth-child(odd) img {
-        -webkit-opacity: 0.8;
-        -moz-opacit: 0.8;
-        opacity: 0.8;
+    :nth-child(even) p {
+        color: ${colors.black} !important
+    ;
     }
 `;
 
-export const LabelItemRoleta = styled.button`
+export const ImageItemRoleta = styled.img`
+    max-width: 75%;
+    min-width: 75%;
+    max-height: 100%;
+    @media (max-width: 500px) {
+        max-width: 65%;
+        min-width: 65%;
+    }
+`;
+
+export const LabelItemRoleta = styled.p`
     color: #fff !important;
     left: 0;
     position: absolute;
     text-decoration: none;
     top: 20px;
+    width: 100%;
+`;
+
+export const ContentButton = styled.div`
+    border-radius: 50%;
+    background-color: ${colors.white};
+    max-width: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    box-shadow:0px 0px 15px 3px #0008;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @keyframes go-back {
+        from {
+            transform: scale(1.3);
+        }
+        to {
+            transform: scale(1);
+        }
+    }
+`;
+
+export const ImageButton = styled.img`
+    max-width: 100%;
+    /* min-width: 100%; */
+    max-height: 100%;
+    /* @media (max-width: 500px) {
+        max-width: 60%;
+        min-width: 60%;
+    } */
+`;
+
+export const ContentLoading = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #0006; */
     width: 100%;
 `;

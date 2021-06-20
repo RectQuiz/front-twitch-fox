@@ -40,16 +40,19 @@ export default function Header({
     // console.log("itemSelect: ",itemSelect);
     const headers = [
         {
+            active:true,
             name:"HOME",
             index:0,
             rota:"/"
         },
         {
+            active:true,
             name:"LOJA",
             index:1,
             rota:"/loja"
         },
         {
+            active:user && !loadingUser,
             name:"ROLETA",
             index:2,
             rota:"/roleta"
@@ -103,17 +106,21 @@ export default function Header({
 
                     <ContainerButtonsNav>
                         {
-                            headers.map((header,index)=>(
-                                <a 
-                                    key={index}
-                                    style={styleTaga} 
-                                    className={`${itemSelect === header.index?"item":""}`} 
-                                    onClick={()=>selectItem(header.index)} 
-                                    href={header.rota}
-                                >
-                                        {header.name}
-                                </a>
-                            ))
+                            headers.map((header,index)=>{
+                                if (header.active) {
+                                    return (
+                                        <a 
+                                            key={index}
+                                            style={styleTaga} 
+                                            className={`${itemSelect === header.index?"item":""}`} 
+                                            onClick={()=>selectItem(header.index)} 
+                                            href={header.rota}
+                                        >
+                                                {header.name}
+                                        </a>
+                                    )
+                                }
+                            })
                         }
                         {
                             !loadingAuth && 
@@ -167,18 +174,19 @@ export default function Header({
                         <Ul open={open}>
                             
                             {
-                                headers.map((header,index)=>(
-                                    
-                                    <li key={index}>
-                                        <a 
-                                            style={styleTaga} 
-                                            href={header.rota}
-                                            onClick={()=>selectItem(header.index)} 
-                                        >
-                                            {header.name}
-                                        </a>
-                                    </li>
-                                ))
+                                headers.map((header,index)=>{
+                                    if (header.active) {
+                                        return (<li key={index}>
+                                            <a 
+                                                style={styleTaga} 
+                                                href={header.rota}
+                                                onClick={()=>selectItem(header.index)} 
+                                            >
+                                                {header.name}
+                                            </a>
+                                        </li>)
+                                    }
+                                })
                             }
                             {
                                 !loadingAuth && 
