@@ -8,3 +8,4 @@ export { default as Loading } from './Loading';
 export { default as HeaderDashBoard } from './HeaderDashBoard';
 export { default as AlertMessageSimple } from './AlertMessageSimple';
 export { default as ListRedeemProducts } from './ListRedeemProducts';
+export { default as ModalAddPoints } from './ModalAddPoints';

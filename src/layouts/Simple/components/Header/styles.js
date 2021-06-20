@@ -136,7 +136,18 @@ export const ContainerButtonMenu = styled.button`
 `;
 
 export const TitleLogo = styled.h1`
-    font-size:20px;
+    @font-face {
+    font-family: 'Gotham';
+    src: url('fonts/Gotham-Bold.eot'); /* IE9 Compat Modes */
+    src: url('fonts/Gotham-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('fonts/Gotham-Bold.woff') format('woff'), /* Modern Browsers */
+        url('fonts/Gotham-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+        url('fonts/Gotham-Bold.svg#svgFontName') format('svg'); /* Legacy iOS */
+    font-weight: 700;
+    font-style: normal;
+    }
+    font-size:30px;
+    font-family: 'Gotham';
     @media (max-width: 280px) {
         /* color:#d32; */
         display:none;

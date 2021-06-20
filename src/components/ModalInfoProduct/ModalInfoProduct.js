@@ -149,11 +149,11 @@ function ModalInfoProduct({
                                     <Amount>
                                         <FiShoppingBag/>  Estoque: {infoProduct.amount}
                                     </Amount>
-                                    <ContentPrice>
+                                    {/* <ContentPrice>
                                         <PriceReal>
                                             {`R$${infoProduct.price_real?infoProduct.price_real.toFixed(2).replace('.',','):'00.00'}`}
                                         </PriceReal>
-                                    </ContentPrice>
+                                    </ContentPrice> */}
                                     <ContentPrice>
                                         {
                                             infoProduct.promo && (
@@ -163,7 +163,7 @@ function ModalInfoProduct({
                                             )
                                         }
                                         <Price>
-                                            {infoProduct.promo?((infoProduct.price - infoProduct.pricePromo)*100)/infoProduct.price:infoProduct.price}  <GiPopcorn/> 
+                                            Valor: {infoProduct.promo?((infoProduct.price - infoProduct.pricePromo)*100)/infoProduct.price:infoProduct.price}  <GiPopcorn/> 
                                         </Price>
                                         <Desconto>
                                             {infoProduct.pricePromo?'-'+infoProduct.pricePromo+'%':''}

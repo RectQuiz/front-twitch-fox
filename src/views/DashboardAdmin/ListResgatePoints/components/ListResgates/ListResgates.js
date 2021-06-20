@@ -36,7 +36,7 @@ function ListResgates({
     function formatDate(date) {
         let data = new Date(date);
         let dataFormatada = ((data.getDate() > 9?data.getDate():"0"+data.getDate())) + "/" + ((data.getMonth() + 1) > 9?(data.getMonth() + 1):"0"+(data.getMonth() + 1)) + "/" + data.getFullYear(); 
-        console.log(dataFormatada);
+        // console.log(dataFormatada);
         return dataFormatada
     }
 

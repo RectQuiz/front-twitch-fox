@@ -31,3 +31,12 @@ export const acionarRoletaService = async (params) => {
   let pontos = params.pontos?params.pontos:'null';
   return await api_.put(`/points/${id_channel}/${pontos}/roleta`);
 };
+
+export const addPointsUserService = async (params) => {
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  params = params ? params : {};
+  let nickname = params.nickname?params.nickname:'null';
+  let pontos = params.pontos?params.pontos:'null';
+  return await api_.put(`/points/${nickname}/${pontos}/add`);
+};

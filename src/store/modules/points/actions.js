@@ -48,3 +48,8 @@ export const setResponseRoletaAction = (response) => ({
     type: actions.SET_RESPONSE_ROLETA,
     response:response
 });
+
+export const addPointsUserAction = (params) => ({
+    type: actions.ADD_POINTS_USER,
+    params:params
+});

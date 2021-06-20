@@ -28,8 +28,10 @@ import { loadProducts } from '../../store/modules/products/actions';
 import { Footer } from '../../components';
 import { RoletaComp } from './components';
 import { GiPopcorn } from 'react-icons/gi';
-import SucessoRoletaSound from '../../assets/sounds/success_roleta.mp3';
+import SucessoRoletaSound from '../../assets/sounds/ganhou_roleta.mp3';
 import PerdaRoletaSound from '../../assets/sounds/perda_roleta.mp3';
+import InicioRoletaSound from '../../assets/sounds/inicio_roleta.mp3';
+import ErroRoletaSound from '../../assets/sounds/erro_roleta.mp3';
 import { acionarRoletaAction } from '../../store/modules/points/actions';
 import Select from 'react-select';
 import { loadChannelsAction } from '../../store/modules/channel/actions';
@@ -38,6 +40,8 @@ import { setAlert } from '../../store/modules/alerts/actions';
 function Roleta({canais}) {
   const { status } = useSelector(({ ModalReducer }) => ModalReducer);
   const [ sucessoRoletaMusic, setSucessoRoletaMusic ] = useState(new Audio(SucessoRoletaSound));
+  const [ inicioRoletaMusic, setInicioRoletaMusic ] = useState(new Audio(InicioRoletaSound));
+  const [ erroRoletaMusic, setErroRoletaMusic ] = useState(new Audio(ErroRoletaSound));
   const [ selectChannels, setSelectChannels ] = useState([]);
   const [ valorAposta, setValorAposta ] = useState(0);
   const [ animationButton, setAnimationButton ] = useState('go-back');
@@ -72,6 +76,8 @@ function Roleta({canais}) {
 
   useEffect(()=>{
       sucessoRoletaMusic.preload = 'auto';
+      inicioRoletaMusic.preload = 'auto';
+      erroRoletaMusic.preload = 'auto';
       dispatch(loadInfoUser());
       dispatch(loadChannelsAction({}));
       load_products(1);
@@ -101,6 +107,40 @@ function Roleta({canais}) {
 
   function trocarCanal() {
     setChannelSelected({ value: '', label: 'SELECIONE::::', id_person:''});
+  }
+
+  function girarRoleta() {
+    if (ativa) {
+      if (isNaN(valorAposta) === false) {
+        if (valorAposta >= 10) {
+          acionarRoleta();
+          setAtiva(false);
+          setAnimationButton('null');
+          // let result = percentageChance(['não', 'sim'], [55, 45]);
+        }else{
+          erroRoletaMusic.play();
+          dispatch(setAlert({
+            message:'Erro ao acionar a roleta, valor deve ser maior que 10',
+            tipo:'error',
+            time:1500
+          }));
+        }
+      }else{
+        erroRoletaMusic.play();
+        dispatch(setAlert({
+          message:'Erro ao acionar a roleta, valor de aposta inválido',
+          tipo:'error',
+          time:1500
+        }));
+      }
+    }else{
+      dispatch(setAlert({
+        message:'Espere um pouco',
+        tipo:'warning',
+        time:1000
+      }));
+    }
+
   }
 
   return(
@@ -169,6 +209,7 @@ function Roleta({canais}) {
                                         type="number"
                                         value={valorAposta}
                                         onChange={(e)=>setValorAposta(e.target.value)}
+                                        onKeyPress={(e)=>{if (e.charCode === 13) girarRoleta()}}
                                 />
                             </ContainerInput>
                         </ContainerSelectInput>
@@ -183,11 +224,14 @@ function Roleta({canais}) {
                       acionarRoleta={acionarRoleta}
                       sucessoRoletaMusic={sucessoRoletaMusic}
                       perdaRoletaMusic={perdaRoletaMusic}
+                      inicioRoletaMusic={inicioRoletaMusic}
+                      erroRoletaMusic={erroRoletaMusic}
                       valorAposta={valorAposta}
                       ativa={ativa}
                       setAtiva={setAtiva}
                       animationButton={animationButton}
                       setAnimationButton={setAnimationButton}
+                      girarRoleta={girarRoleta}
                     />
                   )
                 }

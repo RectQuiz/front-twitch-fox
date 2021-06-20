@@ -575,7 +575,7 @@ function FormEditProduct({editProduct,product, deleteStickerProduct}) {
                                Float do produto:
                             </LabelForm>
                             <InputForm
-                                    type="number"
+                                    type="text"
                                     name="floatvalue"
                                     id="floatvalue"
                                     className="floatvalue"

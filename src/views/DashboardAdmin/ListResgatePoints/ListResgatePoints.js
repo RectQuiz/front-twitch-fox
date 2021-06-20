@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ScaleLoader from "react-spinners/ScaleLoader";
-import { HeaderDashBoard } from '../../../components';
+import { HeaderDashBoard, ModalAddPoints } from '../../../components';
 import { SelectItemMenuAdmin } from '../../../store/modules/menuAdmin/actions';
 import { loadInfoUser } from '../../../store/modules/user/actions';
 import { ButtonActionProduct, ListResgates } from './components';
 import colors from '../../../styles/colors';
-import { FaSyncAlt } from 'react-icons/fa';
+import { FaSyncAlt, FaPlus } from 'react-icons/fa';
 
 import {
     Content,
@@ -17,15 +17,17 @@ import {
 } from './styles';
 import { useHistory } from 'react-router';
 import { loadRedeemPoints, syncRedeemPointPendentesAction } from '../../../store/modules/points/actions';
+import { setStatusModal } from '../../../store/modules/modal/actions';
 
 function ListResgatePoints() {
     const history = useHistory();
     const dispatch = useDispatch();
+    const { status:statusModal } = useSelector(({ ModalReducer }) => ModalReducer);
     const [ modalDetailItem, setModaDetailItem ] = useState(false);
     const { user, users, loading:loadingUser } = useSelector(({ UserReducer }) => UserReducer);
     const { redeemPoints, totalPages, currentPage, loading:loadingPoints, errors, status } = useSelector(({ PointsReducer }) => PointsReducer);
 
-    console.log('redeemPoints DashboardAdmin: ',redeemPoints);
+    console.log('statusModal DashboardAdmin: ',statusModal);
     useEffect(()=>{
         console.log('loadInfoUser DashboardAdmin');
         dispatch(loadInfoUser());
@@ -39,6 +41,17 @@ function ListResgatePoints() {
     
     const syncronizarResgatesPontosPendentes = ()=>{
         dispatch(syncRedeemPointPendentesAction());
+    }
+
+    const openModalAddPoints = (status_set)=>{
+        if (status_set != statusModal) {
+          dispatch(setStatusModal(status_set));
+        }
+    }
+
+    const handleClose = ()=>{
+        console.log('handleClose modal');
+        openModalAddPoints(false);
     }
 
     return (
@@ -81,6 +94,16 @@ function ListResgatePoints() {
                                                 color2={colors.black}
                                             />
                                         }
+                                        {
+                                            redeemPoints&&
+                                            <ButtonActionProduct
+                                                iconButton={<FaPlus size={50}color={colors.primary_dashboard} />}
+                                                textButton={"Adicionar ponto"}
+                                                onClick={openModalAddPoints}
+                                                color1={colors.primary_geral}
+                                                color2={colors.primary_geral_dark}
+                                            />
+                                        }
                                     </ContentColumDashBoard>
                                 </ContentRowDashBoard>
                             </ContentBodyDash>
@@ -88,6 +111,7 @@ function ListResgatePoints() {
                     }
                 {/* <Footer/> */}
             </BackgroundColor>
+            <ModalAddPoints show={statusModal} handleClose={handleClose}/>
         </Content>
     );
 }

@@ -56,8 +56,8 @@ export const ContentCardInfo = styled.div`
         max-width:95%;
         min-width:95%;
         
-        max-height: 90vh;
-        min-height: 90vh;
+        max-height: 80vh;
+        min-height: 80vh;
         padding:10px;
     }
     /* display: flex; */
@@ -204,6 +204,9 @@ export const TitleCard = styled.div`
     white-space:nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    @media (max-width: 500px) {
+        font-size: 20px;
+    }
 `;
 
 export const PaintCard = styled.div`
@@ -213,12 +216,22 @@ export const PaintCard = styled.div`
     white-space:nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    @media (max-width: 500px) {
+        font-size: 25px;
+    }
 `;
 
-export const DescCard = styled.h5`
+export const DescCard = styled.div`
     color:#fff;
     opacity:0.5;
     text-align:left;
+    font-size: 20px;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media (max-width: 500px) {
+        font-size: 15px;
+    }
 `;
 
 export const ActionCard = styled.button`
@@ -236,8 +249,12 @@ export const ActionCard = styled.button`
     }
 `;
 
-export const Amount = styled.h4`
+export const Amount = styled.div`
     color:#fff;
+    font-size: 24px;
+    @media (max-width: 500px) {
+        font-size: 20px;
+    }
 `;
 
 export const ButtonAction = styled.div`
@@ -278,6 +295,9 @@ export const Price = styled.div`
     text-overflow: ellipsis;
     white-space:nowrap;
     margin: 0;
+    @media (max-width: 500px) {
+        font-size: 25px;
+    }
 `;
 
 export const PriceReal = styled.div`
@@ -289,6 +309,9 @@ export const PriceReal = styled.div`
     text-overflow: ellipsis;
     white-space:nowrap;
     margin: 0;
+    @media (max-width: 500px) {
+        font-size: 15px;
+    }
 `;
 
 export const PriceOld = styled.h3`
@@ -312,6 +335,9 @@ export const Desconto = styled.h3`
     text-overflow: ellipsis;
     white-space:nowrap;
     padding-left:7px;
+    @media (max-width: 500px) {
+        font-size: 15px;
+    }
     /* background-color:#fff; */
 `;
 

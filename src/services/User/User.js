@@ -53,6 +53,8 @@ export const setStatusType = async (params) => {
 };
 
 export const editPerson = async (params) => {
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
   params = params ? params : {};
-  return await api.put(`${resouceUrl}/${params.id}`, params.body);
+  return await api_.put(`${resouceUrl}/${params.id}`, params.body);
 };

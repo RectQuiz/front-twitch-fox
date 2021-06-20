@@ -7,7 +7,7 @@ export const Container = styled.div`
   top: ${({layout})=>layout == 'simple'?'176px':layout == 'dashboard'?'20px':'176px'};
   right: 0;
   /* padding: 10px; */
-  z-index: 7;
+  z-index: 8;
 `;
 
 export const Content = styled.div`

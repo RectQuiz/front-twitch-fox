@@ -26,12 +26,15 @@ function RoletaComp({
   sucessoRoletaMusic,
   perdaRoletaMusic,
   acionarRoleta,
+  inicioRoletaMusic,
+  erroRoletaMusic,
   loading,
   valorAposta,
   ativa,
   setAtiva,
   animationButton,
-  setAnimationButton
+  setAnimationButton,
+  girarRoleta
 }) {
   const dispatch = useDispatch();
   const [ deg, setDeg ] = useState(null);
@@ -49,6 +52,7 @@ function RoletaComp({
       dispatch(setResponseRedeemPoints({}));
       console.log("respRoleta: ",respRoleta);
       if (respRoleta) {
+        inicioRoletaMusic.play();
         if (respRoleta < 0) {
           let mult_deg_rand = percentageChance(nao, [25,25,25,25]);
           calculaGrau(mult_deg_rand);
@@ -79,6 +83,7 @@ function RoletaComp({
           }, 15000);
         }
       } else {
+        erroRoletaMusic.play();
         dispatch(setAlert({
           message:'Erro ao acionar a roleta',
           tipo:'error',
@@ -87,6 +92,7 @@ function RoletaComp({
       }
     }
     if (statusPoints == 500 || statusPoints == 400) {
+      erroRoletaMusic.play();
       setAtiva(true);
     }
   },[statusPoints]);
@@ -126,41 +132,9 @@ function RoletaComp({
     
     mult_certo = mult_certo < 0?mult_certo*-1:mult_certo;
     // console.log("mult_certo: ",mult_certo);
-    let _deg = deg + (mult_certo * 45) + 1800;
+    let _deg = deg + (mult_certo * 45) + 2520;
     setDeg(_deg);
     setIndex_atual(index_novo);
-  }
-
-  function girarRoleta() {
-    if (ativa) {
-      if (isNaN(valorAposta) === false) {
-        if (valorAposta >= 10) {
-          acionarRoleta();
-          setAtiva(false);
-          setAnimationButton('null');
-          // let result = percentageChance(['não', 'sim'], [55, 45]);
-        }else{
-          dispatch(setAlert({
-            message:'Erro ao acionar a roleta, valor deve ser maior que 10',
-            tipo:'error',
-            time:1500
-          }));
-        }
-      }else{
-        dispatch(setAlert({
-          message:'Erro ao acionar a roleta, valor de aposta inválido',
-          tipo:'error',
-          time:1500
-        }));
-      }
-    }else{
-      dispatch(setAlert({
-        message:'Espere um pouco',
-        tipo:'warning',
-        time:1000
-      }));
-    }
-
   }
   
   var handleChange = function(event){

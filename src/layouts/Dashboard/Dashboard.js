@@ -40,6 +40,8 @@ import {
 } from './styles';
 import { Accordion } from './components';
 import { AlertMessageSimple, ModalError } from '../../components';
+import { setAlert } from '../../store/modules/alerts/actions';
+import { setErrorGeneral } from '../../store/modules/error/actions';
 
 function Dashboard(props) {
     const dispatch = useDispatch();
@@ -47,7 +49,7 @@ function Dashboard(props) {
     const { children } = props;
     const { user, users, loading, errors, status } = useSelector(({ UserReducer }) => UserReducer);
     const [ itensMenu, setItensMenu ] = useState([]);
-    const { status_error } = useSelector(({ ErrorReducer }) => ErrorReducer);
+    const { error_general, status_error, code_general  } = useSelector(({ ErrorReducer }) => ErrorReducer);
     const { item_selected } = useSelector(({ MenuAdminReducer }) => MenuAdminReducer);
     console.log("status_error: ",status_error);
     let isAuth = user?user.streamer:true;
@@ -135,6 +137,34 @@ function Dashboard(props) {
             }
         ]);
     },[user]);
+
+    useEffect(()=>{
+        // console.log('error_general general: ',error_general);
+        // console.log('status_error general: ',status_error);
+        // console.log('code_general general: ',code_general);
+        if(status_error === true){
+          if (code_general == 401) {
+              // console.log('fechou error modal erro 401');
+              localStorage.removeItem('@siteJokerz/token');
+              localStorage.removeItem('@siteJokerz/nickname');
+              history.push('/home');
+              dispatch(setAlert({
+                message:error_general,
+                tipo:'error',
+                time:2000
+              }));
+              dispatch(setErrorGeneral('',false,0));
+          }else{
+              dispatch(setAlert({
+                message:error_general,
+                tipo:'error',
+                time:2000
+              }));
+              dispatch(setErrorGeneral('',false,0));
+              // history.push('home');
+          }
+        }
+    },[status_error]);
 
     return (
         !isAuth ? (
