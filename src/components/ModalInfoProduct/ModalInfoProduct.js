@@ -188,7 +188,7 @@ function ModalInfoProduct({
                                                     </ButtonAdd>
                                                 ):
                                                 (
-                                                    (user.points>=infoProduct.promo?infoProduct.pricePromo:infoProduct.price)?
+                                                    (infoProduct.promo && user.points>=infoProduct.pricePromo || !infoProduct.promo && user.points>=infoProduct.price)?
                                                     (
                                                         <ButtonAdd onClick={()=>setConfirm(true)} active={true}>
                                                             Resgatar item
