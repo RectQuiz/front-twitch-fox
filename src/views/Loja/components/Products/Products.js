@@ -18,7 +18,7 @@ import { API_URL } from '../../../../services/config';
 export default function Products({
     products,
     totalPages,
-    // currentPage,
+    currentPage,
     load_products,
     modal,
     setModal,
@@ -111,6 +111,7 @@ export default function Products({
                             }
                         </Content>
                         <ReactPaginate
+                                initialPage={currentPage-1}
                                 previousLabel={"prev"}
                                 nextLabel={"next"}
                                 breakLabel={"..."}
