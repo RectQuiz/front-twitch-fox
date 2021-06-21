@@ -15,7 +15,7 @@ import colors from '../../../../../styles/colors';
 import { useDispatch } from 'react-redux';
 import { changeStatusProductAction, deleteProductAction } from '../../../../../store/modules/products/actions';
 
-function ItensLastAdd({products, totalPages, flex, setModal, modal, load_products, loading}) {
+function ItensLastAdd({products, totalPages, flex, setModal, modal, load_products, loading, currentPage}) {
     const dispatch = useDispatch();
     const [ productSelect, setProductSelect ] = useState(null);
     const history = useHistory();
@@ -101,6 +101,7 @@ function ItensLastAdd({products, totalPages, flex, setModal, modal, load_product
                     }
                 </Content>
                 <ReactPaginate
+                        initialPage={currentPage-1}
                         previousLabel={"prev"}
                         nextLabel={"next"}
                         breakLabel={"..."}
