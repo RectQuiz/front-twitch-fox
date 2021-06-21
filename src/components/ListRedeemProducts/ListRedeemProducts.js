@@ -67,8 +67,8 @@ function ListRedeemProducts({
                                                     <ContentItemList title={redeemProduct.id_user?redeemProduct.id_user.nickname:'Não encontrado'} important={true} left={true}>
                                                         {redeemProduct.id_user?redeemProduct.id_user.nickname:'Não encontrado'}
                                                     </ContentItemList>
-                                                    <ContentItemList title={redeemProduct.product_id?redeemProduct.id_user.name:'Não encontrado'} important={true}>
-                                                        {redeemProduct.product_id?redeemProduct.id_user.name:'Não encontrado'}
+                                                    <ContentItemList title={redeemProduct.product_id?redeemProduct.product_id.name:'Não encontrado'} important={true}>
+                                                        {redeemProduct.product_id?redeemProduct.product_id.name:'Não encontrado'}
                                                     </ContentItemList> 
                                                     <ContentItemList title={formatDate(redeemProduct.date)}>
                                                         {formatDate(redeemProduct.date)}

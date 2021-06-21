@@ -29,10 +29,7 @@ function Loja() {
   }
 
   useEffect(()=>{
-      const token = localStorage.getItem('@siteJokerz/token');
-      if (token) {
-        dispatch(loadInfoUser());
-      }
+      dispatch(loadInfoUser());
       load_products(1);
   },[]);
   

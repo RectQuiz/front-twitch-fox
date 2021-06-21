@@ -134,10 +134,10 @@ const CardProduct = (props) => {
                             )
                         }
                         <Price>
-                            {promo?((price - pricePromo)*100)/price:price}  <GiPopcorn/> 
+                            {promo?pricePromo?pricePromo:0:price}  <GiPopcorn/> 
                         </Price>
                         <Desconto>
-                            {pricePromo?'-'+pricePromo+'%':''}
+                            {pricePromo?'-'+((price - pricePromo)*100)/price+'%':''}
                         </Desconto>
                     </ContentPrice>
                     {

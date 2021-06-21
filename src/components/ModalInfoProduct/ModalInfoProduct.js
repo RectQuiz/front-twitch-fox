@@ -163,10 +163,10 @@ function ModalInfoProduct({
                                             )
                                         }
                                         <Price>
-                                            Valor: {infoProduct.promo?((infoProduct.price - infoProduct.pricePromo)*100)/infoProduct.price:infoProduct.price}  <GiPopcorn/> 
+                                            Valor: {infoProduct.promo?infoProduct.pricePromo:infoProduct.price}  <GiPopcorn/> 
                                         </Price>
                                         <Desconto>
-                                            {infoProduct.pricePromo?'-'+infoProduct.pricePromo+'%':''}
+                                            {infoProduct.pricePromo?'-'+((infoProduct.price - infoProduct.pricePromo)*100)/infoProduct.price+'%':''}
                                         </Desconto>
                                     </ContentPrice>
                                     <ContentButtonAdd>
@@ -188,7 +188,7 @@ function ModalInfoProduct({
                                                     </ButtonAdd>
                                                 ):
                                                 (
-                                                    (user.points>=infoProduct.price)?
+                                                    (user.points>=infoProduct.promo?infoProduct.pricePromo:infoProduct.price)?
                                                     (
                                                         <ButtonAdd onClick={()=>setConfirm(true)} active={true}>
                                                             Resgatar item
@@ -217,7 +217,7 @@ function ModalInfoProduct({
                                 <TitleConfirm>
                                     {`Deseja realmente adiquirir este item por`}
                                     <PriceConfirm>
-                                    {`${infoProduct.price?infoProduct.price:0} pipocas?`}
+                                    {`${infoProduct.price?infoProduct.promo?infoProduct.pricePromo:infoProduct.price:0} pipocas?`}
                                     </PriceConfirm>
                                 </TitleConfirm>
                                 <ContentButtonConfirm>

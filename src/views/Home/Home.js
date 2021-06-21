@@ -11,58 +11,32 @@ import fundo from '../../assets/images/fundo.jpg';
 import Footer from '../../components/Footer';
 import { BackgroundColor, Content } from './styles';
 import { loadInfoUser } from '../../store/modules/user/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadProducts } from '../../store/modules/products/actions';
 
 export default function Home({history}){
     const dispatch = useDispatch();
-    const [ products, setProducts ] = useState([]);
-
-    useEffect(()=>{
-        const load_products = async()=>{
-            try {
-                // let resp = await api.get(`https://steamcommunity.com/id/argerioaf/inventory/json/730/2`);
-                let resp = await api.get(`https://api.teamjokerz.com.br/products/promo`);
-                // console.log('resp itens cs: ',resp.data.data);
-                setProducts(resp.data.data);
-            } catch (error) {
-                console.log('error itens cs: ',error);
-                if (error.response) {
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                    console.log('data',error.response.data);
-                    console.log('status',error.response.status);
-                    console.log('headers',error.response.headers);
-                } else if (error.request) {
-                    // The request was made but no response was received
-                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                    // http.ClientRequest in node.js
-                    console.log('request',error.request);
-                } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log('Error itens cs', error.message);
-                }
-                console.log('error.config',error.config);
-            }
-        }
-        load_products();
-    },[]);
+  const { products, totalPages, currentPage, loading } = useSelector(({ ProductsReducer }) => ProductsReducer);
     
     useEffect(()=>{
-        const token = localStorage.getItem('@siteJokerz/token');
-        console.log("token Home: ",token);
-        if (token) {
-            console.log('loadInfoUser Home');
-            dispatch(loadInfoUser());
-        }
+        dispatch(loadInfoUser());
+        load_products(1);
     },[]);
+
+    const load_products = async(page)=>{
+      dispatch(loadProducts({page:page, status:"emEstoque"}));
+    };
 
     return (
         <Content fundo={fundo}>
             <CarouselComp/>
             <BackgroundColor>
                 <Cards/>
-                {products.length > 0 && <Divider title='Promoções'/>}
-                <Promo products={products}/>
+                {products && products.length > 0 && <Divider title='Produtos'/>}
+                {
+                    products && products.length > 0 && <Promo products={products}/>
+                }
+               
                 {/* <Divider title='Lives parceiras'/> */}
                 <Parceiros/>
                 <Footer/>

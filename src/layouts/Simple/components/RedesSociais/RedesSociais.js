@@ -10,7 +10,7 @@ export default function RedesSociais({}){
         <Container>
             <Content>
                     <IconButton>
-                        <a href="https://discord.gg/TcJjX7E" target="_blank">
+                        <a href="https://discord.gg/8EXSMvMtSd" target="_blank">
                             <IconContext.Provider value={{ color: "white", size: '2em'}}>
                                 <div>
                                     <FaDiscord/>
@@ -28,7 +28,7 @@ export default function RedesSociais({}){
                         </a>
                     </IconButton>
                     <IconButton>
-                        <a href="https://twitter.com/team_jokerz" target="_blank">
+                        <a href="https://twitter.com/teamjokerzcsgo" target="_blank">
                             <IconContext.Provider value={{ color: "white", size: '2em'}}>
                                 <div>
                                     <FiTwitter/>

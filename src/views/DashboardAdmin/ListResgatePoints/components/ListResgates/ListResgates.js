@@ -55,8 +55,11 @@ function ListResgates({
                         <ContentHeader>
                             Data
                         </ContentHeader>
-                        <ContentHeader important={true} right={true}>
+                        <ContentHeader>
                             Canal
+                        </ContentHeader>
+                        <ContentHeader important={true} right={true}>
+                            Tipo de resgate
                         </ContentHeader>
                     </HeaderList>
                     {
@@ -76,8 +79,11 @@ function ListResgates({
                                                 <ContentItemList title={formatDate(redeemPoint.date)}>
                                                     {formatDate(redeemPoint.date)}
                                                 </ContentItemList> 
-                                                <ContentItemList important={true} right={true} title={redeemPoint.id_channel?redeemPoint.id_channel.name:'Canal inesistente'}>
+                                                <ContentItemList title={redeemPoint.id_channel?redeemPoint.id_channel.name:'Canal inesistente'}>
                                                     {redeemPoint.id_channel?redeemPoint.id_channel.name:'Canal inesistente'}
+                                                </ContentItemList>
+                                                <ContentItemList important={true} right={true} title={redeemPoint.type?redeemPoint.type:'Tipo inesistente'}>
+                                                    {redeemPoint.type?redeemPoint.type:'Tipo inesistente'}
                                                 </ContentItemList>
                                             </ContentRedeem>
                                         )
