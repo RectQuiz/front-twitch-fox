@@ -30,7 +30,7 @@ function Loja() {
 
   useEffect(()=>{
       dispatch(loadInfoUser());
-      load_products(1);
+      load_products(currentPage);
   },[]);
   
   const load_products = async(page)=>{
