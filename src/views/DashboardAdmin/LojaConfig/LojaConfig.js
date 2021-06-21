@@ -25,20 +25,20 @@ function LojaConfig() {
     const [ modalDetailItem, setModaDetailItem ] = useState(false);
     const { user, users, loading:loadingUser } = useSelector(({ UserReducer }) => UserReducer);
     const { products, totalPages, currentPage, loading:loadingProduct, errors, status } = useSelector(({ ProductsReducer }) => ProductsReducer);
-    // console.log("loadingProduct: ",loadingProduct);
+    console.log("currentPage: ",currentPage);
 
     useEffect(()=>{
         console.log('loadInfoUser DashboardAdmin');
         dispatch(loadInfoUser());
         dispatch(SelectItemMenuAdmin({index:2.1}));
-        load_products(1);
+        load_products(currentPage);
     },[]);
 
     useEffect(()=>{
       if (loadingProduct == false && status == 201 && errors.length == 0) {
         dispatch(setStatusProducts(0));
         dispatch(setResponseProducts({}));
-        load_products(1);
+        load_products(currentPage);
       }
     },[status]);
 
@@ -78,7 +78,7 @@ function LojaConfig() {
                         ):
                         (
                             <ContentBodyDash>
-                                <HeaderDashBoard reload={()=>load_products(1)} title={"Sua aréa de configuração da loja"} subtitle={"Aréa de configuração da loja."} />
+                                <HeaderDashBoard reload={()=>load_products(currentPage)} title={"Sua aréa de configuração da loja"} subtitle={"Aréa de configuração da loja."} />
                                 <ContentRowDashBoard>
                                     {
                                         products&&<ItensLastAdd
