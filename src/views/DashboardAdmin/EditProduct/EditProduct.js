@@ -34,7 +34,7 @@ function EditProduct({history}) {
       if (loadingProduct == false && status == 201 && errors.length == 0) {
         dispatch(setStatusProducts(0));
         dispatch(setResponseProducts({}));
-        dispatch(loadProducts());
+        dispatch(loadProducts({page:currentPage,last:true}));
         history.push('/dashboard/loja');
       }
     },[status]);
