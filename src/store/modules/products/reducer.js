@@ -8,7 +8,7 @@ const initial_state = {
     errors: '',
     status:0,
     totalPages:0,
-    currentPage:0,
+    currentPage:1,
     redeemProducts:null
 }
 
