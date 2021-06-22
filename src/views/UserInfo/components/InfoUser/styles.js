@@ -145,7 +145,7 @@ export const ItemValuesChannels = styled.div`
     padding:7px;
     color:#fff;
     font-size:16px;
-    border:1px solid ${({status})=>status?'#008080':'#B22222'};
+    border:1px solid ${({status})=>status?'#008080':colors.color_jokerz_2};
     border-top-right-radius:7px;
     border-bottom-right-radius:7px;
     /* background-color:red; */
@@ -154,12 +154,12 @@ export const ItemValuesChannels = styled.div`
 export const ItemLabelChannel = styled.div`
     /* width:10%; */
     padding:7px;
-    background-color:${({status})=>status?'#008080':'#B22222'};
+    background-color:${({status})=>status?'#008080':colors.color_jokerz_2};
     border-top-left-radius:7px;
     border-bottom-left-radius:7px;
     color:#fff;
     font-size:16px;
-    border:1px solid ${({status})=>status?'#008080':'#B22222'};
+    border:1px solid ${({status})=>status?'#008080':colors.color_jokerz_2};
 `;
 
 export const ContentValueInfoChannels = styled.div`

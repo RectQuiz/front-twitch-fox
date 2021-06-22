@@ -1,3 +1,12 @@
+
+
+const color_jokerz_1 = "#636363";
+const color_jokerz_2 = "#B200B7";
+const color_jokerz_3 = "#009B00";
+const color_jokerz_4 = "#1A009B";
+const color_jokerz_5 = "#D6D000";
+const color_jokerz_6 = "#171a21";
+
 export default {
     red:"red",
     red_dark:"#8B0000",
@@ -15,7 +24,6 @@ export default {
     green:"green",
     green_dark:"#006400",
     brown:"bronw",
-    primary_geral:"#B200B7",
     primary_geral_dark:"#800000",
     steam_primary:"#1b2838",
     steam_secondary:"#171a21",
@@ -32,13 +40,14 @@ export default {
     color_socket:"#008080",
     color_sync_points:"#000080",
 
-
-    color_jokerz_1:"#636363",
-    color_jokerz_2:"#B200B7",
-    color_jokerz_3:"#009B00",
-    color_jokerz_4:"#1A009B",
-    color_jokerz_5:"#D6D000",
-    color_jokerz_6:"#FF9100",
+        
+    primary_geral:color_jokerz_2,
+    color_jokerz_1:color_jokerz_1,
+    color_jokerz_2:color_jokerz_2,
+    color_jokerz_3:color_jokerz_3,
+    color_jokerz_4:color_jokerz_4,
+    color_jokerz_5:color_jokerz_5,
+    color_jokerz_6:color_jokerz_6,
     
     // CINZA #636363
     // ROXO #B200B7

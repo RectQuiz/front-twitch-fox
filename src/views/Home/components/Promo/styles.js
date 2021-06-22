@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../../../styles/colors';
 
 export const Container = styled.div`
   /* background-color: red; */
@@ -45,7 +46,7 @@ export const ButtonStore = styled.button`
   /* width:5vw; */
   padding:10px;
   /* height:70px; */
-  background-color:rgba(218,0,57);
+  background-color:${colors.color_jokerz_2};
   border-radius:5px;
   text-transform:uppercase;
   font-size:20px;

@@ -2,15 +2,15 @@ import styled from 'styled-components';
 import colors from '../../../../styles/colors';
 
 export const Container = styled.div`
-  background-color: #1c1c1c;
+  background-color: ${colors.color_jokerz_6};
   width: 100%;
   height: auto;
-  color: #fff;
+  color: ${colors.white};
   display: flex;
   /* max-height:95px; */
   min-height:95px;
   /* padding: 0px 10px; */
-  border-bottom: 4px solid #141414;
+  border-bottom: 4px solid ${colors.color_jokerz_2};
   /* position:absolute;
   top:70px; */
   /* opacity:0.5; */

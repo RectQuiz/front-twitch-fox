@@ -128,25 +128,33 @@ function ModalInfoProduct({
                                 </ContentHeader>
                                 <ContentInfoCard>
                                     <HeaderInfo>
-                                        <TitleCard>
-                                            <FaInfoCircle size={20}/> {infoProduct.title}
+                                        <TitleCard title={infoProduct.title && (infoProduct.weapon.length == 0 || infoProduct.paint.length == 0)?infoProduct.title:`${infoProduct.weapon} | ${infoProduct.paint}`}>
+                                            {infoProduct.title && (infoProduct.weapon.length == 0 || infoProduct.paint.length == 0)?infoProduct.title:`${infoProduct.weapon} | ${infoProduct.paint}`}
                                         </TitleCard>
                                         {
                                             infoProduct.desc.trim().length > 0 &&
                                             (
-                                                <DescCard>
+                                                <DescCard title={infoProduct.desc}>
+                                                    <FaInfoCircle size={20}/> 
+                                                    {`   `}
                                                     {infoProduct.desc}
                                                 </DescCard>
                                             )
                                         }
-                                        <DescCard>
-                                            Float: {infoProduct.floatvalue}
-                                        </DescCard>
-                                        <PaintCard>
+                                        {
+                                            infoProduct.floatvalue.trim().length > 0 && infoProduct.floatvalue != 'null' &&
+                                            (
+                                                <DescCard title={infoProduct.floatvalue}>
+                                                    Float: {infoProduct.floatvalue}
+                                                </DescCard>
+                                            )
+                                        }
+                                        {/* <PaintCard>
                                             {infoProduct.paint?infoProduct.paint:""}
-                                        </PaintCard>
+                                        </PaintCard> */}
                                     </HeaderInfo>
-                                    <Amount>
+
+                                    <Amount title={infoProduct.amount}>
                                         <FiShoppingBag/>  Estoque: {infoProduct.amount}
                                     </Amount>
                                     {/* <ContentPrice>
@@ -162,53 +170,53 @@ function ModalInfoProduct({
                                                 </PriceOld>
                                             )
                                         }
-                                        <Price>
+                                        <Price title={infoProduct.promo?infoProduct.pricePromo:infoProduct.price}>
                                             Valor: {infoProduct.promo?infoProduct.pricePromo:infoProduct.price}  <GiPopcorn/> 
                                         </Price>
-                                        <Desconto>
+                                        <Desconto title={infoProduct.pricePromo?'-'+((infoProduct.price - infoProduct.pricePromo)*100)/infoProduct.price+'%':''}>
                                             {infoProduct.pricePromo?'-'+((infoProduct.price - infoProduct.pricePromo)*100)/infoProduct.price+'%':''}
                                         </Desconto>
                                     </ContentPrice>
                                     <ContentButtonAdd>
-                                    {
-                                        user?
-                                        (
-                                            
-                                            user.type_account === 'pendente'?
+                                        {
+                                            user?
                                             (
-                                                <ButtonAdd onClick={verificarPerfil} active={false} >
-                                                    Atualize seu perfil
-                                                </ButtonAdd>
-                                            ):
-                                            (
-                                                user.type_account === 'secondary'?
+                                                
+                                                user.type_account === 'pendente'?
                                                 (
-                                                    <ButtonAdd disabled active={false} >
-                                                        Apenas para contas primárias
+                                                    <ButtonAdd onClick={verificarPerfil} active={false} >
+                                                        Atualize seu perfil
                                                     </ButtonAdd>
                                                 ):
                                                 (
-                                                    (infoProduct.promo && user.points>=infoProduct.pricePromo || !infoProduct.promo && user.points>=infoProduct.price)?
+                                                    user.type_account === 'secondary'?
                                                     (
-                                                        <ButtonAdd onClick={()=>setConfirm(true)} active={true}>
-                                                            Resgatar item
+                                                        <ButtonAdd disabled active={false} >
+                                                            Apenas para contas primárias
                                                         </ButtonAdd>
                                                     ):
                                                     (
-                                                        <ButtonAdd disabled active={false}>
-                                                            Pontos insuficientes
-                                                        </ButtonAdd>
+                                                        (infoProduct.promo && user.points>=infoProduct.pricePromo || !infoProduct.promo && user.points>=infoProduct.price)?
+                                                        (
+                                                            <ButtonAdd onClick={()=>setConfirm(true)} active={true}>
+                                                                Resgatar item
+                                                            </ButtonAdd>
+                                                        ):
+                                                        (
+                                                            <ButtonAdd disabled active={false}>
+                                                                Pontos insuficientes
+                                                            </ButtonAdd>
+                                                        )
                                                     )
                                                 )
+                                            ):
+                                            (
+                                                <ButtonAdd disabled active={false} >
+                                                    Faça login antes
+                                                </ButtonAdd>
                                             )
-                                        ):
-                                        (
-                                            <ButtonAdd disabled active={false} >
-                                                Faça login antes
-                                            </ButtonAdd>
-                                        )
-                                    }
-                                </ContentButtonAdd>
+                                        }
+                                    </ContentButtonAdd>
                                 </ContentInfoCard>
                             </ContentCardInfo>
                         ):

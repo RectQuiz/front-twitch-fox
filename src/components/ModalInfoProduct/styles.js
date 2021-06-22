@@ -101,7 +101,7 @@ export const ContentImage = styled.div`
     justify-content:center;
     align-items:center;
     overflow: hidden;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid ${colors.color_jokerz_2};
     position:relative;
     /* margin-bottom:5px; */
 `;
@@ -151,7 +151,7 @@ export const ContentInfoCard = styled.div`
     /* border-top: 2px solid #fff; */
     display:flex;
     flex-direction:column;
-    justify-content:space-between;
+    justify-content:flex-start;
     align-items:flex-start;
     overflow: auto;
     overflow-x:hidden;
@@ -225,10 +225,11 @@ export const DescCard = styled.div`
     color:#fff;
     opacity:0.5;
     text-align:left;
-    font-size: 20px;
+    font-size: 18px;
     white-space:nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-bottom: 5px;
     @media (max-width: 500px) {
         font-size: 15px;
     }

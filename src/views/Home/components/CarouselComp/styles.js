@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../../../styles/colors';
 
 export const Container = styled.div`
   background-color: transparent;
@@ -59,5 +60,5 @@ export const SubTitleSlide = styled.p`
 export const DetailHome = styled.div`
   width:100%;
   height:3px;
-  background-color:#DC143C;
+  background-color:${colors.color_jokerz_2};
 `;

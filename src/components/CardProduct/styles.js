@@ -69,7 +69,7 @@ export const ImageProduct = styled.img`
 export const ContentImage = styled.div`
     background-color:rgba(0,0,0,0.4);
     border-radius:12px;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid ${colors.color_jokerz_2};
     border-bottom-left-radius:0px;
     border-bottom-right-radius:0px;
     padding:15px;
@@ -97,6 +97,30 @@ export const Type = styled.p`
 
 export const TitleCard = styled.h4`
     font-size:19px;
+    /* max-height:27px; */
+    color:#fff;
+    font-family:Raleway,sans-serif;
+    text-align:left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    /* background-color:#fff; */
+`;
+
+export const WeaponCard = styled.h4`
+    font-size:19px;
+    /* max-height:27px; */
+    color:#fff;
+    font-family:Raleway,sans-serif;
+    text-align:left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    /* background-color:#fff; */
+`;
+
+export const PaintCard = styled.h4`
+    font-size:16px;
     /* max-height:27px; */
     color:#fff;
     font-family:Raleway,sans-serif;
@@ -210,8 +234,8 @@ export const ContentInfo = styled.div`
     /* flex:5; */
     /* background-color:#fbbf; */
     height:100%;
-    max-height:${(sizeCardH/2)-40}px;
-    min-height:${(sizeCardH/2)-40}px;
+    max-height:${((sizeCardH/2)-40)}px;
+    min-height:${((sizeCardH/2)-40)}px;
     width:100%;
     padding-top:10px;
     padding-bottom:10px;

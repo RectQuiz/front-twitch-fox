@@ -5,7 +5,8 @@ export default function Footer({}){
     return (
         <Container>
             <Content>
-                    © TeamJokerz 2020 ™. Todos os direitos reservados.
+                    Copyright © 2021 TeamJokerz ™ <br></br>
+                    developed by Argério Queiroz (argerioaf3@gmail.com)
             </Content>
         </Container>
 

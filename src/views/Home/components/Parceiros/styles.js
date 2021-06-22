@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../../../styles/colors';
 
 export const Container = styled.div`
     width:100%;
@@ -19,7 +20,7 @@ export const Content = styled.div`
     display:flex;
     flex:1;
     border-radius:16px;
-    border:2px solid rgba(218,0,57);
+    border:2px solid ${colors.color_jokerz_2};
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -78,7 +79,7 @@ export const ContentLogoParceiro = styled.div`
     height: 150px;
     overflow: hidden;
     /* position: relative; */
-    border:3px solid  rgba(218,0,57);
+    border:3px solid  ${colors.color_jokerz_2};
 `;
 
 export const LogoParceiro = styled.img`

@@ -33,6 +33,9 @@ export default function Cards({products}){
                                                 key={index}
                                                 image={product.imageurl?product.imageurl:`${API_URL}/${product.imagepath}`}
                                                 title={product.name}
+                                                weapon={product.weapon?product.weapon:''}
+                                                paint={product.paint?product.paint:''}
+                                                exterior={product.exterior?product.exterior:''}
                                                 type={product.type}
                                                 amount={product.amount}
                                                 price={product.price}

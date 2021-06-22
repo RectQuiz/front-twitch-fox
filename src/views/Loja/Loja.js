@@ -30,7 +30,12 @@ function Loja() {
   }
 
   useEffect(()=>{
-      dispatch(loadInfoUser());
+    const token = localStorage.getItem('@siteJokerz/token');
+    console.log("token Home: ",token);
+    if (token) {
+        console.log('loadInfoUser Home');
+        dispatch(loadInfoUser());
+    }
       load_products(currentPage);
   },[]);
   

@@ -5,6 +5,8 @@ import {
     Card,
     ImageProduct,
     TitleCard,
+    WeaponCard,
+    PaintCard,
     DescCard,
     ContentImage,
 
@@ -52,7 +54,10 @@ const CardProduct = (props) => {
         editProduct = ()=>{},
         deleteProduct = ()=>{},
         changeStatusProduct = ()=>{},
-        status
+        status,
+        weapon,
+        paint,
+        exterior
     } = props;
     // image = `https://steamcommunity-a.akamaihd.net/economy/image/${image}`;
     const OpenActionLink = (inspectLink)=>{
@@ -102,11 +107,24 @@ const CardProduct = (props) => {
                         {type}
                     </Type> */}
                     {
-                        title&&
+                        title && (weapon.length == 0 || paint.length == 0) &&
                         (
                             <TitleCard title={title}>
                                 {title}
                             </TitleCard>
+                        )
+                    }
+                    {
+                        weapon.length > 0 && paint.length > 0 &&
+                        (
+                            <>
+                                <WeaponCard title={weapon}>
+                                    {`${weapon} | ${paint}`}
+                                </WeaponCard>
+                                {/* <PaintCard title={paint}>
+                                    {paint}
+                                </PaintCard> */}
+                            </>
                         )
                     }
                     {

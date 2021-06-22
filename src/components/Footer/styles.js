@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../styles/colors';
 
 export const Container = styled.div`
   /* background-color:  #fff; */
@@ -26,7 +27,7 @@ export const Content = styled.div`
   flex-direction:column;
   justify-content: flex-start;
   padding-top:10px;
-  border-top: 6px solid #141414;
+  border-top: 6px solid ${colors.color_jokerz_2};
   text-align:center;
 `;
 

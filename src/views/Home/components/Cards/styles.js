@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../../../styles/colors';
 
 export const Container = styled.div`
   /* background-color: #05060D; */
@@ -44,7 +45,7 @@ export const Card = styled.div`
     width:100%;
     height:100%;
     border-width:1px;
-    border:1.5px solid #DC143C;
+    border:1.5px solid ${colors.color_jokerz_2};
     border-radius:12px;
     background-image:radial-gradient(circle, rgb(38, 0, 8) 2px, rgb(0, 0, 0) 94%, rgb(0, 0, 0) 100%);
     box-shadow:5px 10px 29px 0 rgba(42,45,54,.2);

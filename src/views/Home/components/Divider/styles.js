@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../../../styles/colors';
 
 export const Container = styled.div`
   /* background-color: red; */
@@ -24,7 +25,7 @@ export const TitleDivider = styled.div`
 export const Line = styled.div`
     height:2px;
     width:100%;
-    background-color:#DC143C;
+    background-color:${colors.color_jokerz_2};
 `;
 
 export const Title = styled.h2`
