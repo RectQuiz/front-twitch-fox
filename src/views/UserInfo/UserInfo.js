@@ -21,6 +21,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { InfoUser } from './components';
 import { Redirect } from 'react-router-dom';
 import { loadRedeemProducts } from '../../store/modules/products/actions';
+import { Helmet } from 'react-helmet';
 
 function UserInfo(props) {
     const { location, history } = props;
@@ -90,6 +91,9 @@ function UserInfo(props) {
 
     return (
         <Content>
+            <Helmet>
+                <title>Seu perfil</title>
+            </Helmet>
             <BackgroundColor>
                     {
                         loading?

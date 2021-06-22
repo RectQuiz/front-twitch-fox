@@ -12,6 +12,7 @@ import { Content, BackgroundColor } from './styles';
 import { loadProducts } from '../../store/modules/products/actions';
 import { AlertMessageSimple, Footer } from '../../components';
 import { setAlert } from '../../store/modules/alerts/actions';
+import { Helmet } from 'react-helmet';
 
 function Loja() {
   const { status } = useSelector(({ ModalReducer }) => ModalReducer);
@@ -39,6 +40,9 @@ function Loja() {
 
   return(
     <Content modal={status}>
+         <Helmet>
+          <title>Loja jokerz</title>
+        </Helmet>
         <BackgroundColor>
             {
                 products?

@@ -15,7 +15,7 @@ export default {
     green:"green",
     green_dark:"#006400",
     brown:"bronw",
-    primary_geral:"#DC143C",
+    primary_geral:"#B200B7",
     primary_geral_dark:"#800000",
     steam_primary:"#1b2838",
     steam_secondary:"#171a21",
@@ -30,5 +30,20 @@ export default {
     card_color_ligth:"#333643",
     color_twitch:"#6441a5",
     color_socket:"#008080",
-    color_sync_points:"#000080"
+    color_sync_points:"#000080",
+
+
+    color_jokerz_1:"#636363",
+    color_jokerz_2:"#B200B7",
+    color_jokerz_3:"#009B00",
+    color_jokerz_4:"#1A009B",
+    color_jokerz_5:"#D6D000",
+    color_jokerz_6:"#FF9100",
+    
+    // CINZA #636363
+    // ROXO #B200B7
+    // VERDE #009B00
+    // AZUL #1A009B
+    // AMARELO #D6D000
+    // LARANJA #FF9100
 }

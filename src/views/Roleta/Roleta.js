@@ -36,6 +36,7 @@ import { acionarRoletaAction } from '../../store/modules/points/actions';
 import Select from 'react-select';
 import { loadChannelsAction } from '../../store/modules/channel/actions';
 import { setAlert } from '../../store/modules/alerts/actions';
+import { Helmet } from 'react-helmet';
 
 function Roleta({canais}) {
   const { status } = useSelector(({ ModalReducer }) => ModalReducer);
@@ -145,6 +146,9 @@ function Roleta({canais}) {
 
   return(
     <Content modal={status}>
+          <Helmet>
+          <title>Roleta jokerz</title>
+        </Helmet>
         <BackgroundColor>
             {
 

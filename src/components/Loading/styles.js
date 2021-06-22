@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../styles/colors';
 
 export const Container = styled.div`
     display: flex; /* Hidden by default */
@@ -24,7 +25,7 @@ export const ContentCardInfo = styled.div`
     height:auto;
     background-color:rgba(0,0,0,0.4);
     border-radius:50%;
-    border: 3px solid #DC143C;
+    border: 3px solid ${colors.primary_geral};
     align-self:center;
     padding:50px;
     overflow: hidden;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../../../styles/colors';
 
 export const Container = styled.div`
   background-color: #1c1c1c;
@@ -46,11 +47,11 @@ export const Content = styled.header`
   
     a:hover{
             /* background-color: #ddd; */
-            color: #DC143C;
+            color: ${colors.primary_geral};
             /* height:100%; */
             @media (max-width: 990px) {
                 background-color: #ddd;
-            color: #DC143C;
+            color: ${colors.primary_geral};
                 height:100%;
             }
     }
@@ -90,7 +91,7 @@ export const ContainerButtonsNav = styled.nav`
         display:none;
     }
     .item{
-        color: #DC143C;
+        color: ${colors.primary_geral};
     }
     
 `;
@@ -242,7 +243,7 @@ export const Nickname = styled.div`
     white-space:nowrap;
     overflow: hidden;
     text-align:center;
-    color:#DC143C;
+    color:${colors.primary_geral};
     font-size:16px;
     ::after{
         display: inline-block;
@@ -287,7 +288,7 @@ export const ItemDropDown = styled.div`
     border-bottom:1px solid #141414;
     width:90%;
     :hover{
-        color: #DC143C !important;
+        color: ${colors.primary_geral} !important;
         font-weight:bold;
     }
 `;
@@ -319,7 +320,7 @@ export const ItemDropDownMobile = styled.div`
     text-transform:uppercase;
     border-bottom:1px solid #141414;
     :hover{
-        color: #DC143C !important;
+        color: ${colors.primary_geral} !important;
         font-weight:bold;
     }
 `;

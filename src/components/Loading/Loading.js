@@ -12,6 +12,7 @@ import {
   setErrorGeneral
 } from '../../store/modules/error/actions';
 import ScaleLoader from "react-spinners/ScaleLoader";
+import colors from '../../styles/colors';
 
 function Loading({
     show,
@@ -34,7 +35,7 @@ function Loading({
                     <ContentCardInfo>
                             <ScaleLoader
                                 // css={override}
-                                color="#DC143C"
+                                color={colors.primary_geral}
                                 height={60}
                                 width={7}
                                 margin={7}

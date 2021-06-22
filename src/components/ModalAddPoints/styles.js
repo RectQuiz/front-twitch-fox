@@ -129,7 +129,7 @@ export const ContainerButton = styled.div`
 `;
 
 export const ButtonForm = styled.button`
-    background-color:#DC143C;
+    background-color:${colors.primary_geral};
     padding:7px;
     border-radius:10px;
     min-width:20%;

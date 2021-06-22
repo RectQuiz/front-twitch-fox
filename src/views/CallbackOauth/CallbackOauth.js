@@ -20,6 +20,7 @@ import {
 import { Footer } from '../../components';
 import { css } from "@emotion/core";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { Helmet } from 'react-helmet';
 
 export default function CallbackOauth({location, history}){
     
@@ -85,6 +86,9 @@ export default function CallbackOauth({location, history}){
     
     return (
         <Container>
+            <Helmet>
+                <title>Login Twitch</title>
+            </Helmet>
             <BackgroundColor>
                 <ScaleLoader
                     // css={override}

@@ -5,6 +5,7 @@ import { SelectItemMenuAdmin } from '../../store/modules/menuAdmin/actions';
 import colors from '../../styles/colors';
 import { useHistory } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import {
     Container,
@@ -171,6 +172,9 @@ function Dashboard(props) {
             <Redirect to={{pathname:'/home', state:{from:props.location}}}  />
         )
         :<Container>
+            <Helmet>
+                <title>Dashboard Admin</title>
+            </Helmet>
             <AlertMessageSimple layout={'dashboard'} />
 
             {/* MENU LATERAL DO LAYOUT */}

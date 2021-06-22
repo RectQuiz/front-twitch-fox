@@ -16,11 +16,11 @@ const Routes = () => {
       <PublicRoute component={View.LoginAdmin} exact layout={Simple} path="/login" />
       
       <PrivateRoute component={View.UserInfo} exact layout={Simple} path="/user" />
-      <PrivateRoute component={View.CadastroPerguntas} exact layout={Simple} path="/perguntas/cadastro" />
-      <PrivateRoute component={View.CadastrarNiveis} exact layout={Simple} path="/nivel/cadastro" />
-      <PrivateRoute component={View.CadastroPremiacao} exact layout={Simple} path="/premiacao/cadastro" />
-      <PrivateRoute component={View.CadastroCategorias} exact layout={Simple} path="/categoria/cadastro" />
-      <PrivateRoute component={View.Partida} exact layout={Simple} path="/partida" />
+      {/* <PrivateRoute component={View.CadastroPerguntas} exact layout={Simple} path="/perguntas/cadastro" /> */}
+      {/* <PrivateRoute component={View.CadastrarNiveis} exact layout={Simple} path="/nivel/cadastro" /> */}
+      {/* <PrivateRoute component={View.CadastroPremiacao} exact layout={Simple} path="/premiacao/cadastro" /> */}
+      {/* <PrivateRoute component={View.CadastroCategorias} exact layout={Simple} path="/categoria/cadastro" /> */}
+      {/* <PrivateRoute component={View.Partida} exact layout={Simple} path="/partida" /> */}
 
 
       <PrivateRoute component={View.HomeDashBoard} exact layout={Dashboard} path="/dashboard/home" />
@@ -38,6 +38,7 @@ const Routes = () => {
 
       <PrivateRoute component={View.Roleta} exact layout={Simple} path="/roleta" />
 
+      <PublicRoute component={View.Home} exact layout={Simple} path="*" />
       {/* <PublicRoute
         component={View.CadPessoaFisica}
         exact

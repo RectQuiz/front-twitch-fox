@@ -19,7 +19,12 @@ export default function Home({history}){
   const { products, totalPages, currentPage, loading } = useSelector(({ ProductsReducer }) => ProductsReducer);
     
     useEffect(()=>{
-        dispatch(loadInfoUser());
+        const token = localStorage.getItem('@siteJokerz/token');
+        console.log("token Home: ",token);
+        if (token) {
+            console.log('loadInfoUser Home');
+            dispatch(loadInfoUser());
+        }
         load_products(1);
     },[]);
 

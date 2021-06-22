@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { Footer } from '../../components';
 import { Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import {
     Content,
@@ -42,6 +43,9 @@ function LoginAdmin(props) {
 
     return (
         <Content>
+            <Helmet>
+                <title>Login Administrativo</title>
+            </Helmet>
             <BackgroundColor>
                 
                 {!isAuth ? 
