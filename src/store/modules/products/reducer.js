@@ -9,7 +9,9 @@ const initial_state = {
     status:0,
     totalPages:0,
     currentPage:1,
-    redeemProducts:null
+    redeemProducts:null,
+    filtros_type:[],
+    regra_filtros:[]
 }
 
 export const ProductsReducer = (state = initial_state, action) => {
@@ -20,6 +22,8 @@ export const ProductsReducer = (state = initial_state, action) => {
         products: action.products.data,
         totalPages: action.products.totalPages,
         currentPage: action.products.currentPage,
+        filtros_type: action.products.filtros_type,
+        regra_filtros: action.products.regra_filtros,
       };
     case actions.SET_PRODUCT:
       return {

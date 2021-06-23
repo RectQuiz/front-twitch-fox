@@ -12,7 +12,23 @@ import {
   import logo from '../../../../assets/images/logo.png';
 
 export default function Cards(){
-    const [ cards, setCards ] = useState([1,2,3]);
+    const [ cards, setCards ] = useState([
+        {
+            titulo:"GANHE PONTOS",
+            decribe:"Receba pontos do chat assistindo as lives parceiras",
+            image:logo
+        },
+        {
+            titulo:"TROQUE OS PONTOS",
+            decribe:"Troque os pontos do chat por pipocas",
+            image:logo
+        },
+        {
+            titulo:"RESGATE SKINS",
+            decribe:"Utilize seus pontos para resgatar skins",
+            image:logo
+        }
+    ]);
     return (
         <Container>
             <Content>
@@ -20,14 +36,14 @@ export default function Cards(){
                     cards.map((card)=>(
                         <ContainerCard key={card}>
                             <Card>
-                                <IconCard 
-                                    src={logo}
+                                <IconCard
+                                    src={card.image}
                                 />
                                 <TitleCard>
-                                    ASSISTA
+                                    {card.titulo}
                                 </TitleCard>
                                 <DescCard>
-                                    Assista as lives.
+                                    {card.decribe}
                                 </DescCard>
                             </Card>
                         </ContainerCard>

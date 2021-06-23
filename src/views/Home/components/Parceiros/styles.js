@@ -55,7 +55,7 @@ export const ContainerLogoParceiros = styled.div`
     width:100%;
     display:flex;
     flex-direction:row;
-    justify-content:space-between;
+    justify-content:center;
     align-items:center;
     /* background-color:#fff; */
     padding:50px;
@@ -70,6 +70,7 @@ export const ContainerLogoParceiro = styled.div`
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    margin: 20px;
 `;
 
 export const ContentLogoParceiro = styled.div`

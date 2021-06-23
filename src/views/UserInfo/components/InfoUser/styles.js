@@ -18,16 +18,16 @@ export const Content = styled.div`
     width: 100%;
     max-width: 1150px;
     display: flex;
-    flex-direction:row;
+    flex-direction:column;
     align-items: center;
-    justify-content:flex-start;
+    justify-content:center;
     border-width:1px;
     border-color:#bdbdbd;
     @media (max-width: 500px) {
         max-width: 100vw;
     }
-        flex-direction:row;
-        flex-wrap:wrap;
+    flex-direction:row;
+    flex-wrap:wrap;
     padding-bottom:40px;
     flex:1;
     /* } */
@@ -268,4 +268,21 @@ export const TitleSelectAccount = styled.div`
     color:#fff;
     font-size:15px;
     padding:10px;
+`;
+
+export const ContentLogoParceiro = styled.div`
+    background-color: #aaa;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    /* position: relative; */
+    border:3px solid  ${colors.color_jokerz_2};
+    margin-bottom: 15px;
+`;
+
+export const LogoParceiro = styled.img`
+    /* position: absolute;
+    bottom: 0; */
+    width: 100%;
 `;

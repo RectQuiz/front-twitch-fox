@@ -72,7 +72,10 @@ export const TitleCard = styled.h4`
 
 export const DescCard = styled.p`
     font-size:19px;
-    color:#fff;
+    color:${colors.color_jokerz_1};
     font-family:Raleway,sans-serif;
     text-align:center;
+    flex-wrap:wrap;
+    margin-left:10px;
+    margin-right:10px;
 `;

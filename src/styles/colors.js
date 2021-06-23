@@ -2,10 +2,11 @@
 
 const color_jokerz_1 = "#636363";
 const color_jokerz_2 = "#B200B7";
+const color_jokerz_6 = "#171a21";
+const color_jokerz_7 = "#05060D";
 const color_jokerz_3 = "#009B00";
 const color_jokerz_4 = "#1A009B";
 const color_jokerz_5 = "#D6D000";
-const color_jokerz_6 = "#171a21";
 
 export default {
     red:"red",
@@ -13,7 +14,7 @@ export default {
     blue:"blue",
     blue_dark:'#191970',
     secundary:"#1c1c1c",
-    primary:"#05060D",
+    primary:color_jokerz_7,
     dedtail1:"#141414",
     white:"#fff",
     primary_dashboard:"#fff",
@@ -30,6 +31,7 @@ export default {
     dourado:"#DAA520",
     dourado_dark:"#B8860B",
     transparent:"rgba(0,0,0,0.5)",
+    transparent2:"rgba(0,0,0,0)",
     yellow:"yellow",
     status_product_1:"#000080",
     status_product_2:"#32CD32",

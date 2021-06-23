@@ -22,7 +22,9 @@ import {
     ItemLabelInfoPerguntas,
     BodyItem,
     ActionItem,
-    InputItem
+    InputItem,
+    ContentLogoParceiro,
+    LogoParceiro
 } from './styles';
 import Select from 'react-select';
 import { useSelector } from 'react-redux';
@@ -70,6 +72,25 @@ function InfoUser({
                 user && !(user.type_account == 'pendente')?
                 (
                     <Content>
+                        {
+                            user.picture.length > 0&&
+                            (
+                                <ContentLogoParceiro>
+                                    <LogoParceiro
+                                        src={user.picture}
+                                    />
+                                </ContentLogoParceiro>
+                            )
+                        }
+                        {/* NICKNAME */}
+                        <ContentItemInfo>
+                            <ItemLabelInfo>
+                                    Usuário: 
+                            </ItemLabelInfo>
+                            <ItemValueInfo>
+                                    {(user && user.nickname)?user.nickname:'Não informado'}
+                            </ItemValueInfo>
+                        </ContentItemInfo>
 
                         {/* TIPO DA CONTA */}
                         <ContentItemInfo>
@@ -81,15 +102,6 @@ function InfoUser({
                             </ItemValueInfo>
                         </ContentItemInfo>
             
-                        {/* NICKNAME */}
-                        <ContentItemInfo>
-                            <ItemLabelInfo>
-                                    Nickname: 
-                            </ItemLabelInfo>
-                            <ItemValueInfo>
-                                    {(user && user.nickname)?user.nickname:'Não informado'}
-                            </ItemValueInfo>
-                        </ContentItemInfo>
             
                         {/* PONTOS */}
                         <ContentItemInfo>

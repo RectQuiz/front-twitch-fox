@@ -199,7 +199,7 @@ function Dashboard(props) {
                         <ContainerInfoUser>
                             <ContentInfoUser onClick={openConfigUser}>
                                 <ContentImageUser>
-                                    <ImageUser src="https://as2.ftcdn.net/v2/jpg/00/65/77/27/1000_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg" />
+                                    <ImageUser src={user.picture?user.picture:"https://as2.ftcdn.net/v2/jpg/00/65/77/27/1000_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"} />
                                 </ContentImageUser>
                                 <DescInfoUser>
                                     {/* <NameUser> */}

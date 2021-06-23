@@ -13,10 +13,13 @@ import { BackgroundColor, Content } from './styles';
 import { loadInfoUser } from '../../store/modules/user/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadProducts } from '../../store/modules/products/actions';
+import { loadChannelsAction } from '../../store/modules/channel/actions';
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 export default function Home({history}){
     const dispatch = useDispatch();
   const { products, totalPages, currentPage, loading } = useSelector(({ ProductsReducer }) => ProductsReducer);
+  const { channels, loading:loadingChannels } = useSelector(({ ChannelsReducer }) => ChannelsReducer);
     
     useEffect(()=>{
         const token = localStorage.getItem('@siteJokerz/token');
@@ -26,6 +29,7 @@ export default function Home({history}){
             dispatch(loadInfoUser());
         }
         load_products(1);
+        dispatch(loadChannelsAction({}));
     },[]);
 
     const load_products = async(page)=>{
@@ -43,7 +47,22 @@ export default function Home({history}){
                 }
                
                 {/* <Divider title='Lives parceiras'/> */}
-                <Parceiros/>
+                {
+                    !loadingChannels?
+                    (
+                        <Parceiros channels={channels}/>
+                    ):
+                    (
+                        <ScaleLoader
+                            // css={override}
+                            color="#DC143C"
+                            height={60}
+                            width={7}
+                            margin={7}
+                            loading={true}
+                        />
+                    )
+                }
                 <Footer/>
             </BackgroundColor>
         </Content>

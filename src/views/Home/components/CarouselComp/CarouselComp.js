@@ -18,18 +18,20 @@ export default function CarouselComp(){
             <Content>
                 <Carousel interval={7000} dynamicHeight={true} showThumbs={false} showStatus={false} width="80vw" infiniteLoop={true} autoPlay={true}>
                     <ContentSlide key="slide1">
-                            <TitleSlide>SEJA BEM VINDO!</TitleSlide>
-                            <SubTitleSlide>
-                                Está pronto para farmar e montar o melhor set no seu jogo favorito?!
-                            </SubTitleSlide>
+                        <TitleSlide>SEJA BEM VINDO!</TitleSlide>
+                        <SubTitleSlide>
+                            Está pronto para farmar e montar o melhor set no seu jogo favorito?!
+                        </SubTitleSlide>
                     </ContentSlide>
                     <ContentSlide key="slide2">
-                            <TitleSlide>texto</TitleSlide>
+                        <TitleSlide>SORTEIOS </TitleSlide>
+                        <SubTitleSlide>Sorteios diários e semanais de skins de CS:GO</SubTitleSlide>
                     </ContentSlide>
                     <ContentSlide key="slide3">
-                            <TitleSlide>texto</TitleSlide>
+                        <TitleSlide>CAMPEONATOS</TitleSlide>
+                        <SubTitleSlide>Campeonatos com inscrição gratuita e premiação em skins</SubTitleSlide>
                     </ContentSlide>
-                    <ContentSlide key="slide4">
+                    {/* <ContentSlide key="slide4">
                             <TitleSlide>texto</TitleSlide>
                     </ContentSlide>
                     <ContentSlide key="slide5">
@@ -37,7 +39,7 @@ export default function CarouselComp(){
                     </ContentSlide>
                     <ContentSlide key="slide6">
                             <TitleSlide>texto</TitleSlide>
-                    </ContentSlide>
+                    </ContentSlide> */}
                 </Carousel>
             </Content>
             <DetailHome/>
