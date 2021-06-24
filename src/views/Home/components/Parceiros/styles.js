@@ -57,20 +57,27 @@ export const ContainerLogoParceiros = styled.div`
     flex-direction:row;
     justify-content:center;
     align-items:center;
+    margin-top: 50px;
     /* background-color:#fff; */
     padding:50px;
     flex-wrap:wrap;
     @media (max-width: 500px) {
         flex-direction:column;
+        padding:0;
+        
     }
 `;
 
-export const ContainerLogoParceiro = styled.div`
+export const ContainerLogoParceiro = styled.a`
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     margin: 20px;
+    /* margin-bottom: 10px; */
+    @media (max-width: 500px) {
+        margin: 0;
+    }
 `;
 
 export const ContentLogoParceiro = styled.div`

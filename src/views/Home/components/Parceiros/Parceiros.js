@@ -31,8 +31,8 @@ function Parceiros({channels}) {
                     <ContainerLogoParceiros>
                         {channels.map(parceiro=>{
                             return (
-                                <a href={parceiro.linkTwitch?parceiro.linkTwitch:"#"} target="_blank">
-                                    <ContainerLogoParceiro key={parceiro}>
+                                <>
+                                    <ContainerLogoParceiro href={parceiro.linkTwitch?parceiro.linkTwitch:"#"} target="_blank" key={parceiro}>
                                         <ContentLogoParceiro>
                                             <LogoParceiro
                                                 src={parceiro.id_person.picture?parceiro.id_person.picture:"https://as2.ftcdn.net/v2/jpg/00/65/77/27/1000_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"}
@@ -42,7 +42,7 @@ function Parceiros({channels}) {
                                         {parceiro.id_person.nickname}
                                         </NameParceiro>
                                     </ContainerLogoParceiro>
-                                </a>
+                                </>
                             )
                         })}
                     </ContainerLogoParceiros>
