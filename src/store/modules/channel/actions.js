@@ -5,6 +5,11 @@ export const loadChannelsAction = (params) => ({
     params:params
 });
 
+export const loadParceirosAction = (params) => ({
+    type: actions.LOAD_PARCEIROS,
+    params:params
+});
+
 export const setChannelsAction = (channels) => ({
     type: actions.SET_CHANNELS,
     channels:channels

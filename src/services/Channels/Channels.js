@@ -11,3 +11,14 @@ export const loadChannelsService= async (params) => {
       }
     });
 };
+
+export const loadParceirosService= async (params) => {
+  const token_ = localStorage.getItem('@siteJokerz/token');
+  const api_ = apiWithToken(token_);
+  params = params ? params : {};
+  return await api_.get(`${resouceUrl}/parceiros`, {
+    params: {
+      ...params
+    }
+  });
+};

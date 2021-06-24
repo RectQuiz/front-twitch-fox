@@ -13,7 +13,7 @@ import { BackgroundColor, Content } from './styles';
 import { loadInfoUser } from '../../store/modules/user/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadProducts } from '../../store/modules/products/actions';
-import { loadChannelsAction } from '../../store/modules/channel/actions';
+import { loadChannelsAction, loadParceirosAction } from '../../store/modules/channel/actions';
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 export default function Home({history}){
@@ -29,11 +29,11 @@ export default function Home({history}){
             dispatch(loadInfoUser());
         }
         load_products(1);
-        dispatch(loadChannelsAction({}));
+        dispatch(loadParceirosAction({}));
     },[]);
 
     const load_products = async(page)=>{
-      dispatch(loadProducts({page:page, status:"emEstoque"}));
+      dispatch(loadProducts({page:page, status:"emEstoque", filtroPrice:"up"}));
     };
 
     return (
