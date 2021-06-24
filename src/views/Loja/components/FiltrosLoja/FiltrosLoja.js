@@ -80,9 +80,9 @@ export default function FiltrosLoja({
                     nome:"Knife",
                     image:knife
                 }
-            case "Glove":
+            case "Gloves":
                 return {
-                    nome:"Glove",
+                    nome:"Gloves",
                     image:gloves
                 }
             case "Sticker":
