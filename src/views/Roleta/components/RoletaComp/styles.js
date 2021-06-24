@@ -92,7 +92,7 @@ export const ContentCentroRoleta = styled.ul`
     -ms-transform-origin: center center;
     -o-transform-origin: center center;
     transform-origin: center center;
-    transition: transform 15s ease;
+    transition: transform 7s ease;
     animation-iteration-count: 3;
     @keyframes treme {
         0% {margin-left: 0;}

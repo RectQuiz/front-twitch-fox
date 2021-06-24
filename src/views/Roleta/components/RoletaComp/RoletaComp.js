@@ -76,7 +76,7 @@ function RoletaComp({
             setAtiva(true);
             setAnimationButton('go-back');
           }, 100);
-        }, 15000);
+        }, 7000);
         
       } else {
         erroRoletaMusic.play();
