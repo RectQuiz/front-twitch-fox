@@ -63,6 +63,8 @@ const CardProduct = (props) => {
     const OpenActionLink = (inspectLink)=>{
         window.location.assign(inspectLink);
     }
+    console.log("weapon: ",weapon);
+    console.log("paint: ",paint);
     return (
         <ContainerCard>
             <Card tradable={tradable || !dash} dash={dash} promo={promo} onClick={()=>!dash?handleSelect(props):()=>{}}>
@@ -92,7 +94,7 @@ const CardProduct = (props) => {
                         ) 
                     }
                     {
-                        dash && (inspectLink.trim().length > 0) && 
+                        dash && (inspectLink && inspectLink.length > 0 && inspectLink.trim().length > 0) && 
                         (
                             <ActionCard>
                                 <ButtonAction onClick={()=>OpenActionLink(inspectLink)}>
@@ -107,7 +109,7 @@ const CardProduct = (props) => {
                         {type}
                     </Type> */}
                     {
-                        title && (weapon.length == 0 || paint.length == 0) &&
+                        title && ((weapon && weapon.length == 0) || (paint && paint.length == 0)) &&
                         (
                             <TitleCard title={title}>
                                 {title}
@@ -115,11 +117,11 @@ const CardProduct = (props) => {
                         )
                     }
                     {
-                        weapon.length > 0 && paint.length > 0 &&
+                        (weapon && weapon.length > 0) || (paint && paint.length > 0) &&
                         (
                             <>
-                                <WeaponCard title={weapon}>
-                                    {`${weapon} | ${paint}`}
+                                <WeaponCard title={`${(weapon && weapon.length > 0)?weapon:''} | ${(paint && paint.length > 0)?paint:''}`}>
+                                    {`${(weapon && weapon.length > 0)?weapon:''} | ${(paint && paint.length > 0)?paint:''}`}
                                 </WeaponCard>
                                 {/* <PaintCard title={paint}>
                                     {paint}
@@ -155,7 +157,7 @@ const CardProduct = (props) => {
                             {promo?pricePromo?pricePromo:0:price}  <GiPopcorn/> 
                         </Price>
                         <Desconto>
-                            {pricePromo?'-'+((price - pricePromo)*100)/price+'%':''}
+                            {pricePromo?'-'+Math.round(((price - pricePromo)*100)/price)+'%':''}
                         </Desconto>
                     </ContentPrice>
                     {

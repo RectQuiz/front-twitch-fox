@@ -31,6 +31,7 @@ function Parceiros({channels}) {
                     <ContainerLogoParceiros>
                         {channels.map(parceiro=>{
                             return (
+                                <a href={parceiro.linkTwitch?parceiro.linkTwitch:"#"} target="_blank">
                                     <ContainerLogoParceiro key={parceiro}>
                                         <ContentLogoParceiro>
                                             <LogoParceiro
@@ -41,6 +42,7 @@ function Parceiros({channels}) {
                                         {parceiro.id_person.nickname}
                                         </NameParceiro>
                                     </ContainerLogoParceiro>
+                                </a>
                             )
                         })}
                     </ContainerLogoParceiros>

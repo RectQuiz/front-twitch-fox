@@ -70,7 +70,7 @@ export const LabelSelect = styled.div`
 
 export const ContentTrocarCanal = styled.button`
     width: 200px;
-    background-color: ${colors.color_jokerz_2};
+    background-color: ${colors.color_jokerz_1};
     border-radius: 10px;
     padding: 7px;
     text-decoration: none;
