@@ -176,7 +176,7 @@ function Roleta({canais}) {
                   (
                     <>
                     {
-                      channelSelected._id.length > 0&&
+                      channelSelected._id.length > 0&& user.type_account != 'secondary'&&
                       (
                         <ContentInfoPoints>
                             <PointsLabel>
