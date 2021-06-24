@@ -194,7 +194,7 @@ export const ContentItemRoleta = styled.div`
         transform: rotate(315deg);
     }
     :nth-child(even) p {
-        color: ${colors.black} !important
+        color: ${colors.white} !important
     ;
     }
 `;
@@ -210,12 +210,13 @@ export const ImageItemRoleta = styled.img`
 `;
 
 export const LabelItemRoleta = styled.p`
-    color: #fff !important;
+    color: ${colors.black} !important;
     left: 0;
     position: absolute;
     text-decoration: none;
     top: 20px;
     width: 100%;
+    font-size: 17px;
 `;
 
 export const ContentButton = styled.div`
@@ -256,4 +257,21 @@ export const ContentLoading = styled.div`
     align-items: center;
     /* background-color: #0006; */
     width: 100%;
+`;
+
+export const ContentImageCanal = styled.div`
+    background-color: #aaa;
+    border-radius: 50%;
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    min-height: 80px;
+    overflow: hidden;
+    /* position: relative; */
+    border:2px solid  ${colors.color_jokerz_2};
+    /* margin-bottom: 15px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 `;

@@ -36,9 +36,9 @@ export default function Cards(){
                     cards.map((card)=>(
                         <ContainerCard key={card}>
                             <Card>
-                                <IconCard
+                                {/* <IconCard
                                     src={card.image}
-                                />
+                                /> */}
                                 <TitleCard>
                                     {card.titulo}
                                 </TitleCard>

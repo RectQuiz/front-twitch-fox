@@ -41,6 +41,9 @@ export const ContainerFiltros = styled.div`
 
 export const ContainerItemTypeFiltro = styled.div`
     border-top-right-radius: 5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     flex-wrap:nowrap;
     overflow: auto;
     width: 100%;
@@ -151,6 +154,8 @@ export const DividerFiltros = styled.div`
 
 export const ContinueLeft = styled.div`
     position: absolute;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
     top: 0;
     left: 15px;
     z-index: 7;
@@ -160,6 +165,8 @@ export const ContinueLeft = styled.div`
 `;
 
 export const ContinueRight = styled.div`
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
     position: absolute;
     top: 0;
     right: 15px;
@@ -171,6 +178,8 @@ export const ContinueRight = styled.div`
 export const ContainerFiltroSecond = styled.div`
     /* position: absolute;
     bottom: 0; */
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     background-color: ${colors.color_jokerz_6};
     width: 100%;
     padding:15px;

@@ -103,7 +103,7 @@ function* acionarRoletaWorker({params}) {
   yield put(actions.setErrorRedeemPoints(''));
   try {
     const response = yield call(Points.acionarRoletaService,params);
-    yield put(actions.setResponseRoletaAction(response.data.data));
+    yield put(actions.setResponseRoletaAction(response.data));
     yield put(actions.setLoadingRedeemPoints(false));
     yield put(actions.setErrorRedeemPoints(''));
     yield put(setErrorGeneral('',false,0));

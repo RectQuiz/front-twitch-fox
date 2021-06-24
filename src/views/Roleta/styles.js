@@ -57,11 +57,11 @@ export const PointsValue = styled.div`
     color:orange;
 `;
 
-export const ContentSelect = styled.div`
-    width: 200px;
-`;
-
 export const ContainerSelectInput = styled.div`
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content:center;
 `;
 
 export const LabelSelect = styled.div`
@@ -90,8 +90,8 @@ export const ContainerInput = styled.div`
     width:100%;
     display:flex;
     flex-direction:column;
-    justify-content:space-between;
-    align-items:flex-start;
+    justify-content:center;
+    align-items:center;
     padding: 5px;
     padding-bottom:10px;
     .image_premio{
@@ -103,9 +103,211 @@ export const ContainerInput = styled.div`
 `;
 
 export const InputValue = styled.input`
-    width:100%;
+    width:80%;
     padding:5px;
     border-radius:10px;
     border: 2px solid #141414;
+    text-align: center;
 `;
 
+export const ContainerGeralSelectCanal = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+    /* background-color: red; */
+`;
+
+export const ContentHeaderSelectCanal = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 320px;
+    /* background-color: red; */
+`;
+
+export const ContentTitleSelctCanal = styled.div`
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    color: ${colors.white};
+`;
+
+export const ContentSubTitleSelectCanal = styled.div`
+    color: ${colors.color_jokerz_1};
+`;
+
+export const ContainerSelectCanal = styled.div`
+    /* width: 200px; */
+    border:2px solid ${colors.color_jokerz_2};
+    padding: 10px;
+    border-radius: 10px;
+    /* border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+    min-height:50vh;
+    max-height:50vh;
+    position: relative;
+        
+`;
+
+export const ContentSelectQ = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: ${colors.red}; */
+`;
+
+export const ContentSelect = styled.div`
+    overflow: auto;
+    ::-webkit-scrollbar {
+        width: 3px;
+        height: 3px;
+    }
+
+    ::-webkit-scrollbar-button:start:decrement,
+    ::-webkit-scrollbar-button:end:increment {
+        display: block;
+        height: 0;
+        background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-track-piece {
+        background-color: ${colors.primary};
+        opacity: 0.1;
+        -webkit-border-radius: 0;
+        -webkit-border-bottom-right-radius: 8px;
+        -webkit-border-bottom-left-radius: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb:vertical {
+        height: 5px;
+        background-color: ${colors.color_jokerz_2};
+        -webkit-border-radius: 8px;
+    }
+`;
+
+export const ContentSelectCanal = styled.button`
+    width: 100%;
+    min-width: 300px;
+    max-width: 300px;
+    background-color: ${colors.color_jokerz_6};
+    /* border:2px solid ${colors.color_jokerz_2}; */
+    padding: 10px;
+    height: 100px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+    :hover {
+        background-color: ${colors.black+5};
+        border: 1px solid ${colors.white};
+    }
+    :focus {
+        border: none;
+        outline:none;
+        outline-style: none;
+    }
+    :active {
+        background-color: ${colors.color_jokerz_6};
+    }
+`;
+
+export const ContentImageCanal = styled.div`
+    background-color: #aaa;
+    border-radius: 50%;
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    min-height: 80px;
+    overflow: hidden;
+    /* position: relative; */
+    border:2px solid  ${colors.color_jokerz_2};
+    /* margin-bottom: 15px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+`;
+
+export const ImageCanal = styled.img`
+    /* position: absolute;
+    bottom: 0; */
+    width: 100%;
+    height: 100%;
+`;
+
+export const ContentNomeCanal = styled.div`
+    color: ${colors.white};
+    margin-left: 10px;
+`;
+
+export const ContentDescCanal = styled.div`
+    color: ${colors.color_jokerz_1};
+    font-size: 14px;
+    margin-left: 10px;
+    flex-wrap: nowrap;
+`;
+
+export const ContentInfoCanal = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    /* background-color: red; */
+`;
+
+export const ContinueTop = styled.div`
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 20px;
+    background-image: linear-gradient(to bottom, ${colors.color_jokerz_6}, ${colors.transparent2});
+`;
+
+export const ContinueBottom = styled.div`
+    /* border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px; */
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    position: absolute;
+    z-index: 10;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-image: linear-gradient(to bottom,${colors.transparent2}, ${colors.color_jokerz_6});
+`;
+
+
+export const ContentDescCanalProba = styled.div`
+    color: ${colors.color_jokerz_2};
+    font-size: 14px;
+    /* margin-left: 10px; */
+`;
+
+export const ContainerProbalilidade = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:pre-wrap;
+    margin-left: 10px;
+`;

@@ -132,65 +132,61 @@ export default function FiltrosLoja({
         <Container>
             <Content>
                 {
-                    user?
-                    (
-                        <ContainerFiltros>
-                            <ContinueLeft/>
-                            <ContainerItemTypeFiltro>
-                                {
-                                    filtros_type.map((filtro)=>{
-                                            let fintro_order = filtroInfoFiltros(filtro);
-                                            return (
-                                                <ContentItemType select={filterSelect._id == filtro._id} onClick={()=>setFiltro(filtro)}>
-                                                    <ContentImageFiltro>
-                                                        <LogoFiltro
-                                                            src={fintro_order.image}
-                                                        />
-                                                    </ContentImageFiltro>
-                                                    <LabelFiltro>
-                                                        {fintro_order.nome}
-                                                    </LabelFiltro>
-                                                </ContentItemType>
-                                            )
-                                    })
-                                }
-                            </ContainerItemTypeFiltro>
-                            
-                            <DividerFiltros/>
-                            
-                            <ContainerFiltroSecond>
-                                {
-                                    filtrosGerais && 
-                                    filtrosGerais.map((filtro)=>{
-                                        return(
-                                            <ContainerFiltroGeral  nome={filtro.nome}>
-                                                <ContentFilter>
-                                                    {filtro.nome}
-                                                </ContentFilter>
-                                                <ContainerOptionsFiltro className={`dropdownFilter_${filtro.nome}`}>
-                                                    {
-                                                        filtro.options.map((option)=>{
-                                                            return (
-                                                                <ContentOptionFiltro select={
-                                                                    filterGeralSelect.nome == filtro.value &&
-                                                                    filterGeralSelect.value == option.value
-                                                                }
-                                                                    onClick={()=>setFiltroGeral({nome:filtro.value,value:option.value})}>
-                                                                    {option.nome}
-                                                                </ContentOptionFiltro>
-                                                            )
-                                                        })
-                                                    }
-                                                </ContainerOptionsFiltro>
-                                            </ContainerFiltroGeral>
+                    <ContainerFiltros>
+                        <ContinueLeft/>
+                        <ContainerItemTypeFiltro>
+                            {
+                                filtros_type.map((filtro)=>{
+                                        let fintro_order = filtroInfoFiltros(filtro);
+                                        return (
+                                            <ContentItemType select={filterSelect._id == filtro._id} onClick={()=>setFiltro(filtro)}>
+                                                <ContentImageFiltro>
+                                                    <LogoFiltro
+                                                        src={fintro_order.image}
+                                                    />
+                                                </ContentImageFiltro>
+                                                <LabelFiltro>
+                                                    {fintro_order.nome}
+                                                </LabelFiltro>
+                                            </ContentItemType>
                                         )
-                                    })
-                                }
-                            </ContainerFiltroSecond>
-                            <ContinueRight/>
-                        </ContainerFiltros>
-                    ):
-                    (null)
+                                })
+                            }
+                        </ContainerItemTypeFiltro>
+                        
+                        <DividerFiltros/>
+                        
+                        <ContainerFiltroSecond>
+                            {
+                                filtrosGerais && 
+                                filtrosGerais.map((filtro)=>{
+                                    return(
+                                        <ContainerFiltroGeral  nome={filtro.nome}>
+                                            <ContentFilter>
+                                                {filtro.nome}
+                                            </ContentFilter>
+                                            <ContainerOptionsFiltro className={`dropdownFilter_${filtro.nome}`}>
+                                                {
+                                                    filtro.options.map((option)=>{
+                                                        return (
+                                                            <ContentOptionFiltro select={
+                                                                filterGeralSelect.nome == filtro.value &&
+                                                                filterGeralSelect.value == option.value
+                                                            }
+                                                                onClick={()=>setFiltroGeral({nome:filtro.value,value:option.value})}>
+                                                                {option.nome}
+                                                            </ContentOptionFiltro>
+                                                        )
+                                                    })
+                                                }
+                                            </ContainerOptionsFiltro>
+                                        </ContainerFiltroGeral>
+                                    )
+                                })
+                            }
+                        </ContainerFiltroSecond>
+                        <ContinueRight/>
+                    </ContainerFiltros>
                 }
             </Content>
         </Container>

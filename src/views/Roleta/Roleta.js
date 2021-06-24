@@ -22,7 +22,24 @@ import {
   ContainerButtonTrocarCanal,
 
   ContainerInput,
-  InputValue
+  InputValue,
+
+  ContainerGeralSelectCanal,
+  ContentHeaderSelectCanal,
+  ContentTitleSelctCanal,
+  ContentSubTitleSelectCanal,
+  ContainerSelectCanal,
+  ContentSelectCanal,
+  ContentImageCanal,
+  ImageCanal,
+  ContentNomeCanal,
+  ContinueTop,
+  ContinueBottom,
+  ContentInfoCanal,
+  ContentDescCanal,
+  ContainerProbalilidade,
+  ContentDescCanalProba,
+  ContentSelectQ
 } from './styles';
 import { loadProducts } from '../../store/modules/products/actions';
 import { Footer } from '../../components';
@@ -48,7 +65,7 @@ function Roleta({canais}) {
   const [ animationButton, setAnimationButton ] = useState('go-back');
   const [ ativa, setAtiva ] = useState(true);
   const [ perdaRoletaMusic, setPerdaRoletaMusic ] = useState(new Audio(PerdaRoletaSound));
-  const [ channelSelected, setChannelSelected ] = useState({ value: '', label: 'SELECIONE::::', id_person:''});
+  const [ channelSelected, setChannelSelected ] = useState({_id:''});
   const { user, loading } = useSelector(({ UserReducer }) => UserReducer);
   const { channels, loading:loadingChannels, errors:errorsChannles, status:statusChannels } = useSelector(({ ChannelsReducer }) => ChannelsReducer);
   const { loading:loadingPoints, errors, status:statusPoints } = useSelector(({ PointsReducer }) => PointsReducer);
@@ -68,7 +85,8 @@ function Roleta({canais}) {
           return {
               value:canal.name,
               label:canal.name,
-              id_person:canal._id
+              id_person:canal._id,
+              canal:canal
           }
       });
       setSelectChannels(selects);
@@ -89,8 +107,8 @@ function Roleta({canais}) {
   };
 
   function acionarRoleta() {
-    if (channelSelected.id_person.length > 0 && valorAposta >= 10 && isNaN(valorAposta) === false) {
-      dispatch(acionarRoletaAction({id_channel:channelSelected.id_person,pontos:parseInt(valorAposta)}));
+    if (channelSelected._id.length > 0 && valorAposta >= 10 && isNaN(valorAposta) === false) {
+      dispatch(acionarRoletaAction({id_channel:channelSelected._id,pontos:parseInt(valorAposta)}));
     }else{
       dispatch(setAlert({
         message:'Erro ao acionar a roleta, tente novamente',
@@ -107,7 +125,7 @@ function Roleta({canais}) {
   };
 
   function trocarCanal() {
-    setChannelSelected({ value: '', label: 'SELECIONE::::', id_person:''});
+    setChannelSelected({_id:''});
   }
 
   function girarRoleta() {
@@ -147,7 +165,7 @@ function Roleta({canais}) {
   return(
     <Content modal={status}>
           <Helmet>
-          <title>Roleta jokerz</title>
+          <title>{channelSelected._id.length > 0?"Roleta "+channelSelected.name:"Roleta jokerz"}</title>
         </Helmet>
         <BackgroundColor>
             {
@@ -158,7 +176,7 @@ function Roleta({canais}) {
                   (
                     <>
                     {
-                      channelSelected.id_person.length > 0&&
+                      channelSelected._id.length > 0&&
                       (
                         <ContentInfoPoints>
                             <PointsLabel>
@@ -200,10 +218,11 @@ function Roleta({canais}) {
                       />
                   )
                 }
+
                 {
-                  user && channelSelected.id_person.length > 0 &&
+                  user && channelSelected._id.length > 0 &&
                   (
-                    <ContentSelect>
+                    <ContentSelectQ>
                         <ContainerSelectInput>
                             <LabelSelect>
                               Qual o valor irá apostar?
@@ -217,11 +236,12 @@ function Roleta({canais}) {
                                 />
                             </ContainerInput>
                         </ContainerSelectInput>
-                    </ContentSelect>
+                    </ContentSelectQ>
                   )
                 }
+
                 {
-                  user && channelSelected.id_person.length > 0 &&
+                  user && channelSelected._id.length > 0 &&
                   (
                     <RoletaComp
                       loading={loadingPoints}
@@ -236,28 +256,74 @@ function Roleta({canais}) {
                       animationButton={animationButton}
                       setAnimationButton={setAnimationButton}
                       girarRoleta={girarRoleta}
+                      channelSelected={channelSelected}
                     />
                   )
                 }
+
                 {
-                  user && (selectChannels.length > 0 && channels && !loadingChannels) && channelSelected.id_person.length == 0 &&
+                  user && (selectChannels.length > 0 && channels && !loadingChannels) && channelSelected._id.length == 0 &&
                   (
-                    <ContentSelect>
-                        <ContainerSelectInput>
-                            <LabelSelect>
-                              Qual o canal:
-                            </LabelSelect>
-                            <Select
-                                value={channelSelected}
-                                onChange={selectChannel}
-                                options={selectChannels}
-                            />
-                        </ContainerSelectInput>
-                    </ContentSelect>
+                    <ContainerGeralSelectCanal>
+
+                      <ContentHeaderSelectCanal>
+                        <ContentTitleSelctCanal>
+                            Escolha a roleta da sua live favorita!
+                        </ContentTitleSelctCanal>
+                        <ContentSubTitleSelectCanal>
+                            Cada roleta tem sua probabilidade.
+                        </ContentSubTitleSelectCanal>
+                      </ContentHeaderSelectCanal>
+                      
+                      <ContainerSelectCanal>
+                        <ContinueTop></ContinueTop>
+                        <ContentSelect>
+                            {
+                              channels && channels.map((channel)=>{
+                                return(
+                                  <>
+                                    <ContentSelectCanal onClick={()=>{selectChannel(channel)}}>
+                                      <ContentImageCanal>
+                                        <ImageCanal
+                                            src={channel.id_person.picture?channel.id_person.picture:"https://as2.ftcdn.net/v2/jpg/00/65/77/27/1000_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"}
+                                        />
+                                      </ContentImageCanal>
+                                      <ContentInfoCanal>
+                                        <ContentNomeCanal>
+                                            {`${channel.name}`}
+                                        </ContentNomeCanal>
+                                        {/* <ContentDescCanal>
+                                            {`Probabilidade:`}
+                                        </ContentDescCanal>
+                                        <ContainerProbalilidade>
+                                          {
+                                            channel.roleta && channel.roleta.length > 0 &&
+                                            (
+                                              channel.roleta.map((roleta)=>{
+                                                return (
+                                                  <ContentDescCanalProba>
+                                                      {`${roleta.name}: ${roleta.probability}% ;`}
+                                                  </ContentDescCanalProba>
+                                                )
+                                              })
+                                            )
+                                          }
+                                        </ContainerProbalilidade> */}
+                                      </ContentInfoCanal>
+                                    </ContentSelectCanal>
+                                  </>
+                                )
+                              })
+                            }
+                        </ContentSelect>
+                        <ContinueBottom></ContinueBottom>
+                      </ContainerSelectCanal>
+                    </ContainerGeralSelectCanal>
                   )
                 }
+
                 {
-                  user && channelSelected.value.length > 0 &&
+                  user && channelSelected._id.length > 0 &&
                   (
                     <ContentTrocarCanal onClick={trocarCanal}>
                         <ContainerButtonTrocarCanal>
@@ -266,6 +332,7 @@ function Roleta({canais}) {
                     </ContentTrocarCanal>
                   )
                 }
+
               </>
             }
             <Footer/>
