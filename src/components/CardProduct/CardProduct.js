@@ -59,6 +59,8 @@ const CardProduct = (props) => {
         paint,
         exterior
     } = props;
+    weapon = weapon?weapon:'';
+    paint = paint?paint:'';
     // image = `https://steamcommunity-a.akamaihd.net/economy/image/${image}`;
     const OpenActionLink = (inspectLink)=>{
         window.location.assign(inspectLink);
@@ -109,7 +111,7 @@ const CardProduct = (props) => {
                         {type}
                     </Type> */}
                     {
-                        title && ((weapon && weapon.length == 0) || (paint && paint.length == 0)) &&
+                        title && ((weapon.length == 0) || (paint.length == 0)) &&
                         (
                             <TitleCard title={title}>
                                 {title}
@@ -117,7 +119,7 @@ const CardProduct = (props) => {
                         )
                     }
                     {
-                        (weapon && weapon.length > 0) || (paint && paint.length > 0) &&
+                        (weapon && weapon.length > 0) && (paint && paint.length > 0) &&
                         (
                             <>
                                 <WeaponCard title={`${(weapon && weapon.length > 0)?weapon:''} | ${(paint && paint.length > 0)?paint:''}`}>

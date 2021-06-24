@@ -128,8 +128,8 @@ function ModalInfoProduct({
                                 </ContentHeader>
                                 <ContentInfoCard>
                                     <HeaderInfo>
-                                        <TitleCard title={infoProduct.title && (infoProduct.weapon && infoProduct.weapon.length == 0 || infoProduct.paint && infoProduct.paint.length == 0)?infoProduct.title:`${infoProduct.weapon?infoProduct.weapon:''} | ${infoProduct.paint?infoProduct.paint:''}`}>
-                                            {infoProduct.title && (infoProduct.weapon && infoProduct.weapon.length == 0 || infoProduct.paint && infoProduct.paint.length == 0)?infoProduct.title:`${infoProduct.weapon?infoProduct.weapon:''} | ${infoProduct.paint?infoProduct.paint:''}`}
+                                        <TitleCard title={infoProduct.title && (!infoProduct.weapon || infoProduct.weapon.length == 0 || !infoProduct.paint || infoProduct.paint.length == 0)?infoProduct.title:`${infoProduct.weapon?infoProduct.weapon:''} | ${infoProduct.paint?infoProduct.paint:''}`}>
+                                            {infoProduct.title && (!infoProduct.weapon || infoProduct.weapon.length == 0 || !infoProduct.paint || infoProduct.paint.length == 0)?infoProduct.title:`${infoProduct.weapon?infoProduct.weapon:''} | ${infoProduct.paint?infoProduct.paint:''}`}
                                         </TitleCard>
                                         {
                                             infoProduct.desc.trim().length > 0 &&
@@ -173,8 +173,10 @@ function ModalInfoProduct({
                                         <Price title={infoProduct.promo?infoProduct.pricePromo:infoProduct.price}>
                                             Valor: {infoProduct.promo?infoProduct.pricePromo:infoProduct.price}  <GiPopcorn/> 
                                         </Price>
-                                        <Desconto title={infoProduct.pricePromo?'-'+Math.round((infoProduct.price - infoProduct.pricePromo)*100)/infoProduct.price+'%':''}>
-                                            {infoProduct.pricePromo?'-'+Math.round((infoProduct.price - infoProduct.pricePromo)*100)/infoProduct.price+'%':''}
+                                        <Desconto title={infoProduct.pricePromo?'-'+Math.round((infoProduct.price - infoProduct.pricePromo*100)/infoProduct.price)+'%':''}>
+                                            {
+                                            infoProduct.pricePromo?'-'+Math.round((infoProduct.price - infoProduct.pricePromo)*100/infoProduct.price)+'%':''
+                                            }
                                         </Desconto>
                                     </ContentPrice>
                                     <ContentButtonAdd>
