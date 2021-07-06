@@ -34,12 +34,19 @@ function UserInfo(props) {
     // const { nick_user } = useParams();
     const { user, users, loading, errors, status } = useSelector(({ UserReducer }) => UserReducer);
     const [ typeSelected, setTypeSelected ] = useState({ value: '', label: 'SELECIONE::::' });
-    const [ selectedPrimaryAccount, setSelectedPrimaryAccount ] = useState({ value: '', label: 'SELECIONE::::' });
+    const [ codigo, setCodigo ] = useState('');
+    const [ usersPrimary, setUsersPrimary ] = useState(users && users.length > 0?users.map((user_)=>{return {value:user_.name,label:user_.name,id_person:user_._id}}):[]);
+    const [ selectedPrimaryAccount, setSelectedPrimaryAccount ] = useState({ value: '', label: 'SELECIONE::::',id_person:''});
     const typesAccount = [
-        { value: 'secondary', label: 'Secundaria' },
-        { value: 'primary', label: 'Primaria' },
+        { value: 'primary', label: 'Primária'},
+        { value: 'secondary', label: 'Secundária'}
       ];
-
+    
+    useEffect(()=>{
+        if (users && users.length > 0) {
+            setUsersPrimary(users.map((user_)=>{return {value:user_.name,label:user_.name,id_person:user_._id}}));
+        }
+    },[users]);
 
     useEffect(()=>{
         if (status == 200 && errors.length == 0 && loading == false) {
@@ -61,17 +68,32 @@ function UserInfo(props) {
         dispatch(loadRedeemProducts({page:page,last:true, user:true}));
     };
 
-    const addTypeAccount = (selectedOption) => {
-        if (selectedOption.value == 'primary') {
-            dispatch(setStatusTypePerson({
-                type_account:selectedOption.value,
-            }));
-        }
+    const selectTypeAccount = (selectedOption)=>{
+        setTypeSelected(selectedOption);
         if(selectedOption.value == 'secondary'){
-            setTypeSelected(selectedOption);
             dispatch(loadAccountsForType({
                 type:'primary'
             }));
+        }
+    }
+
+    const selectUserPrimary = (selectedOption)=>{
+        setSelectedPrimaryAccount(selectedOption);
+    }
+
+    const addTypeAccount = () => {
+        if (typeSelected.value == 'primary') {
+            dispatch(setStatusTypePerson({
+                type_account:typeSelected.value,
+                codigo:codigo.length > 0?codigo:null
+            }));
+        }else if (typeSelected.value == 'secondary') {
+            dispatch(setStatusTypePerson({
+                type_account:typeSelected.value,
+                id_person_primary:selectedPrimaryAccount.id_person
+            }));
+        }else{
+
         }
     };
     
@@ -112,14 +134,19 @@ function UserInfo(props) {
                                 !user.streamer ? 
                                 (
                                     <InfoUser
+                                        codigo={codigo}
+                                        setCodigo={setCodigo}
                                         load_redeem_products={load_redeem_products}
-                                        users={users}
+                                        usersPrimary={usersPrimary}
                                         user={user}
                                         typesAccount={typesAccount}
                                         addTypeAccount={addTypeAccount}
                                         typeSelected={typeSelected}
                                         addPrimaryAccount={addPrimaryAccount}
                                         editUser={editUser}
+                                        selectTypeAccount={selectTypeAccount}
+                                        selectedPrimaryAccount={selectedPrimaryAccount}
+                                        selectUserPrimary={selectUserPrimary}
                                     />
                                 )
                                 :(<Redirect to={{pathname:'/home', state:{from:location}}} />)
