@@ -104,16 +104,16 @@ function ListResgates({
                                     redeemProducts.map((redeemProduct,index)=>{
                                             return (
                                                 <ContentRedeem>
-                                                    <ContentItemList title={redeemProduct.id_user.nickname} important={true} left={true}>
-                                                        {redeemProduct.id_user.nickname}
+                                                    <ContentItemList title={redeemProduct.id_user && redeemProduct.id_user.nickname?redeemProduct.id_user.nickname:'Não encontrado'} important={true} left={true}>
+                                                        {redeemProduct.id_user && redeemProduct.id_user.nickname?redeemProduct.id_user.nickname:'Não encontrado'}
                                                     </ContentItemList>
-                                                    <ContentItemList title={redeemProduct.product_id.name} important={true}>
-                                                        {redeemProduct.product_id.name}
+                                                    <ContentItemList title={redeemProduct.product_id && redeemProduct.product_id.name?redeemProduct.product_id.name:'Não encontrado'} important={true}>
+                                                        {redeemProduct.product_id && redeemProduct.product_id.name?redeemProduct.product_id.name:'Não encontrado'}
                                                     </ContentItemList> 
                                                     <ContentItemList title={formatDate(redeemProduct.date)}>
                                                         {formatDate(redeemProduct.date)}
                                                     </ContentItemList> 
-                                                    <ContentItemList title={redeemProduct.id_channel.name}>
+                                                    <ContentItemList title={redeemProduct.product_float?redeemProduct.product_float:'Não possui'}>
                                                         {redeemProduct.product_float?redeemProduct.product_float:'Não possui'}
                                                     </ContentItemList>
                                                     <ContentItemAcoes important={true} right={true}>
@@ -121,7 +121,7 @@ function ListResgates({
                                                             <FaListAlt size={22} color={colors.white} />
                                                         </ContentAcao>
                                                         {
-                                                            ((redeemProduct.id_user.tradelinkSteam&&redeemProduct.id_user.tradelinkSteam.length>0)) &&
+                                                            ((redeemProduct.id_user && redeemProduct.id_user.tradelinkSteam&&redeemProduct.id_user.tradelinkSteam.length>0)) &&
                                                                 <ContentAcao onClick={()=>copiarTradLink(redeemProduct.id_user.tradelinkSteam)} color={colors.white}>
                                                                     <FaSteam size={22} color={colors.steam_primary} />
                                                                 </ContentAcao>
