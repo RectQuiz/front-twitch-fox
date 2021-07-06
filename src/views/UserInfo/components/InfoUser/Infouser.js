@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GiPopcorn, GiKing } from 'react-icons/gi';
 import { MdBlock } from 'react-icons/md';
 import { FaPen, FaSave, FaRegTimesCircle } from 'react-icons/fa';
@@ -15,7 +15,11 @@ import {
     ContentValueInfoChannels,
     ItemLabelChannel,
     ContainerValueInfoChannels,
+    ContainerSelectTypeAccounts,
     ContainerSelectTypeAccount,
+    ContainerButtonSelectTypes,
+    ContainerButtonVoltar,
+    ContainerButtonContinuar,
     TitleSelectAccount,
     ContentValueInfoPerguntas,
     ContainerValuePerguntas,
@@ -24,7 +28,12 @@ import {
     ActionItem,
     InputItem,
     ContentLogoParceiro,
-    LogoParceiro
+    LogoParceiro,
+    ContainerInputCodigo,
+    InputCodig,
+    LabelForm,
+    ContainerAvisoIndicacao,
+    ContentAvisoIndicacao
 } from './styles';
 import Select from 'react-select';
 import { useSelector } from 'react-redux';
@@ -33,26 +42,23 @@ import colors from '../../../../styles/colors';
 
 function InfoUser({
     user,
-    users,
+    usersPrimary,
     typesAccount,
     addTypeAccount,
     typeSelected,
     addPrimaryAccount,
     load_redeem_products,
-    editUser
+    editUser,
+    selectTypeAccount,
+    selectedPrimaryAccount,
+    selectUserPrimary,
+    codigo,
+    setCodigo
 }) {
     const [ tradeLink, setTradeLink ] = useState((user && user.tradelinkSteam)?user.tradelinkSteam:'');
     const [ edit, setEdit ] = useState(false);
     const { redeemProducts, totalPages, currentPage, loading:loadingProducts } = useSelector(({ ProductsReducer }) => ProductsReducer);
-    if (users && users.length > 0) {
-        users = users.map((user)=>{
-            return {
-                value:user.name,
-                label:user.name,
-                id_person:user._id
-            }
-        });
-    }
+    
 
     // let admin = user.permissions.length > 0?user.permissions.find(permission=>{
     //     return permission.ifo_permission.name == 'admin';
@@ -157,47 +163,114 @@ function InfoUser({
                             </BodyItem>
                         </ContentItemInfo>
             
+                        {/* CONTA VINCULADA */}
+                        {
+                            user.conta_vinculada&&
+                            (
+                                <ContentItemInfo>
+                                    <ItemLabelInfo>
+                                        Conta vinculada:
+                                    </ItemLabelInfo>
+                                    <ItemValueInfo style={{color:'orange'}}>
+                                            {user.conta_vinculada && user.conta_vinculada._id?user.conta_vinculada.name:'Não encontrado'}
+                                    </ItemValueInfo>
+                                </ContentItemInfo>
+                            )
+                        }
+
+                        {/* SEU CODIGO */}
+                        {
+                            
+                            user.type_account == 'primary'&&
+                            (
+                                <ContentItemInfo>
+                                    <ItemLabelInfo>
+                                            Seu código: 
+                                    </ItemLabelInfo>
+                                    <BodyItem>
+                                        <ItemValueInfo>
+                                                {user.idTwitch?user.idTwitch:'Não encontrado'}
+                                        </ItemValueInfo>
+                                        {/* <ActionItem onClick={()=>setEdit(true)}>
+                                            <FaPen color={colors.dourado} size={20}/>
+                                        </ActionItem> */}
+                                    </BodyItem>
+                                </ContentItemInfo>
+                            )
+                        }
+
                         {/* CANAIS */}
-                        <ContentItemInfoChannels>
-                            <ItemLabelChannels>
-                                    Canais habilitados
-                            </ItemLabelChannels>
-                            <ContentValueInfoChannels>
-                                {
-                                    (user && user.channels)&&
-                                    (
-                                        user.channels.map((channel,index)=>{
-                                            return(
-                                                <ContainerValueInfoChannels key={index}> 
-                                                    <ItemLabelChannel status={channel.status && user.active}>
-                                                        {channel.info_channel.name}: 
-                                                    </ItemLabelChannel>
-                                                    <ItemValuesChannels status={channel.status && user.active} style={{color:'orange'}}>
-                                                        {channel.points} 
-                                                        <GiPopcorn/>  
-                                                        {channel.banned && <MdBlock style={{color:'red'}}/>}  
-                                                        {channel.subscribe && <GiKing style={{color:'yellow'}}/>}
-                                                    </ItemValuesChannels>
-                                                </ContainerValueInfoChannels>
+                        {
+                            (user && user.channels.length > 0)&&
+                            (
+                                <ContentItemInfoChannels>
+                                    <ItemLabelChannels>
+                                            Canais habilitados
+                                    </ItemLabelChannels>
+                                    <ContentValueInfoChannels>
+                                                {user.channels.map((channel,index)=>{
+                                                    return(
+                                                        <ContainerValueInfoChannels key={index}> 
+                                                            <ItemLabelChannel status={channel.status && user.active}>
+                                                                {channel.info_channel.name}: 
+                                                            </ItemLabelChannel>
+                                                            <ItemValuesChannels status={channel.status && user.active} style={{color:'orange'}}>
+                                                                {channel.points} 
+                                                                <GiPopcorn/>  
+                                                                {channel.banned && <MdBlock style={{color:'red'}}/>}  
+                                                                {channel.subscribe && <GiKing style={{color:'yellow'}}/>}
+                                                            </ItemValuesChannels>
+                                                        </ContainerValueInfoChannels>
+                                                    )
+                                                })}
+                                    </ContentValueInfoChannels>
+                                </ContentItemInfoChannels>
+                            )
+                        }
+                        
+                        {/* CONTAS VINCULADAS */}
+                        {
+                            user.contas_vinculadas.length > 0&&
+                            (
+                                <ContentItemInfoChannels>
+                                    <ItemLabelChannels>
+                                            Contas vinculadas
+                                    </ItemLabelChannels>
+                                    <ContentValueInfoChannels>
+                                        {
+                                            (user && user.contas_vinculadas)&&
+                                            (
+                                                user.contas_vinculadas.map((contas,index)=>{
+                                                    return(
+                                                        <ContainerValueInfoChannels key={index}> 
+                                                            <ItemLabelChannel status={contas.status}>
+                                                                {contas.info_user && contas.info_user.name?contas.info_user.name:'Não encontrado'}: 
+                                                            </ItemLabelChannel>
+                                                            <ItemValuesChannels status={contas.status} style={{color:'orange'}}>
+                                                                {contas.points || contas.points == 0?contas.points:'Não encontrado'} 
+                                                            </ItemValuesChannels>
+                                                        </ContainerValueInfoChannels>
+                                                    )
+                                                })
                                             )
-                                        })
-                                    )
-                                }
-                            </ContentValueInfoChannels>
-                        </ContentItemInfoChannels>
+                                        }
+                                    </ContentValueInfoChannels>
+                                </ContentItemInfoChannels>
+                            )
+                        }
                         
                         {/* CONTAS SECUNDARIAS */}
                         {
                             user.type_account == 'primary'?
                             (
-                                <ContentItemInfoChannels>
-                                    <ItemLabelChannels>
-                                            Contas secundarias
-                                    </ItemLabelChannels>
-                                    <ContentValueInfoChannels>
-                                        {
-                                            (user && user.channels)&&
-                                            (
+                                (user && user.channels.length > 0)&&
+                                (
+                                    <ContentItemInfoChannels>
+                                        <ItemLabelChannels>
+                                                Contas secundárias
+                                        </ItemLabelChannels>
+                                        <ContentValueInfoChannels>
+                                            {
                                                 user.secondary_accounts.map((account,index)=>{
                                                     return(
                                                         <ContainerValueInfoChannels key={index}> 
@@ -210,15 +283,15 @@ function InfoUser({
                                                         </ContainerValueInfoChannels>
                                                     )
                                                 })
-                                            )
-                                        }
-                                    </ContentValueInfoChannels>
-                                </ContentItemInfoChannels>
+                                            }
+                                        </ContentValueInfoChannels>
+                                    </ContentItemInfoChannels>
+                                )
                             ):
                             (
                                 <ContentItemInfoChannels>
                                     <ItemLabelChannels>
-                                            Conta primaria vinculda
+                                            Conta primária vinculda
                                     </ItemLabelChannels>
                                     <ContentValueInfoChannels>
                                         <ContainerValueInfoChannels> 
@@ -236,7 +309,7 @@ function InfoUser({
                         
                         {/* RESGATES */}
                         {
-                            user.type_account == 'primary'&&
+                            user.type_account == 'primary' && (redeemProducts && redeemProducts.length > 0) &&
                             (
                                 <ContentItemInfoChannels>
                                     <ItemLabelChannels>
@@ -313,28 +386,91 @@ function InfoUser({
                 (
                     typeSelected.value == 'secondary'?
                     (
-                        <ContainerSelectTypeAccount>
-                            <TitleSelectAccount>
-                                Selecione a conta primaria que irá se vincular.
-                            </TitleSelectAccount>
-                            <Select
-                                value={typeSelected}
-                                onChange={addPrimaryAccount}
-                                options={users}
-                            />
-                        </ContainerSelectTypeAccount>
+                        <ContainerSelectTypeAccounts>
+                            <ContainerSelectTypeAccount>
+                                <TitleSelectAccount>
+                                    Selecione a conta primária que irá se vincular.
+                                </TitleSelectAccount>
+                                <Select
+                                    value={selectedPrimaryAccount}
+                                    onChange={selectUserPrimary}
+                                    options={usersPrimary}
+                                />
+                            </ContainerSelectTypeAccount>
+                            <ContainerButtonSelectTypes>
+                                <ContainerButtonVoltar
+                                    onClick={()=>{
+                                        selectTypeAccount({ value: '', label: 'SELECIONE::::' });
+                                        selectUserPrimary({ value: '', label: 'SELECIONE::::',id_person:''});
+                                    }}
+                                >
+                                    Voltar
+                                </ContainerButtonVoltar>
+                                <ContainerButtonContinuar
+                                    onClick={addTypeAccount}
+                                    disabled={selectedPrimaryAccount.value.length == 0}
+                                >
+                                    Continuar
+                                </ContainerButtonContinuar>
+                            </ContainerButtonSelectTypes>
+                        </ContainerSelectTypeAccounts>
                     ):
                     (
-                        <ContainerSelectTypeAccount>
-                            <TitleSelectAccount>
-                                Qual o tipo da sua conta?
-                            </TitleSelectAccount>
-                            <Select
-                                value={typeSelected}
-                                onChange={addTypeAccount}
-                                options={typesAccount}
-                            />
-                        </ContainerSelectTypeAccount>
+                        <ContainerSelectTypeAccounts>
+                            <ContainerSelectTypeAccount>
+                                <TitleSelectAccount>
+                                    Qual o tipo da sua conta?
+                                </TitleSelectAccount>
+                                <Select
+                                    value={typeSelected}
+                                    onChange={selectTypeAccount}
+                                    options={typesAccount}
+                                />
+                                {
+                                    typeSelected.value == 'primary' && 
+                                    (
+                                        <>
+                                            <ContainerInputCodigo>
+                                                <LabelForm>
+                                                    Código do amigo:
+                                                </LabelForm>
+                                                <InputCodig
+                                                    placeholder='Código do amigo'
+                                                    type="text"
+                                                    name="codigo"
+                                                    id="codigo"
+                                                    value={codigo} // We also bind our email value
+                                                    onChange={(e)=>setCodigo(e.target.value)}
+                                                />
+                                            </ContainerInputCodigo>
+                                            <ContainerAvisoIndicacao>
+                                                <ContentAvisoIndicacao>
+                                                    Preencha o campo (Código do amigo) apenas se tiver um código, caso não possua clique em continuar.
+                                                </ContentAvisoIndicacao>
+                                            </ContainerAvisoIndicacao>
+                                        </>
+                                    )
+                                }
+                            </ContainerSelectTypeAccount>
+                            <ContainerButtonSelectTypes>
+                                {/* {
+                                    typeSelected.value == 'primary' && 
+                                    (
+                                        // <ContainerButtonVoltar
+                                        //     onClick={()=>selectTypeAccount({ value: '', label: 'SELECIONE::::' })}
+                                        // >
+                                        //     Voltar
+                                        // </ContainerButtonVoltar>
+                                    )
+                                } */}
+                                <ContainerButtonContinuar
+                                    onClick={addTypeAccount}
+                                    disabled={typeSelected.value != 'primary' && typeSelected.value != 'secondary'}
+                                >
+                                    Continuar
+                                </ContainerButtonContinuar>
+                            </ContainerButtonSelectTypes>
+                        </ContainerSelectTypeAccounts>
                     )
                 )
             }
