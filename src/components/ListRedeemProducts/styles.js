@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import colors from '../../styles/colors';
 
 export const Container = styled.div`
-  flex:${(props)=>props.flex?props.flex:1};
   background-color: ${colors.dedtail2};
-  /* width: 100%; */
+  width: 100%;
   display: flex;
   flex-direction:column;
   align-items: center;
