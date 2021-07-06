@@ -194,8 +194,41 @@ export const ContainerValueInfoChannels = styled.div`
 `;
 
 //selecinar tipo
-export const ContainerSelectTypeAccount = styled.div`
+export const ContainerSelectTypeAccounts = styled.div`
+    max-width:200px;
+    /* background-color: ${colors.color_jokerz_2}; */
 
+`;
+
+export const ContainerSelectTypeAccount = styled.div`
+    width: 100%;
+    /* background-color: ${colors.color_jokerz_3}; */
+`;
+
+export const ContainerButtonSelectTypes = styled.div`
+    width: 100%;
+    /* background-color: ${colors.color_jokerz_4}; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+`;
+
+export const ContainerButtonVoltar = styled.button`
+    width: 50%;
+    margin: 5px;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: ${colors.red_dark};
+`;
+
+export const ContainerButtonContinuar = styled.button`
+    width: 50%;
+    margin: 5px;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: ${colors.green_dark};
 `;
 
 export const ContentValueInfoPerguntas = styled.div`
@@ -270,6 +303,29 @@ export const TitleSelectAccount = styled.div`
     padding:10px;
 `;
 
+export const ContainerInputCodigo = styled.div`
+    /* background-color:#44f; */
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:10px;
+    padding-top: 10px;
+`;
+
+export const LabelForm = styled.label`
+    color:${colors.white};
+    font-weight: bold;
+`;
+
+export const InputCodig = styled.input`
+    width:100%;
+    padding:5px;
+    border-radius:10px;
+    border: 2px solid #141414;
+`;
+
 export const ContentLogoParceiro = styled.div`
     background-color: #aaa;
     border-radius: 50%;
@@ -285,4 +341,18 @@ export const LogoParceiro = styled.img`
     /* position: absolute;
     bottom: 0; */
     width: 100%;
+`;
+
+export const ContainerAvisoIndicacao = styled.div`
+    background-color: ${colors.color_jokerz_6};
+    padding:5px;
+`;
+
+export const ContentAvisoIndicacao = styled.div`
+    background-color: ${colors.color_jokerz_1};
+    border-radius: 10px;
+    color:#fff;
+    font-size:13px;
+    padding:10px;
+    text-align: center;
 `;
