@@ -165,7 +165,7 @@ function Roleta({canais}) {
   return(
     <Content modal={status}>
           <Helmet>
-          <title>{channelSelected._id.length > 0?"Roleta "+channelSelected.name:"Roleta jokerz"}</title>
+          <title>{channelSelected._id.length > 0?"Roleta "+channelSelected.name:"Roleta DuarteaNath"}</title>
         </Helmet>
         <BackgroundColor>
             {

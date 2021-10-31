@@ -373,7 +373,7 @@ function Perguntas({
       });
       // console.log('if_errar: ',if_errar);
       if (if_errar.length > 0) {
-        setImagesOptionsErrar('https://api.teamjokerz.com.br/'+if_errar[0].image);
+        setImagesOptionsErrar('https://api.duarteanath.com.br/'+if_errar[0].image);
       }else{
         setImagesOptionsErrar(Vazio);
       }
@@ -387,7 +387,7 @@ function Perguntas({
       });
       // console.log('if_parar: ',if_parar);
       if (if_parar.length > 0) {
-        setImagesOptionsParar('https://api.teamjokerz.com.br/'+if_parar[0].image);
+        setImagesOptionsParar('https://api.duarteanath.com.br/'+if_parar[0].image);
       }else{
         setImagesOptionsParar(Vazio);
       }
@@ -400,7 +400,7 @@ function Perguntas({
     });
     if (if_acertar.length > 0) {
       // console.log('if_acertar: ',if_acertar);
-      setImagesOptionsAcertar('https://api.teamjokerz.com.br/'+if_acertar[0].image);
+      setImagesOptionsAcertar('https://api.duarteanath.com.br/'+if_acertar[0].image);
     }else{
       setImagesOptionsAcertar(Vazio);
     }

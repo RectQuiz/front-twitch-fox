@@ -78,7 +78,7 @@ function Loja() {
   return(
     <Content modal={status}>
          <Helmet>
-          <title>Loja jokerz</title>
+          <title>Loja DuarteaNath</title>
         </Helmet>
         <BackgroundColor>
             {
