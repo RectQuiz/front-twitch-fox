@@ -1,7 +1,7 @@
 
 
 const color_jokerz_1 = "#636363";
-const color_jokerz_2 = "#B200B7";
+const color_jokerz_2 = "#FF69B4";
 const color_jokerz_6 = "#171a21";
 const color_jokerz_7 = "#05060D";
 const color_jokerz_3 = "#009B00";

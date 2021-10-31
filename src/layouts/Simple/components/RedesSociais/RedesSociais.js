@@ -18,7 +18,7 @@ export default function RedesSociais({}){
                             </IconContext.Provider>
                         </a>
                     </IconButton>
-                    <IconButton>
+                    {/* <IconButton>
                         <a href="http://facebook.com/teamjokerzcsgo" target="_blank">
                             <IconContext.Provider value={{ color: "white", size: '2em'}}>
                                 <div>
@@ -26,9 +26,9 @@ export default function RedesSociais({}){
                                 </div>
                             </IconContext.Provider>
                         </a>
-                    </IconButton>
+                    </IconButton> */}
                     <IconButton>
-                        <a href="https://twitter.com/teamjokerzcsgo" target="_blank">
+                        <a href="https://twitter.com/duarteanath" target="_blank">
                             <IconContext.Provider value={{ color: "white", size: '2em'}}>
                                 <div>
                                     <FiTwitter/>
@@ -37,7 +37,7 @@ export default function RedesSociais({}){
                         </a>
                     </IconButton>
                     <IconButton>
-                        <a href="https://youtube.com/teamjokerz/storyvnow?sub_confirmation=1" target="_blank">
+                        <a href="https://www.youtube.com/c/DuarteaNath/storyvnow?sub_confirmation=1" target="_blank">
                             <IconContext.Provider value={{ color: "white", size: '2em'}}>
                                 <div>
                                     <AiFillYoutube/>
@@ -46,7 +46,7 @@ export default function RedesSociais({}){
                         </a>
                     </IconButton>
                     <IconButton>
-                        <a href="https://www.instagram.com/teamjokerzcsgo/" target="_blank">
+                        <a href="https://www.instagram.com/duarteanath/" target="_blank">
                             <IconContext.Provider value={{ color: "white", size: '2em'}}>
                                 <div>
                                     <AiOutlineInstagram/>

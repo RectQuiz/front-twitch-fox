@@ -21,7 +21,7 @@ import {
     ItemDropDownMobile
 } from './styles';
 // import { useHistory } from 'react-router-dom';
-import logo from '../../../../assets/images/logo.png';
+import logo from '../../../../assets/images/logo_nath.png';
 import menu from '../../../../assets/images/menu.png';
 // import { Link } from 'react-router-dom';
 export default function Header({
@@ -100,7 +100,7 @@ export default function Header({
                             alt="logo"
                         />
                         <TitleLogo>
-                            TeamJokerz
+                            DuarteaNath
                         </TitleLogo>
                     </ContainerLogo>
 

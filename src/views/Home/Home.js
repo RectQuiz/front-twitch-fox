@@ -7,7 +7,7 @@ import Cards from './components/Cards';
 import Promo from './components/Promo';
 import Divider from './components/Divider';
 import Parceiros from './components/Parceiros';
-import fundo from '../../assets/images/fundo.jpg';
+import fundo from '../../assets/images/fundo_nath.jpg';
 import Footer from '../../components/Footer';
 import { BackgroundColor, Content } from './styles';
 import { loadInfoUser } from '../../store/modules/user/actions';
