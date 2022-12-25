@@ -1,4 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
+import colors from "./colors";
 
 export default createGlobalStyle`
 *{
@@ -21,6 +22,7 @@ export default createGlobalStyle`
 
 html,body,#root{
   height:100%;
+  --primary-geral: ${colors.primary_geral};
 }
 body::-webkit-scrollbar {
   width: 9px;

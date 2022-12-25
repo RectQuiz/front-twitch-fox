@@ -1,32 +1,38 @@
-import { all, put,call, takeLatest } from 'redux-saga/effects';
-import * as Products from '../../../services/Products';
-import  * as actionType from './actionTypes';
-import * as actions from './actions';
-import * as actionsUser from '../user/actions';
-import { setErrorGeneral } from '../error/actions';
+import { all, put, call, takeLatest } from "redux-saga/effects";
+import * as Products from "../../../services/Products";
+import * as actionType from "./actionTypes";
+import * as actions from "./actions";
+import * as actionsUser from "../user/actions";
+import { setErrorGeneral } from "../error/actions";
 
-function* loadProductsWorker({params}) {
+function* loadProductsWorker({ params }) {
   yield put(actions.setLoadingProducts(true));
   yield put(actions.setStatusProducts(0));
   yield put(actions.setResponseProducts({}));
-  yield put(actions.setErrorProducts(''));
+  yield put(actions.setErrorProducts(""));
   try {
-    const response = yield call(Products.loadProducts,params);
+    const response = yield call(Products.loadProducts, params);
     yield put(actions.setProducts(response.data));
     yield put(actions.setLoadingProducts(false));
-    yield put(actions.setErrorProducts(''));
-    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setErrorProducts(""));
+    yield put(setErrorGeneral("", false, 0));
     yield put(actions.setResponseProducts(response));
     yield put(actions.setStatusProducts(response.status));
   } catch (error) {
     yield put(actions.setLoadingProducts(false));
     yield put(actions.setStatusProducts(error.status));
     if (error.response) {
-      yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
+      yield put(
+        setErrorGeneral(
+          error.response.data.message,
+          true,
+          error.response.status
+        )
+      );
       yield put(actions.setErrorProducts(error.response.data.message));
       yield put(actions.setStatusProducts(error.response.status));
     } else if (error.request) {
-      yield put(setErrorGeneral(error.message,true,error.request.status));
+      yield put(setErrorGeneral(error.message, true, error.request.status));
       yield put(actions.setErrorProducts({ data: error.message }));
       yield put(actions.setStatusProducts(error.request.status));
     } else {
@@ -35,28 +41,34 @@ function* loadProductsWorker({params}) {
   }
 }
 
-function* loadProductWorker({id}) {
+function* loadProductWorker({ id }) {
   yield put(actions.setLoadingProducts(true));
   yield put(actions.setStatusProducts(0));
   yield put(actions.setResponseProducts({}));
-  yield put(actions.setErrorProducts(''));
+  yield put(actions.setErrorProducts(""));
   try {
-    const response = yield call(Products.loadProduct,id);
+    const response = yield call(Products.loadProduct, id);
     yield put(actions.setProduct(response.data.data));
     yield put(actions.setLoadingProducts(false));
-    yield put(actions.setErrorProducts(''));
-    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setErrorProducts(""));
+    yield put(setErrorGeneral("", false, 0));
     yield put(actions.setResponseProducts(response));
     yield put(actions.setStatusProducts(response.status));
   } catch (error) {
     yield put(actions.setLoadingProducts(false));
     yield put(actions.setStatusProducts(error.status));
     if (error.response) {
-      yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
+      yield put(
+        setErrorGeneral(
+          error.response.data.message,
+          true,
+          error.response.status
+        )
+      );
       yield put(actions.setErrorProducts(error.response.data.message));
       yield put(actions.setStatusProducts(error.response.status));
     } else if (error.request) {
-      yield put(setErrorGeneral(error.message,true,error.request.status));
+      yield put(setErrorGeneral(error.message, true, error.request.status));
       yield put(actions.setErrorProducts({ data: error.message }));
       yield put(actions.setStatusProducts(error.request.status));
     } else {
@@ -69,12 +81,12 @@ function* registerProductWorker({ product }) {
   yield put(actions.setLoadingProducts(true));
   yield put(actions.setStatusProducts(0));
   yield put(actions.setErrorProducts({}));
-  yield put(actions.setResponseProducts(''));
+  yield put(actions.setResponseProducts(""));
   try {
     const response = yield call(Products.registerProduct, product);
     // console.log('response loadInfoUserhWorker: ',response);
-    yield put(actions.setErrorProducts(''));
-    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setErrorProducts(""));
+    yield put(setErrorGeneral("", false, 0));
     yield put(actions.setResponseProducts(response));
     yield put(actions.setLoadingProducts(false));
     // yield put(actions.setResponse(response));
@@ -83,18 +95,24 @@ function* registerProductWorker({ product }) {
   } catch (error) {
     yield put(actions.setLoadingProducts(false));
     if (error.response) {
-        console.log('error response register product: ',error.response);
-        yield put(actions.setErrorProducts(error.response.data.message));
-        yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
-        yield put(actions.setStatusProducts(error.response.status));
+      console.log("error response register product: ", error.response);
+      yield put(actions.setErrorProducts(error.response.data.message));
+      yield put(
+        setErrorGeneral(
+          error.response.data.message,
+          true,
+          error.response.status
+        )
+      );
+      yield put(actions.setStatusProducts(error.response.status));
     } else if (error.request) {
-        console.log('error request register product: ',error.request);
-        yield put(setErrorGeneral(error.message,true,error.request.status));
-        yield put(actions.setErrorProducts({ data: error.message }));
-        yield put(actions.setStatusProducts(error.request.status));
+      console.log("error request register product: ", error.request);
+      yield put(setErrorGeneral(error.message, true, error.request.status));
+      yield put(actions.setErrorProducts({ data: error.message }));
+      yield put(actions.setStatusProducts(error.request.status));
     } else {
-        console.log('error desc  register product: ',error.message);
-        yield put(actions.setErrorProducts({ data: error.message }));
+      console.log("error desc  register product: ", error.message);
+      yield put(actions.setErrorProducts({ data: error.message }));
     }
   }
 }
@@ -103,12 +121,12 @@ function* editProductWorker({ params }) {
   yield put(actions.setLoadingProducts(true));
   yield put(actions.setStatusProducts(0));
   yield put(actions.setErrorProducts({}));
-  yield put(actions.setResponseProducts(''));
+  yield put(actions.setResponseProducts(""));
   try {
     const response = yield call(Products.editProduct, params);
     // console.log('response loadInfoUserhWorker: ',response);
-    yield put(actions.setErrorProducts(''));
-    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setErrorProducts(""));
+    yield put(setErrorGeneral("", false, 0));
     yield put(actions.setResponseProducts(response));
     yield put(actions.setLoadingProducts(false));
     // yield put(actions.setResponse(response));
@@ -117,18 +135,24 @@ function* editProductWorker({ params }) {
   } catch (error) {
     yield put(actions.setLoadingProducts(false));
     if (error.response) {
-        console.log('error response register product: ',error.response);
-        yield put(actions.setErrorProducts(error.response.data.message));
-        yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
-        yield put(actions.setStatusProducts(error.response.status));
+      console.log("error response register product: ", error.response);
+      yield put(actions.setErrorProducts(error.response.data.message));
+      yield put(
+        setErrorGeneral(
+          error.response.data.message,
+          true,
+          error.response.status
+        )
+      );
+      yield put(actions.setStatusProducts(error.response.status));
     } else if (error.request) {
-        console.log('error request register product: ',error.request);
-        yield put(setErrorGeneral(error.message,true,error.request.status));
-        yield put(actions.setErrorProducts({ data: error.message }));
-        yield put(actions.setStatusProducts(error.request.status));
+      console.log("error request register product: ", error.request);
+      yield put(setErrorGeneral(error.message, true, error.request.status));
+      yield put(actions.setErrorProducts({ data: error.message }));
+      yield put(actions.setStatusProducts(error.request.status));
     } else {
-        console.log('error desc  register product: ',error.message);
-        yield put(actions.setErrorProducts({ data: error.message }));
+      console.log("error desc  register product: ", error.message);
+      yield put(actions.setErrorProducts({ data: error.message }));
     }
   }
 }
@@ -137,12 +161,12 @@ function* changeStatusProductWorker({ params }) {
   yield put(actions.setLoadingProducts(true));
   yield put(actions.setStatusProducts(0));
   yield put(actions.setErrorProducts({}));
-  yield put(actions.setResponseProducts(''));
+  yield put(actions.setResponseProducts(""));
   try {
     const response = yield call(Products.changeStatusProductService, params);
     // console.log('response loadInfoUserhWorker: ',response);
-    yield put(actions.setErrorProducts(''));
-    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setErrorProducts(""));
+    yield put(setErrorGeneral("", false, 0));
     yield put(actions.setResponseProducts(response));
     yield put(actions.setLoadingProducts(false));
     // yield put(actions.setResponse(response));
@@ -151,18 +175,24 @@ function* changeStatusProductWorker({ params }) {
   } catch (error) {
     yield put(actions.setLoadingProducts(false));
     if (error.response) {
-        console.log('error response register product: ',error.response);
-        yield put(actions.setErrorProducts(error.response.data.message));
-        yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
-        yield put(actions.setStatusProducts(error.response.status));
+      console.log("error response register product: ", error.response);
+      yield put(actions.setErrorProducts(error.response.data.message));
+      yield put(
+        setErrorGeneral(
+          error.response.data.message,
+          true,
+          error.response.status
+        )
+      );
+      yield put(actions.setStatusProducts(error.response.status));
     } else if (error.request) {
-        console.log('error request register product: ',error.request);
-        yield put(setErrorGeneral(error.message,true,error.request.status));
-        yield put(actions.setErrorProducts({ data: error.message }));
-        yield put(actions.setStatusProducts(error.request.status));
+      console.log("error request register product: ", error.request);
+      yield put(setErrorGeneral(error.message, true, error.request.status));
+      yield put(actions.setErrorProducts({ data: error.message }));
+      yield put(actions.setStatusProducts(error.request.status));
     } else {
-        console.log('error desc  register product: ',error.message);
-        yield put(actions.setErrorProducts({ data: error.message }));
+      console.log("error desc  register product: ", error.message);
+      yield put(actions.setErrorProducts({ data: error.message }));
     }
   }
 }
@@ -171,46 +201,52 @@ function* cadProductsSteamWorker() {
   yield put(actions.setLoadingProducts(true));
   yield put(actions.setStatusProducts(0));
   yield put(actions.setErrorProducts({}));
-  yield put(actions.setResponseProducts(''));
+  yield put(actions.setResponseProducts(""));
   try {
     const response = yield call(Products.cadProductSteamService);
     // console.log('response loadInfoUserhWorker: ',response);
-    yield put(actions.setErrorProducts(''));
-    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setErrorProducts(""));
+    yield put(setErrorGeneral("", false, 0));
     yield put(actions.setResponseProducts(response));
     yield put(actions.setLoadingProducts(false));
     // yield put(actions.setResponse(response));
     yield put(actions.setStatusProducts(response.status));
-    yield put(actions.loadProducts({page:1,last:true}));
+    yield put(actions.loadProducts({ page: 1, last: true }));
   } catch (error) {
     yield put(actions.setLoadingProducts(false));
     if (error.response) {
-        console.log('error response register product: ',error.response);
-        yield put(actions.setErrorProducts(error.response.data.message));
-        yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
-        yield put(actions.setStatusProducts(error.response.status));
+      console.log("error response register product: ", error.response);
+      yield put(actions.setErrorProducts(error.response.data.message));
+      yield put(
+        setErrorGeneral(
+          error.response.data.message,
+          true,
+          error.response.status
+        )
+      );
+      yield put(actions.setStatusProducts(error.response.status));
     } else if (error.request) {
-        console.log('error request register product: ',error.request);
-        yield put(setErrorGeneral(error.message,true,error.request.status));
-        yield put(actions.setErrorProducts({ data: error.message }));
-        yield put(actions.setStatusProducts(error.request.status));
+      console.log("error request register product: ", error.request);
+      yield put(setErrorGeneral(error.message, true, error.request.status));
+      yield put(actions.setErrorProducts({ data: error.message }));
+      yield put(actions.setStatusProducts(error.request.status));
     } else {
-        console.log('error desc  register product: ',error.message);
-        yield put(actions.setErrorProducts({ data: error.message }));
+      console.log("error desc  register product: ", error.message);
+      yield put(actions.setErrorProducts({ data: error.message }));
     }
   }
 }
 
-function* deleteStickerProductSteamWorker({info}) {
+function* deleteStickerProductSteamWorker({ info }) {
   yield put(actions.setLoadingProducts(true));
   yield put(actions.setStatusProducts(0));
   yield put(actions.setErrorProducts({}));
-  yield put(actions.setResponseProducts(''));
+  yield put(actions.setResponseProducts(""));
   try {
-    const response = yield call(Products.deleteStickerProductService,info);
+    const response = yield call(Products.deleteStickerProductService, info);
     // console.log('response loadInfoUserhWorker: ',response);
-    yield put(actions.setErrorProducts(''));
-    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setErrorProducts(""));
+    yield put(setErrorGeneral("", false, 0));
     yield put(actions.setResponseProducts(response));
     yield put(actions.setLoadingProducts(false));
     // yield put(actions.setResponse(response));
@@ -219,114 +255,147 @@ function* deleteStickerProductSteamWorker({info}) {
   } catch (error) {
     yield put(actions.setLoadingProducts(false));
     if (error.response) {
-        console.log('error response register product: ',error.response);
-        yield put(actions.setErrorProducts(error.response.data.message));
-        yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
-        yield put(actions.setStatusProducts(error.response.status));
+      console.log("error response register product: ", error.response);
+      yield put(actions.setErrorProducts(error.response.data.message));
+      yield put(
+        setErrorGeneral(
+          error.response.data.message,
+          true,
+          error.response.status
+        )
+      );
+      yield put(actions.setStatusProducts(error.response.status));
     } else if (error.request) {
-        console.log('error request register product: ',error.request);
-        yield put(setErrorGeneral(error.message,true,error.request.status));
-        yield put(actions.setErrorProducts({ data: error.message }));
-        yield put(actions.setStatusProducts(error.request.status));
+      console.log("error request register product: ", error.request);
+      yield put(setErrorGeneral(error.message, true, error.request.status));
+      yield put(actions.setErrorProducts({ data: error.message }));
+      yield put(actions.setStatusProducts(error.request.status));
     } else {
-        console.log('error desc  register product: ',error.message);
-        yield put(actions.setErrorProducts({ data: error.message }));
+      console.log("error desc  register product: ", error.message);
+      yield put(actions.setErrorProducts({ data: error.message }));
     }
   }
 }
 
-function* deleteProductWorker({id}) {
+function* deleteProductWorker({ id }) {
   yield put(actions.setLoadingProducts(true));
   yield put(actions.setStatusProducts(0));
   yield put(actions.setErrorProducts({}));
-  yield put(actions.setResponseProducts(''));
+  yield put(actions.setResponseProducts(""));
   try {
-    const response = yield call(Products.deleteProductService,id);
+    const response = yield call(Products.deleteProductService, id);
     // console.log('response loadInfoUserhWorker: ',response);
-    yield put(actions.setErrorProducts(''));
-    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setErrorProducts(""));
+    yield put(setErrorGeneral("", false, 0));
     yield put(actions.setResponseProducts(response));
     yield put(actions.setLoadingProducts(false));
     // yield put(actions.setResponse(response));
     yield put(actions.setStatusProducts(response.status));
-    yield put(actions.loadProducts({page:1,last:true}));
+    yield put(actions.loadProducts({ page: 1, last: true }));
   } catch (error) {
     yield put(actions.setLoadingProducts(false));
     if (error.response) {
-        console.log('error response register product: ',error.response);
-        yield put(actions.setErrorProducts(error.response.data.message));
-        yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
-        yield put(actions.setStatusProducts(error.response.status));
+      console.log("error response register product: ", error.response);
+      yield put(actions.setErrorProducts(error.response.data.message));
+      yield put(
+        setErrorGeneral(
+          error.response.data.message,
+          true,
+          error.response.status
+        )
+      );
+      yield put(actions.setStatusProducts(error.response.status));
     } else if (error.request) {
-        console.log('error request register product: ',error.request);
-        yield put(setErrorGeneral(error.message,true,error.request.status));
-        yield put(actions.setErrorProducts({ data: error.message }));
-        yield put(actions.setStatusProducts(error.request.status));
+      console.log("error request register product: ", error.request);
+      yield put(setErrorGeneral(error.message, true, error.request.status));
+      yield put(actions.setErrorProducts({ data: error.message }));
+      yield put(actions.setStatusProducts(error.request.status));
     } else {
-        console.log('error desc  register product: ',error.message);
-        yield put(actions.setErrorProducts({ data: error.message }));
+      console.log("error desc  register product: ", error.message);
+      yield put(actions.setErrorProducts({ data: error.message }));
     }
   }
 }
 
-function* redeemProductWorker({params}) {
+function* redeemProductWorker({ params }) {
   // console.log("params: ",params);
   yield put(actions.setLoadingProducts(true));
   yield put(actions.setStatusProducts(0));
   yield put(actions.setErrorProducts({}));
-  yield put(actions.setResponseProducts(''));
+  yield put(actions.setResponseProducts(""));
   try {
-    const response = yield call(Products.redeemProductService,params);
+    const response = yield call(Products.redeemProductService, params);
     // console.log('response loadInfoUserhWorker: ',response);
-    yield put(actions.setErrorProducts(''));
-    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setErrorProducts(""));
+    yield put(setErrorGeneral("", false, 0));
     yield put(actions.setResponseProducts(response));
     yield put(actions.setLoadingProducts(false));
     // yield put(actions.setResponse(response));
     yield put(actions.setStatusProducts(response.status));
     yield put(actionsUser.loadInfoUser());
-    yield put(actions.loadProducts({page:1, status:"emEstoque"}));
+    console.log("redeemProductWorker: ", response);
+    yield put(
+      actions.loadProducts({
+        page: 1,
+        channel_id: response.data.data.id_owner
+          ? response.data.data.id_owner
+          : null,
+        status: "emEstoque",
+      })
+    );
   } catch (error) {
     yield put(actions.setLoadingProducts(false));
     if (error.response) {
-        console.log('error response register product: ',error.response);
-        yield put(actions.setErrorProducts(error.response.data.message));
-        yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
-        yield put(actions.setStatusProducts(error.response.status));
+      console.log("error response register product: ", error.response);
+      yield put(actions.setErrorProducts(error.response.data.message));
+      yield put(
+        setErrorGeneral(
+          error.response.data.message,
+          true,
+          error.response.status
+        )
+      );
+      yield put(actions.setStatusProducts(error.response.status));
     } else if (error.request) {
-        console.log('error request register product: ',error.request);
-        yield put(setErrorGeneral(error.message,true,error.request.status));
-        yield put(actions.setErrorProducts({ data: error.message }));
-        yield put(actions.setStatusProducts(error.request.status));
+      console.log("error request register product: ", error.request);
+      yield put(setErrorGeneral(error.message, true, error.request.status));
+      yield put(actions.setErrorProducts({ data: error.message }));
+      yield put(actions.setStatusProducts(error.request.status));
     } else {
-        console.log('error desc  register product: ',error.message);
-        yield put(actions.setErrorProducts({ data: error.message }));
+      console.log("error desc  register product: ", error.message);
+      yield put(actions.setErrorProducts({ data: error.message }));
     }
   }
 }
 
-function* loadRedeemProductsWorker({params}) {
+function* loadRedeemProductsWorker({ params }) {
   yield put(actions.setLoadingProducts(true));
   yield put(actions.setStatusProducts(0));
   yield put(actions.setResponseProducts({}));
-  yield put(actions.setErrorProducts(''));
+  yield put(actions.setErrorProducts(""));
   try {
-    const response = yield call(Products.loadredeemProucts,params);
+    const response = yield call(Products.loadredeemProucts, params);
     yield put(actions.setRedeemProducts(response.data));
     yield put(actions.setLoadingProducts(false));
-    yield put(actions.setErrorProducts(''));
-    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setErrorProducts(""));
+    yield put(setErrorGeneral("", false, 0));
     yield put(actions.setResponseProducts(response));
     yield put(actions.setStatusProducts(response.status));
   } catch (error) {
     yield put(actions.setLoadingProducts(false));
     yield put(actions.setStatusProducts(error.status));
     if (error.response) {
-      yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
+      yield put(
+        setErrorGeneral(
+          error.response.data.message,
+          true,
+          error.response.status
+        )
+      );
       yield put(actions.setErrorProducts(error.response.data.message));
       yield put(actions.setStatusProducts(error.response.status));
     } else if (error.request) {
-      yield put(setErrorGeneral(error.message,true,error.request.status));
+      yield put(setErrorGeneral(error.message, true, error.request.status));
       yield put(actions.setErrorProducts({ data: error.message }));
       yield put(actions.setStatusProducts(error.request.status));
     } else {
@@ -335,37 +404,43 @@ function* loadRedeemProductsWorker({params}) {
   }
 }
 
-function* changeStatusRedeemProductWorker({redeem}) {
+function* changeStatusRedeemProductWorker({ redeem }) {
   // console.log("params: ",params);
   yield put(actions.setLoadingProducts(true));
   yield put(actions.setStatusProducts(0));
   yield put(actions.setErrorProducts({}));
-  yield put(actions.setResponseProducts(''));
+  yield put(actions.setResponseProducts(""));
   try {
-    const response = yield call(Products.changeStatusRedeemProucts,redeem);
+    const response = yield call(Products.changeStatusRedeemProucts, redeem);
     // console.log('response loadInfoUserhWorker: ',response);
-    yield put(actions.setErrorProducts(''));
-    yield put(setErrorGeneral('',false,0));
+    yield put(actions.setErrorProducts(""));
+    yield put(setErrorGeneral("", false, 0));
     yield put(actions.setResponseProducts(response));
     yield put(actions.setLoadingProducts(false));
     // yield put(actions.setResponse(response));
     yield put(actions.setStatusProducts(response.status));
-    yield put(actions.loadRedeemProducts({page:1,status:'pendente'}));
+    yield put(actions.loadRedeemProducts({ page: 1, status: "pendente" }));
   } catch (error) {
     yield put(actions.setLoadingProducts(false));
     if (error.response) {
-        console.log('error response register product: ',error.response);
-        yield put(actions.setErrorProducts(error.response.data.message));
-        yield put(setErrorGeneral(error.response.data.message,true,error.response.status));
-        yield put(actions.setStatusProducts(error.response.status));
+      console.log("error response register product: ", error.response);
+      yield put(actions.setErrorProducts(error.response.data.message));
+      yield put(
+        setErrorGeneral(
+          error.response.data.message,
+          true,
+          error.response.status
+        )
+      );
+      yield put(actions.setStatusProducts(error.response.status));
     } else if (error.request) {
-        console.log('error request register product: ',error.request);
-        yield put(setErrorGeneral(error.message,true,error.request.status));
-        yield put(actions.setErrorProducts({ data: error.message }));
-        yield put(actions.setStatusProducts(error.request.status));
+      console.log("error request register product: ", error.request);
+      yield put(setErrorGeneral(error.message, true, error.request.status));
+      yield put(actions.setErrorProducts({ data: error.message }));
+      yield put(actions.setStatusProducts(error.request.status));
     } else {
-        console.log('error desc  register product: ',error.message);
-        yield put(actions.setErrorProducts({ data: error.message }));
+      console.log("error desc  register product: ", error.message);
+      yield put(actions.setErrorProducts({ data: error.message }));
     }
   }
 }
@@ -376,12 +451,18 @@ function* watcherAnalise() {
   yield takeLatest(actionType.LOAD_PRODUCT, loadProductWorker);
   yield takeLatest(actionType.EDIT_PRODUCT, editProductWorker);
   yield takeLatest(actionType.CAD_PRODUCTS_STEAM, cadProductsSteamWorker);
-  yield takeLatest(actionType.DELETE_STICKER_PRODUCT, deleteStickerProductSteamWorker);
+  yield takeLatest(
+    actionType.DELETE_STICKER_PRODUCT,
+    deleteStickerProductSteamWorker
+  );
   yield takeLatest(actionType.CHANGE_STATUS_PRODUCT, changeStatusProductWorker);
   yield takeLatest(actionType.DELETE_PRODUCT, deleteProductWorker);
   yield takeLatest(actionType.REDEEM_PRODUCT, redeemProductWorker);
   yield takeLatest(actionType.LOAD_REDEEM_PRODUCTS, loadRedeemProductsWorker);
-  yield takeLatest(actionType.CHANGE_STATUS_REDEEM_PRODUCT, changeStatusRedeemProductWorker);
+  yield takeLatest(
+    actionType.CHANGE_STATUS_REDEEM_PRODUCT,
+    changeStatusRedeemProductWorker
+  );
 }
 
 export default function* saga() {

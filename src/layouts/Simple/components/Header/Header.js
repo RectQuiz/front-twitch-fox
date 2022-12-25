@@ -1,236 +1,238 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
-    Container,
-    Content,
-    ContainerLogo,
-    ImageLogo,
-    ContainerButtonsNav,
-    ButtonAuth,
-    ContainerButtonMenu,
-    TitleLogo,
-    ImageMenu,
-    Ul,
-    ContentBig,
-    ContentSmall,
-    ContainerNickname,
-    ContentNickname,
-    Nickname,
-    ContainerDropDown,
-    ItemDropDown,
-    ContainerDropDownMobile,
-    ItemDropDownMobile
-} from './styles';
+  Container,
+  Content,
+  ContainerLogo,
+  ImageLogo,
+  ContainerButtonsNav,
+  ButtonAuth,
+  ContainerButtonMenu,
+  TitleLogo,
+  ImageMenu,
+  Ul,
+  ContentBig,
+  ContentSmall,
+  ContainerNickname,
+  ContentNickname,
+  Nickname,
+  ContainerDropDown,
+  ItemDropDown,
+  ContainerDropDownMobile,
+  ItemDropDownMobile,
+} from "./styles";
 // import { useHistory } from 'react-router-dom';
-import logo from '../../../../assets/images/logo_nath.png';
-import menu from '../../../../assets/images/menu.png';
+import menu from "../../../../assets/images/menu.png";
+import { API_URL } from "../../../../services/config";
 // import { Link } from 'react-router-dom';
 export default function Header({
-    open,
-    setOpen,
-    logar,
-    loadingAuth,
-    nickname,
-    user,
-    loadingUser
-}){
-    // let history = useHistory();
-    const [ itemSelect, setItemSelect] = useState(0);
-    const [ dropDawnMobile, setDropDawnMobile] = useState(false);
+  open,
+  setOpen,
+  logar,
+  loadingAuth,
+  nickname,
+  user,
+  loadingUser,
+  channel,
+}) {
+  // let history = useHistory();
+  const [itemSelect, setItemSelect] = useState(0);
+  const [dropDawnMobile, setDropDawnMobile] = useState(false);
 
-    // console.log("itemSelect: ",itemSelect);
-    const headers = [
-        {
-            active:true,
-            name:"HOME",
-            index:0,
-            rota:"/"
-        },
-        {
-            active:true,
-            name:"LOJA",
-            index:1,
-            rota:"/loja"
-        },
-        {
-            active:user && !loadingUser,
-            name:"ROLETA",
-            index:2,
-            rota:"/roleta"
-        }
-        // {
-        //     name:"PARCEIROS",
-        //     index:2,
-        //     rota:"#contact"
-        // },
-        // {
-        //     name:"CONTATO",
-        //     index:3,
-        //     rota:"#about"
-        // }
-    ]
-    
-    const setVisibleDropDownMobile = ()=>{
-        console.log('visibleInfoUser: ',dropDawnMobile);
-        setDropDawnMobile(!dropDawnMobile);
-    }
+  // console.log("itemSelect: ",itemSelect);
+  const headers = [
+    {
+      active: true,
+      name: "HOME",
+      index: 0,
+      rota: "/home",
+      channel: true,
+    },
+    {
+      active: channel ? true : false,
+      name: "LOJA",
+      index: 1,
+      rota: "/loja",
+      channel: true,
+    },
+    {
+      active: channel ? user && !loadingUser : false,
+      name: "ROLETA",
+      index: 2,
+      rota: "/roleta",
+      channel: true,
+    },
+    {
+      active: channel ? user && !loadingUser : false,
+      name: "PARCEIROS",
+      index: 3,
+      rota: "/home",
+      channel: false,
+    },
+    // {
+    //     name:"PARCEIROS",
+    //     index:2,
+    //     rota:"#contact"
+    // },
+    // {
+    //     name:"CONTATO",
+    //     index:3,
+    //     rota:"#about"
+    // }
+  ];
 
-    const styleTaga = {
-        cursor:loadingAuth?'not-allowed':'',
-        pointerEvents:loadingAuth?'none':'auto'
-    }
+  const setVisibleDropDownMobile = () => {
+    console.log("visibleInfoUser: ", dropDawnMobile);
+    setDropDawnMobile(!dropDawnMobile);
+  };
 
-    const logOut = ()=>{
-        localStorage.removeItem('@siteJokerz/token');
-        localStorage.removeItem('@siteJokerz/nickname');
-        window.location.reload(false);
-    }
+  const styleTaga = {
+    cursor: loadingAuth ? "not-allowed" : "",
+    pointerEvents: loadingAuth ? "none" : "auto",
+  };
 
-    function selectItem(number) {
-        setItemSelect(number);
-    }
+  const logOut = () => {
+    localStorage.removeItem("@siteJokerz/token");
+    localStorage.removeItem("@siteJokerz/nickname");
+    window.location.reload(false);
+  };
 
-    return (
-        <Container>
-            <Content>
-                <ContentBig>
+  function selectItem(number) {
+    setItemSelect(number);
+  }
 
-                    <ContainerLogo>
-                        <ImageLogo
-                            src={logo}
-                            alt="logo"
-                        />
-                        <TitleLogo>
-                            DuarteaNath
-                        </TitleLogo>
-                    </ContainerLogo>
+  const picture_rgx = /uploads/;
+  let test_rgx = picture_rgx.exec(
+    channel && channel.id_person && channel.id_person.picture
+  );
+  let picture =
+    channel && channel.id_person && channel.id_person.picture
+      ? test_rgx && test_rgx.length > 0
+        ? `${API_URL}/${channel.id_person.picture}`
+        : channel.id_person.picture
+      : "https://as2.ftcdn.net/v2/jpg/00/65/77/27/1000_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg";
 
-                    <ContainerButtonsNav>
-                        {
-                            headers.map((header,index)=>{
-                                if (header.active) {
-                                    return (
-                                        <a 
-                                            key={index}
-                                            style={styleTaga} 
-                                            className={`${itemSelect === header.index?"item":""}`} 
-                                            onClick={()=>selectItem(header.index)} 
-                                            href={header.rota}
-                                        >
-                                                {header.name}
-                                        </a>
-                                    )
-                                }
-                            })
-                        }
-                        {
-                            !loadingAuth && 
-                            (
-                                !nickname?(
-                                    <ButtonAuth onClick={logar}>LOGIN COM A TWITCH</ButtonAuth>
-                                ):
-                                (
-                                    <ContainerNickname>
-                                        <ContentNickname>
-                                            <Nickname>
-                                                {nickname}
-                                            </Nickname>
-                                        </ContentNickname>
-                                        <ContainerDropDown className='dropDownNicname'>
-                                            {
-                                                !loadingUser && user&&
-                                                (
-                                                    user.streamer?
-                                                    (
-                                                        <ItemDropDown>
-                                                            <a style={styleTaga} href={`/dashboard`}>Dashboard</a>
-                                                        </ItemDropDown>
-                                                    ):
-                                                    (
-                                                        <ItemDropDown>
-                                                            <a style={styleTaga} href={`/user`}>Perfil</a>
-                                                        </ItemDropDown>
-                                                    )
-                                                )
-                                            }
-                                            <ItemDropDown style={{padding:10}} onClick={logOut}>
-                                                Sair
-                                            </ItemDropDown>
-                                        </ContainerDropDown>
-                                    </ContainerNickname>
-                                )
-                            )
-                        }
-                    </ContainerButtonsNav>
+  return (
+    <Container>
+      <Content>
+        <ContentBig>
+          <ContainerLogo>
+            {channel && <ImageLogo src={picture} alt="logo" />}
+            <TitleLogo>{channel && channel.name}</TitleLogo>
+          </ContainerLogo>
 
-                    <ContainerButtonMenu onClick={()=>setOpen(!open)}>
-                        <ImageMenu
-                            src={menu}
-                        />
-                    </ContainerButtonMenu>
+          <ContainerButtonsNav>
+            {headers.map((header, index) => {
+              if (header.active) {
+                return (
+                  <a
+                    key={index}
+                    style={styleTaga}
+                    className={`${itemSelect === header.index ? "item" : ""}`}
+                    onClick={() => selectItem(header.index)}
+                    href={`${header.rota}${
+                      channel && header.channel ? "/" + channel.name : ""
+                    }`}
+                  >
+                    {header.name}
+                  </a>
+                );
+              }
+            })}
+            {!loadingAuth &&
+              (!nickname ? (
+                <ButtonAuth onClick={logar}>LOGIN COM A TWITCH</ButtonAuth>
+              ) : (
+                <ContainerNickname>
+                  <ContentNickname>
+                    <Nickname>{nickname}</Nickname>
+                  </ContentNickname>
+                  <ContainerDropDown className="dropDownNicname">
+                    {!loadingUser &&
+                      user &&
+                      (user.streamer ? (
+                        <ItemDropDown>
+                          <a style={styleTaga} href={`/dashboard`}>
+                            Dashboard
+                          </a>
+                        </ItemDropDown>
+                      ) : (
+                        <ItemDropDown>
+                          <a
+                            style={styleTaga}
+                            href={`/user${channel ? "/" + channel.name : ""}`}
+                          >
+                            Perfil
+                          </a>
+                        </ItemDropDown>
+                      ))}
+                    <ItemDropDown style={{ padding: 10 }} onClick={logOut}>
+                      Sair
+                    </ItemDropDown>
+                  </ContainerDropDown>
+                </ContainerNickname>
+              ))}
+          </ContainerButtonsNav>
 
-                </ContentBig>
+          <ContainerButtonMenu onClick={() => setOpen(!open)}>
+            <ImageMenu src={menu} />
+          </ContainerButtonMenu>
+        </ContentBig>
 
-                <ContentSmall open={open}>
-                        <Ul open={open}>
-                            
-                            {
-                                headers.map((header,index)=>{
-                                    if (header.active) {
-                                        return (<li key={index}>
-                                            <a 
-                                                style={styleTaga} 
-                                                href={header.rota}
-                                                onClick={()=>selectItem(header.index)} 
-                                            >
-                                                {header.name}
-                                            </a>
-                                        </li>)
-                                    }
-                                })
-                            }
-                            {
-                                !loadingAuth && 
-                                (
-                                    !nickname && (!loadingUser && !user)?(
-                                        <ButtonAuth onClick={logar}>LOGIN COM A TWITCH</ButtonAuth>
-                                    ):
-                                    (
-                                        <ContainerNickname>
-                                            <ContentNickname onClick={setVisibleDropDownMobile}>
-                                                <Nickname>
-                                                    {nickname}
-                                                </Nickname>
-                                            </ContentNickname>
-                                            <ContainerDropDownMobile status={dropDawnMobile}  className='dropDownMobile'>
-                                                {
-                                                    !loadingUser && user&&
-                                                    (
-                                                        user.streamer?
-                                                        (
-                                                            <ItemDropDownMobile>
-                                                                <a style={styleTaga} href={`/dashboard`}>Dashboard</a>
-                                                            </ItemDropDownMobile>
-                                                        ):
-                                                        (
-                                                            <ItemDropDownMobile>
-                                                                <a style={styleTaga} href={`/user`}>Perfil</a>
-                                                            </ItemDropDownMobile>
-                                                        )
-                                                    )
-                                                }
-                                                <ItemDropDownMobile onClick={logOut}>
-                                                    Sair
-                                                </ItemDropDownMobile>
-                                            </ContainerDropDownMobile>
-                                        </ContainerNickname>
-                                    )
-                                )
-                            }
-                        </Ul>
-                </ContentSmall>
-
-            </Content>
-        </Container>
-
-    )
+        <ContentSmall open={open}>
+          <Ul open={open}>
+            {headers.map((header, index) => {
+              if (header.active) {
+                return (
+                  <li key={index}>
+                    <a
+                      style={styleTaga}
+                      href={`${header.rota}${
+                        channel && header.channel ? "/" + channel.name : ""
+                      }`}
+                      onClick={() => selectItem(header.index)}
+                    >
+                      {header.name}
+                    </a>
+                  </li>
+                );
+              }
+            })}
+            {!loadingAuth &&
+              (!nickname && !loadingUser && !user ? (
+                <ButtonAuth onClick={logar}>LOGIN COM A TWITCH</ButtonAuth>
+              ) : (
+                <ContainerNickname>
+                  <ContentNickname onClick={setVisibleDropDownMobile}>
+                    <Nickname>{nickname}</Nickname>
+                  </ContentNickname>
+                  <ContainerDropDownMobile
+                    status={dropDawnMobile}
+                    className="dropDownMobile"
+                  >
+                    {!loadingUser &&
+                      user &&
+                      (user.streamer ? (
+                        <ItemDropDownMobile>
+                          <a style={styleTaga} href={`/dashboard`}>
+                            Dashboard
+                          </a>
+                        </ItemDropDownMobile>
+                      ) : (
+                        <ItemDropDownMobile>
+                          <a style={styleTaga} href={`/user`}>
+                            Perfil
+                          </a>
+                        </ItemDropDownMobile>
+                      ))}
+                    <ItemDropDownMobile onClick={logOut}>
+                      Sair
+                    </ItemDropDownMobile>
+                  </ContainerDropDownMobile>
+                </ContainerNickname>
+              ))}
+          </Ul>
+        </ContentSmall>
+      </Content>
+    </Container>
+  );
 }

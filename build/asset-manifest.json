@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.e23e421a.chunk.css",
-    "main.js": "/static/js/main.f6736043.chunk.js",
-    "main.js.map": "/static/js/main.f6736043.chunk.js.map",
+    "main.css": "/static/css/main.b76c0a7a.chunk.css",
+    "main.js": "/static/js/main.9306fb8d.chunk.js",
+    "main.js.map": "/static/js/main.9306fb8d.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.43c6347e.js",
     "runtime-main.js.map": "/static/js/runtime-main.43c6347e.js.map",
     "static/css/2.fb346933.chunk.css": "/static/css/2.fb346933.chunk.css",
-    "static/js/2.76ef1fa6.chunk.js": "/static/js/2.76ef1fa6.chunk.js",
-    "static/js/2.76ef1fa6.chunk.js.map": "/static/js/2.76ef1fa6.chunk.js.map",
+    "static/js/2.ad377c8e.chunk.js": "/static/js/2.ad377c8e.chunk.js",
+    "static/js/2.ad377c8e.chunk.js.map": "/static/js/2.ad377c8e.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.ecdd37fc6c7ba8c6ef806c7ebe8f2d71.js": "/precache-manifest.ecdd37fc6c7ba8c6ef806c7ebe8f2d71.js",
+    "precache-manifest.5b473ac1a06cdeecae0b6636fcfa5e76.js": "/precache-manifest.5b473ac1a06cdeecae0b6636fcfa5e76.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.fb346933.chunk.css.map": "/static/css/2.fb346933.chunk.css.map",
-    "static/css/main.e23e421a.chunk.css.map": "/static/css/main.e23e421a.chunk.css.map",
-    "static/js/2.76ef1fa6.chunk.js.LICENSE.txt": "/static/js/2.76ef1fa6.chunk.js.LICENSE.txt",
+    "static/css/main.b76c0a7a.chunk.css.map": "/static/css/main.b76c0a7a.chunk.css.map",
+    "static/js/2.ad377c8e.chunk.js.LICENSE.txt": "/static/js/2.ad377c8e.chunk.js.LICENSE.txt",
     "static/media/C42.png": "/static/media/C42.6a0c8bee.png",
     "static/media/SMGs.png": "/static/media/SMGs.69c88a72.png",
     "static/media/Sniper_Rifle.png": "/static/media/Sniper_Rifle.994e3283.png",
@@ -38,7 +38,6 @@
     "static/media/item2_roleta.png": "/static/media/item2_roleta.f1d1dbab.png",
     "static/media/knife.png": "/static/media/knife.5e1ff081.png",
     "static/media/logo.png": "/static/media/logo.5cc2d909.png",
-    "static/media/logo_nath.png": "/static/media/logo_nath.875cc5ee.png",
     "static/media/machineguns.png": "/static/media/machineguns.f9b1d440.png",
     "static/media/molotov.png": "/static/media/molotov.d3d30a63.png",
     "static/media/molotov.mp3": "/static/media/molotov.e0c01286.mp3",
@@ -56,8 +55,8 @@
   "entrypoints": [
     "static/js/runtime-main.43c6347e.js",
     "static/css/2.fb346933.chunk.css",
-    "static/js/2.76ef1fa6.chunk.js",
-    "static/css/main.e23e421a.chunk.css",
-    "static/js/main.f6736043.chunk.js"
+    "static/js/2.ad377c8e.chunk.js",
+    "static/css/main.b76c0a7a.chunk.css",
+    "static/js/main.9306fb8d.chunk.js"
   ]
 }
